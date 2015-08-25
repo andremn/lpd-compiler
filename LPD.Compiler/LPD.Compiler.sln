@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LPD.Compiler", "LPD.Compiler\LPD.Compiler.csproj", "{9E477E1A-4CFC-42EB-826F-1D91E924FAF0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LPD.Compiler.Lexical", "LPD.Compiler.Lexical\LPD.Compiler.Lexical.csproj", "{44C76A22-259B-4B79-80F2-FC4EF94BD590}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9E477E1A-4CFC-42EB-826F-1D91E924FAF0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9E477E1A-4CFC-42EB-826F-1D91E924FAF0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9E477E1A-4CFC-42EB-826F-1D91E924FAF0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9E477E1A-4CFC-42EB-826F-1D91E924FAF0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{44C76A22-259B-4B79-80F2-FC4EF94BD590}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{44C76A22-259B-4B79-80F2-FC4EF94BD590}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{44C76A22-259B-4B79-80F2-FC4EF94BD590}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{44C76A22-259B-4B79-80F2-FC4EF94BD590}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
