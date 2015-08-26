@@ -13,5 +13,9 @@ namespace LPD.Compiler
     /// </summary>
     public partial class App : Application
     {
+        public App()
+        {
+            new Lexical.LexicalAnalizer(@"C:\Users\andre\Desktop\Compiladores\Testes\Lexema1.lpd").DoAnalisys();
+        }
     }
 }
