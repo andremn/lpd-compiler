@@ -180,12 +180,11 @@ namespace LPD.Compiler.Lexical
             }
             else if (character == GreaterChar)
             {
-                id += character;
                 character = _reader.Peek().Value;
 
                 if (character == EqualChar)
                 {
-                    _reader.Read();
+                    id += _reader.Read();
                     token.Symbol = Symbols.SMaiorIg;
                 }
                 else
@@ -195,12 +194,11 @@ namespace LPD.Compiler.Lexical
             }
             else if (character == LessChar)
             {
-                id += character;
                 character = _reader.Peek().Value;
 
                 if (character == EqualChar)
                 {
-                    _reader.Read();
+                    id += _reader.Read();
                     token.Symbol = Symbols.SMenorIg;
                 }
                 else
