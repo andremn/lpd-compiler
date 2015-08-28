@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace LPD.Compiler.Lexical
 {
@@ -15,18 +14,20 @@ namespace LPD.Compiler.Lexical
         private const char TwoPointsChar = ':';
         private const char UnderscoreChar = '_';
         private const char EqualChar = '=';
-        private const char DotCommaChar = ';';
+        private const char SemiColonChar = ';';
         private const char CommaChar = ',';
-        private const char OpenParenthesesCommaChar = '(';
-        private const char CloseParenthesesCommaChar = ')';
+        private const char OpenBracketChar = '(';
+        private const char CloseBracketChar = ')';
         private const char DotChar = '.';
         private const char PlusChar = '+';
         private const char MinusChar = '-';
         private const char MultChar = '*';
+        private const char GreaterChar = '>';
+        private const char LessChar = '<';
 
-        private static readonly char[] ArithmeticOperators = { '+', '-', '*' };
-        private static readonly char[] RelationalOperators = { '<', '>', '=' };
-        private static readonly char[] PontuationOperators = { ';', ',', '(', ')', '.' };
+        private static readonly char[] ArithmeticOperators = { PlusChar, MinusChar, MultChar };
+        private static readonly char[] RelationalOperators = { LessChar, GreaterChar, EqualChar };
+        private static readonly char[] PontuationOperators = { SemiColonChar, CommaChar, OpenBracketChar, CloseBracketChar, DotChar };
 
         private static readonly Dictionary<string, Symbols> Tokens = new Dictionary<string, Symbols>()
         {
@@ -53,7 +54,7 @@ namespace LPD.Compiler.Lexical
             ["nao"] = Symbols.SNao
         };
 
-        private StreamReader _reader;
+        private CharReader _reader;
         private string _filePath;
 
         public LexicalAnalizer(string filePath)
@@ -61,20 +62,18 @@ namespace LPD.Compiler.Lexical
             _filePath = filePath;
         }
 
-        public IList<Token> DoAnalisys()
+        public TokenCollection GetTokens()
         {
-            List<Token> tokens = new List<Token>();
+            TokenCollection tokens = new TokenCollection();
 
             using (FileStream fileStream = File.OpenRead(_filePath))
             {
-                using (_reader = new StreamReader(fileStream))
+                using (_reader = new CharReader(fileStream, Encoding.UTF8))
                 {
-                    int read;
+                    char? character;
 
-                    while ((read = _reader.Read()) >= 0)
+                    while ((character = _reader.Read()).HasValue)
                     {
-                        char character = (char)read;
-
                         if (character == '\r' || character == '\n')
                         {
                             continue;
@@ -82,9 +81,9 @@ namespace LPD.Compiler.Lexical
 
                         if (character == CommentStart)
                         {
-                            while ((read = _reader.Read()) >= 0 && (char)read != CommentEnd)
+                            while (character != CommentEnd)
                             {
-                                read = _reader.Read();
+                                character = _reader.Read();
                             }
 
                             continue;
@@ -94,7 +93,7 @@ namespace LPD.Compiler.Lexical
                             continue;
                         }
 
-                        tokens.Add(GetToken(character));
+                        tokens.Append(GetToken());
                     }
                 }
             }
@@ -102,33 +101,34 @@ namespace LPD.Compiler.Lexical
             return tokens;
         }
 
-        private Token GetToken(char character)
+        private Token GetToken()
         {
             Token token;
+            char character = _reader.Current.Value;
 
             if (char.IsDigit(character))
             {
-                token = HandleDigit(character);
+                token = HandleDigit();
             }
             else if (char.IsLetter(character))
             {
-                token = HandleKeyWord(character);
+                token = HandleKeyWord();
             }
             else if (character == TwoPointsChar)
             {
-                token = HandleAtribution(character);
+                token = HandleAtribution();
             }
             else if (ArithmeticOperators.Contains(character))
             {
-                token = HandleArithmeticOperator(character);
+                token = HandleArithmeticOperator();
             }
             else if (RelationalOperators.Contains(character))
             {
-                token = HandleRelationalOperator(character);
+                token = HandleRelationalOperator();
             }
             else if (PontuationOperators.Contains(character))
             {
-                token = HandlePontuation(character);
+                token = HandlePontuation();
             }
             else
             {
@@ -138,13 +138,14 @@ namespace LPD.Compiler.Lexical
             return token;
         }
 
-        private Token HandlePontuation(char character)
+        private Token HandlePontuation()
         {
             Token token = new Token();
+            char character = _reader.Current.Value;
 
             switch (character)
             {
-                case DotCommaChar:
+                case SemiColonChar:
                     token.Symbol = Symbols.SPontoVirgula;
                     break;
                 case CommaChar:
@@ -153,22 +154,23 @@ namespace LPD.Compiler.Lexical
                 case DotChar:
                     token.Symbol = Symbols.SPonto;
                     break;
-                case OpenParenthesesCommaChar:
+                case OpenBracketChar:
                     token.Symbol = Symbols.SAbreParenteses;
                     break;
-                case CloseParenthesesCommaChar:
+                case CloseBracketChar:
                     token.Symbol = Symbols.SFechaParenteses;
                     break;
             }
 
-            token.Lexema = character.ToString();
+            token.Lexeme = character.ToString();
             return token;
         }
 
-        private Token HandleRelationalOperator(char character)
+        private Token HandleRelationalOperator()
         {
             Token token = new Token();
             string id = string.Empty;
+            char character = _reader.Current.Value;
 
             id += character;
 
@@ -176,38 +178,45 @@ namespace LPD.Compiler.Lexical
             {
                 token.Symbol = Symbols.SIg;
             }
-            else
+            else if (character == GreaterChar)
             {
-                if (character == '>')
+                id += character;
+                character = _reader.Peek().Value;
+
+                if (character == EqualChar)
                 {
-                    token.Symbol = Symbols.SMaior;
-                }
-                else if (character == '<')
-                {
-                    token.Symbol = Symbols.SMenor;
+                    _reader.Read();
+                    token.Symbol = Symbols.SMaiorIg;
                 }
                 else
                 {
-                    character = (char)_reader.Read();
+                    token.Symbol = Symbols.SMaior;
+                }
+            }
+            else if (character == LessChar)
+            {
+                id += character;
+                character = _reader.Peek().Value;
 
-                    if (id[0] == '>' && character == EqualChar)
-                    {
-                        token.Symbol = Symbols.SMaiorig;
-                    }
-                    else if (id[0] == '<' && character == EqualChar)
-                    {
-                        token.Symbol = Symbols.SMenorig;
-                    }
+                if (character == EqualChar)
+                {
+                    _reader.Read();
+                    token.Symbol = Symbols.SMenorIg;
+                }
+                else
+                {
+                    token.Symbol = Symbols.SMenor;
                 }
             }
 
-            token.Lexema = id;
+            token.Lexeme = id;
             return token;
         }
 
-        private Token HandleArithmeticOperator(char character)
+        private Token HandleArithmeticOperator()
         {
             Token token = new Token();
+            char character = _reader.Current.Value;
 
             switch (character)
             {
@@ -222,17 +231,18 @@ namespace LPD.Compiler.Lexical
                     break;
             }
 
-            token.Lexema = character.ToString();
+            token.Lexeme = character.ToString();
             return token;
         }
 
-        private Token HandleAtribution(char character)
+        private Token HandleAtribution()
         {
             Token token = new Token();
             string lex = string.Empty;
+            char character = _reader.Current.Value;
 
             lex += character;
-            character = (char)_reader.Peek();
+            character = _reader.Peek().Value;
 
             if (character == EqualChar)
             {
@@ -245,32 +255,33 @@ namespace LPD.Compiler.Lexical
             }
 
             _reader.Read();
-            token.Lexema = lex;
+            token.Lexeme = lex;
             return token;
         }
 
-        private Token HandleKeyWord(char character)
+        private Token HandleKeyWord()
         {
             Token token = new Token();
             Symbols symbol;
             StringBuilder stringBuilder = new StringBuilder();
+            char character = _reader.Current.Value;
             string id;
 
             while (true)
             {
                 stringBuilder.Append(character);
-                character = (char)_reader.Peek();
+                character = _reader.Peek().Value;
 
                 if (!char.IsLetterOrDigit(character) && character != UnderscoreChar)
                 {
                     break;
                 }
 
-                character = (char)_reader.Read();
+                character = _reader.Read().Value;
             }
 
             id = stringBuilder.ToString();
-            token.Lexema = id;
+            token.Lexeme = id;
             
             if (!Tokens.TryGetValue(id, out symbol))
             {
@@ -281,12 +292,13 @@ namespace LPD.Compiler.Lexical
             return token;
         }
 
-        private Token HandleDigit(char character)
+        private Token HandleDigit()
         {
             StringBuilder stringBuilder = new StringBuilder();
+            char character = _reader.Current.Value;
 
             stringBuilder.Append(character);
-            character = (char)_reader.Peek();
+            character = _reader.Peek().Value;
 
             while (true)
             {
@@ -296,10 +308,10 @@ namespace LPD.Compiler.Lexical
                 }
 
                 stringBuilder.Append(character);
-                character = (char)_reader.Read();
+                character = _reader.Read().Value;
             }
 
-            return new Token() { Lexema = stringBuilder.ToString(), Symbol = Symbols.SNumero };
+            return new Token() { Lexeme = stringBuilder.ToString(), Symbol = Symbols.SNumero };
         } 
     }
 }

@@ -4,11 +4,11 @@
     {
         public Symbols Symbol { get; set; }
 
-        public string Lexema { get; set; }
+        public string Lexeme { get; set; }
 
         public override string ToString()
         {
-            return Symbol.ToString() + " " + Lexema;
+            return Lexeme + " " + Symbol;
         }
     }
 }
