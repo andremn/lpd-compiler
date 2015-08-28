@@ -1,19 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<logicalClassDesignerModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm4="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm5="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/ModelStore" dslVersion="1.0.0.0" Id="38b96a82-2336-4016-bce7-60dbd7ffc837" name="Lexical" linkedPackageId="f064a465-7b5c-44ac-a428-7e3ee7a1bff8" xmlns="http://schemas.microsoft.com/dsltools/LogicalClassDesigner">
-  <profileInstances>
-    <packageHasProfileInstances Id="224359cb-e758-414e-a41a-b7ea6aa1c29e">
-      <profileInstance Id="f6770cfc-8de7-41c2-8101-a25b40628b7f" name="StandardProfileL2">
-        <elementDefinition Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791" />
-      </profileInstance>
-      <elementDefinition Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b" />
-    </packageHasProfileInstances>
-    <packageHasProfileInstances Id="bd941b21-7f50-44f5-ad35-8e05bda29b3d">
-      <profileInstance Id="710f9029-9e03-4a91-95d5-262606e20458" name="StandardProfileL3">
-        <elementDefinition Id="532ea607-fb19-44b8-8502-3351b05452be" />
-      </profileInstance>
-      <elementDefinition Id="29349502-908c-4fda-9054-c48619c59ed0" />
-    </packageHasProfileInstances>
-  </profileInstances>
+<logicalClassDesignerModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm4="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/ModelStore" dslVersion="1.0.0.0" Id="38b96a82-2336-4016-bce7-60dbd7ffc837" name="Lexical" linkedPackageId="f064a465-7b5c-44ac-a428-7e3ee7a1bff8" xmlns="http://schemas.microsoft.com/dsltools/LogicalClassDesigner">
   <packagedElements>
     <logicalClassDesignerModelHasTypes>
       <class Id="581f672d-e09f-440d-bbf0-4b8ce1db5a9e" name="LexicalAnalizer" isAbstract="false" isLeaf="false" isActiveClass="false">
@@ -300,10 +286,338 @@
             <elementDefinition Id="4006ee2b-cce5-4630-9ae4-cebffb7a02e1" />
           </association>
         </targetEnds>
+        <ownedLiterals>
+          <enumerationLiteral Id="aa6d5de1-e510-49c6-a9c0-671123382f62" name="SInicio">
+            <elementDefinition Id="e16f1ec3-3b0d-43dd-961c-9a3cda2dfaa8" />
+            <specification>
+              <literalInteger Id="c82553d1-79c1-40f1-886f-5e23d54286eb" name="Integer" value="0">
+                <elementDefinition Id="9aa33b9f-9ca2-4e96-b672-f563fbbb02cd" />
+              </literalInteger>
+            </specification>
+          </enumerationLiteral>
+          <enumerationLiteral Id="f445b544-05bb-43fd-86eb-1fe22ce95e1c" name="SLeia">
+            <elementDefinition Id="83869d49-b7ab-42ab-a8b5-5c6b07a5e8cf" />
+            <specification>
+              <literalInteger Id="173b539f-d83f-4d56-a9ac-4b513289ed27" name="Integer" value="11">
+                <elementDefinition Id="43f23244-a671-4759-8ef6-eca261342e65" />
+              </literalInteger>
+            </specification>
+          </enumerationLiteral>
+          <enumerationLiteral Id="069f374f-0f42-4b9f-a756-b96baab9d552" name="SMaior">
+            <elementDefinition Id="d038ffb0-4f63-4a3f-813f-ac3728645553" />
+            <specification>
+              <literalInteger Id="2bcbd8b1-a47a-4418-ab1f-0a2960c84cc9" name="Integer" value="22">
+                <elementDefinition Id="41e7a78c-3e96-46a0-9bdf-3155a53e1208" />
+              </literalInteger>
+            </specification>
+          </enumerationLiteral>
+          <enumerationLiteral Id="dc0c38cd-7738-47a8-9aa5-e6c5ee9b9c72" name="SDiv">
+            <elementDefinition Id="f6bdad84-9a12-49e1-a2c3-0a6a14359856" />
+            <specification>
+              <literalInteger Id="e33258a4-e3b6-4783-ba85-c7ab91842671" name="Integer" value="31">
+                <elementDefinition Id="23f7ce29-8e21-4664-99e6-864e8de8b5f0" />
+              </literalInteger>
+            </specification>
+          </enumerationLiteral>
+          <enumerationLiteral Id="08c31e66-eb95-4233-bd89-229d9f45abc7" name="SE">
+            <elementDefinition Id="5d2fc06b-a4bb-4821-a718-032569fecaeb" />
+            <specification>
+              <literalInteger Id="7c547146-a920-4794-aeef-798e08426ac4" name="Integer" value="32">
+                <elementDefinition Id="a7112173-0015-47e7-ac68-d3d6cc44d0de" />
+              </literalInteger>
+            </specification>
+          </enumerationLiteral>
+          <enumerationLiteral Id="28f12f89-90fc-4cc7-9545-469afd28c629" name="SOu">
+            <elementDefinition Id="0e6b4599-78ee-4451-8926-812cebf157aa" />
+            <specification>
+              <literalInteger Id="59689f78-08d3-4abd-8df7-49838c25c8a2" name="Integer" value="33">
+                <elementDefinition Id="53cbed3b-7bdb-4547-9a41-f4b47b24c3dd" />
+              </literalInteger>
+            </specification>
+          </enumerationLiteral>
+          <enumerationLiteral Id="1b8e6ae7-39f5-4bd2-b360-9fb3c2ff145e" name="SNao">
+            <elementDefinition Id="9012f4ca-8bf8-42da-9601-0953931ced63" />
+            <specification>
+              <literalInteger Id="e50903be-a0b3-4612-9e87-055d07860121" name="Integer" value="34">
+                <elementDefinition Id="84d73780-b55c-4425-8e75-6e90dbc5eb2a" />
+              </literalInteger>
+            </specification>
+          </enumerationLiteral>
+          <enumerationLiteral Id="08da5193-ffc0-45b9-bfbb-9bdb01ff5442" name="SDoisPontos">
+            <elementDefinition Id="0cea467a-24b2-491d-9e95-357f614d11e3" />
+            <specification>
+              <literalInteger Id="4b0cd9c6-b831-4cf2-a308-431a538f62ad" name="Integer" value="35">
+                <elementDefinition Id="d9dca0e6-fbff-4f8a-8d93-976ae93e6c54" />
+              </literalInteger>
+            </specification>
+          </enumerationLiteral>
+          <enumerationLiteral Id="f18228b0-9db3-462d-aa63-621ed5bbe7c2" name="SPrograma">
+            <elementDefinition Id="c1e2e313-bb0a-488d-b12d-38123d94b2a1" />
+            <specification>
+              <literalInteger Id="a623a34b-434f-406f-ba65-d5ff277c2c92" name="Integer" value="36">
+                <elementDefinition Id="732611f9-e7c5-45fe-976d-9dea55368be4" />
+              </literalInteger>
+            </specification>
+          </enumerationLiteral>
+          <enumerationLiteral Id="11c0fd9f-dcfe-4507-b35d-8c544fffedb1" name="SFim">
+            <elementDefinition Id="1540495c-2a2c-45e0-9245-9c3ecc66872d" />
+            <specification>
+              <literalInteger Id="212eee85-98af-4fec-8851-6bcdbbd220a1" name="Integer" value="1">
+                <elementDefinition Id="f092c8df-01a8-4dca-8448-f64b234020fa" />
+              </literalInteger>
+            </specification>
+          </enumerationLiteral>
+          <enumerationLiteral Id="e4df35c2-3b68-46fb-a683-79d963f0f152" name="SProcedimento">
+            <elementDefinition Id="407967f2-2a4a-4145-91f1-ef9cea0e74ca" />
+            <specification>
+              <literalInteger Id="3a9a67ae-a904-4ca1-8321-348aaf7388f5" name="Integer" value="2">
+                <elementDefinition Id="8b6d8b17-57cb-4e02-a915-034b7cfecbdb" />
+              </literalInteger>
+            </specification>
+          </enumerationLiteral>
+          <enumerationLiteral Id="a0fc4ec1-e985-477d-9333-750cbefb228c" name="SFuncao">
+            <elementDefinition Id="92799d3e-e9d0-473b-9bc2-7a13c46c860c" />
+            <specification>
+              <literalInteger Id="bbb16612-9ad3-4ae5-8181-4bd7d78fb06a" name="Integer" value="3">
+                <elementDefinition Id="6dafc3bf-acd0-4954-bff4-c92048c5e25e" />
+              </literalInteger>
+            </specification>
+          </enumerationLiteral>
+          <enumerationLiteral Id="0208e24b-d0f6-495b-af51-e11393a3ab33" name="SSe">
+            <elementDefinition Id="38d8065a-5888-45e2-a343-b2c53c5f8e95" />
+            <specification>
+              <literalInteger Id="8cd50b33-e20f-43cd-a245-9ce12f4cc880" name="Integer" value="4">
+                <elementDefinition Id="ad7e3af6-465c-4a9c-8e55-f09a5faa41d9" />
+              </literalInteger>
+            </specification>
+          </enumerationLiteral>
+          <enumerationLiteral Id="a8fc39fa-40d4-4c43-b871-fe334f55c4dd" name="SEntao">
+            <elementDefinition Id="e57130cc-2903-45ad-90a2-dbfa81e64187" />
+            <specification>
+              <literalInteger Id="40f80c98-c93b-479f-b889-1b79ceb450c7" name="Integer" value="5">
+                <elementDefinition Id="f6f7e698-d073-4cf7-b541-4f21be39ba55" />
+              </literalInteger>
+            </specification>
+          </enumerationLiteral>
+          <enumerationLiteral Id="d6ccf201-3c68-42f6-b22f-a94b428858d2" name="SSenao">
+            <elementDefinition Id="a30c1a04-cc99-4d87-b3f9-2add1baf6506" />
+            <specification>
+              <literalInteger Id="f6bfe244-b5c3-492b-81d4-cb6024aa04c9" name="Integer" value="6">
+                <elementDefinition Id="af1865ce-1ba3-426a-88b1-86821ecd83f1" />
+              </literalInteger>
+            </specification>
+          </enumerationLiteral>
+          <enumerationLiteral Id="29f691a6-11eb-4cf7-84c2-a5015e271e97" name="SEnquanto">
+            <elementDefinition Id="bf9a0565-386a-4f99-ad6a-1a4687bd6351" />
+            <specification>
+              <literalInteger Id="8c2e84e4-6a6a-4b67-8284-a20102dc6a17" name="Integer" value="7">
+                <elementDefinition Id="bd14f880-5bdd-426e-bc5f-caf07b368e6d" />
+              </literalInteger>
+            </specification>
+          </enumerationLiteral>
+          <enumerationLiteral Id="31f99891-2220-4151-af1c-046281cddc0c" name="SFaca">
+            <elementDefinition Id="436f8343-8462-4760-a709-d72915676516" />
+            <specification>
+              <literalInteger Id="be1829ca-a7ba-4f68-8826-806ce60d7224" name="Integer" value="8">
+                <elementDefinition Id="44e836bb-6312-4653-affc-beb1fd969e82" />
+              </literalInteger>
+            </specification>
+          </enumerationLiteral>
+          <enumerationLiteral Id="10c1e479-cdc3-40f8-aac2-68deb0e17c1d" name="SAtribuicao">
+            <elementDefinition Id="8a85a4cb-e86a-4f23-b95c-816774fd7f26" />
+            <specification>
+              <literalInteger Id="cc12798a-bc48-4f1b-8499-c755ab5c1168" name="Integer" value="9">
+                <elementDefinition Id="749ef6cc-95f4-4301-89ca-82d0d3d24247" />
+              </literalInteger>
+            </specification>
+          </enumerationLiteral>
+          <enumerationLiteral Id="a586c354-c64a-47e7-a1cb-e5dd8315396d" name="SEscreva">
+            <elementDefinition Id="5fde31dc-2a27-426d-a090-d808f0df15cb" />
+            <specification>
+              <literalInteger Id="4b995bbc-9d3e-433b-8893-7cf34cc519ab" name="Integer" value="10">
+                <elementDefinition Id="6fa86711-fbe9-4055-a69d-2b1a5c39e23e" />
+              </literalInteger>
+            </specification>
+          </enumerationLiteral>
+          <enumerationLiteral Id="845fc44b-c829-4d5c-a938-572c96170586" name="SVar">
+            <elementDefinition Id="7e9f168c-8f72-4f14-888e-f25773d893e0" />
+            <specification>
+              <literalInteger Id="f6553eda-9634-4551-9b54-4d58fbb3cb07" name="Integer" value="12">
+                <elementDefinition Id="eed6c29f-ecef-4cc0-a100-ff677045dc13" />
+              </literalInteger>
+            </specification>
+          </enumerationLiteral>
+          <enumerationLiteral Id="f80f0169-28e3-44c7-9ba7-cc368b5cc3d8" name="SInteiro">
+            <elementDefinition Id="f06c4609-34fd-4610-80c7-f1b380227b8f" />
+            <specification>
+              <literalInteger Id="311f1f81-43e2-4d10-a45b-38f43e208512" name="Integer" value="13">
+                <elementDefinition Id="1b806636-c365-4684-b867-4d897e0391c4" />
+              </literalInteger>
+            </specification>
+          </enumerationLiteral>
+          <enumerationLiteral Id="6d752a28-7963-41b8-8605-07a08217e421" name="SBooleano">
+            <elementDefinition Id="8d4432a2-4b5b-4acf-b81f-b1b493a7336f" />
+            <specification>
+              <literalInteger Id="f3873451-4717-46c0-9c94-68098e0cdde6" name="Integer" value="14">
+                <elementDefinition Id="73511624-95e6-47de-b80c-e35df9437133" />
+              </literalInteger>
+            </specification>
+          </enumerationLiteral>
+          <enumerationLiteral Id="b2f71569-6f6f-4e18-a66e-6b0be93bd9d4" name="SIdentificador">
+            <elementDefinition Id="b0522559-3d47-4eda-a082-5f4814f9a284" />
+            <specification>
+              <literalInteger Id="c7013110-be60-4128-aa0d-797ba9808401" name="Integer" value="15">
+                <elementDefinition Id="59e93e9c-b1a8-4bbd-91be-8b50c7b98e86" />
+              </literalInteger>
+            </specification>
+          </enumerationLiteral>
+          <enumerationLiteral Id="a395cb06-507a-44d7-bb5b-692a315526a4" name="SNumero">
+            <elementDefinition Id="ff22783d-239e-45ba-a989-9c36d651e88e" />
+            <specification>
+              <literalInteger Id="1fd2e136-e3b9-4375-9447-291d274783a3" name="Integer" value="16">
+                <elementDefinition Id="867e063c-9e5a-4916-8145-33f221bc6f7a" />
+              </literalInteger>
+            </specification>
+          </enumerationLiteral>
+          <enumerationLiteral Id="7fc21bba-6452-4eae-bce2-48df0caa6b0b" name="SPonto">
+            <elementDefinition Id="a65fd733-f359-423e-9eec-3a3e3b75648a" />
+            <specification>
+              <literalInteger Id="e483ee11-2734-4687-b6f4-dcfb021ff52a" name="Integer" value="17">
+                <elementDefinition Id="629db149-5dbc-4e2e-9001-25d2a211f627" />
+              </literalInteger>
+            </specification>
+          </enumerationLiteral>
+          <enumerationLiteral Id="97116d1f-6b16-4ac0-b4fd-fd0ada546260" name="SPontoVirgula">
+            <elementDefinition Id="db7c453c-5c26-4b0d-805d-cba17eb92fe0" />
+            <specification>
+              <literalInteger Id="ec3c6246-c75d-477f-adcc-7331a850e7db" name="Integer" value="18">
+                <elementDefinition Id="aa3bb695-9bfa-4ddd-8f27-37a9f07aac45" />
+              </literalInteger>
+            </specification>
+          </enumerationLiteral>
+          <enumerationLiteral Id="5b681cf4-e941-424e-9499-bcba3e25d1bb" name="SVirgula">
+            <elementDefinition Id="9e99d22c-2951-4f79-a685-9207c5dff483" />
+            <specification>
+              <literalInteger Id="9df41f02-985d-4fe1-9150-af3aece05b38" name="Integer" value="19">
+                <elementDefinition Id="c5dcd33c-7ab4-40ca-9367-20633558b6be" />
+              </literalInteger>
+            </specification>
+          </enumerationLiteral>
+          <enumerationLiteral Id="b85373bd-4220-44aa-8621-da1543407039" name="SAbreParenteses">
+            <elementDefinition Id="18622940-6d75-46eb-8112-7b06833d840f" />
+            <specification>
+              <literalInteger Id="8f90e3d7-d962-4944-8d39-6d2d6c8403fb" name="Integer" value="20">
+                <elementDefinition Id="afa3011c-bf32-4dfa-8512-acfdacb914ea" />
+              </literalInteger>
+            </specification>
+          </enumerationLiteral>
+          <enumerationLiteral Id="fa6b8173-1c6b-4de0-88e6-972614c70654" name="SFechaParenteses">
+            <elementDefinition Id="16de960b-716c-49b4-b176-5ceb9e981a99" />
+            <specification>
+              <literalInteger Id="39284689-4bfd-46d5-8780-ee2edd8a0488" name="Integer" value="21">
+                <elementDefinition Id="37a34882-454b-41df-b57e-225d261a9402" />
+              </literalInteger>
+            </specification>
+          </enumerationLiteral>
+          <enumerationLiteral Id="0915f436-db30-4c3d-b08e-98ef84d93f76" name="SMaiorIg">
+            <elementDefinition Id="c3f79bef-e97a-4b99-b5ad-f38425ac420c" />
+            <specification>
+              <literalInteger Id="d95f5e5e-2c65-47cb-9d84-7284c25fbbf3" name="Integer" value="23">
+                <elementDefinition Id="35432dbc-5695-426e-9ad6-74266fd7462b" />
+              </literalInteger>
+            </specification>
+          </enumerationLiteral>
+          <enumerationLiteral Id="dac3e46d-853c-436b-897a-7b923236d009" name="SIg">
+            <elementDefinition Id="690fd477-df30-4613-b128-c7b027fc862d" />
+            <specification>
+              <literalInteger Id="8ce7081e-3a13-44d0-becb-8c931b45ed2a" name="Integer" value="24">
+                <elementDefinition Id="a2c4229f-b967-460b-ae19-c91927cb266e" />
+              </literalInteger>
+            </specification>
+          </enumerationLiteral>
+          <enumerationLiteral Id="df64c260-1fb6-4e11-802d-4bae46dfb877" name="SMenor">
+            <elementDefinition Id="819556b2-c354-49ef-bbab-17c11dc648c4" />
+            <specification>
+              <literalInteger Id="bfecfd76-6913-4f84-a2c3-ba4b5c78d100" name="Integer" value="25">
+                <elementDefinition Id="32c3db99-551c-4fc2-99a5-c9f1c9077d3b" />
+              </literalInteger>
+            </specification>
+          </enumerationLiteral>
+          <enumerationLiteral Id="fbf65816-1a8a-4791-92f4-53258fc5ec85" name="SMenorIg">
+            <elementDefinition Id="fcdedb23-dde4-453e-98ca-c592e3e9d3d3" />
+            <specification>
+              <literalInteger Id="89db117b-bfa8-4fdd-b698-075b48a0ce7f" name="Integer" value="26">
+                <elementDefinition Id="baa8ef9e-176e-4c2e-bcf4-ac43a319e533" />
+              </literalInteger>
+            </specification>
+          </enumerationLiteral>
+          <enumerationLiteral Id="98dfbfbf-dbc3-440e-929a-40e196b1e8bc" name="SDif">
+            <elementDefinition Id="0bdb482d-06d2-4191-97b4-ff41a4f98d93" />
+            <specification>
+              <literalInteger Id="73d2f2c6-1dff-49f2-aa91-6015a617609f" name="Integer" value="27">
+                <elementDefinition Id="eda36f6d-cf3e-4c0e-818b-132a124a3287" />
+              </literalInteger>
+            </specification>
+          </enumerationLiteral>
+          <enumerationLiteral Id="a0e004df-c1eb-45cd-9649-e85a69bd3261" name="SMais">
+            <elementDefinition Id="fec79cc5-f19f-4df6-a99a-b828cf5bc656" />
+            <specification>
+              <literalInteger Id="b9996f26-a81b-4fcc-9ce5-d63e7a43cf50" name="Integer" value="28">
+                <elementDefinition Id="8872a846-7163-487a-86ce-5dfdbd6a537d" />
+              </literalInteger>
+            </specification>
+          </enumerationLiteral>
+          <enumerationLiteral Id="a02c14e4-b61c-4ca7-b1a8-d851359041e0" name="SMenos">
+            <elementDefinition Id="71174a3f-f349-4f74-b42a-9aa672e2d93e" />
+            <specification>
+              <literalInteger Id="7c85f2ea-2996-48f7-8db0-d9f6fa9b09b9" name="Integer" value="29">
+                <elementDefinition Id="aa545f75-5ae6-4bc5-b6f0-e8848f63c73c" />
+              </literalInteger>
+            </specification>
+          </enumerationLiteral>
+          <enumerationLiteral Id="54706dfb-978d-4838-b9db-1832b7729d0f" name="SMult">
+            <elementDefinition Id="1e199316-4ef6-4332-adb3-e19f36494d0a" />
+            <specification>
+              <literalInteger Id="27555d81-bf75-4aab-88a9-325e0f7a6837" name="Integer" value="30">
+                <elementDefinition Id="a89e99ce-24df-48f7-8557-da8d4807c47f" />
+              </literalInteger>
+            </specification>
+          </enumerationLiteral>
+          <enumerationLiteral Id="bcaea4d3-623b-4deb-8b2d-6f0519659980" name="SVerdadeiro">
+            <elementDefinition Id="1cc9ce08-fd83-4faf-8b8c-47ae8dcf906d" />
+            <specification>
+              <literalInteger Id="6179570d-69d4-4a40-8f01-702287ebebbc" name="Integer" value="37">
+                <elementDefinition Id="550e427c-84dd-437e-af1f-4764ba7af628" />
+              </literalInteger>
+            </specification>
+          </enumerationLiteral>
+          <enumerationLiteral Id="49be3e9a-baf2-4ad3-ac9f-8dab0e0afd46" name="SFalso">
+            <elementDefinition Id="2e833b4e-2097-4d2e-8f76-d338b276deac" />
+            <specification>
+              <literalInteger Id="03a5ac5a-cc99-45d4-96d6-e689cb97b901" name="Integer" value="38">
+                <elementDefinition Id="193679f1-2d80-446a-9000-b9e3026c1960" />
+              </literalInteger>
+            </specification>
+          </enumerationLiteral>
+        </ownedLiterals>
       </enumeration>
     </logicalClassDesignerModelHasTypes>
   </packagedElements>
   <package Id="f064a465-7b5c-44ac-a428-7e3ee7a1bff8" name="LPD.Compiler.Architecture">
     <elementDefinition Id="bd7a0be5-ddf7-4fa4-859b-fc160849711d" />
+    <profileInstances>
+      <packageHasProfileInstances Id="224359cb-e758-414e-a41a-b7ea6aa1c29e">
+        <profileInstance Id="f6770cfc-8de7-41c2-8101-a25b40628b7f" name="StandardProfileL2">
+          <elementDefinition Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791" />
+        </profileInstance>
+        <elementDefinition Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b" />
+      </packageHasProfileInstances>
+      <packageHasProfileInstances Id="bd941b21-7f50-44f5-ad35-8e05bda29b3d">
+        <profileInstance Id="710f9029-9e03-4a91-95d5-262606e20458" name="StandardProfileL3">
+          <elementDefinition Id="532ea607-fb19-44b8-8502-3351b05452be" />
+        </profileInstance>
+        <elementDefinition Id="29349502-908c-4fda-9054-c48619c59ed0" />
+      </packageHasProfileInstances>
+    </profileInstances>
   </package>
 </logicalClassDesignerModel>

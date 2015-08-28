@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="LPD.Compiler.Lexical.CharReader" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAAACAEAAAAAACAAAAgAAAAAAAAAAAABAAAAAA=</HashCode>
+      <FileName>CharReader.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="LPD.Compiler.Lexical.LexicalAnalizer" Collapsed="true">
+    <Position X="2.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACEABQIABAAAaEogRAACAAAEAEAgCACQAKAAIAABIQA=</HashCode>
+      <FileName>LexicalAnalizer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LPD.Compiler.Lexical.TokenCollection" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="0.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAABAABAAAAAAAAAAAAQAEAAAAAAAAAAA=</HashCode>
+      <FileName>TokenCollection.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Struct Name="LPD.Compiler.Lexical.Token" Collapsed="true">
+    <Position X="0.5" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAEAAAAAAAAAAAAIAAAAAAAAAAACAA=</HashCode>
+      <FileName>Token.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Enum Name="LPD.Compiler.Lexical.Symbols">
+    <Position X="4" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>VAAACAQAAoAgAXBCCEwALACCAwYIAsAAAAQAAoBgRAA=</HashCode>
+      <FileName>Symbols.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

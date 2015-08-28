@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<modelStoreModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm4="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm5="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/LogicalClassDesigner"
+<modelStoreModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm4="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/LogicalClassDesigner"
   dslVersion="1.0.0.0"
   Id="bd7a0be5-ddf7-4fa4-859b-fc160849711d"
   name="LPD.Compiler.Architecture" xmlns="http://schemas.microsoft.com/dsltools/ModelStore">
@@ -551,6 +551,398 @@
             </relationshipOwnedElementsInternal>
           </association>
         </targetEnds>
+        <ownedLiterals>
+          <enumerationLiteral
+            Id="e16f1ec3-3b0d-43dd-961c-9a3cda2dfaa8"
+            name="SInicio">
+            <specification>
+              <literalInteger
+                Id="9aa33b9f-9ca2-4e96-b672-f563fbbb02cd"
+                name="Integer"
+                value="0" />
+            </specification>
+          </enumerationLiteral>
+          <enumerationLiteral
+            Id="83869d49-b7ab-42ab-a8b5-5c6b07a5e8cf"
+            name="SLeia">
+            <specification>
+              <literalInteger
+                Id="43f23244-a671-4759-8ef6-eca261342e65"
+                name="Integer"
+                value="11" />
+            </specification>
+          </enumerationLiteral>
+          <enumerationLiteral
+            Id="d038ffb0-4f63-4a3f-813f-ac3728645553"
+            name="SMaior">
+            <specification>
+              <literalInteger
+                Id="41e7a78c-3e96-46a0-9bdf-3155a53e1208"
+                name="Integer"
+                value="22" />
+            </specification>
+          </enumerationLiteral>
+          <enumerationLiteral
+            Id="f6bdad84-9a12-49e1-a2c3-0a6a14359856"
+            name="SDiv">
+            <specification>
+              <literalInteger
+                Id="23f7ce29-8e21-4664-99e6-864e8de8b5f0"
+                name="Integer"
+                value="31" />
+            </specification>
+          </enumerationLiteral>
+          <enumerationLiteral
+            Id="5d2fc06b-a4bb-4821-a718-032569fecaeb"
+            name="SE">
+            <specification>
+              <literalInteger
+                Id="a7112173-0015-47e7-ac68-d3d6cc44d0de"
+                name="Integer"
+                value="32" />
+            </specification>
+          </enumerationLiteral>
+          <enumerationLiteral
+            Id="0e6b4599-78ee-4451-8926-812cebf157aa"
+            name="SOu">
+            <specification>
+              <literalInteger
+                Id="53cbed3b-7bdb-4547-9a41-f4b47b24c3dd"
+                name="Integer"
+                value="33" />
+            </specification>
+          </enumerationLiteral>
+          <enumerationLiteral
+            Id="9012f4ca-8bf8-42da-9601-0953931ced63"
+            name="SNao">
+            <specification>
+              <literalInteger
+                Id="84d73780-b55c-4425-8e75-6e90dbc5eb2a"
+                name="Integer"
+                value="34" />
+            </specification>
+          </enumerationLiteral>
+          <enumerationLiteral
+            Id="0cea467a-24b2-491d-9e95-357f614d11e3"
+            name="SDoisPontos">
+            <specification>
+              <literalInteger
+                Id="d9dca0e6-fbff-4f8a-8d93-976ae93e6c54"
+                name="Integer"
+                value="35" />
+            </specification>
+          </enumerationLiteral>
+          <enumerationLiteral
+            Id="c1e2e313-bb0a-488d-b12d-38123d94b2a1"
+            name="SPrograma">
+            <specification>
+              <literalInteger
+                Id="732611f9-e7c5-45fe-976d-9dea55368be4"
+                name="Integer"
+                value="36" />
+            </specification>
+          </enumerationLiteral>
+          <enumerationLiteral
+            Id="1540495c-2a2c-45e0-9245-9c3ecc66872d"
+            name="SFim">
+            <specification>
+              <literalInteger
+                Id="f092c8df-01a8-4dca-8448-f64b234020fa"
+                name="Integer"
+                value="1" />
+            </specification>
+          </enumerationLiteral>
+          <enumerationLiteral
+            Id="407967f2-2a4a-4145-91f1-ef9cea0e74ca"
+            name="SProcedimento">
+            <specification>
+              <literalInteger
+                Id="8b6d8b17-57cb-4e02-a915-034b7cfecbdb"
+                name="Integer"
+                value="2" />
+            </specification>
+          </enumerationLiteral>
+          <enumerationLiteral
+            Id="92799d3e-e9d0-473b-9bc2-7a13c46c860c"
+            name="SFuncao">
+            <specification>
+              <literalInteger
+                Id="6dafc3bf-acd0-4954-bff4-c92048c5e25e"
+                name="Integer"
+                value="3" />
+            </specification>
+          </enumerationLiteral>
+          <enumerationLiteral
+            Id="38d8065a-5888-45e2-a343-b2c53c5f8e95"
+            name="SSe">
+            <specification>
+              <literalInteger
+                Id="ad7e3af6-465c-4a9c-8e55-f09a5faa41d9"
+                name="Integer"
+                value="4" />
+            </specification>
+          </enumerationLiteral>
+          <enumerationLiteral
+            Id="e57130cc-2903-45ad-90a2-dbfa81e64187"
+            name="SEntao">
+            <specification>
+              <literalInteger
+                Id="f6f7e698-d073-4cf7-b541-4f21be39ba55"
+                name="Integer"
+                value="5" />
+            </specification>
+          </enumerationLiteral>
+          <enumerationLiteral
+            Id="a30c1a04-cc99-4d87-b3f9-2add1baf6506"
+            name="SSenao">
+            <specification>
+              <literalInteger
+                Id="af1865ce-1ba3-426a-88b1-86821ecd83f1"
+                name="Integer"
+                value="6" />
+            </specification>
+          </enumerationLiteral>
+          <enumerationLiteral
+            Id="bf9a0565-386a-4f99-ad6a-1a4687bd6351"
+            name="SEnquanto">
+            <specification>
+              <literalInteger
+                Id="bd14f880-5bdd-426e-bc5f-caf07b368e6d"
+                name="Integer"
+                value="7" />
+            </specification>
+          </enumerationLiteral>
+          <enumerationLiteral
+            Id="436f8343-8462-4760-a709-d72915676516"
+            name="SFaca">
+            <specification>
+              <literalInteger
+                Id="44e836bb-6312-4653-affc-beb1fd969e82"
+                name="Integer"
+                value="8" />
+            </specification>
+          </enumerationLiteral>
+          <enumerationLiteral
+            Id="8a85a4cb-e86a-4f23-b95c-816774fd7f26"
+            name="SAtribuicao">
+            <specification>
+              <literalInteger
+                Id="749ef6cc-95f4-4301-89ca-82d0d3d24247"
+                name="Integer"
+                value="9" />
+            </specification>
+          </enumerationLiteral>
+          <enumerationLiteral
+            Id="5fde31dc-2a27-426d-a090-d808f0df15cb"
+            name="SEscreva">
+            <specification>
+              <literalInteger
+                Id="6fa86711-fbe9-4055-a69d-2b1a5c39e23e"
+                name="Integer"
+                value="10" />
+            </specification>
+          </enumerationLiteral>
+          <enumerationLiteral
+            Id="7e9f168c-8f72-4f14-888e-f25773d893e0"
+            name="SVar">
+            <specification>
+              <literalInteger
+                Id="eed6c29f-ecef-4cc0-a100-ff677045dc13"
+                name="Integer"
+                value="12" />
+            </specification>
+          </enumerationLiteral>
+          <enumerationLiteral
+            Id="f06c4609-34fd-4610-80c7-f1b380227b8f"
+            name="SInteiro">
+            <specification>
+              <literalInteger
+                Id="1b806636-c365-4684-b867-4d897e0391c4"
+                name="Integer"
+                value="13" />
+            </specification>
+          </enumerationLiteral>
+          <enumerationLiteral
+            Id="8d4432a2-4b5b-4acf-b81f-b1b493a7336f"
+            name="SBooleano">
+            <specification>
+              <literalInteger
+                Id="73511624-95e6-47de-b80c-e35df9437133"
+                name="Integer"
+                value="14" />
+            </specification>
+          </enumerationLiteral>
+          <enumerationLiteral
+            Id="b0522559-3d47-4eda-a082-5f4814f9a284"
+            name="SIdentificador">
+            <specification>
+              <literalInteger
+                Id="59e93e9c-b1a8-4bbd-91be-8b50c7b98e86"
+                name="Integer"
+                value="15" />
+            </specification>
+          </enumerationLiteral>
+          <enumerationLiteral
+            Id="ff22783d-239e-45ba-a989-9c36d651e88e"
+            name="SNumero">
+            <specification>
+              <literalInteger
+                Id="867e063c-9e5a-4916-8145-33f221bc6f7a"
+                name="Integer"
+                value="16" />
+            </specification>
+          </enumerationLiteral>
+          <enumerationLiteral
+            Id="a65fd733-f359-423e-9eec-3a3e3b75648a"
+            name="SPonto">
+            <specification>
+              <literalInteger
+                Id="629db149-5dbc-4e2e-9001-25d2a211f627"
+                name="Integer"
+                value="17" />
+            </specification>
+          </enumerationLiteral>
+          <enumerationLiteral
+            Id="db7c453c-5c26-4b0d-805d-cba17eb92fe0"
+            name="SPontoVirgula">
+            <specification>
+              <literalInteger
+                Id="aa3bb695-9bfa-4ddd-8f27-37a9f07aac45"
+                name="Integer"
+                value="18" />
+            </specification>
+          </enumerationLiteral>
+          <enumerationLiteral
+            Id="9e99d22c-2951-4f79-a685-9207c5dff483"
+            name="SVirgula">
+            <specification>
+              <literalInteger
+                Id="c5dcd33c-7ab4-40ca-9367-20633558b6be"
+                name="Integer"
+                value="19" />
+            </specification>
+          </enumerationLiteral>
+          <enumerationLiteral
+            Id="18622940-6d75-46eb-8112-7b06833d840f"
+            name="SAbreParenteses">
+            <specification>
+              <literalInteger
+                Id="afa3011c-bf32-4dfa-8512-acfdacb914ea"
+                name="Integer"
+                value="20" />
+            </specification>
+          </enumerationLiteral>
+          <enumerationLiteral
+            Id="16de960b-716c-49b4-b176-5ceb9e981a99"
+            name="SFechaParenteses">
+            <specification>
+              <literalInteger
+                Id="37a34882-454b-41df-b57e-225d261a9402"
+                name="Integer"
+                value="21" />
+            </specification>
+          </enumerationLiteral>
+          <enumerationLiteral
+            Id="c3f79bef-e97a-4b99-b5ad-f38425ac420c"
+            name="SMaiorIg">
+            <specification>
+              <literalInteger
+                Id="35432dbc-5695-426e-9ad6-74266fd7462b"
+                name="Integer"
+                value="23" />
+            </specification>
+          </enumerationLiteral>
+          <enumerationLiteral
+            Id="690fd477-df30-4613-b128-c7b027fc862d"
+            name="SIg">
+            <specification>
+              <literalInteger
+                Id="a2c4229f-b967-460b-ae19-c91927cb266e"
+                name="Integer"
+                value="24" />
+            </specification>
+          </enumerationLiteral>
+          <enumerationLiteral
+            Id="819556b2-c354-49ef-bbab-17c11dc648c4"
+            name="SMenor">
+            <specification>
+              <literalInteger
+                Id="32c3db99-551c-4fc2-99a5-c9f1c9077d3b"
+                name="Integer"
+                value="25" />
+            </specification>
+          </enumerationLiteral>
+          <enumerationLiteral
+            Id="fcdedb23-dde4-453e-98ca-c592e3e9d3d3"
+            name="SMenorIg">
+            <specification>
+              <literalInteger
+                Id="baa8ef9e-176e-4c2e-bcf4-ac43a319e533"
+                name="Integer"
+                value="26" />
+            </specification>
+          </enumerationLiteral>
+          <enumerationLiteral
+            Id="0bdb482d-06d2-4191-97b4-ff41a4f98d93"
+            name="SDif">
+            <specification>
+              <literalInteger
+                Id="eda36f6d-cf3e-4c0e-818b-132a124a3287"
+                name="Integer"
+                value="27" />
+            </specification>
+          </enumerationLiteral>
+          <enumerationLiteral
+            Id="fec79cc5-f19f-4df6-a99a-b828cf5bc656"
+            name="SMais">
+            <specification>
+              <literalInteger
+                Id="8872a846-7163-487a-86ce-5dfdbd6a537d"
+                name="Integer"
+                value="28" />
+            </specification>
+          </enumerationLiteral>
+          <enumerationLiteral
+            Id="71174a3f-f349-4f74-b42a-9aa672e2d93e"
+            name="SMenos">
+            <specification>
+              <literalInteger
+                Id="aa545f75-5ae6-4bc5-b6f0-e8848f63c73c"
+                name="Integer"
+                value="29" />
+            </specification>
+          </enumerationLiteral>
+          <enumerationLiteral
+            Id="1e199316-4ef6-4332-adb3-e19f36494d0a"
+            name="SMult">
+            <specification>
+              <literalInteger
+                Id="a89e99ce-24df-48f7-8557-da8d4807c47f"
+                name="Integer"
+                value="30" />
+            </specification>
+          </enumerationLiteral>
+          <enumerationLiteral
+            Id="1cc9ce08-fd83-4faf-8b8c-47ae8dcf906d"
+            name="SVerdadeiro">
+            <specification>
+              <literalInteger
+                Id="550e427c-84dd-437e-af1f-4764ba7af628"
+                name="Integer"
+                value="37" />
+            </specification>
+          </enumerationLiteral>
+          <enumerationLiteral
+            Id="2e833b4e-2097-4d2e-8f76-d338b276deac"
+            name="SFalso">
+            <specification>
+              <literalInteger
+                Id="193679f1-2d80-446a-9000-b9e3026c1960"
+                name="Integer"
+                value="38" />
+            </specification>
+          </enumerationLiteral>
+        </ownedLiterals>
       </enumeration>
     </packageHasNamedElement>
   </packagedElements>
