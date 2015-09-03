@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<modelStoreModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm4="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/LogicalClassDesigner"
+<modelStoreModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm4="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm5="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/LogicalClassDesigner"
   dslVersion="1.0.0.0"
   Id="bd7a0be5-ddf7-4fa4-859b-fc160849711d"
   name="LPD.Compiler.Architecture" xmlns="http://schemas.microsoft.com/dsltools/ModelStore">
@@ -101,47 +101,6 @@
         isAbstract="false"
         isLeaf="false"
         isActiveClass="false">
-        <targetEnds>
-          <association
-            Id="3d270f67-77e1-4c26-a2f7-e2f61bc071d1"
-            isDerived="false"
-            sourceEndRoleName="Token"
-            targetEndRoleName="LexicalAnalizer"
-            isLeaf="false"
-            isAbstract="false">
-            <classMoniker
-              Id="7e07092d-12e7-4901-a8ef-122491668e1f"
-              LastKnownName="LexicalAnalizer"
-              LastKnownLocation="LPD.Compiler.Architecture.uml" />
-            <relationshipOwnedElementsInternal>
-              <associationHasOwnedEnds>
-                <memberEnd
-                  Id="3724ad2b-6506-4209-b53b-1ddf6d3b85a0"
-                  name="Token"
-                  isLeaf="false"
-                  isStatic="false"
-                  isReadOnly="false"
-                  isDerived="false"
-                  isDerivedUnion="false"
-                  aggregation="None"
-                  isComposite="false"
-                  isNavigableOwned="false" />
-              </associationHasOwnedEnds>
-              <associationHasOwnedEnds>
-                <memberEnd
-                  Id="f0bf8b0b-ea04-4c50-bc13-4b254348d966"
-                  name="LexicalAnalizer"
-                  isLeaf="false"
-                  isStatic="false"
-                  isReadOnly="false"
-                  isDerived="false"
-                  isDerivedUnion="false"
-                  aggregation="None"
-                  isComposite="false" />
-              </associationHasOwnedEnds>
-            </relationshipOwnedElementsInternal>
-          </association>
-        </targetEnds>
         <ownedAttributesInternal>
           <property
             Id="33061223-f050-40c1-a3df-5bf32d870139"
@@ -192,7 +151,7 @@
         <ownedAttributesInternal>
           <property
             Id="c002503b-f5db-4882-8461-36785403bb4d"
-            name="Current :"
+            name="Current"
             isLeaf="false"
             isStatic="false"
             isReadOnly="false"
@@ -228,54 +187,6 @@
                     <undefinedTypeMoniker
                       Id="05769a73-f65a-4070-b378-12dd3f0f8b68"
                       LastKnownName="Nullable&lt;char&gt;"
-                      LastKnownLocation="LPD.Compiler.Architecture.uml" />
-                  </type_NamedElement>
-                </parameter>
-              </operationHasOwnedParameters>
-            </ownedParameters>
-          </operation>
-          <operation
-            Id="d335a261-5cf6-49df-92b6-ccf2490d056e"
-            name="Peek"
-            isLeaf="false"
-            isStatic="false"
-            isAbstract="false"
-            concurrency="Sequential"
-            isQuery="false">
-            <ownedParameters>
-              <operationHasOwnedParameters>
-                <parameter
-                  Id="cc20b054-38fa-4dc3-9614-d0bceccd924a"
-                  direction="Return"
-                  isUnique="false">
-                  <type_NamedElement>
-                    <undefinedTypeMoniker
-                      Id="05769a73-f65a-4070-b378-12dd3f0f8b68"
-                      LastKnownName="Nullable&lt;char&gt;"
-                      LastKnownLocation="LPD.Compiler.Architecture.uml" />
-                  </type_NamedElement>
-                </parameter>
-              </operationHasOwnedParameters>
-            </ownedParameters>
-          </operation>
-          <operation
-            Id="edc1261a-8ad0-4635-9513-c71a13514bf7"
-            name="Dispose"
-            isLeaf="false"
-            isStatic="false"
-            isAbstract="false"
-            concurrency="Sequential"
-            isQuery="false">
-            <ownedParameters>
-              <operationHasOwnedParameters>
-                <parameter
-                  Id="e81065d9-8435-44c1-8cd4-19a65cb4fcde"
-                  direction="Return"
-                  isUnique="false">
-                  <type_NamedElement>
-                    <undefinedTypeMoniker
-                      Id="4cc167f9-846a-44fd-b4cd-2bee92754a8b"
-                      LastKnownName="void"
                       LastKnownLocation="LPD.Compiler.Architecture.uml" />
                   </type_NamedElement>
                 </parameter>
@@ -333,7 +244,7 @@
             </relationshipOwnedElementsInternal>
           </association>
           <association
-            Id="25e6f023-bb24-46eb-b62a-d5dc3b3b45e1"
+            Id="472a3c05-bcda-462b-ab62-20ad10650961"
             isDerived="false"
             sourceEndRoleName="TokenCollection"
             targetEndRoleName="Token"
@@ -346,7 +257,7 @@
             <relationshipOwnedElementsInternal>
               <associationHasOwnedEnds>
                 <memberEnd
-                  Id="0bcc9eb4-59c2-4d8c-a022-8576f86b7bfa"
+                  Id="e26fc382-433c-424d-9cdb-eb525e285f15"
                   name="TokenCollection"
                   isLeaf="false"
                   isStatic="false"
@@ -355,24 +266,11 @@
                   isDerivedUnion="false"
                   aggregation="Composite"
                   isComposite="false"
-                  isNavigableOwned="false">
-                  <lowerValueInternal>
-                    <literalString
-                      Id="6ed7c7c0-3f7d-4f33-b0e7-ab7278e122fb"
-                      name="Lower"
-                      value="N" />
-                  </lowerValueInternal>
-                  <upperValueInternal>
-                    <literalString
-                      Id="acd8c818-cff5-428e-84f8-bb9ebfe2c467"
-                      name="Upper"
-                      value="N" />
-                  </upperValueInternal>
-                </memberEnd>
+                  isNavigableOwned="false" />
               </associationHasOwnedEnds>
               <associationHasOwnedEnds>
                 <memberEnd
-                  Id="1155ffbc-b8c6-436b-88e2-b44970956bc1"
+                  Id="39eb376e-0c2a-4f84-a3d0-3be909eee3a1"
                   name="Token"
                   isLeaf="false"
                   isStatic="false"
@@ -383,15 +281,15 @@
                   isComposite="true">
                   <lowerValueInternal>
                     <literalString
-                      Id="ec3e858f-e697-4b9b-8b57-b964316596d9"
+                      Id="4ba4941a-de2d-42d4-acc1-d8bcfff5ab44"
                       name="Lower"
-                      value="N" />
+                      value="0" />
                   </lowerValueInternal>
                   <upperValueInternal>
                     <literalString
-                      Id="46b2eb1b-36c7-4859-85fd-4353cd19db3b"
+                      Id="d8a478bb-2ecf-4204-a47c-7b98ef5bbf61"
                       name="Upper"
-                      value="N" />
+                      value="*" />
                   </upperValueInternal>
                 </memberEnd>
               </associationHasOwnedEnds>
@@ -417,54 +315,6 @@
                     <undefinedTypeMoniker
                       Id="4cc167f9-846a-44fd-b4cd-2bee92754a8b"
                       LastKnownName="void"
-                      LastKnownLocation="LPD.Compiler.Architecture.uml" />
-                  </type_NamedElement>
-                </parameter>
-              </operationHasOwnedParameters>
-            </ownedParameters>
-          </operation>
-          <operation
-            Id="84047902-dfe9-4923-b1e8-acb846a2c113"
-            name="GetEnumerator"
-            isLeaf="false"
-            isStatic="false"
-            isAbstract="false"
-            concurrency="Sequential"
-            isQuery="false">
-            <ownedParameters>
-              <operationHasOwnedParameters>
-                <parameter
-                  Id="9fa74c95-2b21-4218-b651-2d98f89b9bf8"
-                  direction="Return"
-                  isUnique="false">
-                  <type_NamedElement>
-                    <undefinedTypeMoniker
-                      Id="f5aabfb6-a085-4311-9848-6ee20b0f5578"
-                      LastKnownName="IEnumerator&lt;Token&gt;"
-                      LastKnownLocation="LPD.Compiler.Architecture.uml" />
-                  </type_NamedElement>
-                </parameter>
-              </operationHasOwnedParameters>
-            </ownedParameters>
-          </operation>
-          <operation
-            Id="14962830-34e0-4418-b33b-ccf63d668600"
-            name="GetEnumerator"
-            isLeaf="false"
-            isStatic="false"
-            isAbstract="false"
-            concurrency="Sequential"
-            isQuery="false">
-            <ownedParameters>
-              <operationHasOwnedParameters>
-                <parameter
-                  Id="8a6812cb-2897-48ef-aada-00fcb65917e3"
-                  direction="Return"
-                  isUnique="false">
-                  <type_NamedElement>
-                    <undefinedTypeMoniker
-                      Id="c1875b93-21f1-4735-bee1-ffd668afceb8"
-                      LastKnownName="IEnumerable"
                       LastKnownLocation="LPD.Compiler.Architecture.uml" />
                   </type_NamedElement>
                 </parameter>
@@ -944,6 +794,251 @@
           </enumerationLiteral>
         </ownedLiterals>
       </enumeration>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="25422843-a3e8-4886-b4cf-04eba43dc16e"
+        name="InvalidTokenException"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <targetEnds>
+          <association
+            Id="3a2d1c66-2c6c-41fe-8f9f-2649d1961520"
+            isDerived="false"
+            sourceEndRoleName="InvalidTokenException"
+            targetEndRoleName="LexicalAnalizer"
+            isLeaf="false"
+            isAbstract="false">
+            <classMoniker
+              Id="7e07092d-12e7-4901-a8ef-122491668e1f"
+              LastKnownName="LexicalAnalizer"
+              LastKnownLocation="LPD.Compiler.Architecture.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="f26a4b72-5055-49ef-ada1-f1a5da8d301b"
+                  name="InvalidTokenException"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false">
+                  <lowerValueInternal>
+                    <literalString
+                      Id="6f579291-f649-4d3f-861f-e4ac00aea7d9"
+                      name="Lower"
+                      value="1" />
+                  </lowerValueInternal>
+                  <upperValueInternal>
+                    <literalString
+                      Id="82fff609-1cc1-4a85-ac1d-c8e11e3ae1d0"
+                      name="Upper"
+                      value="*" />
+                  </upperValueInternal>
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="51ef41d4-160b-4acd-970a-970d23638906"
+                  name="LexicalAnalizer"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false">
+                  <lowerValueInternal>
+                    <literalString
+                      Id="70a54d73-3791-4b0e-a692-7acfa76e2a18"
+                      name="Lower"
+                      value="1" />
+                  </lowerValueInternal>
+                  <upperValueInternal>
+                    <literalString
+                      Id="b4e3eb8c-6ff7-4bcb-83c8-33019daa3e05"
+                      name="Upper"
+                      value="1" />
+                  </upperValueInternal>
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+        </targetEnds>
+        <ownedAttributesInternal>
+          <property
+            Id="fde2e067-eea1-4a8e-bdc3-b3ed2f5ccabe"
+            name="ProgramPosition"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <undefinedTypeMoniker
+                Id="c3d7dbff-d030-4788-a875-cc07c8f418b9"
+                LastKnownName="ProgramPosition"
+                LastKnownLocation="LPD.Compiler.Architecture.uml" />
+            </type_NamedElement>
+          </property>
+          <property
+            Id="6b963aff-bbb5-4097-90f3-c93e3e06cfc9"
+            name="Message"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <undefinedTypeMoniker
+                Id="6d40bfab-aee5-4831-91e2-286b52eddfcf"
+                LastKnownName="string"
+                LastKnownLocation="LPD.Compiler.Architecture.uml" />
+            </type_NamedElement>
+          </property>
+        </ownedAttributesInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <undefinedType
+        Id="c3d7dbff-d030-4788-a875-cc07c8f418b9"
+        name="ProgramPosition" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="3258d03d-9d4e-40cb-a4b6-ac717320a6eb"
+        name="ProgramPosition"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <targetEnds>
+          <association
+            Id="715ac5cc-afcc-4a6c-a8d1-b4988f50f6ee"
+            isDerived="false"
+            sourceEndRoleName="ProgramPosition"
+            targetEndRoleName="LexicalAnalizer"
+            isLeaf="false"
+            isAbstract="false">
+            <classMoniker
+              Id="7e07092d-12e7-4901-a8ef-122491668e1f"
+              LastKnownName="LexicalAnalizer"
+              LastKnownLocation="LPD.Compiler.Architecture.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="2651606d-5d19-4c2e-9ba5-0b2a32e91b36"
+                  name="ProgramPosition"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="85c64cd5-41a7-4eeb-be20-66634dadcaf6"
+                  name="LexicalAnalizer"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+          <association
+            Id="fe77bde1-e30a-4676-bc2a-e4deb5fd0e20"
+            isDerived="false"
+            sourceEndRoleName="ProgramPosition"
+            targetEndRoleName="InvalidTokenException"
+            isLeaf="false"
+            isAbstract="false">
+            <classMoniker
+              Id="25422843-a3e8-4886-b4cf-04eba43dc16e"
+              LastKnownName="InvalidTokenException"
+              LastKnownLocation="LPD.Compiler.Architecture.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="d8710921-5ec5-4be5-a481-bb5a9d5ae31f"
+                  name="ProgramPosition"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false">
+                  <lowerValueInternal>
+                    <literalString
+                      Id="2943dee6-b457-489f-a3da-de84249ed4cf"
+                      name="Lower"
+                      value="1" />
+                  </lowerValueInternal>
+                  <upperValueInternal>
+                    <literalString
+                      Id="a79883c7-2f61-4285-8c84-75700d809ed1"
+                      name="Upper"
+                      value="*" />
+                  </upperValueInternal>
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="3f7d8397-c8b7-4d86-8175-c112888e59bd"
+                  name="InvalidTokenException"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+        </targetEnds>
+        <ownedAttributesInternal>
+          <property
+            Id="770d43d0-1a5a-4511-8e51-0e2b2c5cb760"
+            name="Line"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false" />
+          <property
+            Id="d5492413-40d2-4a81-ba75-c60ed42c9db8"
+            name="Column"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false" />
+        </ownedAttributesInternal>
+      </class>
     </packageHasNamedElement>
   </packagedElements>
   <primitiveType
