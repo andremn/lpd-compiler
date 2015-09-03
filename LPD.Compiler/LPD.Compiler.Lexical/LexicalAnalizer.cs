@@ -8,11 +8,21 @@ namespace LPD.Compiler.Lexical
 {
     public class LexicalAnalizer
     {
+        #region Error messages
+
+        private const string UnknownTokenErrorMessageFormat = "O símbolo '{0}' não é um símbolo válido.";
+        private const string ExpectedTokenErrorMessageFormat = "Esperado o símbolo '{0}' {1} do símbolo '{2}'.";
+
+        #endregion
+
+        #region Chars
+
         private const char CommentStart = '{';
         private const char CommentEnd = '}';
         private const char SpaceChar = ' ';
         private const char TwoPointsChar = ':';
         private const char UnderscoreChar = '_';
+        private const char ExclamationChar = '!';
         private const char EqualChar = '=';
         private const char SemiColonChar = ';';
         private const char CommaChar = ',';
@@ -25,11 +35,13 @@ namespace LPD.Compiler.Lexical
         private const char GreaterChar = '>';
         private const char LessChar = '<';
 
+        #endregion
+
         private static readonly char[] ArithmeticOperators = { PlusChar, MinusChar, MultChar };
-        private static readonly char[] RelationalOperators = { LessChar, GreaterChar, EqualChar };
+        private static readonly char[] RelationalOperators = { LessChar, GreaterChar, EqualChar, ExclamationChar };
         private static readonly char[] PontuationOperators = { SemiColonChar, CommaChar, OpenBracketChar, CloseBracketChar, DotChar };
 
-        private static readonly Dictionary<string, Symbols> Tokens = new Dictionary<string, Symbols>()
+        private static readonly Dictionary<string, Symbols> Keywords = new Dictionary<string, Symbols>()
         {
             ["programa"] = Symbols.SPrograma,
             ["se"] = Symbols.SSe,
@@ -56,10 +68,13 @@ namespace LPD.Compiler.Lexical
 
         private CharReader _reader;
         private string _filePath;
+        private ProgramPosition _currentPosition;
 
         public LexicalAnalizer(string filePath)
         {
             _filePath = filePath;
+            _currentPosition.Column = 0;
+            _currentPosition.Line = 1;
         }
 
         public TokenCollection GetTokens()
@@ -72,10 +87,17 @@ namespace LPD.Compiler.Lexical
                 {
                     char? character;
 
+                    _reader.CharRead += OnCharRead;
+
                     while ((character = _reader.Read()).HasValue)
                     {
                         if (character == '\r' || character == '\n')
                         {
+                            if (character == '\n')
+                            {
+                                _currentPosition.Line++;
+                            }
+
                             continue;
                         }
 
@@ -132,7 +154,7 @@ namespace LPD.Compiler.Lexical
             }
             else
             {
-                throw new InvalidOperationException();
+                throw new InvalidTokenException(_currentPosition, string.Format(UnknownTokenErrorMessageFormat, character));
             }
 
             return token;
@@ -177,6 +199,18 @@ namespace LPD.Compiler.Lexical
             if (character == EqualChar)
             {
                 token.Symbol = Symbols.SIg;
+            }
+            else if (character == ExclamationChar)
+            {
+                character = _reader.Read().Value;
+
+                if (character != EqualChar)
+                {
+                    throw new InvalidTokenException(_currentPosition, string.Format(ExpectedTokenErrorMessageFormat, EqualChar, ExclamationChar));
+                }
+
+                id += character;
+                token.Symbol = Symbols.SDif;
             }
             else if (character == GreaterChar)
             {
@@ -281,7 +315,7 @@ namespace LPD.Compiler.Lexical
             id = stringBuilder.ToString();
             token.Lexeme = id;
             
-            if (!Tokens.TryGetValue(id, out symbol))
+            if (!Keywords.TryGetValue(id, out symbol))
             {
                 symbol = Symbols.SIdentificador;
             }
@@ -310,6 +344,11 @@ namespace LPD.Compiler.Lexical
             }
 
             return new Token() { Lexeme = stringBuilder.ToString(), Symbol = Symbols.SNumero };
-        } 
+        }
+
+        private void OnCharRead(object sender, EventArgs e)
+        {
+            _currentPosition.Column++;
+        }
     }
 }

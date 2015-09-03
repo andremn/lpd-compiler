@@ -19,6 +19,8 @@ namespace LPD.Compiler.Lexical
             get { return _current; }
         }
 
+        public event EventHandler CharRead;
+
         public char? Read()
         {
             if (_reader.PeekChar() < 0)
@@ -27,6 +29,12 @@ namespace LPD.Compiler.Lexical
             }
 
             _current = _reader.ReadChar();
+
+            if (CharRead != null)
+            {
+                CharRead(this, EventArgs.Empty);
+            }
+
             return _current;
         }
 
