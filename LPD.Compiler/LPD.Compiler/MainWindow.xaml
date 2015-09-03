@@ -1,12 +1,137 @@
-﻿<Window x:Class="LPD.Compiler.MainWindow"
+﻿<Controls:MetroWindow x:Class="LPD.Compiler.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        xmlns:CustomControls="clr-namespace:LPD.Compiler.Controls"
         xmlns:local="clr-namespace:LPD.Compiler"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
-    <Grid>
-        <ListView x:Name="TokensListView"/>
+        Background="#FFEEEEEE"
+        GlowBrush="{DynamicResource AccentColorBrush}"
+        Title="Compilador LPD" Height="500" Width="600" WindowState="Maximized">
+
+    <Controls:MetroWindow.Resources>
+
+        <Style x:Key="CustomButtonStyle" TargetType="{x:Type Button}">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="{DynamicResource FlatButtonForegroundBrush}"/>
+            <Setter Property="FontSize" Value="{DynamicResource FlatButtonFontSize}"/>
+            <Setter Property="Padding" Value="10,5"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="RenderTransformOrigin" Value="0.5,0.5"/>
+            <Setter Property="RenderTransform">
+                <Setter.Value>
+                    <ScaleTransform ScaleX="1.0" ScaleY="1.0"/>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border x:Name="Border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Margin="0">
+                            <ContentPresenter ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" ContentStringFormat="{TemplateBinding ContentStringFormat}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Trigger.EnterActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation From="1.0" To="0.75" Duration="0:0:0.150" Storyboard.TargetProperty="Opacity"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </Trigger.EnterActions>
+                                <Trigger.ExitActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation From="0.75" To="1.0" Duration="0:0:0.150" Storyboard.TargetProperty="Opacity"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </Trigger.ExitActions>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Trigger.EnterActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation From="1" To="0.95" Duration="0:0:0.150" Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)"/>
+                                            <DoubleAnimation From="1" To="0.95" Duration="0:0:0.150" Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </Trigger.EnterActions>
+                                <Trigger.ExitActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation From="0.95" To="1.0" Duration="0:0:0.150" Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)"/>
+                                            <DoubleAnimation From="0.95" To="1.0" Duration="0:0:0.150" Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </Trigger.ExitActions>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Foreground" Value="{DynamicResource GrayBrush2}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="CodeTextBoxStyle" TargetType="{x:Type TextBoxBase}">
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Padding" Value="0,10,0,0"/>
+            <Setter Property="AllowDrop" Value="true"/>
+            <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TextBoxBase}">
+                        <Border Name="Border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}">
+                            <ScrollViewer x:Name="PART_ContentHost" />
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Controls:MetroWindow.Resources>
+    
+    <Grid Margin="10,0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="48"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="150"/>
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal"
+                    Margin="10,0"
+                    Grid.Row="0">
+            <Button Style="{StaticResource CustomButtonStyle}" ToolTip="Novo"
+                    Click="OnNewFileButtonClick">
+                <Image Source="Images/NewFile.png"
+                   Height="32" Width="32"/>
+            </Button>
+            <Button Style="{StaticResource CustomButtonStyle}" ToolTip="Abrir"
+                    Click="OnOpenFileButtonClick">
+                <Image Source="Images/Folder.png"
+                   Height="36" Width="36"/>
+            </Button>
+        </StackPanel>
+        <Border Background="White" BorderBrush="{DynamicResource AccentColorBrush}" BorderThickness="1"
+                Grid.Row="1">
+            <DockPanel>
+                <!--<TextBlock Text="{Binding ElementName=CodeTextBox, Path=(CustomControls:AttachedProperties.BindableLineCount)}"
+                           Background="#FFDEDEDE"
+                           TextAlignment="Center"
+                           Width="20"/>-->
+                <TextBox x:Name="CodeTextBox"
+                         FontSize="18"
+                         Style="{StaticResource CodeTextBoxStyle}"
+                         CustomControls:AttachedProperties.HasBindableLineCount="True"
+                         Margin="5,0"
+                         TextWrapping="Wrap"
+                         AcceptsReturn="True"/>
+            </DockPanel>
+        </Border>
+        <GroupBox Grid.Row="2" Header="Output">
+            <ListView x:Name="ErrorsListView" Background="Transparent"/>
+        </GroupBox>
     </Grid>
-</Window>
+</Controls:MetroWindow>
