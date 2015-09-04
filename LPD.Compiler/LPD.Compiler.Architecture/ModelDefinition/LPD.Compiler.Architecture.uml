@@ -84,7 +84,7 @@
                   <type_NamedElement>
                     <classMoniker
                       Id="b50ff4d7-4749-4195-881e-bc33476b2043"
-                      LastKnownName="TokenCollection"
+                      LastKnownName="TokenPositionCollection"
                       LastKnownLocation="LPD.Compiler.Architecture.uml" />
                   </type_NamedElement>
                 </parameter>
@@ -199,7 +199,7 @@
     <packageHasNamedElement>
       <class
         Id="b50ff4d7-4749-4195-881e-bc33476b2043"
-        name="TokenCollection"
+        name="TokenPositionCollection"
         isAbstract="false"
         isLeaf="false"
         isActiveClass="false">
@@ -288,6 +288,58 @@
                   <upperValueInternal>
                     <literalString
                       Id="d8a478bb-2ecf-4204-a47c-7b98ef5bbf61"
+                      name="Upper"
+                      value="*" />
+                  </upperValueInternal>
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+          <association
+            Id="7657cdc3-e09e-40af-8cdc-6eed6d98e21d"
+            isDerived="false"
+            sourceEndRoleName="TokenPositionCollection"
+            targetEndRoleName="Position"
+            isLeaf="false"
+            isAbstract="false">
+            <classMoniker
+              Id="3258d03d-9d4e-40cb-a4b6-ac717320a6eb"
+              LastKnownName="Position"
+              LastKnownLocation="LPD.Compiler.Architecture.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="789d8c01-864c-43c9-90f3-60a269824452"
+                  name="TokenPositionCollection"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="Composite"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="a8bb456a-fd02-4894-ba4b-e2ef99ba3c1b"
+                  name="Position"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="true">
+                  <lowerValueInternal>
+                    <literalString
+                      Id="ae17ab88-1309-4966-ad27-a2cb93e08701"
+                      name="Lower"
+                      value="0" />
+                  </lowerValueInternal>
+                  <upperValueInternal>
+                    <literalString
+                      Id="cbfea2c2-ca28-4689-b7f9-9fda5d9b1b64"
                       name="Upper"
                       value="*" />
                   </upperValueInternal>
@@ -917,50 +969,11 @@
     <packageHasNamedElement>
       <class
         Id="3258d03d-9d4e-40cb-a4b6-ac717320a6eb"
-        name="ProgramPosition"
+        name="Position"
         isAbstract="false"
         isLeaf="false"
         isActiveClass="false">
         <targetEnds>
-          <association
-            Id="715ac5cc-afcc-4a6c-a8d1-b4988f50f6ee"
-            isDerived="false"
-            sourceEndRoleName="ProgramPosition"
-            targetEndRoleName="LexicalAnalizer"
-            isLeaf="false"
-            isAbstract="false">
-            <classMoniker
-              Id="7e07092d-12e7-4901-a8ef-122491668e1f"
-              LastKnownName="LexicalAnalizer"
-              LastKnownLocation="LPD.Compiler.Architecture.uml" />
-            <relationshipOwnedElementsInternal>
-              <associationHasOwnedEnds>
-                <memberEnd
-                  Id="2651606d-5d19-4c2e-9ba5-0b2a32e91b36"
-                  name="ProgramPosition"
-                  isLeaf="false"
-                  isStatic="false"
-                  isReadOnly="false"
-                  isDerived="false"
-                  isDerivedUnion="false"
-                  aggregation="None"
-                  isComposite="false"
-                  isNavigableOwned="false" />
-              </associationHasOwnedEnds>
-              <associationHasOwnedEnds>
-                <memberEnd
-                  Id="85c64cd5-41a7-4eeb-be20-66634dadcaf6"
-                  name="LexicalAnalizer"
-                  isLeaf="false"
-                  isStatic="false"
-                  isReadOnly="false"
-                  isDerived="false"
-                  isDerivedUnion="false"
-                  aggregation="None"
-                  isComposite="false" />
-              </associationHasOwnedEnds>
-            </relationshipOwnedElementsInternal>
-          </association>
           <association
             Id="fe77bde1-e30a-4676-bc2a-e4deb5fd0e20"
             isDerived="false"
@@ -1037,6 +1050,53 @@
             isDerivedUnion="false"
             aggregation="None"
             isComposite="false" />
+        </ownedAttributesInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="10d004a0-c2a9-4467-bf0f-ba31363faa5f"
+        name="Position"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <ownedAttributesInternal>
+          <property
+            Id="2d2f5e81-fe8a-492f-b341-115b93e72760"
+            name="Symbol"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <undefinedTypeMoniker
+                Id="58d7ebe8-9e23-4ca9-a61a-3d242f2759b9"
+                LastKnownName="Symbols"
+                LastKnownLocation="LPD.Compiler.Architecture.uml" />
+            </type_NamedElement>
+          </property>
+          <property
+            Id="7f8f7820-37ae-4ea5-b099-5ceb939167d4"
+            name="Lexeme"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <undefinedTypeMoniker
+                Id="6d40bfab-aee5-4831-91e2-286b52eddfcf"
+                LastKnownName="string"
+                LastKnownLocation="LPD.Compiler.Architecture.uml" />
+            </type_NamedElement>
+          </property>
         </ownedAttributesInternal>
       </class>
     </packageHasNamedElement>

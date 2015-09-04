@@ -30,7 +30,7 @@
                 <parameter Id="13ad2a10-a131-4553-847b-998f91edd46f" direction="Return" isUnique="false">
                   <elementDefinition Id="c49694e5-47db-4968-a2fb-03b5ea3e63ff" />
                   <type_NamedElement>
-                    <referencedTypeMoniker Id="c6aceccb-ea98-4dbe-b433-c977f0353701" LastKnownName="TokenCollection" />
+                    <referencedTypeMoniker Id="c6aceccb-ea98-4dbe-b433-c977f0353701" LastKnownName="TokenPositionCollection" />
                   </type_NamedElement>
                 </parameter>
               </operationHasOwnedParameters>
@@ -87,7 +87,7 @@
       </class>
     </logicalClassDesignerModelHasTypes>
     <logicalClassDesignerModelHasTypes>
-      <class Id="7a419053-61ed-48bc-a2c1-f0cba9acf62e" name="TokenCollection" isAbstract="false" isLeaf="false" isActiveClass="false">
+      <class Id="7a419053-61ed-48bc-a2c1-f0cba9acf62e" name="TokenPositionCollection" isAbstract="false" isLeaf="false" isActiveClass="false">
         <elementDefinition Id="b50ff4d7-4749-4195-881e-bc33476b2043" />
         <targetEnds>
           <association Id="badaf35e-c596-450c-a0b7-f1860ca032ed" isDerived="false" sourceEndRoleName="TokenCollection" targetEndRoleName="LexicalAnalizer" isLeaf="false" isAbstract="false">
@@ -132,6 +132,32 @@
             </relationshipOwnedElementsInternal>
             <elementDefinition Id="472a3c05-bcda-462b-ab62-20ad10650961" />
           </association>
+          <association Id="8233c891-56fa-458a-b0b9-af1858f1343c" isDerived="false" sourceEndRoleName="TokenPositionCollection" targetEndRoleName="Position" isLeaf="false" isAbstract="false">
+            <classMoniker Id="6e3c20f9-a742-4c59-a369-6462b01696cd" LastKnownName="Position" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="cca55de2-25cf-4a5d-8325-a74270910e54" name="TokenPositionCollection" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="Composite" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="789d8c01-864c-43c9-90f3-60a269824452" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="803e9bb5-11a2-4ddd-bf45-077fab2259a6" name="Position" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="true">
+                  <lowerValueInternal>
+                    <literalString Id="30a8e695-5493-496a-853d-73f770a6f1a5" name="Lower" value="0">
+                      <elementDefinition Id="ae17ab88-1309-4966-ad27-a2cb93e08701" />
+                    </literalString>
+                  </lowerValueInternal>
+                  <upperValueInternal>
+                    <literalString Id="826fa63c-9e57-4266-bc0d-2c0842e618bd" name="Upper" value="*">
+                      <elementDefinition Id="cbfea2c2-ca28-4689-b7f9-9fda5d9b1b64" />
+                    </literalString>
+                  </upperValueInternal>
+                  <elementDefinition Id="a8bb456a-fd02-4894-ba4b-e2ef99ba3c1b" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="7657cdc3-e09e-40af-8cdc-6eed6d98e21d" />
+          </association>
         </targetEnds>
         <ownedOperationsInternal>
           <operation Id="d26c94d8-9474-4216-a62d-80050172d2a4" name="Append" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
@@ -156,7 +182,7 @@
       </referencedType>
     </packageHasNamedElement>
     <packageHasNamedElement>
-      <referencedType Id="c6aceccb-ea98-4dbe-b433-c977f0353701" name="TokenCollection" isAbstract="false" isLeaf="false" cachedFullName="LPD.Compiler.Architecture::TokenCollection">
+      <referencedType Id="c6aceccb-ea98-4dbe-b433-c977f0353701" name="TokenPositionCollection" isAbstract="false" isLeaf="false" cachedFullName="LPD.Compiler.Architecture::TokenPositionCollection">
         <elementDefinition Id="b50ff4d7-4749-4195-881e-bc33476b2043" />
       </referencedType>
     </packageHasNamedElement>
@@ -580,25 +606,9 @@
       </referencedType>
     </packageHasNamedElement>
     <logicalClassDesignerModelHasTypes>
-      <class Id="6e3c20f9-a742-4c59-a369-6462b01696cd" name="ProgramPosition" isAbstract="false" isLeaf="false" isActiveClass="false">
+      <class Id="6e3c20f9-a742-4c59-a369-6462b01696cd" name="Position" isAbstract="false" isLeaf="false" isActiveClass="false">
         <elementDefinition Id="3258d03d-9d4e-40cb-a4b6-ac717320a6eb" />
         <targetEnds>
-          <association Id="c6e37e9f-b845-425f-8407-19cf19e04e4f" isDerived="false" sourceEndRoleName="ProgramPosition" targetEndRoleName="LexicalAnalizer" isLeaf="false" isAbstract="false">
-            <classMoniker Id="581f672d-e09f-440d-bbf0-4b8ce1db5a9e" LastKnownName="LexicalAnalizer" />
-            <relationshipOwnedElementsInternal>
-              <associationHasOwnedEnds>
-                <memberEnd Id="6dec5e25-d38c-4481-a958-3c97c2e51127" name="ProgramPosition" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
-                  <elementDefinition Id="2651606d-5d19-4c2e-9ba5-0b2a32e91b36" />
-                </memberEnd>
-              </associationHasOwnedEnds>
-              <associationHasOwnedEnds>
-                <memberEnd Id="aa45d414-bedc-4688-872c-59d44398fd33" name="LexicalAnalizer" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
-                  <elementDefinition Id="85c64cd5-41a7-4eeb-be20-66634dadcaf6" />
-                </memberEnd>
-              </associationHasOwnedEnds>
-            </relationshipOwnedElementsInternal>
-            <elementDefinition Id="715ac5cc-afcc-4a6c-a8d1-b4988f50f6ee" />
-          </association>
           <association Id="9b3ef061-ad45-4467-90f3-79dbd9826123" isDerived="false" sourceEndRoleName="ProgramPosition" targetEndRoleName="InvalidTokenException" isLeaf="false" isAbstract="false">
             <classMoniker Id="125ccf55-19a3-44d4-9c8c-f4f474575afb" LastKnownName="InvalidTokenException" />
             <relationshipOwnedElementsInternal>

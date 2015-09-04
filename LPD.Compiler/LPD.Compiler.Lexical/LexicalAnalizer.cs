@@ -68,7 +68,7 @@ namespace LPD.Compiler.Lexical
 
         private CharReader _reader;
         private string _filePath;
-        private ProgramPosition _currentPosition;
+        private Position _currentPosition;
 
         public LexicalAnalizer(string filePath)
         {
@@ -77,9 +77,9 @@ namespace LPD.Compiler.Lexical
             _currentPosition.Line = 1;
         }
 
-        public TokenCollection GetTokens()
+        public TokenPositionCollection GetTokens()
         {
-            TokenCollection tokens = new TokenCollection();
+            TokenPositionCollection tokens = new TokenPositionCollection();
 
             using (FileStream fileStream = File.OpenRead(_filePath))
             {
@@ -115,7 +115,7 @@ namespace LPD.Compiler.Lexical
                             continue;
                         }
 
-                        tokens.Append(GetToken());
+                        tokens.Append(_currentPosition, GetToken());
                     }
                 }
             }
