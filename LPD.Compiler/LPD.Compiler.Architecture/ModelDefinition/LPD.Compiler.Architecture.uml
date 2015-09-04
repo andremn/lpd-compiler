@@ -91,6 +91,181 @@
               </operationHasOwnedParameters>
             </ownedParameters>
           </operation>
+          <operation
+            Id="e41e317f-2517-4c9b-b00b-b5ac0d1b085a"
+            name="HandleAtribution"
+            visibility="Private"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="03dbc0a0-f814-4093-ab45-abad6e830ee4"
+                  direction="Return"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <classMoniker
+                      Id="0cdc1b9c-85b9-4a6f-886c-363eb47150a3"
+                      LastKnownName="Token"
+                      LastKnownLocation="LPD.Compiler.Architecture.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation
+            Id="686a30ad-31f5-4b0a-9503-0569e0054387"
+            name="HandleRelationalOperator"
+            visibility="Private"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="9012c43c-65df-4a87-9e2c-6e7b79d40126"
+                  direction="Return"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <classMoniker
+                      Id="0cdc1b9c-85b9-4a6f-886c-363eb47150a3"
+                      LastKnownName="Token"
+                      LastKnownLocation="LPD.Compiler.Architecture.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation
+            Id="2010c49c-b998-448d-bfc9-554803692d86"
+            name="HandleArithmeticOperator"
+            visibility="Private"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="d31b650b-3a8d-4b03-b095-339105b0642e"
+                  direction="Return"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <classMoniker
+                      Id="0cdc1b9c-85b9-4a6f-886c-363eb47150a3"
+                      LastKnownName="Token"
+                      LastKnownLocation="LPD.Compiler.Architecture.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation
+            Id="d48d375c-3db3-4ad9-b517-e27906fe440e"
+            name="HandleKeyWord"
+            visibility="Private"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="edd592c8-b244-454f-914b-437b9adb7e01"
+                  direction="Return"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <classMoniker
+                      Id="0cdc1b9c-85b9-4a6f-886c-363eb47150a3"
+                      LastKnownName="Token"
+                      LastKnownLocation="LPD.Compiler.Architecture.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation
+            Id="df097b54-c7c8-4f80-8beb-7bb6730da56c"
+            name="HandleDigit"
+            visibility="Private"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="8b2df5df-6ffd-4d83-9572-834e8b4eb179"
+                  direction="Return"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <classMoniker
+                      Id="0cdc1b9c-85b9-4a6f-886c-363eb47150a3"
+                      LastKnownName="Token"
+                      LastKnownLocation="LPD.Compiler.Architecture.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation
+            Id="a3a68dde-9ee5-4cb8-aa8d-97b34e4bb0ee"
+            name="GetToken"
+            visibility="Private"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="85261969-4ce4-45d9-8952-73c24c881cbe"
+                  direction="Return"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <classMoniker
+                      Id="0cdc1b9c-85b9-4a6f-886c-363eb47150a3"
+                      LastKnownName="Token"
+                      LastKnownLocation="LPD.Compiler.Architecture.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation
+            Id="4093432c-9623-43bb-828f-3e3cf958b884"
+            name="HandlePontuation"
+            visibility="Private"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="3d29bb3c-0470-4f16-bc64-b8f8476b0eb6"
+                  direction="Return"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <classMoniker
+                      Id="0cdc1b9c-85b9-4a6f-886c-363eb47150a3"
+                      LastKnownName="Token"
+                      LastKnownLocation="LPD.Compiler.Architecture.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
         </ownedOperationsInternal>
       </class>
     </packageHasNamedElement>
@@ -101,6 +276,60 @@
         isAbstract="false"
         isLeaf="false"
         isActiveClass="false">
+        <targetEnds>
+          <association
+            Id="7b23fe60-06e4-40b8-8ea3-fde143c85ef8"
+            isDerived="false"
+            sourceEndRoleName="Token"
+            targetEndRoleName="LexicalAnalizer"
+            isLeaf="false"
+            isAbstract="false">
+            <classMoniker
+              Id="7e07092d-12e7-4901-a8ef-122491668e1f"
+              LastKnownName="LexicalAnalizer"
+              LastKnownLocation="LPD.Compiler.Architecture.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="80244954-0096-44be-8332-f4204789cda4"
+                  name="Token"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false">
+                  <lowerValueInternal>
+                    <literalString
+                      Id="f4d4d3a7-1fc5-4a15-a8d1-94215538da43"
+                      name="Lower"
+                      value="1" />
+                  </lowerValueInternal>
+                  <upperValueInternal>
+                    <literalString
+                      Id="c188a2bf-ef7a-40c4-89c2-23c728c8eaee"
+                      name="Upper"
+                      value="*" />
+                  </upperValueInternal>
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="a4e3cbb8-275f-4a56-89d4-e8abc54f5d2f"
+                  name="LexicalAnalizer"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+        </targetEnds>
         <ownedAttributesInternal>
           <property
             Id="33061223-f050-40c1-a3df-5bf32d870139"
@@ -924,7 +1153,7 @@
         <ownedAttributesInternal>
           <property
             Id="fde2e067-eea1-4a8e-bdc3-b3ed2f5ccabe"
-            name="ProgramPosition"
+            name="Position"
             isLeaf="false"
             isStatic="false"
             isReadOnly="false"
@@ -934,9 +1163,9 @@
             aggregation="None"
             isComposite="false">
             <type_NamedElement>
-              <undefinedTypeMoniker
-                Id="c3d7dbff-d030-4788-a875-cc07c8f418b9"
-                LastKnownName="ProgramPosition"
+              <classMoniker
+                Id="3258d03d-9d4e-40cb-a4b6-ac717320a6eb"
+                LastKnownName="Position"
                 LastKnownLocation="LPD.Compiler.Architecture.uml" />
             </type_NamedElement>
           </property>
@@ -1016,6 +1245,45 @@
                 <memberEnd
                   Id="3f7d8397-c8b7-4d86-8175-c112888e59bd"
                   name="InvalidTokenException"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+          <association
+            Id="2d356b2f-1b41-4f9a-8b30-ad95b6d03436"
+            isDerived="false"
+            sourceEndRoleName="Position"
+            targetEndRoleName="LexicalAnalizer"
+            isLeaf="false"
+            isAbstract="false">
+            <classMoniker
+              Id="7e07092d-12e7-4901-a8ef-122491668e1f"
+              LastKnownName="LexicalAnalizer"
+              LastKnownLocation="LPD.Compiler.Architecture.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="85271784-6a03-4bc3-ae57-1e49bd0b65c3"
+                  name="Position"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="6af5817c-801b-4a74-b2bc-73f95f9e3719"
+                  name="LexicalAnalizer"
                   isLeaf="false"
                   isStatic="false"
                   isReadOnly="false"

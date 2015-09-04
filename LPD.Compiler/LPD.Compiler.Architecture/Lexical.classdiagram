@@ -36,12 +36,131 @@
               </operationHasOwnedParameters>
             </ownedParameters>
           </operation>
+          <operation Id="0ff7ef9b-ce28-4da0-ba82-d57c494f22e9" name="HandleAtribution" visibility="Private" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="e41e317f-2517-4c9b-b00b-b5ac0d1b085a" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="10f81a3d-6bab-4c79-ac98-602e93a98707" direction="Return" isUnique="false">
+                  <elementDefinition Id="03dbc0a0-f814-4093-ab45-abad6e830ee4" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="94346a44-0428-406d-8985-92bbc303e54c" LastKnownName="Token" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation Id="fdb110e2-a01f-4792-8c41-cd0b7960ca44" name="HandleRelationalOperator" visibility="Private" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="686a30ad-31f5-4b0a-9503-0569e0054387" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="c7e026f4-a348-4958-89ab-0e427a46ebca" direction="Return" isUnique="false">
+                  <elementDefinition Id="9012c43c-65df-4a87-9e2c-6e7b79d40126" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="1f64a1a2-b401-44bc-9e4e-0f8015715693" LastKnownName="Token" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation Id="a4803080-92d8-41c0-ac1c-11aca63ccf07" name="HandleArithmeticOperator" visibility="Private" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="2010c49c-b998-448d-bfc9-554803692d86" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="a7663c1f-c8a1-46c1-939e-4e2fdb96ec1c" direction="Return" isUnique="false">
+                  <elementDefinition Id="d31b650b-3a8d-4b03-b095-339105b0642e" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="a9257865-64c2-40e8-a85c-8f961b629c7c" LastKnownName="Token" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation Id="c723109a-ef6a-4f89-8a15-6f734062ed99" name="HandleKeyWord" visibility="Private" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="d48d375c-3db3-4ad9-b517-e27906fe440e" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="a487e9c1-9a39-49e9-8fc9-6b7310ca7c8e" direction="Return" isUnique="false">
+                  <elementDefinition Id="edd592c8-b244-454f-914b-437b9adb7e01" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="644239b8-a5bb-4c55-a9a4-2b316331b3df" LastKnownName="Token" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation Id="625cde98-3b9b-4ad5-b9d1-dbefa4b84f03" name="HandleDigit" visibility="Private" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="df097b54-c7c8-4f80-8beb-7bb6730da56c" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="97617981-0601-4251-8b8c-7fdfdd8927fa" direction="Return" isUnique="false">
+                  <elementDefinition Id="8b2df5df-6ffd-4d83-9572-834e8b4eb179" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="a44d4133-68aa-4248-a67a-29d149906f5f" LastKnownName="Token" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation Id="6b7c9eee-b8e9-48bc-b21c-c4494e0d5966" name="GetToken" visibility="Private" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="a3a68dde-9ee5-4cb8-aa8d-97b34e4bb0ee" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="adabec58-f727-48cb-b2e7-6f4b2e363876" direction="Return" isUnique="false">
+                  <elementDefinition Id="85261969-4ce4-45d9-8952-73c24c881cbe" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="94346a44-0428-406d-8985-92bbc303e54c" LastKnownName="Token" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation Id="91061d91-db16-45dc-9a0f-6c2ed910cdde" name="HandlePontuation" visibility="Private" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="4093432c-9623-43bb-828f-3e3cf958b884" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="99ed88fe-36f5-430a-b084-d7329128b5e3" direction="Return" isUnique="false">
+                  <elementDefinition Id="3d29bb3c-0470-4f16-bc64-b8f8476b0eb6" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="94346a44-0428-406d-8985-92bbc303e54c" LastKnownName="Token" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
         </ownedOperationsInternal>
       </class>
     </logicalClassDesignerModelHasTypes>
     <logicalClassDesignerModelHasTypes>
       <class Id="e45b83c0-21db-40a3-8f15-0839aa02f4d6" name="Token" isAbstract="false" isLeaf="false" isActiveClass="false">
         <elementDefinition Id="0cdc1b9c-85b9-4a6f-886c-363eb47150a3" />
+        <targetEnds>
+          <association Id="e813bbe6-8fd9-4a6b-9f72-dbde307ba8f6" isDerived="false" sourceEndRoleName="Token" targetEndRoleName="LexicalAnalizer" isLeaf="false" isAbstract="false">
+            <classMoniker Id="581f672d-e09f-440d-bbf0-4b8ce1db5a9e" LastKnownName="LexicalAnalizer" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="5fccf995-c196-462e-86a1-195d8e63566b" name="Token" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <lowerValueInternal>
+                    <literalString Id="ef90ba3c-72cd-4013-a8a9-a371002d6a40" name="Lower" value="1">
+                      <elementDefinition Id="f4d4d3a7-1fc5-4a15-a8d1-94215538da43" />
+                    </literalString>
+                  </lowerValueInternal>
+                  <upperValueInternal>
+                    <literalString Id="e94ba758-ac91-46d5-93d7-91017d7313ec" name="Upper" value="*">
+                      <elementDefinition Id="c188a2bf-ef7a-40c4-89c2-23c728c8eaee" />
+                    </literalString>
+                  </upperValueInternal>
+                  <elementDefinition Id="80244954-0096-44be-8332-f4204789cda4" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="f4206f26-122f-435a-aba4-31aa2b8acd67" name="LexicalAnalizer" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="a4e3cbb8-275f-4a56-89d4-e8abc54f5d2f" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="7b23fe60-06e4-40b8-8ea3-fde143c85ef8" />
+          </association>
+        </targetEnds>
         <ownedAttributesInternal>
           <property Id="fb53a38d-cf64-4bf4-a180-8d93da2b5211" name="Symbol" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
             <elementDefinition Id="33061223-f050-40c1-a3df-5bf32d870139" />
@@ -585,10 +704,10 @@
           </association>
         </targetEnds>
         <ownedAttributesInternal>
-          <property Id="7a5dae66-f274-4cf0-b647-f5b3cba1f0e1" name="ProgramPosition" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+          <property Id="7a5dae66-f274-4cf0-b647-f5b3cba1f0e1" name="Position" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
             <elementDefinition Id="fde2e067-eea1-4a8e-bdc3-b3ed2f5ccabe" />
             <type_NamedElement>
-              <referencedTypeMoniker Id="3aecdadb-8434-4c11-9812-9a5439e25017" LastKnownName="ProgramPosition" />
+              <referencedTypeMoniker Id="79450b1e-5dd6-4b84-b9f0-8f5824ec8db9" LastKnownName="Position" />
             </type_NamedElement>
           </property>
           <property Id="6a91fa94-0606-4824-aa9b-a985c822b788" name="Message" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
@@ -600,11 +719,6 @@
         </ownedAttributesInternal>
       </class>
     </logicalClassDesignerModelHasTypes>
-    <packageHasNamedElement>
-      <referencedType Id="3aecdadb-8434-4c11-9812-9a5439e25017" name="ProgramPosition" isAbstract="false" isLeaf="false" cachedFullName="ProgramPosition">
-        <elementDefinition Id="c3d7dbff-d030-4788-a875-cc07c8f418b9" />
-      </referencedType>
-    </packageHasNamedElement>
     <logicalClassDesignerModelHasTypes>
       <class Id="6e3c20f9-a742-4c59-a369-6462b01696cd" name="Position" isAbstract="false" isLeaf="false" isActiveClass="false">
         <elementDefinition Id="3258d03d-9d4e-40cb-a4b6-ac717320a6eb" />
@@ -635,6 +749,22 @@
             </relationshipOwnedElementsInternal>
             <elementDefinition Id="fe77bde1-e30a-4676-bc2a-e4deb5fd0e20" />
           </association>
+          <association Id="7c061b90-ab70-4ca6-a1aa-29a7f09afa88" isDerived="false" sourceEndRoleName="Position" targetEndRoleName="LexicalAnalizer" isLeaf="false" isAbstract="false">
+            <classMoniker Id="581f672d-e09f-440d-bbf0-4b8ce1db5a9e" LastKnownName="LexicalAnalizer" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="1c1b7490-9047-4f47-bcfb-7b411d2d8e59" name="Position" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="85271784-6a03-4bc3-ae57-1e49bd0b65c3" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="dc3863a9-ce1e-48b4-b193-ecec27e10f88" name="LexicalAnalizer" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="6af5817c-801b-4a74-b2bc-73f95f9e3719" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="2d356b2f-1b41-4f9a-8b30-ad95b6d03436" />
+          </association>
         </targetEnds>
         <ownedAttributesInternal>
           <property Id="5f083518-f92d-49a9-b7ea-9b12a70ac023" name="Line" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
@@ -646,6 +776,36 @@
         </ownedAttributesInternal>
       </class>
     </logicalClassDesignerModelHasTypes>
+    <packageHasNamedElement>
+      <referencedType Id="79450b1e-5dd6-4b84-b9f0-8f5824ec8db9" name="Position" isAbstract="false" isLeaf="false" cachedFullName="LPD.Compiler.Architecture::Position">
+        <elementDefinition Id="3258d03d-9d4e-40cb-a4b6-ac717320a6eb" />
+      </referencedType>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <referencedType Id="94346a44-0428-406d-8985-92bbc303e54c" name="Token" isAbstract="false" isLeaf="false" cachedFullName="LPD.Compiler.Architecture::Token">
+        <elementDefinition Id="0cdc1b9c-85b9-4a6f-886c-363eb47150a3" />
+      </referencedType>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <referencedType Id="1f64a1a2-b401-44bc-9e4e-0f8015715693" name="Token" isAbstract="false" isLeaf="false" cachedFullName="LPD.Compiler.Architecture::Token">
+        <elementDefinition Id="0cdc1b9c-85b9-4a6f-886c-363eb47150a3" />
+      </referencedType>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <referencedType Id="a9257865-64c2-40e8-a85c-8f961b629c7c" name="Token" isAbstract="false" isLeaf="false" cachedFullName="LPD.Compiler.Architecture::Token">
+        <elementDefinition Id="0cdc1b9c-85b9-4a6f-886c-363eb47150a3" />
+      </referencedType>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <referencedType Id="644239b8-a5bb-4c55-a9a4-2b316331b3df" name="Token" isAbstract="false" isLeaf="false" cachedFullName="LPD.Compiler.Architecture::Token">
+        <elementDefinition Id="0cdc1b9c-85b9-4a6f-886c-363eb47150a3" />
+      </referencedType>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <referencedType Id="a44d4133-68aa-4248-a67a-29d149906f5f" name="Token" isAbstract="false" isLeaf="false" cachedFullName="LPD.Compiler.Architecture::Token">
+        <elementDefinition Id="0cdc1b9c-85b9-4a6f-886c-363eb47150a3" />
+      </referencedType>
+    </packageHasNamedElement>
   </packagedElements>
   <package Id="f064a465-7b5c-44ac-a428-7e3ee7a1bff8" name="LPD.Compiler.Architecture">
     <elementDefinition Id="bd7a0be5-ddf7-4fa4-859b-fc160849711d" />
