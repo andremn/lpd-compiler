@@ -96,6 +96,7 @@ namespace LPD.Compiler.Lexical
                             if (character == '\n')
                             {
                                 _currentPosition.Line++;
+                                _currentPosition.Column = 0;
                             }
 
                             continue;

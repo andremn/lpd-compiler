@@ -2,9 +2,12 @@
 using LPD.Compiler.Lexical;
 using MahApps.Metro.Controls;
 using Microsoft.Win32;
+using System;
+using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
+using System.Windows.Media;
 
 namespace LPD.Compiler
 {
@@ -48,6 +51,37 @@ namespace LPD.Compiler
 
             _selectedFile = openFileDialog.FileName;
             ReadAndShowFile();
+
+            try
+            {
+                Tokens.ItemsSource = new LexicalAnalizer(_selectedFile).GetTokens();
+            }
+            catch (InvalidTokenException ex)
+            {
+                ErrorsListView.ItemsSource = new List<ErrorViewModel>()
+                {
+                    new ErrorViewModel() { Position = ex.Position, Message = ex.Message }
+                };
+            }
         }
+
+        private void OnErrorsListViewSelectedChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var position = ErrorsListView.SelectedItem as ErrorViewModel;
+            var line = position.Position.Line - 1;
+            int charIndex;
+
+            CodeTextBox.Focus();
+            CodeTextBox.ScrollToLine(line);
+            charIndex = CodeTextBox.GetCharacterIndexFromLineIndex(line);
+            CodeTextBox.CaretIndex = charIndex + position.Position.Column - 1;
+        }
+    }
+
+    class ErrorViewModel
+    {
+        public Lexical.Position Position { get; set; }
+
+        public string Message { get; set; }
     }
 }

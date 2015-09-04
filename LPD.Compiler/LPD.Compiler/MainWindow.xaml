@@ -122,16 +122,37 @@
                            TextAlignment="Center"
                            Width="20"/>-->
                 <TextBox x:Name="CodeTextBox"
+                         DockPanel.Dock="Left"
+                         Focusable="True"
+                         IsReadOnlyCaretVisible="True"
+                         IsInactiveSelectionHighlightEnabled="True"
                          FontSize="18"
                          Style="{StaticResource CodeTextBoxStyle}"
-                         CustomControls:AttachedProperties.HasBindableLineCount="True"
                          Margin="5,0"
                          TextWrapping="Wrap"
                          AcceptsReturn="True"/>
+                <ListView x:Name="Tokens"
+                         DockPanel.Dock="Right"
+                         Margin="5,0"/>
             </DockPanel>
         </Border>
         <GroupBox Grid.Row="2" Header="Output">
-            <ListView x:Name="ErrorsListView" Background="Transparent"/>
+            <ListView x:Name="ErrorsListView" Background="Transparent"
+                      SelectionChanged="OnErrorsListViewSelectedChanged">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock>
+                                <Run Text="{Binding Position.Line}"/>
+                                <Run Text=", "/>
+                                <Run Text="{Binding Position.Column}"/>
+                                <Run Text=": "/>
+                                <Run Text="{Binding Message}"/>
+                            </TextBlock>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
         </GroupBox>
     </Grid>
 </Controls:MetroWindow>

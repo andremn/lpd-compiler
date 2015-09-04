@@ -10,5 +10,10 @@ namespace LPD.Compiler.Lexical
         public Symbols Symbol { get; set; }
 
         public string Lexeme { get; set; }
+
+        public override string ToString()
+        {
+            return Symbol + " " + Lexeme;
+        }
     }
 }
