@@ -9,6 +9,7 @@
         mc:Ignorable="d"
         Background="#FFEEEEEE"
         GlowBrush="{DynamicResource AccentColorBrush}"
+        PreviewKeyDown="OnMainWindowPreviewKeyDown"
         Title="Compilador LPD" Height="500" Width="600" WindowState="Maximized">
 
     <Controls:MetroWindow.Resources>
@@ -101,44 +102,53 @@
             <RowDefinition Height="150"/>
         </Grid.RowDefinitions>
         <StackPanel Orientation="Horizontal"
-                    Margin="10,0"
                     Grid.Row="0">
             <Button Style="{StaticResource CustomButtonStyle}" ToolTip="Novo"
                     Click="OnNewFileButtonClick">
                 <Image Source="Images/NewFile.png"
-                   Height="32" Width="32"/>
+                   Height="30" Width="30"/>
             </Button>
             <Button Style="{StaticResource CustomButtonStyle}" ToolTip="Abrir"
                     Click="OnOpenFileButtonClick">
                 <Image Source="Images/Folder.png"
                    Height="36" Width="36"/>
             </Button>
+            <Button x:Name="SaveButton" Style="{StaticResource CustomButtonStyle}" ToolTip="Salvar"
+                    Click="OnSaveFileButtonClick">
+                <Image Source="Images/Save.png"
+                   Height="28" Width="28"/>
+            </Button>
+            <Button x:Name="SaveAsButton" Style="{StaticResource CustomButtonStyle}" ToolTip="Savar como"
+                    Click="OnSaveAsFileButtonClick">
+                <Image Source="Images/SaveAs.png"
+                   Height="28" Width="28"/>
+            </Button>
+            <Separator BorderBrush="LightGray" BorderThickness="2" Height="2"  Margin="10,10">
+                <Separator.LayoutTransform>
+                    <RotateTransform Angle="90" />
+                </Separator.LayoutTransform>
+            </Separator>
+            <Button x:Name="CompileButton" Style="{StaticResource CustomButtonStyle}" ToolTip="Compilar"
+                    Click="OnCompileButtonClick">
+                <Image Source="Images/Compile.png"
+                   Height="28" Width="28"/>
+            </Button>
         </StackPanel>
         <Border Background="White" BorderBrush="{DynamicResource AccentColorBrush}" BorderThickness="1"
+                Margin="5,0"
                 Grid.Row="1">
             <DockPanel>
-                <!--<TextBlock Text="{Binding ElementName=CodeTextBox, Path=(CustomControls:AttachedProperties.BindableLineCount)}"
-                           Background="#FFDEDEDE"
-                           TextAlignment="Center"
-                           Width="20"/>-->
-                <TextBox x:Name="CodeTextBox"
-                         DockPanel.Dock="Left"
-                         Focusable="True"
-                         IsReadOnlyCaretVisible="True"
-                         IsInactiveSelectionHighlightEnabled="True"
-                         FontSize="18"
-                         Style="{StaticResource CodeTextBoxStyle}"
-                         Margin="5,0"
-                         TextWrapping="Wrap"
-                         AcceptsReturn="True"/>
-                <ListView x:Name="Tokens"
-                         DockPanel.Dock="Right"
-                         Margin="5,0"/>
+                <AvalonEdit:TextEditor x:Name="Editor"
+                                       xmlns:AvalonEdit="http://icsharpcode.net/sharpdevelop/avalonedit"
+                                       ShowLineNumbers="True"
+                                       LineNumbersForeground="{DynamicResource AccentColorBrush}"
+                                       FontSize="14" 
+                                       FontFamily="Consolas"
+                                       PreviewKeyDown="OnEditorPreviewKeyDown"/>
             </DockPanel>
         </Border>
         <GroupBox Grid.Row="2" Header="Output">
-            <ListView x:Name="ErrorsListView" Background="Transparent"
-                      SelectionChanged="OnErrorsListViewSelectedChanged">
+            <ListView x:Name="ErrorsListView" Background="Transparent">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">
@@ -152,6 +162,11 @@
                         </StackPanel>
                     </DataTemplate>
                 </ListView.ItemTemplate>
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <EventSetter Event="PreviewMouseDoubleClick" Handler="OnErrorListViewItemPreviewMouseDoubleClick" />
+                    </Style>
+                </ListView.ItemContainerStyle>
             </ListView>
         </GroupBox>
     </Grid>

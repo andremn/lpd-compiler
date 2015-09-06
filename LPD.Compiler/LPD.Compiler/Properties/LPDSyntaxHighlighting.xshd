@@ -1,0 +1,45 @@
+<SyntaxDefinition name="LPD" xmlns="http://icsharpcode.net/sharpdevelop/syntaxdefinition/2008">
+    <Color name="Comment" foreground="Green" />
+
+    <!-- This is the main ruleset. -->
+    <RuleSet>
+        <Span color="Comment" begin="{" end="}"/>
+
+        <Keywords foreground="Blue">
+            <Word>se</Word>
+            <Word>entao</Word>
+            <Word>senao</Word>
+            <Word>programa</Word>
+            <Word>enquanto</Word>
+            <Word>faca</Word>
+            <Word>inicio</Word>
+            <Word>fim</Word>
+            <Word>escreva</Word>
+            <Word>leia</Word>
+            <Word>var</Word>
+            <Word>inteiro</Word>
+            <Word>booleano</Word>
+            <Word>verdadeiro</Word>
+            <Word>falso</Word>
+            <Word>procedimento</Word>
+            <Word>funcao</Word>
+        </Keywords>
+
+        <Keywords fontWeight="bold" foreground="Black">           
+            <Word>div</Word>
+            <Word>e</Word>
+            <Word>ou</Word>            
+            <Word>nao</Word>
+        </Keywords>
+
+        <!-- Digits -->
+        <Rule foreground="Black">
+            \b0[xX][0-9a-fA-F]+  # hex number
+        |    \b
+            (    \d+(\.[0-9]+)?   #number with optional floating point
+            |    \.[0-9]+         #or just starting with floating point
+            )
+            ([eE][+-]?[0-9]+)? # optional exponent
+        </Rule>
+    </RuleSet>
+</SyntaxDefinition>
