@@ -34,6 +34,9 @@ namespace LPD.Compiler.Lexical
         private const char MultChar = '*';
         private const char GreaterChar = '>';
         private const char LessChar = '<';
+        private const char LineFeedChar = '\r';
+        private const char CarriageReturnChar = '\n';
+        private const char TabChar = '\t';
 
         #endregion
 
@@ -68,13 +71,14 @@ namespace LPD.Compiler.Lexical
 
         private CharReader _reader;
         private string _filePath;
-        private Position _currentPosition;
+        private CodePosition _currentPosition;
 
         public LexicalAnalizer(string filePath)
         {
             _filePath = filePath;
             _currentPosition.Column = 0;
             _currentPosition.Line = 1;
+            _currentPosition.Index = -1;
         }
 
         public TokenPositionCollection GetTokens()
@@ -91,9 +95,18 @@ namespace LPD.Compiler.Lexical
 
                     while ((character = _reader.Read()).HasValue)
                     {
-                        if (character == '\r' || character == '\n')
+                        if (character == CarriageReturnChar)
                         {
-                            if (character == '\n')
+                            _currentPosition.Line++;
+                            _currentPosition.Column = 0;
+                            continue;
+                        }
+
+                        if (character == LineFeedChar)
+                        {
+                            character = _reader.Read().Value;
+
+                            if (character == CarriageReturnChar)
                             {
                                 _currentPosition.Line++;
                                 _currentPosition.Column = 0;
@@ -104,18 +117,16 @@ namespace LPD.Compiler.Lexical
 
                         if (character == CommentStart)
                         {
-                            while (character != CommentEnd)
-                            {
-                                character = _reader.Read();
-                            }
-
+                            ConsumeComment();
                             continue;
                         }
-                        else if (character == SpaceChar)
+
+                        if (character == SpaceChar || character == TabChar)
                         {
+                            ConsumeCharacter(character.Value);
                             continue;
                         }
-
+                        
                         tokens.Append(_currentPosition, GetToken());
                     }
                 }
@@ -305,6 +316,12 @@ namespace LPD.Compiler.Lexical
                 stringBuilder.Append(character);
                 character = _reader.Peek().Value;
 
+                if (character.HasDiacritic())
+                {
+                    _reader.Read();
+                    throw new InvalidTokenException(_currentPosition, string.Format(UnknownTokenErrorMessageFormat, character));
+                }
+
                 if (!char.IsLetterOrDigit(character) && character != UnderscoreChar)
                 {
                     break;
@@ -328,27 +345,50 @@ namespace LPD.Compiler.Lexical
         private Token HandleDigit()
         {
             StringBuilder stringBuilder = new StringBuilder();
-            char character = _reader.Current.Value;
+            char? character = _reader.Current;
 
             stringBuilder.Append(character);
-            character = _reader.Peek().Value;
 
-            while (true)
+            while ((character = _reader.Peek()).HasValue && char.IsDigit(character.Value))
             {
-                if (!char.IsDigit(character))
-                {
-                    break;
-                }
-
                 stringBuilder.Append(character);
-                character = _reader.Read().Value;
+                _reader.Read();
             }
 
             return new Token() { Lexeme = stringBuilder.ToString(), Symbol = Symbols.SNumero };
         }
 
+        private void ConsumeComment()
+        {
+            char? character;
+
+            while ((character = _reader.Read()).HasValue)
+            {
+                if (character == CommentEnd)
+                {
+                    break;
+                }
+            }
+        }
+
+        private void ConsumeCharacter(char character)
+        {
+            char? c;
+
+            while ((c = _reader.Peek()).HasValue)
+            {
+                if (c != character)
+                {
+                    break;
+                }
+
+                _reader.Read();
+            }
+        }
+
         private void OnCharRead(object sender, EventArgs e)
         {
+            _currentPosition.Index++;
             _currentPosition.Column++;
         }
     }

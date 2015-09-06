@@ -11,7 +11,7 @@ namespace LPD.Compiler.Lexical
         /// Initializes a new instance of the <see cref="InvalidTokenException"/> class with the specified program posistion.
         /// </summary>
         /// <param name="position">The position of the program this exception is being thrown.</param>
-        public InvalidTokenException(Position position)
+        public InvalidTokenException(CodePosition position)
         {
             Position = position;
         }
@@ -21,7 +21,7 @@ namespace LPD.Compiler.Lexical
         /// </summary>
         /// <param name="position">The position of the program this exception is being thrown.</param>
         /// <param name="message">The exception message describing the error.</param>
-        public InvalidTokenException(Position position, string message)
+        public InvalidTokenException(CodePosition position, string message)
             : base(message)
         {
             Position = position;
@@ -33,7 +33,7 @@ namespace LPD.Compiler.Lexical
         /// <param name="position">The position of the program this exception is being thrown.</param>
         /// <param name="message">The exception message describing the error.</param>
         /// <param name="innerException">The exception that is the cause of the current exception.</param>
-        public InvalidTokenException(Position position, string message, Exception innerException)
+        public InvalidTokenException(CodePosition position, string message, Exception innerException)
             : base(message, innerException)
         {
             Position = position;
@@ -42,6 +42,6 @@ namespace LPD.Compiler.Lexical
         /// <summary>
         /// Gets or sets the position of the program this exception was thrown.
         /// </summary>
-        public Position Position { get; set; }
+        public CodePosition Position { get; set; }
     }
 }

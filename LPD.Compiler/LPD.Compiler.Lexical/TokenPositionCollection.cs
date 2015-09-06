@@ -4,21 +4,21 @@ using System.Collections.Generic;
 
 namespace LPD.Compiler.Lexical
 {
-    public class TokenPositionCollection : IEnumerable<Tuple<Position, Token>>
+    public class TokenPositionCollection : IEnumerable<Tuple<CodePosition, Token>>
     {
-        private readonly IList<Tuple<Position, Token>> _internalTokens;
+        private readonly IList<Tuple<CodePosition, Token>> _internalTokens;
 
         internal TokenPositionCollection()
         {
-            _internalTokens = new List<Tuple<Position, Token>>();
+            _internalTokens = new List<Tuple<CodePosition, Token>>();
         }
         
-        internal void Append(Position position, Token token)
+        internal void Append(CodePosition position, Token token)
         {
-            _internalTokens.Add(new Tuple<Position, Token>(position, token));
+            _internalTokens.Add(new Tuple<CodePosition, Token>(position, token));
         }
 
-        public IEnumerator<Tuple<Position, Token>> GetEnumerator()
+        public IEnumerator<Tuple<CodePosition, Token>> GetEnumerator()
         {
             return _internalTokens.GetEnumerator();
         }
