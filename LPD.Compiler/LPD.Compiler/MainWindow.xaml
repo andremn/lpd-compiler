@@ -113,6 +113,16 @@
                 <Image Source="Images/Folder.png"
                    Height="36" Width="36"/>
             </Button>
+            <Button Style="{StaticResource CustomButtonStyle}" ToolTip="Abrir"
+                    Click="OnStartButtonClick">
+                <Image Source="Images/playbtn.png"
+                   Height="36" Width="36"/>
+            </Button>
+            <Button Style="{StaticResource CustomButtonStyle}" ToolTip="Abrir"
+                    Click="OnRefreshButtonClick">
+                <Image Source="Images/refresh.png"
+                   Height="36" Width="36"/>
+            </Button>
         </StackPanel>
         <Border Background="White" BorderBrush="{DynamicResource AccentColorBrush}" BorderThickness="1"
                 Grid.Row="1">

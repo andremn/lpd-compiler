@@ -123,6 +123,8 @@
     <Content Include="Images\NewFile.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Resource Include="Images\refresh.png" />
+    <Resource Include="Images\playbtn.png" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

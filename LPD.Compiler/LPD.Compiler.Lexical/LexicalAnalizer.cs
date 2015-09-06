@@ -40,7 +40,7 @@ namespace LPD.Compiler.Lexical
         private static readonly char[] ArithmeticOperators = { PlusChar, MinusChar, MultChar };
         private static readonly char[] RelationalOperators = { LessChar, GreaterChar, EqualChar, ExclamationChar };
         private static readonly char[] PontuationOperators = { SemiColonChar, CommaChar, OpenBracketChar, CloseBracketChar, DotChar };
-
+        
         private static readonly Dictionary<string, Symbols> Keywords = new Dictionary<string, Symbols>()
         {
             ["programa"] = Symbols.SPrograma,

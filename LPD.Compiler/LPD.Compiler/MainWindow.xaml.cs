@@ -16,9 +16,11 @@ namespace LPD.Compiler
     /// </summary>
     public partial class MainWindow : MetroWindow
     {
-        private const string OpenFileDialogFilter = "Arquivo LPD|*.lpd|Todos os arquivos|*.*";
+        private const string OpenFileDialogFilter = "Todos os arquivos|*.*";
 
         private string _selectedFile;
+
+        private bool isOpenFile = false;
 
         public MainWindow()
         {
@@ -28,6 +30,7 @@ namespace LPD.Compiler
         private async void ReadAndShowFile()
         {
             CodeTextBox.Text = await FileHelper.GetFileContentAsStringAsync(_selectedFile);
+            isOpenFile = true;
         }
 
         private void OnNewFileButtonClick(object sender, RoutedEventArgs e)
@@ -52,17 +55,7 @@ namespace LPD.Compiler
             _selectedFile = openFileDialog.FileName;
             ReadAndShowFile();
 
-            try
-            {
-                Tokens.ItemsSource = new LexicalAnalizer(_selectedFile).GetTokens();
-            }
-            catch (InvalidTokenException ex)
-            {
-                ErrorsListView.ItemsSource = new List<ErrorViewModel>()
-                {
-                    new ErrorViewModel() { Position = ex.Position, Message = ex.Message }
-                };
-            }
+            
         }
 
         private void OnErrorsListViewSelectedChanged(object sender, SelectionChangedEventArgs e)
@@ -76,7 +69,32 @@ namespace LPD.Compiler
             charIndex = CodeTextBox.GetCharacterIndexFromLineIndex(line);
             CodeTextBox.CaretIndex = charIndex + position.Position.Column - 1;
         }
+
+        private void OnStartButtonClick(object sender, RoutedEventArgs e)
+        {
+            if (isOpenFile)
+            {
+                try
+                {
+                    Tokens.ItemsSource = new LexicalAnalizer(_selectedFile).GetTokens();
+                }
+                catch (InvalidTokenException ex)
+                {
+                    ErrorsListView.ItemsSource = new List<ErrorViewModel>()
+                    {
+                        new ErrorViewModel() { Position = ex.Position, Message = ex.Message }
+                    };
+                }
+            }
+        }
+
+        private void OnRefreshButtonClick(object sender, RoutedEventArgs e)
+        {
+            //TODO - Implementar um refresh? se necessário!
+        }
     }
+
+
 
     class ErrorViewModel
     {
