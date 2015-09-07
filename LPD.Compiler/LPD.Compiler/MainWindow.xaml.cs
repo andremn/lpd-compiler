@@ -25,7 +25,7 @@ namespace LPD.Compiler
     public partial class MainWindow : MetroWindow
     {
         private const string WindowTitleFormat = "LPD COMPILER - {0}";
-        private const string FileDialogFilter = "Arquivo LPD|*.lpd|Todos os arquivos|*.*";
+        private const string FileDialogFilter = "Arquivo LPD,TXT|*.lpd;*.txt| Todos os arquivos|*.*";
 
         private const string SaveButtonEnabledSource = "Images/Save.png";
         private const string SaveButtonDisabledSource = "Images/Save_Disabled.png";
@@ -44,6 +44,15 @@ namespace LPD.Compiler
             UpdateSaveButtons();
             Editor.SyntaxHighlighting = HighlightingLoader.Load(FileHelper.GetSyntaxHighlighting(), HighlightingManager.Instance);
         }
+        /// <summary>
+        /// Refresh the file 
+        /// </summary>
+        /// <returns><see cref="Task"/></returns>
+        private async Task RefreshFileAsync(string file)
+        {
+            Editor.Text = await FileHelper.GetFileContentAsStringAsync(file);
+        }
+
 
         /// <summary>
         /// Reads all the contents of the selected file and shows it to the user.
@@ -316,6 +325,16 @@ namespace LPD.Compiler
         private async void OnCompileButtonClick(object sender, RoutedEventArgs e)
         {
             await CompileAsync();
+        }
+
+        private async void Refresh_Click(object sender, RoutedEventArgs e)
+        {
+            if (!string.IsNullOrEmpty(_selectedFile))
+            {
+                await RefreshFileAsync(_selectedFile);
+
+                return;
+            }
         }
     }
 }

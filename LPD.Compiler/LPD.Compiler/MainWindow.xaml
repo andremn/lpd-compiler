@@ -133,6 +133,11 @@
                 <Image Source="Images/Compile.png"
                    Height="28" Width="28"/>
             </Button>
+            <Button x:Name="Refresh" Style="{StaticResource CustomButtonStyle}" ToolTip="Compilar"
+                    Click="Refresh_Click">
+                <Image Source="Images/refresh.png"
+                   Height="28" Width="28"/>
+            </Button>
         </StackPanel>
         <Border Background="White" BorderBrush="{DynamicResource AccentColorBrush}" BorderThickness="1"
                 Margin="5,0"
