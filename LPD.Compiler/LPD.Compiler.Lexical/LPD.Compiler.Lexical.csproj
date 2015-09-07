@@ -40,9 +40,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CharExtensions.cs" />
     <Compile Include="CharReader.cs" />
     <Compile Include="InvalidTokenException.cs" />
-    <Compile Include="Position.cs" />
+    <Compile Include="CodePosition.cs" />
     <Compile Include="Symbols.cs" />
     <Compile Include="LexicalAnalizer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
