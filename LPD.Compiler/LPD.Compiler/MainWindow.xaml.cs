@@ -31,6 +31,8 @@ namespace LPD.Compiler
         private const string SaveButtonDisabledSource = "Images/Save_Disabled.png";
         private const string SaveAsButtonEnabledSource = "Images/SaveAs.png";
         private const string SaveAsButtonDisabledSource = "Images/SaveAs_Disabled.png";
+        private const string RefreshButtonDisabledSource = "Images/refresh_disabled.png";
+        private const string RefreshButtonEnabledSource = "Images/refresh.png";
 
         private string _selectedFile;
         private ushort _modificationsCount = 0;
@@ -106,18 +108,21 @@ namespace LPD.Compiler
         {
             Image saveButtonContent = SaveButton.Content as Image;
             Image saveAsButtonContent = SaveAsButton.Content as Image;
+            Image refreshButtonContent = Refresh.Content as Image;
 
             if  (_modificationsCount > 0)
             {
                 saveButtonContent.Source = new BitmapImage(new Uri(SaveButtonEnabledSource, UriKind.Relative));
                 saveAsButtonContent.Source = new BitmapImage(new Uri(SaveAsButtonEnabledSource, UriKind.Relative));
-                SaveButton.IsEnabled = SaveAsButton.IsEnabled = true;
+                refreshButtonContent.Source = new BitmapImage(new Uri(RefreshButtonEnabledSource,UriKind.Relative));
+                SaveButton.IsEnabled = SaveAsButton.IsEnabled = Refresh.IsEnabled= true;
             }
             else
             {
                 saveButtonContent.Source = new BitmapImage(new Uri(SaveButtonDisabledSource, UriKind.Relative));
                 saveAsButtonContent.Source = new BitmapImage(new Uri(SaveAsButtonDisabledSource, UriKind.Relative));
-                SaveButton.IsEnabled = SaveAsButton.IsEnabled = false;
+                refreshButtonContent.Source = new BitmapImage(new Uri(RefreshButtonDisabledSource, UriKind.Relative));
+                SaveButton.IsEnabled = SaveAsButton.IsEnabled = Refresh.IsEnabled = false;
             }
         }
 

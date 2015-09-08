@@ -110,6 +110,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Resource Include="Images\refresh.png" />
+    <Resource Include="Images\refresh_disabled.png" />
     <Content Include="Images\SaveAs.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

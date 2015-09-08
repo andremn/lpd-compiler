@@ -133,7 +133,7 @@
                 <Image Source="Images/Compile.png"
                    Height="28" Width="28"/>
             </Button>
-            <Button x:Name="Refresh" Style="{StaticResource CustomButtonStyle}" ToolTip="Compilar"
+            <Button x:Name="Refresh" Style="{StaticResource CustomButtonStyle}" ToolTip="Refrescar"
                     Click="Refresh_Click">
                 <Image Source="Images/refresh.png"
                    Height="28" Width="28"/>
