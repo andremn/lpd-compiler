@@ -123,6 +123,11 @@
                 <Image Source="Images/SaveAs.png"
                    Height="28" Width="28"/>
             </Button>
+            <Button x:Name="Refresh" Style="{StaticResource CustomButtonStyle}" ToolTip="Refrescar"
+                    Click="Refresh_Click">
+                <Image Source="Images/refresh.png"
+                   Height="28" Width="28"/>
+            </Button>
             <Separator BorderBrush="LightGray" BorderThickness="2" Height="2"  Margin="10,10">
                 <Separator.LayoutTransform>
                     <RotateTransform Angle="90" />
@@ -133,46 +138,33 @@
                 <Image Source="Images/Compile.png"
                    Height="28" Width="28"/>
             </Button>
-            <Button x:Name="Refresh" Style="{StaticResource CustomButtonStyle}" ToolTip="Refrescar"
-                    Click="Refresh_Click">
-                <Image Source="Images/refresh.png"
-                   Height="28" Width="28"/>
-            </Button>
         </StackPanel>
         <Border Background="White" BorderBrush="{DynamicResource AccentColorBrush}" BorderThickness="1"
                 Margin="5,0"
                 Grid.Row="1">
-            <DockPanel>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width=".5*"/>
+                    <ColumnDefinition Width=".5*"/>
+                </Grid.ColumnDefinitions>
                 <AvalonEdit:TextEditor x:Name="Editor"
+                                       Grid.Column="0"
                                        xmlns:AvalonEdit="http://icsharpcode.net/sharpdevelop/avalonedit"
                                        ShowLineNumbers="True"
                                        LineNumbersForeground="{DynamicResource AccentColorBrush}"
                                        FontSize="14" 
                                        FontFamily="Consolas"
-                                       PreviewKeyDown="OnEditorPreviewKeyDown"/>
-            </DockPanel>
+                                       PreviewKeyDown="OnEditorPreviewKeyDown"
+                                       TextChanged="OnEditorTextChanged"/>
+                <GroupBox x:Name="TokenGroupBox"
+                          Grid.Column="1">
+                    <ListView x:Name="TokensList"
+                              Margin="30,0,0,0"/>
+                </GroupBox>
+            </Grid>
         </Border>
         <GroupBox Grid.Row="2" Header="Output">
-            <ListView x:Name="ErrorsListView" Background="Transparent">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock>
-                                <Run Text="{Binding Position.Line}"/>
-                                <Run Text=", "/>
-                                <Run Text="{Binding Position.Column}"/>
-                                <Run Text=": "/>
-                                <Run Text="{Binding Message}"/>
-                            </TextBlock>
-                        </StackPanel>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-                <ListView.ItemContainerStyle>
-                    <Style TargetType="ListViewItem">
-                        <EventSetter Event="PreviewMouseDoubleClick" Handler="OnErrorListViewItemPreviewMouseDoubleClick" />
-                    </Style>
-                </ListView.ItemContainerStyle>
-            </ListView>
+            <TextBlock x:Name="ErrorTextBlock"/>
         </GroupBox>
     </Grid>
 </Controls:MetroWindow>

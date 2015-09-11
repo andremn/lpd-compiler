@@ -3,7 +3,7 @@
 
     <!-- This is the main ruleset. -->
     <RuleSet>
-        <Span color="Comment" begin="{" end="}"/>
+        <Span color="Comment" multiline="true" begin="{" end="}"/>
 
         <Keywords foreground="Blue">
             <Word>se</Word>

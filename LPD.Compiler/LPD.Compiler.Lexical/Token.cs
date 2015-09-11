@@ -7,6 +7,8 @@ namespace LPD.Compiler.Lexical
 #endif
     public struct Token
     {
+        public static readonly Token Empty = new Token() { Symbol = Symbols.None, Lexeme = null };
+
         public Symbols Symbol { get; set; }
 
         public string Lexeme { get; set; }
