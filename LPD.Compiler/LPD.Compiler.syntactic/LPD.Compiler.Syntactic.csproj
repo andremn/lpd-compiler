@@ -7,8 +7,8 @@
     <ProjectGuid>{8C533F75-BED5-42BC-AE76-6643730AFF42}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>LPD.Compiler.syntactic</RootNamespace>
-    <AssemblyName>LPD.Compiler.syntactic</AssemblyName>
+    <RootNamespace>LPD.Compiler.Syntactic</RootNamespace>
+    <AssemblyName>LPD.Compiler.Syntactic</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SyntacticAnaliser.cs" />
+    <Compile Include="SyntacticException.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\LPD.Compiler.Lexical\LPD.Compiler.Lexical.csproj">

@@ -1,15 +1,19 @@
-﻿
-using LPD.Compiler.Shared;
+﻿using LPD.Compiler.Shared;
 
 namespace LPD.Compiler.Syntactic
 {
-    class SyntacticAnaliser
+    public class SyntacticAnaliser
     {
-
-
         public CompileError Analise()
         {
-            return null;
+            try
+            {
+
+            }
+            catch (SyntacticException ex)
+            {
+
+            }
         }
 
         private void BlockAnalise()
@@ -31,22 +35,27 @@ namespace LPD.Compiler.Syntactic
         {
 
         }
+
         private void CommandsAnalise()
         {
 
         }
+
         private void SimpleCommandAnalise()
         {
 
         }
+
         private void AttrProcAnalise()
         {
 
         }
+
         private void ProcCallAnalise()
         {
 
         }
+
         private void ReadAnalise()
         {
 
@@ -56,46 +65,55 @@ namespace LPD.Compiler.Syntactic
         {
 
         }
+
         private void WhileAnalise()
         {
 
         }
+
         private void IfAnalise()
         {
 
         }
+
         private void SubRoutineAnalise()
         {
 
         }
+
         private void ProcDclAnalise()
         {
 
         }
+
         private void FuncDclAnalise()
         {
 
         }
+
         private void ExpressionAnalise()
         {
 
         }
+
         private void SimpleExpressionAnalise()
         {
 
         }
+
         private void TermAnalise()
         {
 
         }
+
         private void FactorAnalise()
         {
 
         }
+
         private void FuncCallAnalise()
         {
 
         }
-
     }
 }
