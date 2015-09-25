@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<logicalClassDesignerDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="Sintatico">
+  <logicalClassDesignerModelMoniker Id="62eaeee5-2a16-4dcb-9899-d1e4aca4adf9" />
+  <nestedChildShapes>
+    <classShape Id="77690ac9-532d-4808-a8c0-709504a58889" absoluteBounds="1.375, 1.125, 2.375, 4.2656248807907104" hideQualifiedName="false" increaseHeight="0" customColor="181, 193, 223">
+      <classMoniker Id="966df4d2-73b3-49ac-a40b-6bafd321b4a9" LastKnownName="AnalisadorSintatico" />
+      <nestedChildShapes>
+        <AttributeElementListCompartment Id="6edd461b-c3cf-4090-a8af-94ef2ce5727f" absoluteBounds="1.3900000000000001, 1.5150000000000001, 2.3449999999999998, 0.2011718675494194" name="AttributesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <OperationElementListCompartment Id="7bf32881-e2d4-438f-9cdb-8fecc843f09a" absoluteBounds="1.3900000000000001, 1.7261718675494193, 2.3449999999999998, 3.5644530132412915" name="OperationsCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+  </nestedChildShapes>
+</logicalClassDesignerDiagram>
