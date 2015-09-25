@@ -105,6 +105,8 @@ namespace LPD.Compiler
             Editor.Text = await FileHelper.GetFileContentAsStringAsync(_selectedFile);
             _modificationsCount = 0;
             UpdateSaveButtons();
+            TokensList.Items.Clear();
+            ErrorTextBlock.Text = string.Empty;
         }
 
         /// <summary>

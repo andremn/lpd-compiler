@@ -15,7 +15,7 @@ namespace LPD.Compiler.Lexical
 
         public override string ToString()
         {
-            return Symbol + " " + Lexeme;
+            return "Símbolo: " + Symbol + " | Lexema: " + Lexeme;
         }
     }
 }
