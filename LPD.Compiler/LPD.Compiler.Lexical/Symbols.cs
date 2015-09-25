@@ -40,6 +40,7 @@
         SDoisPontos = 35,
         SPrograma = 36,
         SVerdadeiro = 37,
-        SFalso = 38
+        SFalso = 38,
+        None = 39
     }
 }

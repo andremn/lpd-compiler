@@ -16,6 +16,7 @@ using System.Windows.Input;
 using System.Windows.Media.Imaging;
 using System.Windows.Threading;
 using System.ComponentModel;
+using System.Linq;
 
 namespace LPD.Compiler
 {
@@ -35,6 +36,7 @@ namespace LPD.Compiler
         private const string RefreshButtonEnabledSource = "Images/refresh.png";
 
         private string _selectedFile;
+        private bool _hasTextChanged = true;
         private ushort _modificationsCount = 0;
 
         /// <summary>
@@ -45,6 +47,44 @@ namespace LPD.Compiler
             InitializeComponent();
             UpdateSaveButtons();
             Editor.SyntaxHighlighting = HighlightingLoader.Load(FileHelper.GetSyntaxHighlighting(), HighlightingManager.Instance);
+
+            #region Needs to be removed
+            /*System.Diagnostics.Stopwatch watch = new System.Diagnostics.Stopwatch();
+            List<Token> tokens = new List<Token>(1000);
+            int counter = 0;
+
+            watch.Start();
+
+            for (int i = 0; i < 1000; i++)
+            {
+                for (int j = 0; j < 1000; j++)
+                {
+                    tokens.Add(new Token() { Lexeme = "Test", Symbol = Symbols.None });
+                }
+
+                for (int k = 0; k < 1000; k++)
+                {
+                    if (tokens[k].Lexeme == "Test")
+                    {
+                        if (tokens[k].Symbol == Symbols.None)
+                        {
+                            counter++;
+                        }
+                    }
+                }
+
+                if (counter < 20)
+                {
+                    MessageBox.Show("Here!", "Oh noo!");
+                }
+
+                counter = 0;
+                tokens.Clear();
+            }
+            
+            watch.Stop();
+            MessageBox.Show(watch.Elapsed.TotalMilliseconds + " ms", "Time");*/
+            #endregion
         }
         /// <summary>
         /// Refresh the file 
@@ -65,6 +105,8 @@ namespace LPD.Compiler
             Editor.Text = await FileHelper.GetFileContentAsStringAsync(_selectedFile);
             _modificationsCount = 0;
             UpdateSaveButtons();
+            TokensList.Items.Clear();
+            ErrorTextBlock.Text = string.Empty;
         }
 
         /// <summary>
@@ -142,23 +184,43 @@ namespace LPD.Compiler
                 if (string.IsNullOrEmpty(_selectedFile))
                 {
                     await SaveAsFileAsync();
-                    return;
                 }
-
-                await SaveFileAsync();
-            }
-
-            //TODO: refactor this.
-            try
-            {
-                new LexicalAnalizer(_selectedFile).GetTokens();
-            }
-            catch (InvalidTokenException ex)
-            {
-                ErrorsListView.ItemsSource = new List<ErrorViewModel>()
+                else
                 {
-                    new ErrorViewModel() { Position = ex.Position, Message = ex.Message }
-                };
+                    await SaveFileAsync();
+                }
+            }
+
+            TokensList.Items.Clear();
+            ErrorTextBlock.Text = string.Empty;
+            
+            using (LexicalAnalizer lexical = new LexicalAnalizer(_selectedFile))
+            {
+                LexicalItem item;
+
+                while (lexical.Next(out item))
+                {
+                    if (item.Error != null)
+                    {
+                        CodePosition position = item.Error.Position;
+
+                        ErrorTextBlock.Text = string.Format("Linha {0}, coluna {1}: {2}", position.Line, position.Column, item.Error.Message);
+                        break;
+                    }
+
+                    TokensList.Items.Add(item.Token);
+                }
+            }
+
+            int tokensCount = TokensList.Items.Count;
+
+            if (tokensCount > 0)
+            {
+                TokenGroupBox.Header = tokensCount > 1 ? tokensCount + " tokens" : "1 token";
+            }
+            else
+            {
+                TokenGroupBox.Header = "Nenhum token";
             }
         }
 
@@ -309,16 +371,13 @@ namespace LPD.Compiler
             {
                 _modificationsCount--;
                 UpdateSaveButtons();
+                _hasTextChanged = false;
             }
             else if (e.Key == Key.Y && Keyboard.Modifiers == ModifierKeys.Control)
             {
                 _modificationsCount++;
                 UpdateSaveButtons();
-            }
-            else if (Keyboard.Modifiers == ModifierKeys.None)
-            {
-                _modificationsCount++;
-                UpdateSaveButtons();
+                _hasTextChanged = false;
             }
         }
 
@@ -340,6 +399,18 @@ namespace LPD.Compiler
 
                 return;
             }
+        }
+
+        private void OnEditorTextChanged(object sender, EventArgs e)
+        {
+            if (!_hasTextChanged)
+            {
+                _hasTextChanged = true;
+                return;
+            }
+
+            _modificationsCount++;
+            UpdateSaveButtons();
         }
     }
 }

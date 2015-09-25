@@ -7,13 +7,15 @@ namespace LPD.Compiler.Lexical
 #endif
     public struct Token
     {
+        public static readonly Token Empty = new Token() { Symbol = Symbols.None, Lexeme = null };
+
         public Symbols Symbol { get; set; }
 
         public string Lexeme { get; set; }
 
         public override string ToString()
         {
-            return Symbol + " " + Lexeme;
+            return "Símbolo: " + Symbol + " | Lexema: " + Lexeme;
         }
     }
 }

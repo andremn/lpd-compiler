@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -6,7 +7,7 @@ using System.Text;
 
 namespace LPD.Compiler.Lexical
 {
-    public class LexicalAnalizer
+    public class LexicalAnalizer : IDisposable
     {
         #region Error messages
 
@@ -79,100 +80,113 @@ namespace LPD.Compiler.Lexical
             _currentPosition.Column = 0;
             _currentPosition.Line = 1;
             _currentPosition.Index = -1;
+            _reader = new CharReader(filePath, Encoding.UTF8);
+            _reader.CharRead += OnCharRead;
         }
 
-        public TokenPositionCollection GetTokens()
+        public bool Next(out LexicalItem item)
         {
-            TokenPositionCollection tokens = new TokenPositionCollection();
+            LexicalItem nextItem = NextItem();
 
-            using (FileStream fileStream = File.OpenRead(_filePath))
+            if (nextItem == null)
             {
-                using (_reader = new CharReader(fileStream, Encoding.UTF8))
-                {
-                    char? character;
-
-                    _reader.CharRead += OnCharRead;
-
-                    while ((character = _reader.Read()).HasValue)
-                    {
-                        if (character == CarriageReturnChar)
-                        {
-                            _currentPosition.Line++;
-                            _currentPosition.Column = 0;
-                            continue;
-                        }
-
-                        if (character == LineFeedChar)
-                        {
-                            character = _reader.Read().Value;
-
-                            if (character == CarriageReturnChar)
-                            {
-                                _currentPosition.Line++;
-                                _currentPosition.Column = 0;
-                            }
-
-                            continue;
-                        }
-
-                        if (character == CommentStart)
-                        {
-                            ConsumeComment();
-                            continue;
-                        }
-
-                        if (character == SpaceChar || character == TabChar)
-                        {
-                            ConsumeCharacter(character.Value);
-                            continue;
-                        }
-                        
-                        tokens.Append(_currentPosition, GetToken());
-                    }
-                }
+                item = null;
+                return false;
             }
 
-            return tokens;
+            item = nextItem;
+            return true;
         }
 
-        private Token GetToken()
+        public void Dispose()
         {
-            Token token;
+            _reader.Dispose();
+        }
+
+        private LexicalItem NextItem()
+        {
+            LexicalItem item = null;
+            char? character;
+            
+            while ((character = _reader.Read()).HasValue)
+            {
+                if (character == CarriageReturnChar)
+                {
+                    _currentPosition.Line++;
+                    _currentPosition.Column = 0;
+                    continue;
+                }
+
+                if (character == LineFeedChar)
+                {
+                    character = _reader.Read().Value;
+
+                    if (character == CarriageReturnChar)
+                    {
+                        _currentPosition.Line++;
+                        _currentPosition.Column = 0;
+                    }
+
+                    continue;
+                }
+
+                if (character == CommentStart)
+                {
+                    ConsumeComment();
+                    continue;
+                }
+
+                if (character == SpaceChar || character == TabChar)
+                {
+                    ConsumeCharacter(character.Value);
+                    continue;
+                }
+
+                item = BuildItem();
+                break;
+            }
+            
+            return item;
+        }
+
+        private LexicalItem BuildItem()
+        {
+            LexicalItem item;
             char character = _reader.Current.Value;
 
             if (char.IsDigit(character))
             {
-                token = HandleDigit();
+                item = HandleDigit();
             }
             else if (char.IsLetter(character))
             {
-                token = HandleKeyWord();
+                item = HandleKeyWord();
             }
             else if (character == TwoPointsChar)
             {
-                token = HandleAtribution();
+                item = HandleAtribution();
             }
             else if (ArithmeticOperators.Contains(character))
             {
-                token = HandleArithmeticOperator();
+                item = HandleArithmeticOperator();
             }
             else if (RelationalOperators.Contains(character))
             {
-                token = HandleRelationalOperator();
+                item = HandleRelationalOperator();
             }
             else if (PontuationOperators.Contains(character))
             {
-                token = HandlePontuation();
+                item = HandlePontuation();
             }
             else
             {
-                throw new InvalidTokenException(_currentPosition, string.Format(UnknownTokenErrorMessageFormat, character));
+                return BuildLexicalItem(Token.Empty, new InvalidTokenError(_currentPosition, string.Format(UnknownTokenErrorMessageFormat, character)));
             }
 
-            return token;
+            return item;
         }
 
-        private Token HandlePontuation()
+        private LexicalItem HandlePontuation()
         {
             Token token = new Token();
             char character = _reader.Current.Value;
@@ -197,10 +211,10 @@ namespace LPD.Compiler.Lexical
             }
 
             token.Lexeme = character.ToString();
-            return token;
+            return BuildLexicalItem(token, null);
         }
 
-        private Token HandleRelationalOperator()
+        private LexicalItem HandleRelationalOperator()
         {
             Token token = new Token();
             string id = string.Empty;
@@ -218,7 +232,10 @@ namespace LPD.Compiler.Lexical
 
                 if (character != EqualChar)
                 {
-                    throw new InvalidTokenException(_currentPosition, string.Format(ExpectedTokenErrorMessageFormat, EqualChar, ExclamationChar));
+                    return new LexicalItem()
+                    {
+                        Error = new InvalidTokenError(_currentPosition, string.Format(ExpectedTokenErrorMessageFormat, EqualChar, ExclamationChar))
+                    };
                 }
 
                 id += character;
@@ -254,10 +271,10 @@ namespace LPD.Compiler.Lexical
             }
 
             token.Lexeme = id;
-            return token;
+            return BuildLexicalItem(token, null);
         }
 
-        private Token HandleArithmeticOperator()
+        private LexicalItem HandleArithmeticOperator()
         {
             Token token = new Token();
             char character = _reader.Current.Value;
@@ -276,10 +293,10 @@ namespace LPD.Compiler.Lexical
             }
 
             token.Lexeme = character.ToString();
-            return token;
+            return BuildLexicalItem(token, null);
         }
 
-        private Token HandleAtribution()
+        private LexicalItem HandleAtribution()
         {
             Token token = new Token();
             string lex = string.Empty;
@@ -300,34 +317,39 @@ namespace LPD.Compiler.Lexical
 
             _reader.Read();
             token.Lexeme = lex;
-            return token;
+            return BuildLexicalItem(token, null);
         }
 
-        private Token HandleKeyWord()
+        private LexicalItem HandleKeyWord()
         {
             Token token = new Token();
             Symbols symbol;
             StringBuilder stringBuilder = new StringBuilder();
-            char character = _reader.Current.Value;
+            char? character = _reader.Current.Value;
             string id;
 
-            while (true)
+            stringBuilder.Append(character);
+
+            while ((character = _reader.Peek()).HasValue)
             {
-                stringBuilder.Append(character);
-                character = _reader.Peek().Value;
-
-                if (character.HasDiacritic())
-                {
-                    _reader.Read();
-                    throw new InvalidTokenException(_currentPosition, string.Format(UnknownTokenErrorMessageFormat, character));
-                }
-
-                if (!char.IsLetterOrDigit(character) && character != UnderscoreChar)
+                if (!char.IsLetterOrDigit(character.Value) && character != UnderscoreChar)
                 {
                     break;
                 }
 
-                character = _reader.Read().Value;
+                stringBuilder.Append(character);
+
+                if (character.Value.HasDiacritic())
+                {
+                    _reader.Read();
+
+                    return new LexicalItem()
+                    {
+                        Error = new InvalidTokenError(_currentPosition, string.Format(UnknownTokenErrorMessageFormat, character))
+                    };
+                }
+
+                _reader.Read();
             }
 
             id = stringBuilder.ToString();
@@ -339,10 +361,10 @@ namespace LPD.Compiler.Lexical
             }
 
             token.Symbol = symbol;
-            return token;
+            return BuildLexicalItem(token, null);
         }
 
-        private Token HandleDigit()
+        private LexicalItem HandleDigit()
         {
             StringBuilder stringBuilder = new StringBuilder();
             char? character = _reader.Current;
@@ -354,8 +376,8 @@ namespace LPD.Compiler.Lexical
                 stringBuilder.Append(character);
                 _reader.Read();
             }
-
-            return new Token() { Lexeme = stringBuilder.ToString(), Symbol = Symbols.SNumero };
+            
+            return BuildLexicalItem(new Token() { Lexeme = stringBuilder.ToString(), Symbol = Symbols.SNumero }, null);
         }
 
         private void ConsumeComment()
@@ -384,6 +406,16 @@ namespace LPD.Compiler.Lexical
 
                 _reader.Read();
             }
+        }
+
+        private LexicalItem BuildLexicalItem(Token token, InvalidTokenError error)
+        {
+            if (error == null)
+            {
+                return new LexicalItem() { Token = token, Error = null };
+            }
+
+            return new LexicalItem() { Error = error };
         }
 
         private void OnCharRead(object sender, EventArgs e)

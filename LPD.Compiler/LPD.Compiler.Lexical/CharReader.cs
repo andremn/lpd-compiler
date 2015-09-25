@@ -9,9 +9,11 @@ namespace LPD.Compiler.Lexical
         private BinaryReader _reader;
         private char? _current;
 
-        public CharReader(Stream stream, Encoding encoding)
+        public CharReader(string filePath, Encoding encoding)
         {
-            _reader = new BinaryReader(stream, encoding, true);
+            FileStream fileStream = File.OpenRead(filePath);
+
+            _reader = new BinaryReader(fileStream, encoding, false);
         }
 
         public char? Current
@@ -23,7 +25,7 @@ namespace LPD.Compiler.Lexical
 
         public char? Read()
         {
-            if (_reader.PeekChar() < 0)
+            if (!Peek().HasValue)
             {
                 return null;
             }
@@ -40,6 +42,11 @@ namespace LPD.Compiler.Lexical
 
         public char? Peek()
         {
+            if (_reader.PeekChar() < 0)
+            {
+                return null;
+            }
+
             return (char)_reader.PeekChar();
         }
 
