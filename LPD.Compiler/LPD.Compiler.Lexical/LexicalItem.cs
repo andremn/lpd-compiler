@@ -1,9 +1,11 @@
-﻿namespace LPD.Compiler.Lexical
+﻿using LPD.Compiler.Shared;
+
+namespace LPD.Compiler.Lexical
 {
     public class LexicalItem
     {
         public Token Token { get; set; }
         
-        public InvalidTokenError Error { get; set; }
+        public CompileError Error { get; set; }
     }
 }

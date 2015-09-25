@@ -1,4 +1,5 @@
 ﻿using LPD.Compiler.Lexical;
+using LPD.Compiler.Shared;
 
 namespace LPD.Compiler.ViewModel
 {

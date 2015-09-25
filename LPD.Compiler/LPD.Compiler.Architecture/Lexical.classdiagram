@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<logicalClassDesignerModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm4="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm5="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/ModelStore" dslVersion="1.0.0.0" Id="38b96a82-2336-4016-bce7-60dbd7ffc837" name="Lexical" linkedPackageId="f064a465-7b5c-44ac-a428-7e3ee7a1bff8" xmlns="http://schemas.microsoft.com/dsltools/LogicalClassDesigner">
+<logicalClassDesignerModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm4="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/ModelStore" dslVersion="1.0.0.0" Id="38b96a82-2336-4016-bce7-60dbd7ffc837" name="Lexical" linkedPackageId="f064a465-7b5c-44ac-a428-7e3ee7a1bff8" xmlns="http://schemas.microsoft.com/dsltools/LogicalClassDesigner">
   <packagedElements>
     <logicalClassDesignerModelHasTypes>
       <class Id="581f672d-e09f-440d-bbf0-4b8ce1db5a9e" name="LexicalAnalizer" isAbstract="false" isLeaf="false" isActiveClass="false">
@@ -663,7 +663,7 @@
       </referencedType>
     </packageHasNamedElement>
     <logicalClassDesignerModelHasTypes>
-      <class Id="125ccf55-19a3-44d4-9c8c-f4f474575afb" name="InvalidTokenException" isAbstract="false" isLeaf="false" isActiveClass="false">
+      <class Id="125ccf55-19a3-44d4-9c8c-f4f474575afb" name="CompileError" isAbstract="false" isLeaf="false" isActiveClass="false">
         <elementDefinition Id="25422843-a3e8-4886-b4cf-04eba43dc16e" />
         <targetEnds>
           <association Id="3da50b4b-055d-43b2-9415-5e8e26511be6" isDerived="false" sourceEndRoleName="InvalidTokenException" targetEndRoleName="LexicalAnalizer" isLeaf="false" isAbstract="false">
@@ -724,7 +724,7 @@
         <elementDefinition Id="3258d03d-9d4e-40cb-a4b6-ac717320a6eb" />
         <targetEnds>
           <association Id="9b3ef061-ad45-4467-90f3-79dbd9826123" isDerived="false" sourceEndRoleName="ProgramPosition" targetEndRoleName="InvalidTokenException" isLeaf="false" isAbstract="false">
-            <classMoniker Id="125ccf55-19a3-44d4-9c8c-f4f474575afb" LastKnownName="InvalidTokenException" />
+            <classMoniker Id="125ccf55-19a3-44d4-9c8c-f4f474575afb" LastKnownName="CompileError" />
             <relationshipOwnedElementsInternal>
               <associationHasOwnedEnds>
                 <memberEnd Id="1e2328b3-e048-4c5d-8745-529a36d7b35a" name="ProgramPosition" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">

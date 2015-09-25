@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics;
 
-namespace LPD.Compiler.Lexical
+namespace LPD.Compiler.Shared
 {
 #if DEBUG
     [DebuggerDisplay("{Line, Column}")]

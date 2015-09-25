@@ -1079,7 +1079,7 @@
     <packageHasNamedElement>
       <class
         Id="25422843-a3e8-4886-b4cf-04eba43dc16e"
-        name="InvalidTokenException"
+        name="CompileError"
         isAbstract="false"
         isLeaf="false"
         isActiveClass="false">
@@ -1212,7 +1212,7 @@
             isAbstract="false">
             <classMoniker
               Id="25422843-a3e8-4886-b4cf-04eba43dc16e"
-              LastKnownName="InvalidTokenException"
+              LastKnownName="CompileError"
               LastKnownLocation="LPD.Compiler.Architecture.uml" />
             <relationshipOwnedElementsInternal>
               <associationHasOwnedEnds>
@@ -1574,6 +1574,194 @@
         isAbstract="false"
         isLeaf="false"
         isActiveClass="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="bb6d3e40-66ea-46c9-9732-0cc2155df183"
+        name="CompileError"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <targetEnds>
+          <association
+            Id="af1ec886-a27d-468d-b7ea-45441a107ef8"
+            isDerived="false"
+            sourceEndRoleName="CompileError"
+            targetEndRoleName="AnalisadorSintatico"
+            isLeaf="false"
+            isAbstract="false">
+            <classMoniker
+              Id="27f4769a-853c-4a2a-be11-27bbc7bb33db"
+              LastKnownName="AnalisadorSintatico"
+              LastKnownLocation="LPD.Compiler.Architecture.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="c4b22804-3aeb-462c-a906-fba24eeab17a"
+                  name="CompileError"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false">
+                  <lowerValueInternal>
+                    <literalString
+                      Id="cb88dfe3-269f-496f-9c6f-31f8ae3c2568"
+                      name="Lower"
+                      value="1" />
+                  </lowerValueInternal>
+                  <upperValueInternal>
+                    <literalString
+                      Id="84b87d93-6745-4b35-8919-4118a4f2e42e"
+                      name="Upper"
+                      value="*" />
+                  </upperValueInternal>
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="892b55b8-ecb9-477d-8abf-943ea956137f"
+                  name="AnalisadorSintatico"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+        </targetEnds>
+        <ownedAttributesInternal>
+          <property
+            Id="b499d50e-747c-471e-96a3-765c1cb57055"
+            name="Position"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <classMoniker
+                Id="3258d03d-9d4e-40cb-a4b6-ac717320a6eb"
+                LastKnownName="Position"
+                LastKnownLocation="LPD.Compiler.Architecture.uml" />
+            </type_NamedElement>
+          </property>
+          <property
+            Id="93478fdb-74fa-4e3e-be6e-0358436159d1"
+            name="Message"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <undefinedTypeMoniker
+                Id="6d40bfab-aee5-4831-91e2-286b52eddfcf"
+                LastKnownName="string"
+                LastKnownLocation="LPD.Compiler.Architecture.uml" />
+            </type_NamedElement>
+          </property>
+        </ownedAttributesInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="15dc9b4b-15c0-48a4-a60c-22adf0070144"
+        name="Position"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <targetEnds>
+          <association
+            Id="433235d1-1590-4f30-952b-4c8329f0d4e1"
+            isDerived="false"
+            sourceEndRoleName="Position"
+            targetEndRoleName="CompileError"
+            isLeaf="false"
+            isAbstract="false">
+            <classMoniker
+              Id="bb6d3e40-66ea-46c9-9732-0cc2155df183"
+              LastKnownName="CompileError"
+              LastKnownLocation="LPD.Compiler.Architecture.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="8ad01bf6-f7b7-4ace-ba84-c6d61b761619"
+                  name="Position"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false">
+                  <lowerValueInternal>
+                    <literalString
+                      Id="990eb605-a0f9-4b8c-af93-ddbbc7583bf8"
+                      name="Lower"
+                      value="1" />
+                  </lowerValueInternal>
+                  <upperValueInternal>
+                    <literalString
+                      Id="de5dc8c7-1bbd-4250-8e9a-6293077b5b41"
+                      name="Upper"
+                      value="*" />
+                  </upperValueInternal>
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="5798239d-8f38-4a71-8eab-ac851f1a96b8"
+                  name="CompileError"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+        </targetEnds>
+        <ownedAttributesInternal>
+          <property
+            Id="c9ac46e1-4829-4d64-b09b-909fe9bf5d84"
+            name="Line"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false" />
+          <property
+            Id="50ccd20d-9dec-456a-a22a-134e39951979"
+            name="Column"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false" />
+        </ownedAttributesInternal>
+      </class>
     </packageHasNamedElement>
   </packagedElements>
   <primitiveType

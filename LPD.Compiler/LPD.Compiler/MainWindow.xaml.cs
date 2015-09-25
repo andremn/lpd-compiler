@@ -17,6 +17,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Threading;
 using System.ComponentModel;
 using System.Linq;
+using LPD.Compiler.Shared;
 
 namespace LPD.Compiler
 {
