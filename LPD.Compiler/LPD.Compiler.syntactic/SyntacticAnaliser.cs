@@ -6,6 +6,7 @@ namespace LPD.Compiler.Syntactic
     public class SyntacticAnaliser
     {
         private LexicalAnalizer _lexical;
+        private Token _token;
 
         public CompileError DoAnalysis()
         {
@@ -19,6 +20,24 @@ namespace LPD.Compiler.Syntactic
             }
 
             return null;
+        }
+
+        private bool NextToken()
+        {
+            LexicalItem item = new LexicalItem();
+
+            if (!_lexical.Next(out item))
+            {
+                return false;
+            }
+
+            if (item.Error != null)
+            {
+                throw new SyntacticException(item.Error.Message);
+            }
+
+            _token = item.Token;
+            return true;
         }
 
         private void BlockAnalise()
