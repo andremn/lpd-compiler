@@ -37,8 +37,21 @@ namespace LPD.Compiler.Syntactic
                                 //TODO - Criar excessao
                             }
                         }
+                        else
+                        {
+                            throw new SyntacticException();
+                        }
+                    }
+                    else
+                    {
+                        throw new SyntacticException();
                     }
                 }
+                else
+                {
+                    throw new SyntacticException();
+                }
+
 
             }
             catch (SyntacticException ex)
