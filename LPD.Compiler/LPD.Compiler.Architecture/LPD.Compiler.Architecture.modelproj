@@ -22,12 +22,19 @@
   </PropertyGroup>
   <Import Project="$(VSToolsPath)\ArchitectureTools\Microsoft.VisualStudio.TeamArchitect.ModelingProject.targets" Condition="'$(VSToolsPath)' != ''" />
   <ItemGroup>
-    <Content Include="Sintatico.classdiagram">
+    <Content Include="Compiler.classdiagram">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="Sintatico.classdiagram.layout">
+    <Content Include="Compiler.classdiagram.layout">
       <SubType>Content</SubType>
-      <DependentUpon>Sintatico.classdiagram</DependentUpon>
+      <DependentUpon>Compiler.classdiagram</DependentUpon>
+    </Content>
+    <Content Include="Syntactic.classdiagram">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Syntactic.classdiagram.layout">
+      <SubType>Content</SubType>
+      <DependentUpon>Syntactic.classdiagram</DependentUpon>
     </Content>
     <Folder Include="ModelDefinition\" />
     <Content Include="Lexical.classdiagram">

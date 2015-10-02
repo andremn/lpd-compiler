@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<modelStoreModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm4="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/LogicalClassDesigner"
+<modelStoreModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm4="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm5="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/LogicalClassDesigner"
   dslVersion="1.0.0.0"
   Id="bd7a0be5-ddf7-4fa4-859b-fc160849711d"
   name="LPD.Compiler.Architecture" xmlns="http://schemas.microsoft.com/dsltools/ModelStore">
@@ -21,26 +21,26 @@
     <packageHasNamedElement>
       <class
         Id="7e07092d-12e7-4901-a8ef-122491668e1f"
-        name="LexicalAnalizer"
+        name="LexicalAnalyzer"
         isAbstract="false"
         isLeaf="false"
         isActiveClass="false">
         <targetEnds>
           <association
-            Id="bb9b95a2-64e7-4280-8983-5eb923b1f66a"
+            Id="ee83f1c2-3485-4dcc-a574-6508c1139cf8"
             isDerived="false"
             sourceEndRoleName="LexicalAnalizer"
-            targetEndRoleName="CharReader"
+            targetEndRoleName="Token"
             isLeaf="false"
             isAbstract="false">
             <classMoniker
-              Id="6270b212-4e1a-4c63-8028-2145a7702469"
-              LastKnownName="CharReader"
+              Id="0cdc1b9c-85b9-4a6f-886c-363eb47150a3"
+              LastKnownName="Token"
               LastKnownLocation="LPD.Compiler.Architecture.uml" />
             <relationshipOwnedElementsInternal>
               <associationHasOwnedEnds>
                 <memberEnd
-                  Id="7bb8f0e2-df51-4a5b-9631-c7fd9463611c"
+                  Id="b88560f6-ccda-4fb5-8c32-3d07112aecbd"
                   name="LexicalAnalizer"
                   isLeaf="false"
                   isStatic="false"
@@ -53,7 +53,176 @@
               </associationHasOwnedEnds>
               <associationHasOwnedEnds>
                 <memberEnd
-                  Id="8671ffd8-ed41-42d6-b7d6-bcd755007a03"
+                  Id="57be25d0-f67f-4406-9c73-337ef049cfb3"
+                  name="Token"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false">
+                  <lowerValueInternal>
+                    <literalString
+                      Id="744216c3-029c-46e2-8d22-e73b9f198f27"
+                      name="Lower"
+                      value="1" />
+                  </lowerValueInternal>
+                  <upperValueInternal>
+                    <literalString
+                      Id="73e88360-122e-492c-8462-e87df1515349"
+                      name="Upper"
+                      value="*" />
+                  </upperValueInternal>
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+          <association
+            Id="1016c14b-8557-49cd-b665-c4affef73d32"
+            isDerived="false"
+            sourceEndRoleName="LexicalAnalyzer"
+            targetEndRoleName="Symbols"
+            isLeaf="false"
+            isAbstract="false">
+            <enumerationMoniker
+              Id="62bfef8c-e0a2-4850-a0f9-719c19484a1b"
+              LastKnownName="Symbols"
+              LastKnownLocation="LPD.Compiler.Architecture.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="fedc15c3-fc9b-4699-9568-40b84f22ae49"
+                  name="LexicalAnalyzer"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="5f351b34-c14b-4e56-a3b5-d8cac9c15bd7"
+                  name="Symbols"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+          <association
+            Id="f81fb009-2da6-4d01-8b50-64a8dc451b26"
+            isDerived="false"
+            sourceEndRoleName="LexicalAnalyzer"
+            targetEndRoleName="CompileError"
+            isLeaf="false"
+            isAbstract="false">
+            <classMoniker
+              Id="25422843-a3e8-4886-b4cf-04eba43dc16e"
+              LastKnownName="CompileError"
+              LastKnownLocation="LPD.Compiler.Architecture.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="4a0c8fe4-f692-4900-82f8-997a33efbc5c"
+                  name="LexicalAnalyzer"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="5af54c67-fd59-46a2-91fa-21edbfeb746a"
+                  name="CompileError"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+          <association
+            Id="6b138e46-33a7-41f5-8003-2655f448e072"
+            isDerived="false"
+            sourceEndRoleName="LexicalAnalyzer"
+            targetEndRoleName="Position"
+            isLeaf="false"
+            isAbstract="false">
+            <classMoniker
+              Id="3258d03d-9d4e-40cb-a4b6-ac717320a6eb"
+              LastKnownName="Position"
+              LastKnownLocation="LPD.Compiler.Architecture.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="e85c2a4d-bf7f-4a33-95b8-ea05d97d354c"
+                  name="LexicalAnalyzer"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="0b2d1835-1a46-47b2-91c0-b11491b39b9b"
+                  name="Position"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+          <association
+            Id="66a46ec4-4302-4fd0-8a5d-4a6b7fce4e9f"
+            isDerived="false"
+            sourceEndRoleName="LexicalAnalyzer"
+            targetEndRoleName="CharReader"
+            isLeaf="false"
+            isAbstract="false">
+            <classMoniker
+              Id="6270b212-4e1a-4c63-8028-2145a7702469"
+              LastKnownName="CharReader"
+              LastKnownLocation="LPD.Compiler.Architecture.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="eae7095f-7de7-451a-8621-343696947fa7"
+                  name="LexicalAnalyzer"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="6eeeab99-792a-411e-89be-4723edd1dd67"
                   name="CharReader"
                   isLeaf="false"
                   isStatic="false"
@@ -67,30 +236,6 @@
           </association>
         </targetEnds>
         <ownedOperationsInternal>
-          <operation
-            Id="d4362555-2129-4c48-b7ef-ac7b51fe297e"
-            name="GetTokens"
-            isLeaf="false"
-            isStatic="false"
-            isAbstract="false"
-            concurrency="Sequential"
-            isQuery="false">
-            <ownedParameters>
-              <operationHasOwnedParameters>
-                <parameter
-                  Id="c49694e5-47db-4968-a2fb-03b5ea3e63ff"
-                  direction="Return"
-                  isUnique="false">
-                  <type_NamedElement>
-                    <classMoniker
-                      Id="b50ff4d7-4749-4195-881e-bc33476b2043"
-                      LastKnownName="TokenPositionCollection"
-                      LastKnownLocation="LPD.Compiler.Architecture.uml" />
-                  </type_NamedElement>
-                </parameter>
-              </operationHasOwnedParameters>
-            </ownedParameters>
-          </operation>
           <operation
             Id="e41e317f-2517-4c9b-b00b-b5ac0d1b085a"
             name="HandleAtribution"
@@ -219,7 +364,6 @@
           <operation
             Id="a3a68dde-9ee5-4cb8-aa8d-97b34e4bb0ee"
             name="GetToken"
-            visibility="Private"
             isLeaf="false"
             isStatic="false"
             isAbstract="false"
@@ -276,60 +420,6 @@
         isAbstract="false"
         isLeaf="false"
         isActiveClass="false">
-        <targetEnds>
-          <association
-            Id="7b23fe60-06e4-40b8-8ea3-fde143c85ef8"
-            isDerived="false"
-            sourceEndRoleName="Token"
-            targetEndRoleName="LexicalAnalizer"
-            isLeaf="false"
-            isAbstract="false">
-            <classMoniker
-              Id="7e07092d-12e7-4901-a8ef-122491668e1f"
-              LastKnownName="LexicalAnalizer"
-              LastKnownLocation="LPD.Compiler.Architecture.uml" />
-            <relationshipOwnedElementsInternal>
-              <associationHasOwnedEnds>
-                <memberEnd
-                  Id="80244954-0096-44be-8332-f4204789cda4"
-                  name="Token"
-                  isLeaf="false"
-                  isStatic="false"
-                  isReadOnly="false"
-                  isDerived="false"
-                  isDerivedUnion="false"
-                  aggregation="None"
-                  isComposite="false"
-                  isNavigableOwned="false">
-                  <lowerValueInternal>
-                    <literalString
-                      Id="f4d4d3a7-1fc5-4a15-a8d1-94215538da43"
-                      name="Lower"
-                      value="1" />
-                  </lowerValueInternal>
-                  <upperValueInternal>
-                    <literalString
-                      Id="c188a2bf-ef7a-40c4-89c2-23c728c8eaee"
-                      name="Upper"
-                      value="*" />
-                  </upperValueInternal>
-                </memberEnd>
-              </associationHasOwnedEnds>
-              <associationHasOwnedEnds>
-                <memberEnd
-                  Id="a4e3cbb8-275f-4a56-89d4-e8abc54f5d2f"
-                  name="LexicalAnalizer"
-                  isLeaf="false"
-                  isStatic="false"
-                  isReadOnly="false"
-                  isDerived="false"
-                  isDerivedUnion="false"
-                  aggregation="None"
-                  isComposite="false" />
-              </associationHasOwnedEnds>
-            </relationshipOwnedElementsInternal>
-          </association>
-        </targetEnds>
         <ownedAttributesInternal>
           <property
             Id="33061223-f050-40c1-a3df-5bf32d870139"
@@ -442,7 +532,7 @@
             isAbstract="false">
             <classMoniker
               Id="7e07092d-12e7-4901-a8ef-122491668e1f"
-              LastKnownName="LexicalAnalizer"
+              LastKnownName="LexicalAnalyzer"
               LastKnownLocation="LPD.Compiler.Architecture.uml" />
             <relationshipOwnedElementsInternal>
               <associationHasOwnedEnds>
@@ -641,47 +731,6 @@
         name="Symbols"
         isAbstract="false"
         isLeaf="false">
-        <targetEnds>
-          <association
-            Id="4006ee2b-cce5-4630-9ae4-cebffb7a02e1"
-            isDerived="false"
-            sourceEndRoleName="Symbols"
-            targetEndRoleName="LexicalAnalizer"
-            isLeaf="false"
-            isAbstract="false">
-            <classMoniker
-              Id="7e07092d-12e7-4901-a8ef-122491668e1f"
-              LastKnownName="LexicalAnalizer"
-              LastKnownLocation="LPD.Compiler.Architecture.uml" />
-            <relationshipOwnedElementsInternal>
-              <associationHasOwnedEnds>
-                <memberEnd
-                  Id="518d529d-731c-4747-b0ee-585127733643"
-                  name="Symbols"
-                  isLeaf="false"
-                  isStatic="false"
-                  isReadOnly="false"
-                  isDerived="false"
-                  isDerivedUnion="false"
-                  aggregation="None"
-                  isComposite="false"
-                  isNavigableOwned="false" />
-              </associationHasOwnedEnds>
-              <associationHasOwnedEnds>
-                <memberEnd
-                  Id="d85c67ab-a015-4a02-bc41-1ba1b031a219"
-                  name="LexicalAnalizer"
-                  isLeaf="false"
-                  isStatic="false"
-                  isReadOnly="false"
-                  isDerived="false"
-                  isDerivedUnion="false"
-                  aggregation="None"
-                  isComposite="false" />
-              </associationHasOwnedEnds>
-            </relationshipOwnedElementsInternal>
-          </association>
-        </targetEnds>
         <ownedLiterals>
           <enumerationLiteral
             Id="e16f1ec3-3b0d-43dd-961c-9a3cda2dfaa8"
@@ -1085,21 +1134,21 @@
         isActiveClass="false">
         <targetEnds>
           <association
-            Id="3a2d1c66-2c6c-41fe-8f9f-2649d1961520"
+            Id="8ad613e6-e7d1-4ad6-b5bb-390b7d5a662a"
             isDerived="false"
-            sourceEndRoleName="InvalidTokenException"
-            targetEndRoleName="LexicalAnalizer"
+            sourceEndRoleName="CompileError"
+            targetEndRoleName="Position"
             isLeaf="false"
             isAbstract="false">
             <classMoniker
-              Id="7e07092d-12e7-4901-a8ef-122491668e1f"
-              LastKnownName="LexicalAnalizer"
+              Id="3258d03d-9d4e-40cb-a4b6-ac717320a6eb"
+              LastKnownName="Position"
               LastKnownLocation="LPD.Compiler.Architecture.uml" />
             <relationshipOwnedElementsInternal>
               <associationHasOwnedEnds>
                 <memberEnd
-                  Id="f26a4b72-5055-49ef-ada1-f1a5da8d301b"
-                  name="InvalidTokenException"
+                  Id="7912d42f-8f0a-4ab8-9f0f-818ac59d0b88"
+                  name="CompileError"
                   isLeaf="false"
                   isStatic="false"
                   isReadOnly="false"
@@ -1110,42 +1159,29 @@
                   isNavigableOwned="false">
                   <lowerValueInternal>
                     <literalString
-                      Id="6f579291-f649-4d3f-861f-e4ac00aea7d9"
+                      Id="3877bea7-1934-4c07-8383-0e616cf54767"
                       name="Lower"
                       value="1" />
                   </lowerValueInternal>
                   <upperValueInternal>
                     <literalString
-                      Id="82fff609-1cc1-4a85-ac1d-c8e11e3ae1d0"
+                      Id="62f76c8f-1a1b-4b15-902e-821c4536c6c0"
                       name="Upper"
-                      value="*" />
+                      value="1" />
                   </upperValueInternal>
                 </memberEnd>
               </associationHasOwnedEnds>
               <associationHasOwnedEnds>
                 <memberEnd
-                  Id="51ef41d4-160b-4acd-970a-970d23638906"
-                  name="LexicalAnalizer"
+                  Id="fb328294-2f5a-49fd-964b-ce3480e96021"
+                  name="Position"
                   isLeaf="false"
                   isStatic="false"
                   isReadOnly="false"
                   isDerived="false"
                   isDerivedUnion="false"
                   aggregation="None"
-                  isComposite="false">
-                  <lowerValueInternal>
-                    <literalString
-                      Id="70a54d73-3791-4b0e-a692-7acfa76e2a18"
-                      name="Lower"
-                      value="1" />
-                  </lowerValueInternal>
-                  <upperValueInternal>
-                    <literalString
-                      Id="b4e3eb8c-6ff7-4bcb-83c8-33019daa3e05"
-                      name="Upper"
-                      value="1" />
-                  </upperValueInternal>
-                </memberEnd>
+                  isComposite="false" />
               </associationHasOwnedEnds>
             </relationshipOwnedElementsInternal>
           </association>
@@ -1202,99 +1238,6 @@
         isAbstract="false"
         isLeaf="false"
         isActiveClass="false">
-        <targetEnds>
-          <association
-            Id="fe77bde1-e30a-4676-bc2a-e4deb5fd0e20"
-            isDerived="false"
-            sourceEndRoleName="ProgramPosition"
-            targetEndRoleName="InvalidTokenException"
-            isLeaf="false"
-            isAbstract="false">
-            <classMoniker
-              Id="25422843-a3e8-4886-b4cf-04eba43dc16e"
-              LastKnownName="CompileError"
-              LastKnownLocation="LPD.Compiler.Architecture.uml" />
-            <relationshipOwnedElementsInternal>
-              <associationHasOwnedEnds>
-                <memberEnd
-                  Id="d8710921-5ec5-4be5-a481-bb5a9d5ae31f"
-                  name="ProgramPosition"
-                  isLeaf="false"
-                  isStatic="false"
-                  isReadOnly="false"
-                  isDerived="false"
-                  isDerivedUnion="false"
-                  aggregation="None"
-                  isComposite="false"
-                  isNavigableOwned="false">
-                  <lowerValueInternal>
-                    <literalString
-                      Id="2943dee6-b457-489f-a3da-de84249ed4cf"
-                      name="Lower"
-                      value="1" />
-                  </lowerValueInternal>
-                  <upperValueInternal>
-                    <literalString
-                      Id="a79883c7-2f61-4285-8c84-75700d809ed1"
-                      name="Upper"
-                      value="*" />
-                  </upperValueInternal>
-                </memberEnd>
-              </associationHasOwnedEnds>
-              <associationHasOwnedEnds>
-                <memberEnd
-                  Id="3f7d8397-c8b7-4d86-8175-c112888e59bd"
-                  name="InvalidTokenException"
-                  isLeaf="false"
-                  isStatic="false"
-                  isReadOnly="false"
-                  isDerived="false"
-                  isDerivedUnion="false"
-                  aggregation="None"
-                  isComposite="false" />
-              </associationHasOwnedEnds>
-            </relationshipOwnedElementsInternal>
-          </association>
-          <association
-            Id="2d356b2f-1b41-4f9a-8b30-ad95b6d03436"
-            isDerived="false"
-            sourceEndRoleName="Position"
-            targetEndRoleName="LexicalAnalizer"
-            isLeaf="false"
-            isAbstract="false">
-            <classMoniker
-              Id="7e07092d-12e7-4901-a8ef-122491668e1f"
-              LastKnownName="LexicalAnalizer"
-              LastKnownLocation="LPD.Compiler.Architecture.uml" />
-            <relationshipOwnedElementsInternal>
-              <associationHasOwnedEnds>
-                <memberEnd
-                  Id="85271784-6a03-4bc3-ae57-1e49bd0b65c3"
-                  name="Position"
-                  isLeaf="false"
-                  isStatic="false"
-                  isReadOnly="false"
-                  isDerived="false"
-                  isDerivedUnion="false"
-                  aggregation="None"
-                  isComposite="false"
-                  isNavigableOwned="false" />
-              </associationHasOwnedEnds>
-              <associationHasOwnedEnds>
-                <memberEnd
-                  Id="6af5817c-801b-4a74-b2bc-73f95f9e3719"
-                  name="LexicalAnalizer"
-                  isLeaf="false"
-                  isStatic="false"
-                  isReadOnly="false"
-                  isDerived="false"
-                  isDerivedUnion="false"
-                  aggregation="None"
-                  isComposite="false" />
-              </associationHasOwnedEnds>
-            </relationshipOwnedElementsInternal>
-          </association>
-        </targetEnds>
         <ownedAttributesInternal>
           <property
             Id="770d43d0-1a5a-4511-8e51-0e2b2c5cb760"
@@ -1371,14 +1314,284 @@
     <packageHasNamedElement>
       <class
         Id="27f4769a-853c-4a2a-be11-27bbc7bb33db"
-        name="AnalisadorSintatico"
+        name="SyntacticAnalyzer"
         isAbstract="false"
         isLeaf="false"
         isActiveClass="false">
+        <targetEnds>
+          <association
+            Id="3adcda18-a65a-4f2c-a7cc-eae209a1eb42"
+            isDerived="false"
+            sourceEndRoleName="SyntacticAnalyzer"
+            targetEndRoleName="LexicalAnalyzer"
+            isLeaf="false"
+            isAbstract="false">
+            <classMoniker
+              Id="779df6bf-7cbe-4bbf-b579-8e9cdf8022dd"
+              LastKnownName="LexicalAnalyzer"
+              LastKnownLocation="LPD.Compiler.Architecture.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="7f198d1a-a2b8-43d0-9823-ea999d277029"
+                  name="SyntacticAnalyzer"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="c1e66ace-8a70-4ca9-800c-de7be90e07b8"
+                  name="LexicalAnalyzer"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+          <association
+            Id="25be188d-bb27-4639-96ce-fce71bf92e0d"
+            isDerived="false"
+            sourceEndRoleName="SyntacticAnalyzer"
+            targetEndRoleName="SyntacticException"
+            isLeaf="false"
+            isAbstract="false">
+            <classMoniker
+              Id="f3a48a7c-c8ee-4c81-99e0-82fd604e7c18"
+              LastKnownName="SyntacticException"
+              LastKnownLocation="LPD.Compiler.Architecture.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="2e036996-cc8a-4605-837e-078024fdc48c"
+                  name="SyntacticAnalyzer"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false">
+                  <lowerValueInternal>
+                    <literalString
+                      Id="816d98f4-152d-4f05-9d57-188fe62384de"
+                      name="Lower"
+                      value="1" />
+                  </lowerValueInternal>
+                  <upperValueInternal>
+                    <literalString
+                      Id="885132a3-86fc-4c5c-8304-e677e45e955b"
+                      name="Upper"
+                      value="*" />
+                  </upperValueInternal>
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="71a37eab-ee6c-4b34-9bd4-ea2987b7557a"
+                  name="SyntacticException"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false">
+                  <lowerValueInternal>
+                    <literalString
+                      Id="ce0852ff-417c-4ca0-bdf2-693ce7c3a22b"
+                      name="Lower"
+                      value="1" />
+                  </lowerValueInternal>
+                  <upperValueInternal>
+                    <literalString
+                      Id="52dac13d-a29c-4e92-b169-817217425538"
+                      name="Upper"
+                      value="*" />
+                  </upperValueInternal>
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+          <association
+            Id="f890d2f9-b562-444b-a670-1973636e339a"
+            isDerived="false"
+            sourceEndRoleName="SyntacticAnalyzer"
+            targetEndRoleName="Position"
+            isLeaf="false"
+            isAbstract="false">
+            <classMoniker
+              Id="91fb5434-9602-4cac-85e9-21b14e3815d1"
+              LastKnownName="Position"
+              LastKnownLocation="LPD.Compiler.Architecture.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="0083ec81-f01b-453b-baf4-90b9aa8744e1"
+                  name="SyntacticAnalyzer"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="ba17aa3e-f819-4e80-806c-e49a1c9369ac"
+                  name="Position"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false">
+                  <lowerValueInternal>
+                    <literalString
+                      Id="d27fc1c0-688a-4b32-8025-aa335c6e5902"
+                      name="Lower"
+                      value="1" />
+                  </lowerValueInternal>
+                  <upperValueInternal>
+                    <literalString
+                      Id="fb0adb25-4d5b-49a6-bcda-c2042ed7c9e7"
+                      name="Upper"
+                      value="*" />
+                  </upperValueInternal>
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+          <association
+            Id="234548a7-fed6-4105-9e92-f157dde3725f"
+            isDerived="false"
+            sourceEndRoleName="SyntacticAnalyzer"
+            targetEndRoleName="Token"
+            isLeaf="false"
+            isAbstract="false">
+            <classMoniker
+              Id="80cb0924-962f-4a2c-b891-77a3dc8736d1"
+              LastKnownName="Token"
+              LastKnownLocation="LPD.Compiler.Architecture.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="cea610de-36d7-44f4-8837-da1c782e78c8"
+                  name="SyntacticAnalyzer"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="bf58088b-d8f2-44b8-b738-c8c58a2a7631"
+                  name="Token"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false">
+                  <lowerValueInternal>
+                    <literalString
+                      Id="250eea2a-3495-4882-aa53-ca46799db914"
+                      name="Lower"
+                      value="1" />
+                  </lowerValueInternal>
+                  <upperValueInternal>
+                    <literalString
+                      Id="3bedcc12-5f13-4fd4-8e0b-8d9168c9e659"
+                      name="Upper"
+                      value="*" />
+                  </upperValueInternal>
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+          <association
+            Id="1f5c8b5c-bb78-4563-8eee-d1f4520377f4"
+            isDerived="false"
+            sourceEndRoleName="SyntacticAnalyzer"
+            targetEndRoleName="CompileError"
+            isLeaf="false"
+            isAbstract="false">
+            <classMoniker
+              Id="be286602-e288-468a-b89e-f6117d8e19bc"
+              LastKnownName="CompileError"
+              LastKnownLocation="LPD.Compiler.Architecture.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="e392b09b-2788-4b28-b53d-f350b53863cf"
+                  name="SyntacticAnalyzer"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="74038c6f-9322-491c-ad64-accb537eb1fe"
+                  name="CompileError"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+        </targetEnds>
+        <ownedAttributesInternal>
+          <property
+            Id="22abdcd7-83b8-4617-b374-4b65c7896f74"
+            name="lexical"
+            visibility="Private"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <classMoniker
+                Id="7e07092d-12e7-4901-a8ef-122491668e1f"
+                LastKnownName="LexicalAnalyzer"
+                LastKnownLocation="LPD.Compiler.Architecture.uml" />
+            </type_NamedElement>
+          </property>
+        </ownedAttributesInternal>
         <ownedOperationsInternal>
           <operation
             Id="a5a23821-36c7-4ddb-b5eb-26a0eaf80e29"
-            name="Analisa"
+            name="Analyze"
             isLeaf="false"
             isStatic="false"
             isAbstract="false"
@@ -1386,7 +1599,7 @@
             isQuery="false" />
           <operation
             Id="a1c694c1-8cf1-4577-853a-f0824b0fdfdc"
-            name="AnalisaBloco"
+            name="AnalyzeBlock"
             visibility="Private"
             isLeaf="false"
             isStatic="false"
@@ -1395,7 +1608,7 @@
             isQuery="false" />
           <operation
             Id="e8464e70-756d-4204-8eb2-c1bada9426f5"
-            name="AnalisaVariaveis"
+            name="AnalyzeVariables"
             visibility="Private"
             isLeaf="false"
             isStatic="false"
@@ -1404,7 +1617,7 @@
             isQuery="false" />
           <operation
             Id="cb8ea2c4-ee1d-488d-8e32-de77b86fdd65"
-            name="AnalisaSubrotinas"
+            name="AnalyzeSubroutine"
             visibility="Private"
             isLeaf="false"
             isStatic="false"
@@ -1413,7 +1626,7 @@
             isQuery="false" />
           <operation
             Id="08d104e3-350f-400f-b316-5dae2f8c94d1"
-            name="AnalisaComandos"
+            name="AnalyzeCommands"
             visibility="Private"
             isLeaf="false"
             isStatic="false"
@@ -1422,7 +1635,7 @@
             isQuery="false" />
           <operation
             Id="5db99b72-80b0-456f-8ab9-886bba189c1c"
-            name="AnalisaTipo"
+            name="AnalyzeType"
             visibility="Private"
             isLeaf="false"
             isStatic="false"
@@ -1431,7 +1644,7 @@
             isQuery="false" />
           <operation
             Id="4f042508-75c9-454b-92cd-558313e6d09f"
-            name="AnalisaComandoSimples"
+            name="AnalyzeSimpleCommand"
             visibility="Private"
             isLeaf="false"
             isStatic="false"
@@ -1440,7 +1653,7 @@
             isQuery="false" />
           <operation
             Id="086ff2a0-d76e-465c-8b61-99095d4eae9e"
-            name="AnalisaAtribChprocedimento"
+            name="AnalyzeAtrProcCall"
             visibility="Private"
             isLeaf="false"
             isStatic="false"
@@ -1449,7 +1662,7 @@
             isQuery="false" />
           <operation
             Id="7ec4b894-7fdd-4efe-8f01-0b30145ec82d"
-            name="AnalisaAtribuicao"
+            name="AnalyzeAtribution"
             visibility="Private"
             isLeaf="false"
             isStatic="false"
@@ -1458,7 +1671,7 @@
             isQuery="false" />
           <operation
             Id="43ba77ca-1d85-4877-9685-fc618844fdf7"
-            name="AnalisaChamadaProcedimento"
+            name="AnalyzeProcCall"
             visibility="Private"
             isLeaf="false"
             isStatic="false"
@@ -1467,7 +1680,7 @@
             isQuery="false" />
           <operation
             Id="2b7372ce-21d1-409e-a2a4-c096e8680868"
-            name="AnalisaLeia"
+            name="AnalyzeRead"
             visibility="Private"
             isLeaf="false"
             isStatic="false"
@@ -1476,7 +1689,7 @@
             isQuery="false" />
           <operation
             Id="2933adfe-b588-4547-8e37-659b1c64c766"
-            name="AnalisaEscreva"
+            name="AnalyzePrint"
             visibility="Private"
             isLeaf="false"
             isStatic="false"
@@ -1485,7 +1698,7 @@
             isQuery="false" />
           <operation
             Id="e269373f-68c4-4866-83d2-507b07be0cd8"
-            name="AnalisaEnquanto"
+            name="AnalyzeWhile"
             visibility="Private"
             isLeaf="false"
             isStatic="false"
@@ -1494,7 +1707,7 @@
             isQuery="false" />
           <operation
             Id="7b32ab32-2816-41e9-bee3-9439c504b9cf"
-            name="AnalisaSe"
+            name="AnalyzeIf"
             visibility="Private"
             isLeaf="false"
             isStatic="false"
@@ -1503,7 +1716,7 @@
             isQuery="false" />
           <operation
             Id="efbde8ca-28c0-4376-a884-ffd970d38113"
-            name="AnalisaDeclaracaoProcedimento"
+            name="AnalyzeProcDeclaration"
             visibility="Private"
             isLeaf="false"
             isStatic="false"
@@ -1512,7 +1725,7 @@
             isQuery="false" />
           <operation
             Id="75c2402a-fdea-40a8-81d7-0a324a77b398"
-            name="AnalisaDeclaracaoFuncao"
+            name="AnalyzeFuncDeclaration"
             visibility="Private"
             isLeaf="false"
             isStatic="false"
@@ -1521,7 +1734,7 @@
             isQuery="false" />
           <operation
             Id="21b0e4f2-8942-499c-bab5-10e3edd2ba5c"
-            name="AnalisaExpressao"
+            name="AnalyzeExpression"
             visibility="Private"
             isLeaf="false"
             isStatic="false"
@@ -1530,7 +1743,7 @@
             isQuery="false" />
           <operation
             Id="670e514a-1b4f-4ad9-aedc-a3bb7fba17a6"
-            name="AnalisaExpressaoSimples"
+            name="AnalyzeSimpleExpression"
             visibility="Private"
             isLeaf="false"
             isStatic="false"
@@ -1539,7 +1752,7 @@
             isQuery="false" />
           <operation
             Id="761baa3c-aac5-4d42-845e-8d247803a2c9"
-            name="AnalisaTermo"
+            name="AnalyzeTerm"
             visibility="Private"
             isLeaf="false"
             isStatic="false"
@@ -1548,7 +1761,7 @@
             isQuery="false" />
           <operation
             Id="c6016453-7aff-486c-be33-390d417a60dd"
-            name="AnalisaFator"
+            name="AnalyzeFactor"
             visibility="Private"
             isLeaf="false"
             isStatic="false"
@@ -1557,7 +1770,7 @@
             isQuery="false" />
           <operation
             Id="cc20fbea-ad97-41de-a737-3febfee47c99"
-            name="AnalisaChamadaFuncao"
+            name="AnalyzeFuncCall"
             visibility="Private"
             isLeaf="false"
             isStatic="false"
@@ -1592,7 +1805,7 @@
             isAbstract="false">
             <classMoniker
               Id="27f4769a-853c-4a2a-be11-27bbc7bb33db"
-              LastKnownName="AnalisadorSintatico"
+              LastKnownName="SyntacticAnalyzer"
               LastKnownLocation="LPD.Compiler.Architecture.uml" />
             <relationshipOwnedElementsInternal>
               <associationHasOwnedEnds>
@@ -1761,6 +1974,3612 @@
             aggregation="None"
             isComposite="false" />
         </ownedAttributesInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="f079bbf4-8d86-4cd5-bf05-08f2c15c9947"
+        name="LexicalAnalizer"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <ownedOperationsInternal>
+          <operation
+            Id="3aec7f9c-060e-4f41-848c-096c962ec460"
+            name="GetTokens"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="ce304bc6-853a-4cae-9140-bf8a946a9285"
+                  direction="Return"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <classMoniker
+                      Id="b50ff4d7-4749-4195-881e-bc33476b2043"
+                      LastKnownName="TokenPositionCollection"
+                      LastKnownLocation="LPD.Compiler.Architecture.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation
+            Id="69a5f877-173b-4bcf-8438-ec90d096c266"
+            name="HandleAtribution"
+            visibility="Private"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="3d322b1c-56b2-47fa-b676-d5eef21ac966"
+                  direction="Return"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <classMoniker
+                      Id="0cdc1b9c-85b9-4a6f-886c-363eb47150a3"
+                      LastKnownName="Token"
+                      LastKnownLocation="LPD.Compiler.Architecture.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation
+            Id="a2407f6c-0571-48f7-a2ac-486ffdc259a2"
+            name="HandleRelationalOperator"
+            visibility="Private"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="2a17bdc1-5ede-486a-933a-f793de760177"
+                  direction="Return"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <classMoniker
+                      Id="0cdc1b9c-85b9-4a6f-886c-363eb47150a3"
+                      LastKnownName="Token"
+                      LastKnownLocation="LPD.Compiler.Architecture.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation
+            Id="13cda432-413a-4ce0-8384-05406b129a44"
+            name="HandleArithmeticOperator"
+            visibility="Private"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="8c311263-9364-439f-85f4-dcec0e778849"
+                  direction="Return"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <classMoniker
+                      Id="0cdc1b9c-85b9-4a6f-886c-363eb47150a3"
+                      LastKnownName="Token"
+                      LastKnownLocation="LPD.Compiler.Architecture.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation
+            Id="ce71bcff-db16-4e7c-a3ef-1db6c45ad6e0"
+            name="HandleKeyWord"
+            visibility="Private"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="f8d6e0cc-2720-4a31-a4a3-36aa37c6f8fc"
+                  direction="Return"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <classMoniker
+                      Id="0cdc1b9c-85b9-4a6f-886c-363eb47150a3"
+                      LastKnownName="Token"
+                      LastKnownLocation="LPD.Compiler.Architecture.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation
+            Id="52aa86b7-400b-4734-aae8-7b203389a535"
+            name="HandleDigit"
+            visibility="Private"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="687b783d-7b37-4381-940d-6c8d8cc342a9"
+                  direction="Return"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <classMoniker
+                      Id="0cdc1b9c-85b9-4a6f-886c-363eb47150a3"
+                      LastKnownName="Token"
+                      LastKnownLocation="LPD.Compiler.Architecture.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation
+            Id="3b7536b0-78e9-4bfe-a3c5-754459984600"
+            name="GetToken"
+            visibility="Private"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="1dca0133-a4b8-412f-a822-46ff81fd7486"
+                  direction="Return"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <classMoniker
+                      Id="0cdc1b9c-85b9-4a6f-886c-363eb47150a3"
+                      LastKnownName="Token"
+                      LastKnownLocation="LPD.Compiler.Architecture.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation
+            Id="c3571840-1cfb-4eb7-b82d-ae6dd7e5c39a"
+            name="HandlePontuation"
+            visibility="Private"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="b8200e21-5e01-41e7-9fc3-dfac47737d1a"
+                  direction="Return"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <classMoniker
+                      Id="0cdc1b9c-85b9-4a6f-886c-363eb47150a3"
+                      LastKnownName="Token"
+                      LastKnownLocation="LPD.Compiler.Architecture.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+        </ownedOperationsInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="84a08935-f8c4-48f6-ad2f-c757d1f12568"
+        name="SyntacticAnalyzer"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <ownedAttributesInternal>
+          <property
+            Id="694285e3-2826-45ba-b205-1c2dc65d2da1"
+            name="Lexical"
+            visibility="Private"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <undefinedTypeMoniker
+                Id="e3bd8e28-d028-4fc4-9ba7-bbf9232c87f5"
+                LastKnownName="LexicalAnalyzer"
+                LastKnownLocation="LPD.Compiler.Architecture.uml" />
+            </type_NamedElement>
+          </property>
+        </ownedAttributesInternal>
+        <ownedOperationsInternal>
+          <operation
+            Id="305487e9-e505-4c9e-ba0b-1dfe5f39b687"
+            name="DoAnalysis"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false" />
+          <operation
+            Id="539c7dcc-ac8a-4d97-8af4-0d4a50bdad27"
+            name="AnalyzeBlock"
+            visibility="Private"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false" />
+          <operation
+            Id="422d5f0c-b606-406b-b25f-06cea8152130"
+            name="AnalyzeVariables"
+            visibility="Private"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false" />
+          <operation
+            Id="aa5e1068-62d6-4623-819e-378bb537e625"
+            name="AnalyzeSubroutine"
+            visibility="Private"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false" />
+          <operation
+            Id="b88de815-7c80-4d98-83a3-8e510a6371a2"
+            name="AnalyzeCommands"
+            visibility="Private"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false" />
+          <operation
+            Id="d732a8c5-130b-4f8f-ae57-5413735b5643"
+            name="AnalyzeType"
+            visibility="Private"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false" />
+          <operation
+            Id="1e37127c-2072-47e4-9468-b331a803f970"
+            name="AnalyzeSimpleCommand"
+            visibility="Private"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false" />
+          <operation
+            Id="79271936-8676-4720-abbe-45c05176528b"
+            name="AnalyzeAtrProcCall"
+            visibility="Private"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false" />
+          <operation
+            Id="28774c3c-4c12-462b-b259-4b19fc23a9fe"
+            name="AnalyzeAtribution"
+            visibility="Private"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false" />
+          <operation
+            Id="5f4b4472-20be-4b6a-bf38-fdd4007aab6b"
+            name="AnalyzeProcCall"
+            visibility="Private"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false" />
+          <operation
+            Id="1e7aac34-e79c-4fd7-b63e-d9df01e8eff8"
+            name="AnalyzeRead"
+            visibility="Private"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false" />
+          <operation
+            Id="ad4b8129-125a-4afa-986a-289a58d5eec6"
+            name="AnalyzePrint"
+            visibility="Private"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false" />
+          <operation
+            Id="53f50118-3c2b-4d9a-8174-8a59a4367951"
+            name="AnalyzeWhile"
+            visibility="Private"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false" />
+          <operation
+            Id="d009f517-e609-4f7c-a2fc-7548cb4bb5bf"
+            name="AnalyzeIf"
+            visibility="Private"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false" />
+          <operation
+            Id="cb1bd5a2-6de1-4a7f-b71a-7623288fab02"
+            name="AnalyzeProcDeclaration"
+            visibility="Private"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false" />
+          <operation
+            Id="f4bb5cbe-2dd7-4353-9bbb-8d2534e0f02d"
+            name="AnalyzeFuncDeclaration"
+            visibility="Private"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false" />
+          <operation
+            Id="e4047025-72a1-4901-93a7-df1278403042"
+            name="AnalyzeExpression"
+            visibility="Private"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false" />
+          <operation
+            Id="666cbcb0-04d7-456a-be14-c347d2cd4b43"
+            name="AnalyzeSimpleExpression"
+            visibility="Private"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false" />
+          <operation
+            Id="6a95582c-b635-4de7-bb62-5835e3e68118"
+            name="AnalyzeTerm"
+            visibility="Private"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false" />
+          <operation
+            Id="000ccf45-3093-4aae-9390-fb1b543b1ac4"
+            name="AnalyzeFactor"
+            visibility="Private"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false" />
+          <operation
+            Id="ee8ce50f-cd2d-4480-a970-dfdc677aec1e"
+            name="AnalyzeFuncCall"
+            visibility="Private"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false" />
+        </ownedOperationsInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <undefinedType
+        Id="e3bd8e28-d028-4fc4-9ba7-bbf9232c87f5"
+        name="LexicalAnalyzer" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="80cb0924-962f-4a2c-b891-77a3dc8736d1"
+        name="Token"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <ownedAttributesInternal>
+          <property
+            Id="d1ea60be-14f9-48fa-86b1-a4a31e55e051"
+            name="Symbol"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <undefinedTypeMoniker
+                Id="58d7ebe8-9e23-4ca9-a61a-3d242f2759b9"
+                LastKnownName="Symbols"
+                LastKnownLocation="LPD.Compiler.Architecture.uml" />
+            </type_NamedElement>
+          </property>
+          <property
+            Id="8b0309bc-4eeb-4b5d-a045-07849aea351a"
+            name="Lexeme"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <undefinedTypeMoniker
+                Id="6d40bfab-aee5-4831-91e2-286b52eddfcf"
+                LastKnownName="string"
+                LastKnownLocation="LPD.Compiler.Architecture.uml" />
+            </type_NamedElement>
+          </property>
+        </ownedAttributesInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="91fb5434-9602-4cac-85e9-21b14e3815d1"
+        name="Position"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <targetEnds>
+          <association
+            Id="a0f9c1b4-616c-4d8f-85fe-aa68bc9cde0f"
+            isDerived="false"
+            sourceEndRoleName="Position"
+            targetEndRoleName="InvalidTokenException"
+            isLeaf="false"
+            isAbstract="false">
+            <classMoniker
+              Id="be286602-e288-468a-b89e-f6117d8e19bc"
+              LastKnownName="CompileError"
+              LastKnownLocation="LPD.Compiler.Architecture.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="ebaa38ef-cedd-49b8-83fa-447206ce4f13"
+                  name="Position"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false">
+                  <lowerValueInternal>
+                    <literalString
+                      Id="b0c0fcc0-7bfb-48ff-8342-b0a2a84c0772"
+                      name="Lower"
+                      value="1" />
+                  </lowerValueInternal>
+                  <upperValueInternal>
+                    <literalString
+                      Id="bf83b62c-107a-4cdf-8209-e54990db92a3"
+                      name="Upper"
+                      value="*" />
+                  </upperValueInternal>
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="fc6f6b1c-abc7-4e5e-a9f9-94e75f330e00"
+                  name="InvalidTokenException"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+        </targetEnds>
+        <ownedAttributesInternal>
+          <property
+            Id="cc2583cb-cc70-4260-a082-c272e2539715"
+            name="Line"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false" />
+          <property
+            Id="9900e824-0242-40b1-afde-9f7da87f8485"
+            name="Column"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false" />
+        </ownedAttributesInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="be286602-e288-468a-b89e-f6117d8e19bc"
+        name="CompileError"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <ownedAttributesInternal>
+          <property
+            Id="2cd9a932-cf9f-47e8-9a7c-8b64b5bef20f"
+            name="Position"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <classMoniker
+                Id="3258d03d-9d4e-40cb-a4b6-ac717320a6eb"
+                LastKnownName="Position"
+                LastKnownLocation="LPD.Compiler.Architecture.uml" />
+            </type_NamedElement>
+          </property>
+          <property
+            Id="fb67dc55-8ab5-4431-8f51-3dd9a8908880"
+            name="Message"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <undefinedTypeMoniker
+                Id="6d40bfab-aee5-4831-91e2-286b52eddfcf"
+                LastKnownName="string"
+                LastKnownLocation="LPD.Compiler.Architecture.uml" />
+            </type_NamedElement>
+          </property>
+        </ownedAttributesInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="779df6bf-7cbe-4bbf-b579-8e9cdf8022dd"
+        name="LexicalAnalyzer"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <targetEnds>
+          <association
+            Id="bfe54edc-36c9-4b2e-a013-f9581015f184"
+            isDerived="false"
+            sourceEndRoleName="LexicalAnalizer"
+            targetEndRoleName="Token"
+            isLeaf="false"
+            isAbstract="false">
+            <classMoniker
+              Id="80cb0924-962f-4a2c-b891-77a3dc8736d1"
+              LastKnownName="Token"
+              LastKnownLocation="LPD.Compiler.Architecture.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="087c0cfe-4e58-48f2-b662-8d19c25e9c12"
+                  name="LexicalAnalizer"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="406ee924-9bdb-47a3-bbf8-600e29be8c5c"
+                  name="Token"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false">
+                  <lowerValueInternal>
+                    <literalString
+                      Id="95af2cc2-4a91-4e78-be36-0d8b128d8576"
+                      name="Lower"
+                      value="1" />
+                  </lowerValueInternal>
+                  <upperValueInternal>
+                    <literalString
+                      Id="11132462-6e6a-4892-84b7-69354814b606"
+                      name="Upper"
+                      value="*" />
+                  </upperValueInternal>
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+          <association
+            Id="b542b963-32bd-4c23-a150-0d76ceaaaaa2"
+            isDerived="false"
+            sourceEndRoleName="LexicalAnalyzer"
+            targetEndRoleName="Position"
+            isLeaf="false"
+            isAbstract="false">
+            <classMoniker
+              Id="91fb5434-9602-4cac-85e9-21b14e3815d1"
+              LastKnownName="Position"
+              LastKnownLocation="LPD.Compiler.Architecture.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="6fd79c75-37a8-4a04-8908-ec5d35220d86"
+                  name="LexicalAnalyzer"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="e72072c3-a0ae-4eab-bad6-7c567c2c6ee6"
+                  name="Position"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false">
+                  <lowerValueInternal>
+                    <literalString
+                      Id="4235a3e8-8a8b-47dc-9362-1937cf8ae487"
+                      name="Lower"
+                      value="1" />
+                  </lowerValueInternal>
+                  <upperValueInternal>
+                    <literalString
+                      Id="9358b8c3-1030-4bc6-9d97-03613751274b"
+                      name="Upper"
+                      value="*" />
+                  </upperValueInternal>
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+          <association
+            Id="0f738f2b-92e3-45f8-9272-5fecabc65c9f"
+            isDerived="false"
+            sourceEndRoleName="LexicalAnalyzer"
+            targetEndRoleName="CompileError"
+            isLeaf="false"
+            isAbstract="false">
+            <classMoniker
+              Id="be286602-e288-468a-b89e-f6117d8e19bc"
+              LastKnownName="CompileError"
+              LastKnownLocation="LPD.Compiler.Architecture.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="77c60d25-636a-4a03-9fdc-7cc2e4ae3987"
+                  name="LexicalAnalyzer"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="d3dc6b70-13d7-4b46-ba75-51c122d4d0bb"
+                  name="CompileError"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false">
+                  <lowerValueInternal>
+                    <literalString
+                      Id="afb31ec1-7a37-4bba-9d93-d1ac0a600d23"
+                      name="Lower"
+                      value="1" />
+                  </lowerValueInternal>
+                  <upperValueInternal>
+                    <literalString
+                      Id="e13efc9a-5770-4cd7-adf3-379af3b34679"
+                      name="Upper"
+                      value="*" />
+                  </upperValueInternal>
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+        </targetEnds>
+        <ownedOperationsInternal>
+          <operation
+            Id="42851967-8338-463f-bf74-acd11eb1d78f"
+            name="HandleAtribution"
+            visibility="Private"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="95254f19-73cb-4ef4-ab94-7829689ca392"
+                  direction="Return"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <classMoniker
+                      Id="0cdc1b9c-85b9-4a6f-886c-363eb47150a3"
+                      LastKnownName="Token"
+                      LastKnownLocation="LPD.Compiler.Architecture.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation
+            Id="b3eea9ee-f612-4491-ac50-87630a3bb97e"
+            name="HandleRelationalOperator"
+            visibility="Private"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="d877179a-d847-4840-b082-4583d57653a6"
+                  direction="Return"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <classMoniker
+                      Id="0cdc1b9c-85b9-4a6f-886c-363eb47150a3"
+                      LastKnownName="Token"
+                      LastKnownLocation="LPD.Compiler.Architecture.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation
+            Id="a975b577-aaf7-404a-b324-db2a46b04132"
+            name="HandleArithmeticOperator"
+            visibility="Private"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="373fb540-c6e1-42ca-bb75-33dc0b530d52"
+                  direction="Return"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <classMoniker
+                      Id="0cdc1b9c-85b9-4a6f-886c-363eb47150a3"
+                      LastKnownName="Token"
+                      LastKnownLocation="LPD.Compiler.Architecture.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation
+            Id="784571dd-ba74-4fc9-9adc-1233ba763863"
+            name="HandleKeyWord"
+            visibility="Private"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="91a7e18f-e6c4-4648-9325-64bb8b1253aa"
+                  direction="Return"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <classMoniker
+                      Id="0cdc1b9c-85b9-4a6f-886c-363eb47150a3"
+                      LastKnownName="Token"
+                      LastKnownLocation="LPD.Compiler.Architecture.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation
+            Id="c27be591-cbc1-4810-a426-3c445fb1a82e"
+            name="HandleDigit"
+            visibility="Private"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="39eb57f3-4f0a-432e-81bf-206e7345f983"
+                  direction="Return"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <classMoniker
+                      Id="0cdc1b9c-85b9-4a6f-886c-363eb47150a3"
+                      LastKnownName="Token"
+                      LastKnownLocation="LPD.Compiler.Architecture.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation
+            Id="20a87a67-e2a0-4460-bce1-6f2469d93fde"
+            name="GetToken"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="fb02a463-76a5-43d1-864f-c8961759d055"
+                  direction="Return"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <classMoniker
+                      Id="0cdc1b9c-85b9-4a6f-886c-363eb47150a3"
+                      LastKnownName="Token"
+                      LastKnownLocation="LPD.Compiler.Architecture.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation
+            Id="3db83218-705f-4ff3-ada6-5a32220f0d98"
+            name="HandlePontuation"
+            visibility="Private"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="fe3fba14-f548-4929-b821-5f2ced0f380a"
+                  direction="Return"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <classMoniker
+                      Id="0cdc1b9c-85b9-4a6f-886c-363eb47150a3"
+                      LastKnownName="Token"
+                      LastKnownLocation="LPD.Compiler.Architecture.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+        </ownedOperationsInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="b1f9b97a-e641-4732-89ff-1cb9e576db6c"
+        name="LexicalAnalyzer"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <targetEnds>
+          <association
+            Id="36e5dc05-83ee-4b41-90f4-a17d8e534b54"
+            isDerived="false"
+            sourceEndRoleName="LexicalAnalizer"
+            targetEndRoleName="Token"
+            isLeaf="false"
+            isAbstract="false">
+            <classMoniker
+              Id="34e716c1-be83-4773-8763-39eece1d4b18"
+              LastKnownName="Token"
+              LastKnownLocation="LPD.Compiler.Architecture.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="746b6cc0-4d67-430b-9012-908ca9076a2e"
+                  name="LexicalAnalizer"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="42270efb-f116-4876-b30c-ec4a1ad815c4"
+                  name="Token"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false">
+                  <lowerValueInternal>
+                    <literalString
+                      Id="75a464b7-15d4-40eb-b5c1-fe15dd65493a"
+                      name="Lower"
+                      value="1" />
+                  </lowerValueInternal>
+                  <upperValueInternal>
+                    <literalString
+                      Id="90bd6f50-5847-46c6-afcc-5cc5fadaf6fa"
+                      name="Upper"
+                      value="*" />
+                  </upperValueInternal>
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+        </targetEnds>
+        <ownedOperationsInternal>
+          <operation
+            Id="c68c2ce1-7066-4763-82b3-b616b3139bd9"
+            name="HandleAtribution"
+            visibility="Private"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="e66054d1-8a9b-49f0-adcf-5f68bbad999f"
+                  direction="Return"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <classMoniker
+                      Id="0cdc1b9c-85b9-4a6f-886c-363eb47150a3"
+                      LastKnownName="Token"
+                      LastKnownLocation="LPD.Compiler.Architecture.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation
+            Id="85963329-aec0-4d35-b049-a2228f21100a"
+            name="HandleRelationalOperator"
+            visibility="Private"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="7358ea3b-3658-4af8-be05-541609e100df"
+                  direction="Return"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <classMoniker
+                      Id="0cdc1b9c-85b9-4a6f-886c-363eb47150a3"
+                      LastKnownName="Token"
+                      LastKnownLocation="LPD.Compiler.Architecture.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation
+            Id="3b457b85-f8bd-4134-b1a8-ca16c8533347"
+            name="HandleArithmeticOperator"
+            visibility="Private"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="869d65db-6d8f-4b9f-a97c-76e5e0b82e85"
+                  direction="Return"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <classMoniker
+                      Id="0cdc1b9c-85b9-4a6f-886c-363eb47150a3"
+                      LastKnownName="Token"
+                      LastKnownLocation="LPD.Compiler.Architecture.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation
+            Id="2eae5bbb-913c-4083-9c37-014afcd6d775"
+            name="HandleKeyWord"
+            visibility="Private"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="6a9783c1-69d7-4438-a1ec-1494b8f3c6e5"
+                  direction="Return"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <classMoniker
+                      Id="0cdc1b9c-85b9-4a6f-886c-363eb47150a3"
+                      LastKnownName="Token"
+                      LastKnownLocation="LPD.Compiler.Architecture.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation
+            Id="baae2238-687c-4957-bb1b-6754ae293df1"
+            name="HandleDigit"
+            visibility="Private"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="843bfe74-45f6-4022-9874-caff1f7c9ca7"
+                  direction="Return"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <classMoniker
+                      Id="0cdc1b9c-85b9-4a6f-886c-363eb47150a3"
+                      LastKnownName="Token"
+                      LastKnownLocation="LPD.Compiler.Architecture.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation
+            Id="9cfa6c74-8a42-4760-830f-8b2f8cd0b430"
+            name="GetToken"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="d637cca5-a223-4cad-a088-64a11d7825d7"
+                  direction="Return"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <classMoniker
+                      Id="0cdc1b9c-85b9-4a6f-886c-363eb47150a3"
+                      LastKnownName="Token"
+                      LastKnownLocation="LPD.Compiler.Architecture.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation
+            Id="c67652c3-a524-474d-affb-00f74f8335a1"
+            name="HandlePontuation"
+            visibility="Private"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="65b1dd30-afb2-4dc7-93a4-b397920ebbd6"
+                  direction="Return"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <classMoniker
+                      Id="0cdc1b9c-85b9-4a6f-886c-363eb47150a3"
+                      LastKnownName="Token"
+                      LastKnownLocation="LPD.Compiler.Architecture.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+        </ownedOperationsInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="34e716c1-be83-4773-8763-39eece1d4b18"
+        name="Token"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <ownedAttributesInternal>
+          <property
+            Id="d702b498-d400-4ca9-a7c8-6a5e25dc011b"
+            name="Symbol"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <undefinedTypeMoniker
+                Id="58d7ebe8-9e23-4ca9-a61a-3d242f2759b9"
+                LastKnownName="Symbols"
+                LastKnownLocation="LPD.Compiler.Architecture.uml" />
+            </type_NamedElement>
+          </property>
+          <property
+            Id="23c1a518-eb25-4ff3-bff8-5c79e46435ad"
+            name="Lexeme"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <undefinedTypeMoniker
+                Id="6d40bfab-aee5-4831-91e2-286b52eddfcf"
+                LastKnownName="string"
+                LastKnownLocation="LPD.Compiler.Architecture.uml" />
+            </type_NamedElement>
+          </property>
+        </ownedAttributesInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="ce9791a8-1d65-4340-981a-255f742fb28a"
+        name="CharReader"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <targetEnds>
+          <association
+            Id="d9f54305-b406-4ca9-904b-593000662207"
+            isDerived="false"
+            sourceEndRoleName="CharReader"
+            targetEndRoleName="LexicalAnalizer"
+            isLeaf="false"
+            isAbstract="false">
+            <classMoniker
+              Id="b1f9b97a-e641-4732-89ff-1cb9e576db6c"
+              LastKnownName="LexicalAnalyzer"
+              LastKnownLocation="LPD.Compiler.Architecture.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="9069228a-6908-4bba-8c47-9e41208a642c"
+                  name="CharReader"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="1fe14c46-b6bc-4818-90c2-e0854e5648c5"
+                  name="LexicalAnalizer"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+        </targetEnds>
+        <ownedAttributesInternal>
+          <property
+            Id="131c7ec2-a6bd-4b16-b83a-5c276e42bd9b"
+            name="Current"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <undefinedTypeMoniker
+                Id="05769a73-f65a-4070-b378-12dd3f0f8b68"
+                LastKnownName="Nullable&lt;char&gt;"
+                LastKnownLocation="LPD.Compiler.Architecture.uml" />
+            </type_NamedElement>
+          </property>
+        </ownedAttributesInternal>
+        <ownedOperationsInternal>
+          <operation
+            Id="5a8c3cc2-1f74-4923-b95e-d1ff031806d5"
+            name="Read"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="4d2ec32c-f851-486f-81de-ab13a0984d6e"
+                  direction="Return"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <undefinedTypeMoniker
+                      Id="05769a73-f65a-4070-b378-12dd3f0f8b68"
+                      LastKnownName="Nullable&lt;char&gt;"
+                      LastKnownLocation="LPD.Compiler.Architecture.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+        </ownedOperationsInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <enumeration
+        Id="7f4e1716-cdc1-45e9-b57d-4093d17d82cb"
+        name="Symbols"
+        isAbstract="false"
+        isLeaf="false">
+        <targetEnds>
+          <association
+            Id="50caa3a5-b088-46d7-81fd-718594233479"
+            isDerived="false"
+            sourceEndRoleName="Symbols"
+            targetEndRoleName="LexicalAnalizer"
+            isLeaf="false"
+            isAbstract="false">
+            <classMoniker
+              Id="b1f9b97a-e641-4732-89ff-1cb9e576db6c"
+              LastKnownName="LexicalAnalyzer"
+              LastKnownLocation="LPD.Compiler.Architecture.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="cf38ef64-7a67-493d-a7db-4629f9231719"
+                  name="Symbols"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="8e0d96a0-9eec-459d-80cd-1e0ff97528aa"
+                  name="LexicalAnalizer"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+        </targetEnds>
+        <ownedLiterals>
+          <enumerationLiteral
+            Id="578890bf-826e-4831-97a8-6b2710c2c10c"
+            name="SInicio">
+            <specification>
+              <literalInteger
+                Id="b53c4126-967e-4e23-83d9-aa42f3f16d6f"
+                name="Integer"
+                value="0" />
+            </specification>
+          </enumerationLiteral>
+          <enumerationLiteral
+            Id="a206775b-c50c-40bf-ac38-218118ed9368"
+            name="SLeia">
+            <specification>
+              <literalInteger
+                Id="23f4919f-179a-43ce-a0f5-d0af2328e8ff"
+                name="Integer"
+                value="11" />
+            </specification>
+          </enumerationLiteral>
+          <enumerationLiteral
+            Id="088ac043-d18c-4829-a054-f3d93ec2a007"
+            name="SMaior">
+            <specification>
+              <literalInteger
+                Id="1c0b0637-5882-4fdd-8a51-d75855124e5d"
+                name="Integer"
+                value="22" />
+            </specification>
+          </enumerationLiteral>
+          <enumerationLiteral
+            Id="aeba8ded-587f-4a95-8cf9-5c19bb9963a2"
+            name="SDiv">
+            <specification>
+              <literalInteger
+                Id="722d7465-3fd5-409f-8c91-2f81e78e6fc3"
+                name="Integer"
+                value="31" />
+            </specification>
+          </enumerationLiteral>
+          <enumerationLiteral
+            Id="5335d83a-0e6a-48fe-9523-8bc25ac1b875"
+            name="SE">
+            <specification>
+              <literalInteger
+                Id="77465301-6a95-4499-89f4-8c9d8256bee9"
+                name="Integer"
+                value="32" />
+            </specification>
+          </enumerationLiteral>
+          <enumerationLiteral
+            Id="90cf6ccc-159e-4952-af0e-9ea98e4b6701"
+            name="SOu">
+            <specification>
+              <literalInteger
+                Id="9fe8a14c-3bc2-45d9-82be-419e4207ac49"
+                name="Integer"
+                value="33" />
+            </specification>
+          </enumerationLiteral>
+          <enumerationLiteral
+            Id="5e9eb690-ef35-41e9-90f2-bfa93162c5b4"
+            name="SNao">
+            <specification>
+              <literalInteger
+                Id="2e027e1c-b7d7-4f83-8530-39545ee7bc0d"
+                name="Integer"
+                value="34" />
+            </specification>
+          </enumerationLiteral>
+          <enumerationLiteral
+            Id="7084d658-bd3c-47ee-af12-450a16f31725"
+            name="SDoisPontos">
+            <specification>
+              <literalInteger
+                Id="3e5e0a65-8ffb-4141-a096-e24d24908674"
+                name="Integer"
+                value="35" />
+            </specification>
+          </enumerationLiteral>
+          <enumerationLiteral
+            Id="58f2a9d2-2a9a-4b9b-908d-80a9ced796ca"
+            name="SPrograma">
+            <specification>
+              <literalInteger
+                Id="f60a4dd3-799a-4299-b57d-a165bbfac31d"
+                name="Integer"
+                value="36" />
+            </specification>
+          </enumerationLiteral>
+          <enumerationLiteral
+            Id="86b49c03-d81c-4f8a-ad9d-7e3dd0151a2b"
+            name="SFim">
+            <specification>
+              <literalInteger
+                Id="c10e154c-c635-408e-80fc-bcbda14bcc53"
+                name="Integer"
+                value="1" />
+            </specification>
+          </enumerationLiteral>
+          <enumerationLiteral
+            Id="6d2ae0a5-9272-4ffd-a68f-5b88a5bd7bb0"
+            name="SProcedimento">
+            <specification>
+              <literalInteger
+                Id="0d5837b5-5427-4ed8-b7cc-e0f9e596586c"
+                name="Integer"
+                value="2" />
+            </specification>
+          </enumerationLiteral>
+          <enumerationLiteral
+            Id="318cd548-f05a-43e8-844c-b2b4f7dfd83e"
+            name="SFuncao">
+            <specification>
+              <literalInteger
+                Id="a2a5e00a-058c-4c93-a3ab-3f5ea52310a1"
+                name="Integer"
+                value="3" />
+            </specification>
+          </enumerationLiteral>
+          <enumerationLiteral
+            Id="3a35171a-15f7-4f6d-a22f-b7f892fab432"
+            name="SSe">
+            <specification>
+              <literalInteger
+                Id="7e1cb92f-3b77-4d7a-9c22-28e6c0aac866"
+                name="Integer"
+                value="4" />
+            </specification>
+          </enumerationLiteral>
+          <enumerationLiteral
+            Id="e5206bb4-fbae-4518-bd02-4a9a63c1f51b"
+            name="SEntao">
+            <specification>
+              <literalInteger
+                Id="1d4c1b2e-1c3e-4581-9d19-11e796eb13b7"
+                name="Integer"
+                value="5" />
+            </specification>
+          </enumerationLiteral>
+          <enumerationLiteral
+            Id="f0c5a831-1768-468f-95d9-869c77729368"
+            name="SSenao">
+            <specification>
+              <literalInteger
+                Id="a216721b-ecbe-4d47-a5d9-6f2ac562afdd"
+                name="Integer"
+                value="6" />
+            </specification>
+          </enumerationLiteral>
+          <enumerationLiteral
+            Id="b0dc162c-3e19-418e-a724-3b1e163eecab"
+            name="SEnquanto">
+            <specification>
+              <literalInteger
+                Id="08dcff7b-a254-44b6-a8fc-f96a9e10b5f1"
+                name="Integer"
+                value="7" />
+            </specification>
+          </enumerationLiteral>
+          <enumerationLiteral
+            Id="a535568b-349b-4056-b397-4fe020e75414"
+            name="SFaca">
+            <specification>
+              <literalInteger
+                Id="6469b96e-8f8c-48e3-969b-a7db0c14bf84"
+                name="Integer"
+                value="8" />
+            </specification>
+          </enumerationLiteral>
+          <enumerationLiteral
+            Id="09e8d491-972b-4c5b-98a2-f75ef3c1affa"
+            name="SAtribuicao">
+            <specification>
+              <literalInteger
+                Id="f0f4796e-db9d-47a2-a4c8-802cdaa8fde2"
+                name="Integer"
+                value="9" />
+            </specification>
+          </enumerationLiteral>
+          <enumerationLiteral
+            Id="57c597bb-4d0d-457d-bc56-6ad233699ea4"
+            name="SEscreva">
+            <specification>
+              <literalInteger
+                Id="77581ea8-1d7f-4456-8ecc-1a7d3effd12e"
+                name="Integer"
+                value="10" />
+            </specification>
+          </enumerationLiteral>
+          <enumerationLiteral
+            Id="e065fe54-4673-46b3-b5b4-b4c00040182b"
+            name="SVar">
+            <specification>
+              <literalInteger
+                Id="fb6bfa47-41ba-4a76-8cdd-64543e677454"
+                name="Integer"
+                value="12" />
+            </specification>
+          </enumerationLiteral>
+          <enumerationLiteral
+            Id="7cf9339e-a2d8-440f-9849-320f611d6600"
+            name="SInteiro">
+            <specification>
+              <literalInteger
+                Id="1d2d2321-8d53-4f76-83df-0962a28edf82"
+                name="Integer"
+                value="13" />
+            </specification>
+          </enumerationLiteral>
+          <enumerationLiteral
+            Id="043eeacd-2c91-47b0-ac74-5295faff065f"
+            name="SBooleano">
+            <specification>
+              <literalInteger
+                Id="0a05c91c-83b0-47f2-b5f4-059ccc48d3fa"
+                name="Integer"
+                value="14" />
+            </specification>
+          </enumerationLiteral>
+          <enumerationLiteral
+            Id="5417b9b4-84e2-4541-bde2-2e43e19b4de6"
+            name="SIdentificador">
+            <specification>
+              <literalInteger
+                Id="1ef79eca-7f5d-4336-9af8-ba2c87123aa2"
+                name="Integer"
+                value="15" />
+            </specification>
+          </enumerationLiteral>
+          <enumerationLiteral
+            Id="603f255c-784e-4d88-ba6f-d3e7826af8e1"
+            name="SNumero">
+            <specification>
+              <literalInteger
+                Id="6a07625a-223b-43e0-9273-5bc9749d2b59"
+                name="Integer"
+                value="16" />
+            </specification>
+          </enumerationLiteral>
+          <enumerationLiteral
+            Id="a0e7bd8c-5c22-4a84-ad3c-a8a2cdf60aee"
+            name="SPonto">
+            <specification>
+              <literalInteger
+                Id="f4de227b-2494-4d28-a80e-d110a8d1de24"
+                name="Integer"
+                value="17" />
+            </specification>
+          </enumerationLiteral>
+          <enumerationLiteral
+            Id="5fbc112b-9400-4e8e-b186-e912dfbc3b80"
+            name="SPontoVirgula">
+            <specification>
+              <literalInteger
+                Id="19b551b1-b4f9-4cf1-a042-50d931d42a38"
+                name="Integer"
+                value="18" />
+            </specification>
+          </enumerationLiteral>
+          <enumerationLiteral
+            Id="c4e7e86a-95ea-4fb2-b62e-98d5a5a8eb1b"
+            name="SVirgula">
+            <specification>
+              <literalInteger
+                Id="b88ec461-fc04-4a53-99d9-882cfc9c601d"
+                name="Integer"
+                value="19" />
+            </specification>
+          </enumerationLiteral>
+          <enumerationLiteral
+            Id="72c8b1d9-a778-4806-8b6d-8bfaf914faa5"
+            name="SAbreParenteses">
+            <specification>
+              <literalInteger
+                Id="18b8e2e5-f546-416f-82bb-4eef82587ac6"
+                name="Integer"
+                value="20" />
+            </specification>
+          </enumerationLiteral>
+          <enumerationLiteral
+            Id="98cccec4-aecf-4db8-b175-598056f2a244"
+            name="SFechaParenteses">
+            <specification>
+              <literalInteger
+                Id="b2598e50-9f61-4aac-a8fa-0e2adbc87fa6"
+                name="Integer"
+                value="21" />
+            </specification>
+          </enumerationLiteral>
+          <enumerationLiteral
+            Id="a1606cc6-fc7d-4702-be34-24bbf7d4abfc"
+            name="SMaiorIg">
+            <specification>
+              <literalInteger
+                Id="3e6949f7-efa4-4c5a-ac10-4dd02533ada8"
+                name="Integer"
+                value="23" />
+            </specification>
+          </enumerationLiteral>
+          <enumerationLiteral
+            Id="a92e78ec-db09-4b37-b5d5-aa51b1d26758"
+            name="SIg">
+            <specification>
+              <literalInteger
+                Id="d7cb3427-a3a8-4fd9-9d2a-c73498e62420"
+                name="Integer"
+                value="24" />
+            </specification>
+          </enumerationLiteral>
+          <enumerationLiteral
+            Id="4d763c5e-2c1e-4030-acf1-a2743edfa880"
+            name="SMenor">
+            <specification>
+              <literalInteger
+                Id="40640277-91e3-4935-b8c4-e497607b0b75"
+                name="Integer"
+                value="25" />
+            </specification>
+          </enumerationLiteral>
+          <enumerationLiteral
+            Id="9b86d755-9cca-4048-a4fa-369fb10bd955"
+            name="SMenorIg">
+            <specification>
+              <literalInteger
+                Id="a40e6ce2-eba4-4e2e-8b61-9c4780599e70"
+                name="Integer"
+                value="26" />
+            </specification>
+          </enumerationLiteral>
+          <enumerationLiteral
+            Id="b66fed38-f1fd-4c63-9b34-f595affdf47a"
+            name="SDif">
+            <specification>
+              <literalInteger
+                Id="d8febdf9-9e09-4033-8bd0-65d877b95221"
+                name="Integer"
+                value="27" />
+            </specification>
+          </enumerationLiteral>
+          <enumerationLiteral
+            Id="21ee74ea-a7eb-4669-a402-e9ca9b2fa1a3"
+            name="SMais">
+            <specification>
+              <literalInteger
+                Id="cea48d16-4d7e-4727-9061-0ffeab733d32"
+                name="Integer"
+                value="28" />
+            </specification>
+          </enumerationLiteral>
+          <enumerationLiteral
+            Id="d3bb46aa-a798-44b2-80fb-c7b390404e06"
+            name="SMenos">
+            <specification>
+              <literalInteger
+                Id="4d360eac-61ae-4f21-97ae-ee2688c3667b"
+                name="Integer"
+                value="29" />
+            </specification>
+          </enumerationLiteral>
+          <enumerationLiteral
+            Id="d4c8cd85-1b53-4171-bc54-de4dd38f621f"
+            name="SMult">
+            <specification>
+              <literalInteger
+                Id="e9021bb9-e62d-452f-ab83-e00333a976a8"
+                name="Integer"
+                value="30" />
+            </specification>
+          </enumerationLiteral>
+          <enumerationLiteral
+            Id="3497e67b-e56c-4870-ad03-f2d9b766c2be"
+            name="SVerdadeiro">
+            <specification>
+              <literalInteger
+                Id="5cc04d87-4199-4f36-ba66-faba9162e069"
+                name="Integer"
+                value="37" />
+            </specification>
+          </enumerationLiteral>
+          <enumerationLiteral
+            Id="bc011237-ce80-4254-a21d-ebaf0d9df551"
+            name="SFalso">
+            <specification>
+              <literalInteger
+                Id="5a4dd4d5-284e-4582-8984-673eff8ae0b0"
+                name="Integer"
+                value="38" />
+            </specification>
+          </enumerationLiteral>
+        </ownedLiterals>
+      </enumeration>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="6ed20b37-6527-4f1d-a08c-733ba888daa7"
+        name="CompileError"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <targetEnds>
+          <association
+            Id="6ef78e33-be1e-4148-99c6-967ffc867af6"
+            isDerived="false"
+            sourceEndRoleName="InvalidTokenException"
+            targetEndRoleName="LexicalAnalizer"
+            isLeaf="false"
+            isAbstract="false">
+            <classMoniker
+              Id="b1f9b97a-e641-4732-89ff-1cb9e576db6c"
+              LastKnownName="LexicalAnalyzer"
+              LastKnownLocation="LPD.Compiler.Architecture.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="b298ad5e-6bb2-44b2-a329-222d40c683bf"
+                  name="InvalidTokenException"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false">
+                  <lowerValueInternal>
+                    <literalString
+                      Id="ed440785-9b40-4d34-bb63-76aa80d940e9"
+                      name="Lower"
+                      value="1" />
+                  </lowerValueInternal>
+                  <upperValueInternal>
+                    <literalString
+                      Id="4fab542d-d5b2-41c1-8265-3cb03a4b7386"
+                      name="Upper"
+                      value="*" />
+                  </upperValueInternal>
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="737c8f8d-ce4a-4890-b287-3954ba348a92"
+                  name="LexicalAnalizer"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false">
+                  <lowerValueInternal>
+                    <literalString
+                      Id="1fdcd593-32fd-49d6-9785-b635e3ac8215"
+                      name="Lower"
+                      value="1" />
+                  </lowerValueInternal>
+                  <upperValueInternal>
+                    <literalString
+                      Id="1a380f15-d800-4d9f-b372-81115b9e3d47"
+                      name="Upper"
+                      value="1" />
+                  </upperValueInternal>
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+        </targetEnds>
+        <ownedAttributesInternal>
+          <property
+            Id="43dfa67a-d005-4fab-a8c5-db7817046a87"
+            name="Position"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <classMoniker
+                Id="3258d03d-9d4e-40cb-a4b6-ac717320a6eb"
+                LastKnownName="Position"
+                LastKnownLocation="LPD.Compiler.Architecture.uml" />
+            </type_NamedElement>
+          </property>
+          <property
+            Id="e9d4f3e5-9557-4d65-bed6-bca36da70d88"
+            name="Message"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <undefinedTypeMoniker
+                Id="6d40bfab-aee5-4831-91e2-286b52eddfcf"
+                LastKnownName="string"
+                LastKnownLocation="LPD.Compiler.Architecture.uml" />
+            </type_NamedElement>
+          </property>
+        </ownedAttributesInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="a4b6cb64-85f3-4157-8a26-0e0c51811509"
+        name="Position"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <targetEnds>
+          <association
+            Id="d7fab62f-2d38-4b02-9350-7164513fc63c"
+            isDerived="false"
+            sourceEndRoleName="ProgramPosition"
+            targetEndRoleName="InvalidTokenException"
+            isLeaf="false"
+            isAbstract="false">
+            <classMoniker
+              Id="6ed20b37-6527-4f1d-a08c-733ba888daa7"
+              LastKnownName="CompileError"
+              LastKnownLocation="LPD.Compiler.Architecture.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="ff9f5e78-8c9a-4278-b1a9-166b9531c7e6"
+                  name="ProgramPosition"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false">
+                  <lowerValueInternal>
+                    <literalString
+                      Id="e6784966-e2ec-4ffb-9313-657c4d1bdbd5"
+                      name="Lower"
+                      value="1" />
+                  </lowerValueInternal>
+                  <upperValueInternal>
+                    <literalString
+                      Id="2d0cab95-11b3-4de1-9981-98d616dea408"
+                      name="Upper"
+                      value="*" />
+                  </upperValueInternal>
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="844c722e-0e42-412d-a904-665a284298dd"
+                  name="InvalidTokenException"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+          <association
+            Id="dd689c3c-f1fb-4b84-bfa1-7e020a0001eb"
+            isDerived="false"
+            sourceEndRoleName="Position"
+            targetEndRoleName="LexicalAnalizer"
+            isLeaf="false"
+            isAbstract="false">
+            <classMoniker
+              Id="b1f9b97a-e641-4732-89ff-1cb9e576db6c"
+              LastKnownName="LexicalAnalyzer"
+              LastKnownLocation="LPD.Compiler.Architecture.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="471f227b-139b-4bbe-b283-c4b5ef96f870"
+                  name="Position"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="bceaf889-c9d7-467b-a73a-b59feb0e8181"
+                  name="LexicalAnalizer"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+        </targetEnds>
+        <ownedAttributesInternal>
+          <property
+            Id="36051497-369e-4f2a-9b78-a4659f940847"
+            name="Line"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false" />
+          <property
+            Id="6e3b73b5-77b5-4712-9569-281ab8bdc7c7"
+            name="Column"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false" />
+        </ownedAttributesInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="f3a48a7c-c8ee-4c81-99e0-82fd604e7c18"
+        name="SyntacticException"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <ownedAttributesInternal>
+          <property
+            Id="3e53f57e-74e3-4066-9d21-b1001955bfb3"
+            name="Message"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <undefinedTypeMoniker
+                Id="6d40bfab-aee5-4831-91e2-286b52eddfcf"
+                LastKnownName="string"
+                LastKnownLocation="LPD.Compiler.Architecture.uml" />
+            </type_NamedElement>
+          </property>
+        </ownedAttributesInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="abb365b9-306e-4eb2-b833-ccf65cc906a6"
+        name="SyntacticAnalyzer"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <targetEnds>
+          <association
+            Id="b9b74db6-a211-46b6-bd72-6145728b647b"
+            isDerived="false"
+            sourceEndRoleName="SyntacticAnalyzer"
+            targetEndRoleName="LexicalAnalyzer"
+            isLeaf="false"
+            isAbstract="false">
+            <classMoniker
+              Id="3f888ed5-f4f6-4365-b028-cb098667a562"
+              LastKnownName="LexicalAnalyzer"
+              LastKnownLocation="LPD.Compiler.Architecture.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="e8d33452-8a11-41ca-abca-b9764cdf1e75"
+                  name="SyntacticAnalyzer"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="3bb4fbcc-423e-4d9a-856e-e7817441f058"
+                  name="LexicalAnalyzer"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+          <association
+            Id="1531369b-01a3-4040-b221-c0c0da17e1cf"
+            isDerived="false"
+            sourceEndRoleName="SyntacticAnalyzer"
+            targetEndRoleName="SyntacticException"
+            isLeaf="false"
+            isAbstract="false">
+            <classMoniker
+              Id="b546ff48-3f5e-4629-90ff-ac8d6ca21fbf"
+              LastKnownName="SyntacticException"
+              LastKnownLocation="LPD.Compiler.Architecture.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="9d89982b-ad3d-42cd-a9d1-2a39bb89c874"
+                  name="SyntacticAnalyzer"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false">
+                  <lowerValueInternal>
+                    <literalString
+                      Id="7588b128-d891-40cc-a4ab-4f9d394c8ad9"
+                      name="Lower"
+                      value="1" />
+                  </lowerValueInternal>
+                  <upperValueInternal>
+                    <literalString
+                      Id="d22f16d0-fb78-444a-82fb-0b02b188fda9"
+                      name="Upper"
+                      value="*" />
+                  </upperValueInternal>
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="99373956-246d-43dd-8ce7-d3ecf910b827"
+                  name="SyntacticException"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false">
+                  <lowerValueInternal>
+                    <literalString
+                      Id="533ca512-8194-47ef-9941-613369b4248f"
+                      name="Lower"
+                      value="1" />
+                  </lowerValueInternal>
+                  <upperValueInternal>
+                    <literalString
+                      Id="537e98d2-db4e-428b-af0c-2dc78c1565cb"
+                      name="Upper"
+                      value="*" />
+                  </upperValueInternal>
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+          <association
+            Id="8fd1fbf8-d20b-44f8-bca9-876090a1af07"
+            isDerived="false"
+            sourceEndRoleName="SyntacticAnalyzer"
+            targetEndRoleName="Position"
+            isLeaf="false"
+            isAbstract="false">
+            <classMoniker
+              Id="f78ea78f-2ddb-4de1-a8e3-001d09ea308f"
+              LastKnownName="Position"
+              LastKnownLocation="LPD.Compiler.Architecture.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="796667b6-7e58-4b29-88f4-348a06663997"
+                  name="SyntacticAnalyzer"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="7831873d-a6c1-4774-84db-3303e4bb9dd8"
+                  name="Position"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false">
+                  <lowerValueInternal>
+                    <literalString
+                      Id="ac71dbb6-521e-4b28-9339-be419f2c0927"
+                      name="Lower"
+                      value="1" />
+                  </lowerValueInternal>
+                  <upperValueInternal>
+                    <literalString
+                      Id="875c2ebd-091f-424e-ba93-797ecdb898d5"
+                      name="Upper"
+                      value="*" />
+                  </upperValueInternal>
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+          <association
+            Id="d1efbf8e-ae33-405d-91cc-23f2bb8d27f6"
+            isDerived="false"
+            sourceEndRoleName="SyntacticAnalyzer"
+            targetEndRoleName="Token"
+            isLeaf="false"
+            isAbstract="false">
+            <classMoniker
+              Id="fa6f2c4a-2a14-45d6-b1e7-7374c1fe8d31"
+              LastKnownName="Token"
+              LastKnownLocation="LPD.Compiler.Architecture.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="9daee0c5-7d51-4ea6-a689-687628483af9"
+                  name="SyntacticAnalyzer"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="f4fd7f53-a123-4602-b737-bdeb0864192f"
+                  name="Token"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false">
+                  <lowerValueInternal>
+                    <literalString
+                      Id="84f743ac-a0af-41f4-96c2-8427b6e34aa8"
+                      name="Lower"
+                      value="1" />
+                  </lowerValueInternal>
+                  <upperValueInternal>
+                    <literalString
+                      Id="5c9d6d3f-eee8-4dc0-9f86-c3242c7ce47a"
+                      name="Upper"
+                      value="*" />
+                  </upperValueInternal>
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+          <association
+            Id="c626de44-8f44-4aa1-ba80-4114d83f40ca"
+            isDerived="false"
+            sourceEndRoleName="SyntacticAnalyzer"
+            targetEndRoleName="CompileError"
+            isLeaf="false"
+            isAbstract="false">
+            <classMoniker
+              Id="d7ab4254-0d43-4535-8486-9e6d3ecb766f"
+              LastKnownName="CompileError"
+              LastKnownLocation="LPD.Compiler.Architecture.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="d6977237-f942-4ef0-97d2-efb232cde738"
+                  name="SyntacticAnalyzer"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="5727eb4d-6747-44b4-a46f-5a876574dbad"
+                  name="CompileError"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+        </targetEnds>
+        <ownedAttributesInternal>
+          <property
+            Id="73ecef63-446f-4b51-a61b-dd90582b904c"
+            name="lexical"
+            visibility="Private"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <classMoniker
+                Id="7e07092d-12e7-4901-a8ef-122491668e1f"
+                LastKnownName="LexicalAnalyzer"
+                LastKnownLocation="LPD.Compiler.Architecture.uml" />
+            </type_NamedElement>
+          </property>
+        </ownedAttributesInternal>
+        <ownedOperationsInternal>
+          <operation
+            Id="54af52c6-4b03-42d6-acde-4b3a8f4a822d"
+            name="Analyze"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false" />
+          <operation
+            Id="a7557279-8faa-427a-9494-9f2e1cafb65f"
+            name="AnalyzeBlock"
+            visibility="Private"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false" />
+          <operation
+            Id="12b1c4eb-3b07-43f6-a376-e2eea8ee4ce9"
+            name="AnalyzeVariables"
+            visibility="Private"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false" />
+          <operation
+            Id="615c05db-e552-4fb6-b7d5-b143c88eb8d2"
+            name="AnalyzeSubroutine"
+            visibility="Private"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false" />
+          <operation
+            Id="d460db61-b776-4ea9-9677-556c7f494413"
+            name="AnalyzeCommands"
+            visibility="Private"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false" />
+          <operation
+            Id="a50437bb-13c0-4e76-80fa-4e2b29cd5f9a"
+            name="AnalyzeType"
+            visibility="Private"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false" />
+          <operation
+            Id="2204c01d-8b43-4b32-b009-8abac80cf5ed"
+            name="AnalyzeSimpleCommand"
+            visibility="Private"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false" />
+          <operation
+            Id="cfae35b2-bbb0-4fdd-9db2-9b7ca0b1c8c6"
+            name="AnalyzeAtrProcCall"
+            visibility="Private"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false" />
+          <operation
+            Id="5e2ef8af-fa02-4c06-94b1-266a2c9f65b8"
+            name="AnalyzeAtribution"
+            visibility="Private"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false" />
+          <operation
+            Id="1d4c6218-8411-4c6b-a9fd-467d8c7aab0b"
+            name="AnalyzeProcCall"
+            visibility="Private"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false" />
+          <operation
+            Id="de57744f-f66f-487f-b785-4e294c40a0ed"
+            name="AnalyzeRead"
+            visibility="Private"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false" />
+          <operation
+            Id="2748785d-ac71-441b-bcb2-e99ca7736121"
+            name="AnalyzePrint"
+            visibility="Private"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false" />
+          <operation
+            Id="cb1892ed-6bb5-4d36-8081-7d8d39bcb785"
+            name="AnalyzeWhile"
+            visibility="Private"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false" />
+          <operation
+            Id="a4f062b4-a453-48f1-bba9-61a98bb715b1"
+            name="AnalyzeIf"
+            visibility="Private"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false" />
+          <operation
+            Id="d67e4171-3a37-41ad-8bc6-0e7665f0bc7e"
+            name="AnalyzeProcDeclaration"
+            visibility="Private"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false" />
+          <operation
+            Id="668b9282-761f-4b69-8130-1e4a007201e8"
+            name="AnalyzeFuncDeclaration"
+            visibility="Private"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false" />
+          <operation
+            Id="c6bdf028-dabf-4ba9-8c50-ed3b987c38ea"
+            name="AnalyzeExpression"
+            visibility="Private"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false" />
+          <operation
+            Id="bf9c3191-5c06-43d8-a091-76fbd30b8a5c"
+            name="AnalyzeSimpleExpression"
+            visibility="Private"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false" />
+          <operation
+            Id="c5ac6a98-8514-46df-aca1-84241f1f1aa8"
+            name="AnalyzeTerm"
+            visibility="Private"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false" />
+          <operation
+            Id="ec25e368-00f4-47f3-b5d3-86d8b1769f1c"
+            name="AnalyzeFactor"
+            visibility="Private"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false" />
+          <operation
+            Id="be1bbc44-e8f9-448e-a8da-302a77e54bce"
+            name="AnalyzeFuncCall"
+            visibility="Private"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false" />
+        </ownedOperationsInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="fa6f2c4a-2a14-45d6-b1e7-7374c1fe8d31"
+        name="Token"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <ownedAttributesInternal>
+          <property
+            Id="9c5a4a71-49ef-44d7-a356-c865f33b362b"
+            name="Symbol"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <undefinedTypeMoniker
+                Id="58d7ebe8-9e23-4ca9-a61a-3d242f2759b9"
+                LastKnownName="Symbols"
+                LastKnownLocation="LPD.Compiler.Architecture.uml" />
+            </type_NamedElement>
+          </property>
+          <property
+            Id="aeef2134-c294-49e6-9527-6a9992a7c967"
+            name="Lexeme"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <undefinedTypeMoniker
+                Id="6d40bfab-aee5-4831-91e2-286b52eddfcf"
+                LastKnownName="string"
+                LastKnownLocation="LPD.Compiler.Architecture.uml" />
+            </type_NamedElement>
+          </property>
+        </ownedAttributesInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="f78ea78f-2ddb-4de1-a8e3-001d09ea308f"
+        name="Position"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <targetEnds>
+          <association
+            Id="735048a0-6f87-401c-be49-add89cad9e12"
+            isDerived="false"
+            sourceEndRoleName="Position"
+            targetEndRoleName="InvalidTokenException"
+            isLeaf="false"
+            isAbstract="false">
+            <classMoniker
+              Id="d7ab4254-0d43-4535-8486-9e6d3ecb766f"
+              LastKnownName="CompileError"
+              LastKnownLocation="LPD.Compiler.Architecture.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="54ebfb57-37b8-4710-aa6e-03bfb67ce250"
+                  name="Position"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false">
+                  <lowerValueInternal>
+                    <literalString
+                      Id="ec693fee-2f6d-4e88-bf8f-e0896b583c9d"
+                      name="Lower"
+                      value="1" />
+                  </lowerValueInternal>
+                  <upperValueInternal>
+                    <literalString
+                      Id="1ec6bb30-cfa5-4791-9ea3-f2b9e31f980b"
+                      name="Upper"
+                      value="*" />
+                  </upperValueInternal>
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="c18e199b-d38e-4088-99a3-2d65417dcadf"
+                  name="InvalidTokenException"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+        </targetEnds>
+        <ownedAttributesInternal>
+          <property
+            Id="b5e9c91f-0c0a-4c4c-91ea-9f62852f6fb0"
+            name="Line"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false" />
+          <property
+            Id="40b774fa-2a85-47ba-8c02-dea6be6c53c9"
+            name="Column"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false" />
+        </ownedAttributesInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="d7ab4254-0d43-4535-8486-9e6d3ecb766f"
+        name="CompileError"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <ownedAttributesInternal>
+          <property
+            Id="28cf46ce-bd20-4f68-8048-9805d98f9acd"
+            name="Position"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <classMoniker
+                Id="3258d03d-9d4e-40cb-a4b6-ac717320a6eb"
+                LastKnownName="Position"
+                LastKnownLocation="LPD.Compiler.Architecture.uml" />
+            </type_NamedElement>
+          </property>
+          <property
+            Id="846f61b8-e861-4fad-a944-e8f19dc1398f"
+            name="Message"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <undefinedTypeMoniker
+                Id="6d40bfab-aee5-4831-91e2-286b52eddfcf"
+                LastKnownName="string"
+                LastKnownLocation="LPD.Compiler.Architecture.uml" />
+            </type_NamedElement>
+          </property>
+        </ownedAttributesInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="3f888ed5-f4f6-4365-b028-cb098667a562"
+        name="LexicalAnalyzer"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <targetEnds>
+          <association
+            Id="5477f17e-b16d-401d-a696-700d27169978"
+            isDerived="false"
+            sourceEndRoleName="LexicalAnalizer"
+            targetEndRoleName="Token"
+            isLeaf="false"
+            isAbstract="false">
+            <classMoniker
+              Id="fa6f2c4a-2a14-45d6-b1e7-7374c1fe8d31"
+              LastKnownName="Token"
+              LastKnownLocation="LPD.Compiler.Architecture.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="0b735525-be4a-4d75-bdc6-d435aad25fc5"
+                  name="LexicalAnalizer"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="af15b6ec-1eae-40d8-bcfc-32c0661860a1"
+                  name="Token"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false">
+                  <lowerValueInternal>
+                    <literalString
+                      Id="a190d192-df9d-4a65-b743-443e808bb95f"
+                      name="Lower"
+                      value="1" />
+                  </lowerValueInternal>
+                  <upperValueInternal>
+                    <literalString
+                      Id="14b44568-6047-4db7-bdfd-cece73f1a245"
+                      name="Upper"
+                      value="*" />
+                  </upperValueInternal>
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+          <association
+            Id="62f39ca9-953f-40d5-ac52-7345e19c0b76"
+            isDerived="false"
+            sourceEndRoleName="LexicalAnalyzer"
+            targetEndRoleName="Position"
+            isLeaf="false"
+            isAbstract="false">
+            <classMoniker
+              Id="f78ea78f-2ddb-4de1-a8e3-001d09ea308f"
+              LastKnownName="Position"
+              LastKnownLocation="LPD.Compiler.Architecture.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="0c2b52d2-87f9-4050-ba1d-308e312a6c62"
+                  name="LexicalAnalyzer"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="7806297e-4e4f-44fb-ae49-d5c2c99bf34a"
+                  name="Position"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false">
+                  <lowerValueInternal>
+                    <literalString
+                      Id="f130864c-2a09-489b-a4f4-d706270109a5"
+                      name="Lower"
+                      value="1" />
+                  </lowerValueInternal>
+                  <upperValueInternal>
+                    <literalString
+                      Id="98fe120a-faf1-4335-9d49-6fa442049686"
+                      name="Upper"
+                      value="*" />
+                  </upperValueInternal>
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+          <association
+            Id="508d01b2-15d5-454d-8b6a-9b050ae8d3db"
+            isDerived="false"
+            sourceEndRoleName="LexicalAnalyzer"
+            targetEndRoleName="CompileError"
+            isLeaf="false"
+            isAbstract="false">
+            <classMoniker
+              Id="d7ab4254-0d43-4535-8486-9e6d3ecb766f"
+              LastKnownName="CompileError"
+              LastKnownLocation="LPD.Compiler.Architecture.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="095cf1a1-e3e7-4192-a238-949068068bee"
+                  name="LexicalAnalyzer"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="163e96e5-eba0-45da-a1c2-fc07c2ae454a"
+                  name="CompileError"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false">
+                  <lowerValueInternal>
+                    <literalString
+                      Id="3f7d3341-dde2-482f-a01c-a18592b21983"
+                      name="Lower"
+                      value="1" />
+                  </lowerValueInternal>
+                  <upperValueInternal>
+                    <literalString
+                      Id="a71df71b-ade8-447f-a128-00fb8ed0556e"
+                      name="Upper"
+                      value="*" />
+                  </upperValueInternal>
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+          <association
+            Id="16e34677-bfa0-43bc-b722-412dfc0d6c87"
+            isDerived="false"
+            sourceEndRoleName="LexicalAnalyzer1"
+            targetEndRoleName="CharReader"
+            isLeaf="false"
+            isAbstract="false">
+            <classMoniker
+              Id="3bd460a8-eae6-41c7-b774-3ae767d93fd6"
+              LastKnownName="CharReader"
+              LastKnownLocation="LPD.Compiler.Architecture.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="efcc3547-7a8e-4be1-9665-e52be0a8fa78"
+                  name="LexicalAnalyzer1"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="4b7b42ba-e06d-4d4c-b0e4-26cad6f0ee5f"
+                  name="CharReader"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+          <association
+            Id="0ce171c5-f188-42e8-a8f5-2735f1c50795"
+            isDerived="false"
+            sourceEndRoleName="LexicalAnalyzer1"
+            targetEndRoleName="Symbols"
+            isLeaf="false"
+            isAbstract="false">
+            <enumerationMoniker
+              Id="2d8dfef5-9332-453b-ab0a-21d2e09b6100"
+              LastKnownName="Symbols"
+              LastKnownLocation="LPD.Compiler.Architecture.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="54a1827e-9461-4051-b6d7-c09008cd0682"
+                  name="LexicalAnalyzer1"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="cf636870-11ab-4998-a1b1-e13099cdcc8c"
+                  name="Symbols"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+        </targetEnds>
+        <ownedOperationsInternal>
+          <operation
+            Id="d4b7d5e4-4f87-4088-ac44-04fb9aeeb658"
+            name="HandleAtribution"
+            visibility="Private"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="e7073cc6-63f1-4e9f-a1ff-4bf94a0a2eeb"
+                  direction="Return"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <classMoniker
+                      Id="0cdc1b9c-85b9-4a6f-886c-363eb47150a3"
+                      LastKnownName="Token"
+                      LastKnownLocation="LPD.Compiler.Architecture.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation
+            Id="ce45b5b5-77c9-42a1-b985-dd6c8755b08d"
+            name="HandleRelationalOperator"
+            visibility="Private"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="56af165c-f87d-41d6-a5d4-00a1be9bcb98"
+                  direction="Return"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <classMoniker
+                      Id="0cdc1b9c-85b9-4a6f-886c-363eb47150a3"
+                      LastKnownName="Token"
+                      LastKnownLocation="LPD.Compiler.Architecture.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation
+            Id="ed6757ce-83a3-43ee-8f8c-5308d6d3b107"
+            name="HandleArithmeticOperator"
+            visibility="Private"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="3a43ec82-2396-4267-8e63-d0db1b117a0a"
+                  direction="Return"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <classMoniker
+                      Id="0cdc1b9c-85b9-4a6f-886c-363eb47150a3"
+                      LastKnownName="Token"
+                      LastKnownLocation="LPD.Compiler.Architecture.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation
+            Id="6a5d36a8-b863-4b52-b854-77b469bffe80"
+            name="HandleKeyWord"
+            visibility="Private"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="7545b092-c713-4439-9d90-a90366235a11"
+                  direction="Return"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <classMoniker
+                      Id="0cdc1b9c-85b9-4a6f-886c-363eb47150a3"
+                      LastKnownName="Token"
+                      LastKnownLocation="LPD.Compiler.Architecture.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation
+            Id="a60ca1a9-7c31-425a-853e-96e2e26856b5"
+            name="HandleDigit"
+            visibility="Private"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="1f7c7128-8aba-4844-b524-1f7da66f3cac"
+                  direction="Return"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <classMoniker
+                      Id="0cdc1b9c-85b9-4a6f-886c-363eb47150a3"
+                      LastKnownName="Token"
+                      LastKnownLocation="LPD.Compiler.Architecture.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation
+            Id="f37ae582-d259-43a5-9c49-8e430976f99d"
+            name="GetToken"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="e5bfce66-3e07-4e75-b05d-150180a95baa"
+                  direction="Return"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <classMoniker
+                      Id="0cdc1b9c-85b9-4a6f-886c-363eb47150a3"
+                      LastKnownName="Token"
+                      LastKnownLocation="LPD.Compiler.Architecture.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation
+            Id="c6baa3e2-6f57-4cb6-a7e3-821970781e13"
+            name="HandlePontuation"
+            visibility="Private"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="821ed4af-2f80-4ce3-a3b0-b6e5330cd5dc"
+                  direction="Return"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <classMoniker
+                      Id="0cdc1b9c-85b9-4a6f-886c-363eb47150a3"
+                      LastKnownName="Token"
+                      LastKnownLocation="LPD.Compiler.Architecture.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+        </ownedOperationsInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="b546ff48-3f5e-4629-90ff-ac8d6ca21fbf"
+        name="SyntacticException"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <ownedAttributesInternal>
+          <property
+            Id="cbeec523-c98f-46a4-8003-52e2fdfd9f66"
+            name="Message"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <undefinedTypeMoniker
+                Id="6d40bfab-aee5-4831-91e2-286b52eddfcf"
+                LastKnownName="string"
+                LastKnownLocation="LPD.Compiler.Architecture.uml" />
+            </type_NamedElement>
+          </property>
+        </ownedAttributesInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <enumeration
+        Id="2d8dfef5-9332-453b-ab0a-21d2e09b6100"
+        name="Symbols"
+        isAbstract="false"
+        isLeaf="false">
+        <ownedLiterals>
+          <enumerationLiteral
+            Id="6caaad6c-9886-4aee-84b1-9fe9f3c0cb1e"
+            name="SInicio">
+            <specification>
+              <literalInteger
+                Id="ba397722-b052-4152-b150-4e53f4151d48"
+                name="Integer"
+                value="0" />
+            </specification>
+          </enumerationLiteral>
+          <enumerationLiteral
+            Id="eb97be2e-9c98-408f-989f-b10aae7499b7"
+            name="SLeia">
+            <specification>
+              <literalInteger
+                Id="a8f17b6d-6858-4ffc-a810-930470003056"
+                name="Integer"
+                value="11" />
+            </specification>
+          </enumerationLiteral>
+          <enumerationLiteral
+            Id="1ed776d8-f8c3-48c9-b3fe-546052e75f92"
+            name="SMaior">
+            <specification>
+              <literalInteger
+                Id="38d9864e-cdd5-4b78-b5ca-69726201343d"
+                name="Integer"
+                value="22" />
+            </specification>
+          </enumerationLiteral>
+          <enumerationLiteral
+            Id="83528993-d02f-4fe3-8f50-45a4e30f264f"
+            name="SDiv">
+            <specification>
+              <literalInteger
+                Id="42fd8fbb-9d63-4b80-bda4-bb43a0275956"
+                name="Integer"
+                value="31" />
+            </specification>
+          </enumerationLiteral>
+          <enumerationLiteral
+            Id="c44ad563-6ebe-4734-8700-5ea7295e7655"
+            name="SE">
+            <specification>
+              <literalInteger
+                Id="f6980e86-5359-4e5a-9009-bf63c2d02a30"
+                name="Integer"
+                value="32" />
+            </specification>
+          </enumerationLiteral>
+          <enumerationLiteral
+            Id="9ded1944-0b4f-491d-b98d-b721d23b6c6c"
+            name="SOu">
+            <specification>
+              <literalInteger
+                Id="57c99ea7-2ba6-4155-9ba5-f4614625c6d1"
+                name="Integer"
+                value="33" />
+            </specification>
+          </enumerationLiteral>
+          <enumerationLiteral
+            Id="b4402925-c9c1-4cca-9901-dcc2e2cce432"
+            name="SNao">
+            <specification>
+              <literalInteger
+                Id="ab2681cd-4ee7-42eb-bd95-dde5b2bdd127"
+                name="Integer"
+                value="34" />
+            </specification>
+          </enumerationLiteral>
+          <enumerationLiteral
+            Id="716b68f1-2ffa-4ecb-a02a-532b4b8eebf8"
+            name="SDoisPontos">
+            <specification>
+              <literalInteger
+                Id="fef083bb-eee6-4e18-88b4-ca13b8113d58"
+                name="Integer"
+                value="35" />
+            </specification>
+          </enumerationLiteral>
+          <enumerationLiteral
+            Id="c30c66b5-77e8-491b-85ae-22b2536944ba"
+            name="SPrograma">
+            <specification>
+              <literalInteger
+                Id="66851631-c821-4467-9afd-17cbf860c8d0"
+                name="Integer"
+                value="36" />
+            </specification>
+          </enumerationLiteral>
+          <enumerationLiteral
+            Id="b50f621d-f28a-48ee-8e4f-14abf88f9616"
+            name="SFim">
+            <specification>
+              <literalInteger
+                Id="6fe1486d-116c-4522-96b5-0824aa8cd5e3"
+                name="Integer"
+                value="1" />
+            </specification>
+          </enumerationLiteral>
+          <enumerationLiteral
+            Id="5fcc5a88-7bc3-4c35-b7ef-9c344837769a"
+            name="SProcedimento">
+            <specification>
+              <literalInteger
+                Id="0052e267-a874-49db-9ea2-269efe7d8498"
+                name="Integer"
+                value="2" />
+            </specification>
+          </enumerationLiteral>
+          <enumerationLiteral
+            Id="c9b7ae98-4027-457e-99a5-ca28836967a7"
+            name="SFuncao">
+            <specification>
+              <literalInteger
+                Id="d79a6fb9-0418-40fb-9ab1-fde2da2ef91d"
+                name="Integer"
+                value="3" />
+            </specification>
+          </enumerationLiteral>
+          <enumerationLiteral
+            Id="f55e6b05-fc15-4bd3-b5c9-98213cce8f57"
+            name="SSe">
+            <specification>
+              <literalInteger
+                Id="dc4b879c-4ef1-4315-ba31-6b7999c4862c"
+                name="Integer"
+                value="4" />
+            </specification>
+          </enumerationLiteral>
+          <enumerationLiteral
+            Id="5c8b7570-8175-4322-800d-dc622baedf52"
+            name="SEntao">
+            <specification>
+              <literalInteger
+                Id="cfa4b709-f545-43ce-9d17-7cf801b86cfa"
+                name="Integer"
+                value="5" />
+            </specification>
+          </enumerationLiteral>
+          <enumerationLiteral
+            Id="c71c0865-4e97-4bb7-ad5c-cc700d7ce9b5"
+            name="SSenao">
+            <specification>
+              <literalInteger
+                Id="c94152de-56fd-4131-aa39-45f80da4ee7e"
+                name="Integer"
+                value="6" />
+            </specification>
+          </enumerationLiteral>
+          <enumerationLiteral
+            Id="ca382abc-6e67-4365-b2b7-00ec62f9713f"
+            name="SEnquanto">
+            <specification>
+              <literalInteger
+                Id="81cfe342-6f20-4779-96f0-16ac262f60ff"
+                name="Integer"
+                value="7" />
+            </specification>
+          </enumerationLiteral>
+          <enumerationLiteral
+            Id="87ef156b-6bb7-4b4a-a443-bd4da8d684d1"
+            name="SFaca">
+            <specification>
+              <literalInteger
+                Id="d4e9b905-d8fe-474c-abb3-d2d0b6d9ce73"
+                name="Integer"
+                value="8" />
+            </specification>
+          </enumerationLiteral>
+          <enumerationLiteral
+            Id="a01ae29f-8119-4900-acd9-ba830899c942"
+            name="SAtribuicao">
+            <specification>
+              <literalInteger
+                Id="08e55927-30af-4058-a2d5-486b4f239409"
+                name="Integer"
+                value="9" />
+            </specification>
+          </enumerationLiteral>
+          <enumerationLiteral
+            Id="71a579c7-e69c-43ae-89ed-a44e9fff8d39"
+            name="SEscreva">
+            <specification>
+              <literalInteger
+                Id="a15dff8d-9913-4c05-aa42-f33cb37740c6"
+                name="Integer"
+                value="10" />
+            </specification>
+          </enumerationLiteral>
+          <enumerationLiteral
+            Id="25f8346b-65bf-475a-8b8d-305c4d181651"
+            name="SVar">
+            <specification>
+              <literalInteger
+                Id="69eb3b00-bb81-41b5-a95a-ece40c2767c2"
+                name="Integer"
+                value="12" />
+            </specification>
+          </enumerationLiteral>
+          <enumerationLiteral
+            Id="b41cf19b-cc84-4b58-9891-4ed5253a019e"
+            name="SInteiro">
+            <specification>
+              <literalInteger
+                Id="484735ec-682a-480f-86bc-fcbe10ff390f"
+                name="Integer"
+                value="13" />
+            </specification>
+          </enumerationLiteral>
+          <enumerationLiteral
+            Id="eff7f715-f39d-4893-b665-a3d285147b9e"
+            name="SBooleano">
+            <specification>
+              <literalInteger
+                Id="6659a5fe-f0e9-47de-bbd4-bdf5825d2780"
+                name="Integer"
+                value="14" />
+            </specification>
+          </enumerationLiteral>
+          <enumerationLiteral
+            Id="dec635bb-c7b7-413e-b2a0-12192292aa8f"
+            name="SIdentificador">
+            <specification>
+              <literalInteger
+                Id="00a7fda6-4b45-40ec-a966-166e3405b1b8"
+                name="Integer"
+                value="15" />
+            </specification>
+          </enumerationLiteral>
+          <enumerationLiteral
+            Id="1acd5d20-e6aa-4b66-97f3-e58e24277ad5"
+            name="SNumero">
+            <specification>
+              <literalInteger
+                Id="29410ce9-da6f-4cd3-aaaf-3415cede33d5"
+                name="Integer"
+                value="16" />
+            </specification>
+          </enumerationLiteral>
+          <enumerationLiteral
+            Id="d942b7b1-3e95-4f2f-b54e-1703f4272319"
+            name="SPonto">
+            <specification>
+              <literalInteger
+                Id="8dd8778e-7271-4baa-9544-9cf076130fb2"
+                name="Integer"
+                value="17" />
+            </specification>
+          </enumerationLiteral>
+          <enumerationLiteral
+            Id="4e6c9f9a-35df-4784-98d7-3ea2eefa87e9"
+            name="SPontoVirgula">
+            <specification>
+              <literalInteger
+                Id="6bb0e0cc-07df-4543-b8a5-385da11d2ae2"
+                name="Integer"
+                value="18" />
+            </specification>
+          </enumerationLiteral>
+          <enumerationLiteral
+            Id="60a84ecd-7975-48a5-a0c1-d8d17d545d0a"
+            name="SVirgula">
+            <specification>
+              <literalInteger
+                Id="902915d2-13b0-4b5b-8174-c9d8f5dad9f5"
+                name="Integer"
+                value="19" />
+            </specification>
+          </enumerationLiteral>
+          <enumerationLiteral
+            Id="67850b84-e457-4015-b110-4e78eb79a628"
+            name="SAbreParenteses">
+            <specification>
+              <literalInteger
+                Id="afee9c19-d171-4506-b722-74222e074161"
+                name="Integer"
+                value="20" />
+            </specification>
+          </enumerationLiteral>
+          <enumerationLiteral
+            Id="28edbf04-ab2e-413c-9ac4-2f3786c3f14b"
+            name="SFechaParenteses">
+            <specification>
+              <literalInteger
+                Id="804e6836-08b3-4023-b132-6ef76e0fe3af"
+                name="Integer"
+                value="21" />
+            </specification>
+          </enumerationLiteral>
+          <enumerationLiteral
+            Id="2f2658aa-8d3c-46b3-a340-10735889c7c4"
+            name="SMaiorIg">
+            <specification>
+              <literalInteger
+                Id="fdce6e58-1ad0-4c07-8794-5207e9af4285"
+                name="Integer"
+                value="23" />
+            </specification>
+          </enumerationLiteral>
+          <enumerationLiteral
+            Id="cddd58e2-849d-469e-b62b-00d506f915f2"
+            name="SIg">
+            <specification>
+              <literalInteger
+                Id="5918748c-7be9-44b0-9829-09b4f0d6e605"
+                name="Integer"
+                value="24" />
+            </specification>
+          </enumerationLiteral>
+          <enumerationLiteral
+            Id="f3f4bb2b-ce47-4b0e-b216-1d84ec7c3459"
+            name="SMenor">
+            <specification>
+              <literalInteger
+                Id="f6cdb382-1463-43be-bfd5-4a33fef23ff3"
+                name="Integer"
+                value="25" />
+            </specification>
+          </enumerationLiteral>
+          <enumerationLiteral
+            Id="eba3e185-c4ab-4071-8f71-48e85332b33b"
+            name="SMenorIg">
+            <specification>
+              <literalInteger
+                Id="407a4e24-efde-48b4-8bfb-58467f868629"
+                name="Integer"
+                value="26" />
+            </specification>
+          </enumerationLiteral>
+          <enumerationLiteral
+            Id="d299793b-11dc-49ac-9adb-77c4e825fde2"
+            name="SDif">
+            <specification>
+              <literalInteger
+                Id="132dce50-b657-4a47-a94c-e19f9668b05b"
+                name="Integer"
+                value="27" />
+            </specification>
+          </enumerationLiteral>
+          <enumerationLiteral
+            Id="523cbb31-7d40-4dd9-8df3-8dfd5c39fa9f"
+            name="SMais">
+            <specification>
+              <literalInteger
+                Id="cba77303-6123-4327-99e4-4ee4c1bc4c5d"
+                name="Integer"
+                value="28" />
+            </specification>
+          </enumerationLiteral>
+          <enumerationLiteral
+            Id="8448f1df-1811-43d8-9e1e-27da8b1cd064"
+            name="SMenos">
+            <specification>
+              <literalInteger
+                Id="6bcc8621-c79c-4aca-a659-6a299e5a25f6"
+                name="Integer"
+                value="29" />
+            </specification>
+          </enumerationLiteral>
+          <enumerationLiteral
+            Id="53ccd240-bd9f-4655-a4a1-0c9849d6d635"
+            name="SMult">
+            <specification>
+              <literalInteger
+                Id="6e7682da-5a0f-4cf6-a922-274f0f5190a3"
+                name="Integer"
+                value="30" />
+            </specification>
+          </enumerationLiteral>
+          <enumerationLiteral
+            Id="d52ca191-f5cb-48f1-a016-9f2db4dc7766"
+            name="SVerdadeiro">
+            <specification>
+              <literalInteger
+                Id="de6b0590-30a5-4a9d-83f7-26c689d0ae39"
+                name="Integer"
+                value="37" />
+            </specification>
+          </enumerationLiteral>
+          <enumerationLiteral
+            Id="f4ba348b-21eb-4a29-ad8f-374477ecfe6b"
+            name="SFalso">
+            <specification>
+              <literalInteger
+                Id="17f55786-e562-4b6b-baf8-b04547cfad06"
+                name="Integer"
+                value="38" />
+            </specification>
+          </enumerationLiteral>
+        </ownedLiterals>
+      </enumeration>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="3bd460a8-eae6-41c7-b774-3ae767d93fd6"
+        name="CharReader"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <ownedAttributesInternal>
+          <property
+            Id="deee26c0-b7d2-4ff9-9625-bf317c85656d"
+            name="Current"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <undefinedTypeMoniker
+                Id="05769a73-f65a-4070-b378-12dd3f0f8b68"
+                LastKnownName="Nullable&lt;char&gt;"
+                LastKnownLocation="LPD.Compiler.Architecture.uml" />
+            </type_NamedElement>
+          </property>
+        </ownedAttributesInternal>
+        <ownedOperationsInternal>
+          <operation
+            Id="3d6b1401-3aa1-474a-ba65-6db9fac78648"
+            name="Read"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="c6c27b40-cb60-406f-b144-d5136aab70e7"
+                  direction="Return"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <undefinedTypeMoniker
+                      Id="05769a73-f65a-4070-b378-12dd3f0f8b68"
+                      LastKnownName="Nullable&lt;char&gt;"
+                      LastKnownLocation="LPD.Compiler.Architecture.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+        </ownedOperationsInternal>
       </class>
     </packageHasNamedElement>
   </packagedElements>

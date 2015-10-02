@@ -1,10 +1,13 @@
-﻿using LPD.Compiler.Shared;
+﻿using LPD.Compiler.Lexical;
+using LPD.Compiler.Shared;
 
 namespace LPD.Compiler.Syntactic
 {
     public class SyntacticAnaliser
     {
-        public CompileError Analise()
+        private LexicalAnalizer _lexical;
+
+        public CompileError DoAnalysis()
         {
             try
             {
@@ -14,6 +17,8 @@ namespace LPD.Compiler.Syntactic
             {
 
             }
+
+            return null;
         }
 
         private void BlockAnalise()
