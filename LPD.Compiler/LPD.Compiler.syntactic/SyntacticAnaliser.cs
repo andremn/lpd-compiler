@@ -5,13 +5,14 @@ namespace LPD.Compiler.Syntactic
 {
     public class SyntacticAnaliser
     {
-        private LexicalAnalizer _lexical;
+       
 
         public CompileError DoAnalysis()
         {
+            
             try
             {
-
+                
             }
             catch (SyntacticException ex)
             {
@@ -20,6 +21,7 @@ namespace LPD.Compiler.Syntactic
 
             return null;
         }
+
 
         private void BlockAnalise()
         {
