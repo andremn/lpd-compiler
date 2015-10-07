@@ -3,25 +3,60 @@ using LPD.Compiler.Shared;
 
 namespace LPD.Compiler.Syntactic
 {
-    public class SyntacticAnalyzer
+    public class SyntacticAnaliser
     {
         private LexicalAnalizer _lexical;
         private Token _token;
 
-        public SyntacticAnalyzer(LexicalAnalizer lexical)
-        {
-            _lexical = lexical;
-        }
-
         public CompileError DoAnalysis()
         {
+            if (!NextToken())
+            {
+                //TODO - Criar excessao
+            }
+
             try
             {
+                if (_token.Symbol == Symbols.SPrograma)
+                {
+                    if (!NextToken())
+                    {
+                        //TODO - Criar excessao
+                    }
+                    if (_token.Symbol == Symbols.SIdentificador)
+                    {
+                        if (!NextToken())
+                        {
+                            //TODO - Criar excessao
+                        }
+                        if (_token.Symbol == Symbols.SPontoVirgula)
+                        {
+                            BlockAnalyze();
+                            if (!NextToken())
+                            {
+                                //TODO - Criar excessao
+                            }
+                        }
+                        else
+                        {
+                            throw new SyntacticException();
+                        }
+                    }
+                    else
+                    {
+                        throw new SyntacticException();
+                    }
+                }
+                else
+                {
+                    throw new SyntacticException();
+                }
+
 
             }
             catch (SyntacticException ex)
             {
-
+                
             }
 
             return null;
@@ -45,138 +80,80 @@ namespace LPD.Compiler.Syntactic
             return true;
         }
 
-        private void AnalyzeBlock()
-        {
-
-        }
-
-        private void AnalyzeVar()
-        {
-
-        }
-
-        private void AnalyzeVars()
-        {
-
-        }
-
-        private void AnalyzeType()
-        {
-
-        }
-
-        private void AnalyzeCommands()
-        {
-
-        }
-
-        private void AnalyzeSimpleCommand()
-        {
-
-        }
-
-        private void AnalyzeAttrProc()
-        {
-
-        }
-
-        private void AnalyzeProcCall()
-        {
-
-        }
-
-        private void AnalyzeRead()
-        {
-
-        }
-
-        private void AnalyzePrint()
-        {
-
-        }
-
-        private void AnalyzeWhile()
+        private void BlockAnalyze()
         {
             if (!NextToken())
             {
-                //Todo: exception
+                //TODO - Criar excessao
             }
-
-            AnalyzeExpression();
-
-            if (_token.Symbol != Symbols.SFaca)
-            {
-                throw new SyntacticException();
-            }
-
-            if (!NextToken())
-            {
-                //Todo: exception
-            }
-
-            AnalyzeSimpleCommand();
+            VarsDclAnalyze();
+            SubRoutineAnalise();
+            CommandsAnalise();
         }
 
-        private void AnalyzeIf()
+        private void VarAnalyze()
         {
-            if (!NextToken())
+            do
             {
-                //Todo: exception
-            }
-
-            AnalyzeExpression();
-
-            if (_token.Symbol != Symbols.SEntao)
-            {
-                throw new SyntacticException();
-            }
-
-            if (!NextToken())
-            {
-                //Todo: exception
-            }
-
-            AnalyzeSimpleCommand();
-
-            if (_token.Symbol == Symbols.SSenao)
-            {
-                if (!NextToken())
-                {
-                    //Todo: exception
-                }
-
-                AnalyzeSimpleCommand();
-            }
-        }
-
-        private void AnalyzeSubRoutine()
-        {
-            if (!NextToken())
-            {
-                //Todo: exception
-            }
-
-            if (_token.Symbol == Symbols.SProcedimento || _token.Symbol == Symbols.SFuncao)
-            {
-                //Todo: code generator
-            }
-
-            while (_token.Symbol == Symbols.SProcedimento || _token.Symbol == Symbols.SFuncao)
-            {
-                if (_token.Symbol == Symbols.SProcedimento)
-                {
-                    AnalyzeProcDcl();
-                }
-                else
-                {
-                    AnalyzeFuncDcl();
-                }
-
-                if (_token.Symbol == Symbols.SPontoVirgula)
+                if (_token.Symbol == Symbols.SIdentificador)
                 {
                     if (!NextToken())
                     {
-                        //Todo: exception
+                        //TODO - Criar excessao
+                    }
+                    if (_token.Symbol == Symbols.SVirgula || _token.Symbol == Symbols.SDoisPontos)
+                    {
+                        if (_token.Symbol == Symbols.SVirgula)
+                        {
+                            if (!NextToken())
+                            {
+                                //TODO - Criar excessao
+                            }
+                            if (_token.Symbol == Symbols.SDoisPontos)
+                            {
+                                //TODO - ERRO
+                                throw new SyntacticException();
+                            }
+                        }
+                        else
+                        {
+                            throw new SyntacticException();
+                        }
+                    }
+                }
+            } while (_token.Symbol == Symbols.SDoisPontos);
+
+            if (!NextToken())
+            {
+                //TODO - Criar excessao
+            }
+            TypeAnalyze();
+        }
+
+        private void VarsDclAnalyze()
+        {
+            if (_token.Symbol == Symbols.SVar)
+            {
+                if (!NextToken())
+                {
+                    //TODO - Criar excessao
+                }
+                if (_token.Symbol == Symbols.SIdentificador)
+                {
+                    while(_token.Symbol == Symbols.SIdentificador)
+                    {
+                        VarAnalyze();
+                        if (_token.Symbol == Symbols.SPontoVirgula)
+                        {
+                            if (!NextToken())
+                            {
+                                //TODO - Criar excessao
+                            }
+                        }
+                        else
+                        {
+                            throw new SyntacticException();
+                        }
                     }
                 }
                 else
@@ -184,193 +161,263 @@ namespace LPD.Compiler.Syntactic
                     throw new SyntacticException();
                 }
             }
+            
         }
 
-        private void AnalyzeProcDcl()
+        private void TypeAnalyze()
         {
-            if (!NextToken())
-            {
-                //Todo: exception
-            }
-
-            if (_token.Symbol != Symbols.SIdentificador)
-            {
-                throw new SyntacticException();
-            }
-
-            if (!NextToken())
-            {
-                //Todo: exception
-            }
-
-            if (_token.Symbol != Symbols.SPontoVirgula)
-            {
-                throw new SyntacticException();
-            }
-
-            AnalyzeBlock();
-        }
-
-        private void AnalyzeFuncDcl()
-        {
-            if (!NextToken())
-            {
-                //Todo: exception
-            }
-
-            if (_token.Symbol != Symbols.SIdentificador)
-            {
-                throw new SyntacticException();
-            }
-
-            if (!NextToken())
-            {
-                //Todo: exception
-            }
-
-            if (_token.Symbol != Symbols.SDoisPontos)
-            {
-                throw new SyntacticException();
-            }
-
             if (_token.Symbol != Symbols.SInteiro && _token.Symbol != Symbols.SBooleano)
             {
                 throw new SyntacticException();
             }
+            else
+            {
+                if (!NextToken())
+                {
+                    //TODO - Criar excessao
+                }
+            }
+        }
 
+        private void CommandsAnalyze()
+        {
+            if (_token.Symbol == Symbols.SInicio)
+            {
+                if (!NextToken())
+                {
+                    //TODO - Criar excessao
+                }
+                SimpleCommandAnalyze();
+                while (_token.Symbol != Symbols.SFim)
+                {
+                    if (_token.Symbol == Symbols.SPontoVirgula)
+                    {
+                        if (!NextToken())
+                        {
+                            //TODO - Criar excessao
+                        }
+                        if (_token.Symbol != Symbols.SFim)
+                        {
+                            SimpleCommandAnalyze();
+                        }
+                        else
+                        {
+                            throw new SyntacticException();
+                        }
+                    }
+                    else
+                    {
+                        throw new SyntacticException();
+                    }
+                }
+            }
+            else
+            {
+                throw new SyntacticException();
+            }
+        }
+
+        private void SimpleCommandAnalyze()
+        {
+            if (_token.Symbol == Symbols.SIdentificador)
+            {
+                if (!NextToken())
+                {
+                    //TODO - Criar excessao
+                }
+                if (_token.Symbol == Symbols.SAtribuicao)
+                {
+                    AnalyzeAttribution();
+                }
+                else
+                {
+                    ProcCallAnalyze();
+                }
+            }
+            else if (_token.Symbol == Symbols.SSe)
+            {
+                IfAnalyze();
+            }
+            else if (_token.Symbol == Symbols.SEnquanto)
+            {
+                WhileAnalyze();
+            }
+            else if (_token.Symbol == Symbols.SLeia)
+            {
+                ReadAnalyze();
+            }
+            else if (_token.Symbol == Symbols.SEscreva)
+            {
+                WriteAnalyze();
+            }
+            else 
+            {
+                CommandsAnalyze();
+            }
+        }
+
+        private void AttrAnalyze()
+        {
+            
+        }
+
+        private void ProcCallAnalyze()
+        {
+
+        }
+
+        private void ReadAnalyze()
+        {
             if (!NextToken())
             {
-                //Todo: exception
+                //TODO - Criar excessao
             }
-
-            if (_token.Symbol != Symbols.SPontoVirgula)
+            if (_token.Symbol == Symbols.SAbreParenteses)
+            {
+                if (!NextToken())
+                {
+                    //TODO - Criar excessao
+                }
+                if (_token.Symbol == Symbols.SIdentificador)
+                {
+                    // doesnt exist yet!
+                    /*
+                    if(pesquisa_declvar_tabela(token.lexema))
+                    {
+                        
+                    }
+                    else
+                    {
+                        throw new SyntacticException();
+                    }*/
+                    if (!NextToken())
+                    {
+                        //TODO - Criar excessao
+                    }
+                    if (_token.Symbol == Symbols.SAbreParenteses)
+                    {
+                        if (!NextToken())
+                        {
+                            //TODO - Criar excessao
+                        }
+                    }
+                    else
+                    {
+                        throw new SyntacticException();
+                    }
+                }
+                else
+                {
+                    throw new SyntacticException();
+                }
+            }
+            else
             {
                 throw new SyntacticException();
             }
 
-            AnalyzeBlock();
         }
 
-        private void AnalyzeExpression()
-        {
-            AnalyzeSimpleExpression();
-
-            if (_token.Symbol == Symbols.SMaior ||
-                _token.Symbol == Symbols.SMaiorIg ||
-                _token.Symbol == Symbols.SMenor ||
-                _token.Symbol == Symbols.SMenorIg ||
-                _token.Symbol == Symbols.SIg ||
-                _token.Symbol == Symbols.SDif)
-            {
-                if (!NextToken())
-                {
-                    //Todo: exception
-                }
-
-                AnalyzeSimpleExpression();
-            }
-        }
-
-        private void AnalyzeSimpleExpression()
-        {
-            if (_token.Symbol == Symbols.SMais || _token.Symbol == Symbols.SMenos)
-            {
-                if (!NextToken())
-                {
-                    //Todo: exception
-                }
-
-                AnalyzeTerm();
-
-                while (_token.Symbol == Symbols.SMais || _token.Symbol == Symbols.SMenos || _token.Symbol == Symbols.SOu)
-                {
-                    if (!NextToken())
-                    {
-                        //Todo: exception
-                    }
-
-                    AnalyzeTerm();
-                }
-            }
-        }
-
-        private void AnalyzeTerm()
-        {
-            AnalyzeFactor();
-
-            while (_token.Symbol == Symbols.SMult || _token.Symbol == Symbols.SDiv || _token.Symbol == Symbols.SE)
-            {
-                if (!NextToken())
-                {
-                    //Todo: exception
-                }
-
-                AnalyzeFactor();
-            }
-        }
-
-        private void AnalyzeFactor()
-        {
-            if (_token.Symbol == Symbols.SIdentificador)
-            {
-                AnalyzeFuncCall();
-            }
-            else
-            {
-                if (_token.Symbol == Symbols.SNumero)
-                {
-                    if (!NextToken())
-                    {
-                        //Todo: exception
-                    }
-                }
-                else if (_token.Symbol == Symbols.SNao)
-                {
-                    if (!NextToken())
-                    {
-                        //Todo: exception
-                    }
-
-                    AnalyzeFactor();
-                }
-                else if (_token.Symbol == Symbols.SAbreParenteses)
-                {
-                    if (!NextToken())
-                    {
-                        //Todo: exception
-                    }
-
-                    AnalyzeExpression();
-
-                    if (_token.Symbol != Symbols.SFechaParenteses)
-                    {
-                        throw new SyntacticException();
-                    }
-
-                    if (_token.Symbol != Symbols.SVerdadeiro && _token.Symbol != Symbols.SFalso)
-                    {
-                        if (!NextToken())
-                        {
-                            //Todo: exception
-                        }
-                    }
-                }
-            }
-        }
-
-        private void AnalyzeAttribution()
+        private void WriteAnalyze()
         {
             if (!NextToken())
             {
-                //Todo: exception
+                //TODO - Criar excessao
+            }
+            if (_token.Symbol == Symbols.SAbreParenteses)
+            {
+                if (!NextToken())
+                {
+                    //TODO - Criar excessao
+                }
+                if (_token.Symbol == Symbols.SIdentificador)
+                {
+                    // doesnt exist yet!
+                    /*
+                    if(pesquisa_declvar_tabela(token.lexema))
+                    {
+                        
+                    }
+                    else
+                    {
+                        throw new SyntacticException();
+                    }*/
+                    if (!NextToken())
+                    {
+                        //TODO - Criar excessao
+                    }
+                    if (_token.Symbol == Symbols.SAbreParenteses)
+                    {
+                        if (!NextToken())
+                        {
+                            //TODO - Criar excessao
+                        }
+                    }
+                    else
+                    {
+                        throw new SyntacticException();
+                    }
+                }
+                else
+                {
+                    throw new SyntacticException();
+                }
+            }
+            else
+            {
+                throw new SyntacticException();
             }
 
-            AnalyzeExpression();
+        }
+        //Ate aqui
+        private void WhileAnalyze()
+        {
+
         }
 
-        private void AnalyzeFuncCall()
+        private void IfAnalyze()
         {
-            //Todo: semântico deve verificar se o tipo do identificador é o mesmo da função
+
+        }
+
+        private void SubRoutineAnalise()
+        {
+
+        }
+
+        private void ProcDclAnalise()
+        {
+
+        }
+
+        private void FuncDclAnalise()
+        {
+
+        }
+
+        private void ExpressionAnalise()
+        {
+
+        }
+
+        private void SimpleExpressionAnalise()
+        {
+
+        }
+
+        private void TermAnalise()
+        {
+
+        }
+
+        private void FactorAnalise()
+        {
+
+        }
+
+        private void FuncCallAnalise()
+        {
+
         }
     }
 }
