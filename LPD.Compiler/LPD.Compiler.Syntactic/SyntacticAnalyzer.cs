@@ -43,9 +43,13 @@ namespace LPD.Compiler.Syntactic
                         if (_token.Symbol == Symbols.SPontoVirgula)
                         {
                             AnalyzeBlock();
-                            if (!NextToken())
+                            if (_token.Symbol == Symbols.SPonto && !NextToken())
                             {
-                                //TODO - Criar excessao
+                                //TODO - SUCESSO
+                            }
+                            else
+                            {
+                                throw new SyntacticException();
                             }
                         }
                         else
@@ -97,6 +101,7 @@ namespace LPD.Compiler.Syntactic
             {
                 //TODO - Criar excessao
             }
+            //Repensar
             AnalyzeVarsDcl();
             AnalyzeSubRoutine();
             AnalyzeCommands();
@@ -171,8 +176,7 @@ namespace LPD.Compiler.Syntactic
                 {
                     throw new SyntacticException();
                 }
-            }
-            
+            }            
         }
 
         private void AnalyzeType()
@@ -269,7 +273,10 @@ namespace LPD.Compiler.Syntactic
 
         private void ProcCallAnalyze()
         {
-
+            if (!NextToken())
+            {
+                //TODO - Criar excessao
+            }
         }
 
         private void AnalyzeRead()
@@ -300,7 +307,7 @@ namespace LPD.Compiler.Syntactic
                     {
                         //TODO - Criar excessao
                     }
-                    if (_token.Symbol == Symbols.SAbreParenteses)
+                    if (_token.Symbol == Symbols.SFechaParenteses)
                     {
                         if (!NextToken())
                         {
