@@ -41,7 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SyntacticAnaliser.cs" />
+    <Compile Include="SyntacticAnalyzer.cs" />
     <Compile Include="SyntacticException.cs" />
   </ItemGroup>
   <ItemGroup>

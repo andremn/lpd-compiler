@@ -18,6 +18,7 @@ using System.Windows.Threading;
 using System.ComponentModel;
 using System.Linq;
 using LPD.Compiler.Shared;
+using LPD.Compiler.Syntactic;
 
 namespace LPD.Compiler
 {
@@ -195,22 +196,11 @@ namespace LPD.Compiler
             TokensList.Items.Clear();
             ErrorTextBlock.Text = string.Empty;
             
-            using (LexicalAnalizer lexical = new LexicalAnalizer(_selectedFile))
+            using (LexicalAnalyzer lexical = new LexicalAnalyzer(_selectedFile))
             {
-                LexicalItem item;
+                var syntactic = new SyntacticAnalyzer(lexical);
 
-                while (lexical.Next(out item))
-                {
-                    if (item.Error != null)
-                    {
-                        CodePosition position = item.Error.Position;
-
-                        ErrorTextBlock.Text = string.Format("Linha {0}, coluna {1}: {2}", position.Line, position.Column, item.Error.Message);
-                        break;
-                    }
-
-                    TokensList.Items.Add(item.Token);
-                }
+                syntactic.DoAnalysis();
             }
 
             int tokensCount = TokensList.Items.Count;

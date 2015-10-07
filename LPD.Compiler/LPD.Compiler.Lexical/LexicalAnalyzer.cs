@@ -8,7 +8,7 @@ using System.Text;
 
 namespace LPD.Compiler.Lexical
 {
-    public class LexicalAnalizer : IDisposable
+    public class LexicalAnalyzer : IDisposable
     {
         #region Error messages
 
@@ -75,7 +75,7 @@ namespace LPD.Compiler.Lexical
         private string _filePath;
         private CodePosition _currentPosition;
 
-        public LexicalAnalizer(string filePath)
+        public LexicalAnalyzer(string filePath)
         {
             _filePath = filePath;
             _currentPosition.Column = 0;
@@ -85,7 +85,7 @@ namespace LPD.Compiler.Lexical
             _reader.CharRead += OnCharRead;
         }
 
-        public bool Next(out LexicalItem item)
+        public bool GetToken(out LexicalItem item)
         {
             LexicalItem nextItem = NextItem();
 

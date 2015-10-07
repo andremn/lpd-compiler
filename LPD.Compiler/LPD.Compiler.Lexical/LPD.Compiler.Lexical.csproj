@@ -44,7 +44,7 @@
     <Compile Include="CharReader.cs" />
     <Compile Include="LexicalItem.cs" />
     <Compile Include="Symbols.cs" />
-    <Compile Include="LexicalAnalizer.cs" />
+    <Compile Include="LexicalAnalyzer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Token.cs" />
   </ItemGroup>
@@ -53,9 +53,6 @@
       <Project>{a196d281-2e94-4e65-9239-65a2800bf79b}</Project>
       <Name>LPD.Compiler.Shared</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="ClassDiagram1.cd" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

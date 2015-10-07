@@ -1,12 +1,23 @@
 ﻿using LPD.Compiler.Lexical;
 using LPD.Compiler.Shared;
+using System;
 
 namespace LPD.Compiler.Syntactic
 {
-    public class SyntacticAnaliser
+    public class SyntacticAnalyzer
     {
-        private LexicalAnalizer _lexical;
+        private LexicalAnalyzer _lexical;
         private Token _token;
+
+        public SyntacticAnalyzer(LexicalAnalyzer lexical)
+        {
+            if (lexical == null)
+            {
+                throw new ArgumentNullException(nameof(lexical));
+            }
+
+            _lexical = lexical;
+        }
 
         public CompileError DoAnalysis()
         {
@@ -54,7 +65,7 @@ namespace LPD.Compiler.Syntactic
 
 
             }
-            catch (SyntacticException ex)
+            catch (SyntacticException)
             {
                 
             }
@@ -66,7 +77,7 @@ namespace LPD.Compiler.Syntactic
         {
             LexicalItem item = new LexicalItem();
 
-            if (!_lexical.Next(out item))
+            if (!_lexical.GetToken(out item))
             {
                 return false;
             }
@@ -421,11 +432,6 @@ namespace LPD.Compiler.Syntactic
 
         private void AnalyzeSubRoutine()
         {
-            if (!NextToken())
-            {
-                //Todo: exception
-            }
-
             if (_token.Symbol == Symbols.SProcedimento || _token.Symbol == Symbols.SFuncao)
             {
                 //Todo: code generator
@@ -549,18 +555,18 @@ namespace LPD.Compiler.Syntactic
                 {
                     //Todo: exception
                 }
+            }
+
+            AnalyzeTerm();
+
+            while (_token.Symbol == Symbols.SMais || _token.Symbol == Symbols.SMenos || _token.Symbol == Symbols.SOu)
+            {
+                if (!NextToken())
+                {
+                    //Todo: exception
+                }
 
                 AnalyzeTerm();
-
-                while (_token.Symbol == Symbols.SMais || _token.Symbol == Symbols.SMenos || _token.Symbol == Symbols.SOu)
-                {
-                    if (!NextToken())
-                    {
-                        //Todo: exception
-                    }
-
-                    AnalyzeTerm();
-                }
             }
         }
 
@@ -641,6 +647,11 @@ namespace LPD.Compiler.Syntactic
         private void AnalyzeFuncCall()
         {
             //Todo: semântico deve verificar se o tipo do identificador é o mesmo da função
+
+            if (!NextToken())
+            {
+                //Todo: exception
+            }
         }
     }
 }
