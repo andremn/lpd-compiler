@@ -74,10 +74,16 @@ namespace LPD.Compiler.Lexical
         private CharReader _reader;
         private string _filePath;
         private CodePosition _currentPosition;
+        private TokenCollection _tokenCollection;
 
         public CodePosition Position
         {
             get { return _currentPosition; }
+        }
+
+        public TokenCollection ReadTokens
+        {
+            get { return _tokenCollection; }
         }
 
         public LexicalAnalyzer(string filePath)
@@ -88,6 +94,7 @@ namespace LPD.Compiler.Lexical
             _currentPosition.Index = -1;
             _reader = new CharReader(filePath, Encoding.UTF8);
             _reader.CharRead += OnCharRead;
+            _tokenCollection = new TokenCollection();
         }
 
         public bool GetToken(out LexicalItem item)
@@ -101,6 +108,7 @@ namespace LPD.Compiler.Lexical
             }
 
             item = nextItem;
+            _tokenCollection.Append(item.Token);
             return true;
         }
 

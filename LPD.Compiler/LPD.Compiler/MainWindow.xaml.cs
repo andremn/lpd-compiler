@@ -198,9 +198,15 @@ namespace LPD.Compiler
             
             using (LexicalAnalyzer lexical = new LexicalAnalyzer(_selectedFile))
             {
-                var syntactic = new SyntacticAnalyzer(lexical);
+                SyntacticAnalyzer syntactic = new SyntacticAnalyzer(lexical);
+                CompileError compileError = syntactic.DoAnalysis();
 
-                syntactic.DoAnalysis();
+                if (compileError != null)
+                {
+
+                }
+
+                TokensList.ItemsSource = lexical.ReadTokens;
             }
 
             int tokensCount = TokensList.Items.Count;

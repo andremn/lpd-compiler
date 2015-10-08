@@ -159,7 +159,13 @@
                 <GroupBox x:Name="TokenGroupBox"
                           Grid.Column="1">
                     <ListView x:Name="TokensList"
-                              Margin="30,0,0,0"/>
+                              Margin="30,0,0,0">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
                 </GroupBox>
             </Grid>
         </Border>
