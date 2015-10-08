@@ -75,6 +75,11 @@ namespace LPD.Compiler.Lexical
         private string _filePath;
         private CodePosition _currentPosition;
 
+        public CodePosition Position
+        {
+            get { return _currentPosition; }
+        }
+
         public LexicalAnalyzer(string filePath)
         {
             _filePath = filePath;
@@ -310,13 +315,13 @@ namespace LPD.Compiler.Lexical
             {
                 lex += character;
                 token.Symbol = Symbols.SAtribuicao;
+                _reader.Read();
             }
             else
             {
                 token.Symbol = Symbols.SDoisPontos;
             }
 
-            _reader.Read();
             token.Lexeme = lex;
             return BuildLexicalItem(token, null);
         }

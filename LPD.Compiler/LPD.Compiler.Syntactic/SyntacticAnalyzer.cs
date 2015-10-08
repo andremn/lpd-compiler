@@ -1,6 +1,7 @@
 ﻿using LPD.Compiler.Lexical;
 using LPD.Compiler.Shared;
 using System;
+using static LPD.Compiler.Syntactic.Properties.Resources;
 
 namespace LPD.Compiler.Syntactic
 {
@@ -43,7 +44,8 @@ namespace LPD.Compiler.Syntactic
                         if (_token.Symbol == Symbols.SPontoVirgula)
                         {
                             AnalyzeBlock();
-                            if (_token.Symbol == Symbols.SPonto && !NextToken())
+
+                            if (_token.Symbol == Symbols.SPonto || !NextToken())
                             {
                                 //TODO - SUCESSO
                             }
@@ -71,7 +73,7 @@ namespace LPD.Compiler.Syntactic
             }
             catch (SyntacticException)
             {
-                
+                throw;
             }
 
             return null;
@@ -95,19 +97,26 @@ namespace LPD.Compiler.Syntactic
             return true;
         }
 
+        private void RaiseUnexpectedTokenError(string message)
+        {
+            int column = _lexical.Position.Column - _token.Lexeme.Length;
+
+            throw new SyntacticException(string.Format(UnexpectedTokenErrorMessage, _lexical.Position.Line, column, message));
+        }
+
         private void AnalyzeBlock()
         {
             if (!NextToken())
             {
                 //TODO - Criar excessao
             }
-            //Repensar
+
             AnalyzeVarsDcl();
-            AnalyzeSubRoutine();
+            AnalyzeSubRoutines();
             AnalyzeCommands();
         }
 
-        private void AnalyzeVar()
+        private void AnalyzeVars()
         {
             do
             {
@@ -117,6 +126,7 @@ namespace LPD.Compiler.Syntactic
                     {
                         //TODO - Criar excessao
                     }
+
                     if (_token.Symbol == Symbols.SVirgula || _token.Symbol == Symbols.SDoisPontos)
                     {
                         if (_token.Symbol == Symbols.SVirgula)
@@ -125,24 +135,25 @@ namespace LPD.Compiler.Syntactic
                             {
                                 //TODO - Criar excessao
                             }
+
                             if (_token.Symbol == Symbols.SDoisPontos)
                             {
-                                //TODO - ERRO
-                                throw new SyntacticException();
+                                RaiseUnexpectedTokenError("':'");
                             }
                         }
-                        else
-                        {
-                            throw new SyntacticException();
-                        }
+                    }
+                    else
+                    {
+                        RaiseUnexpectedTokenError("',' ou ':'");
                     }
                 }
-            } while (_token.Symbol == Symbols.SDoisPontos);
+            } while (_token.Symbol != Symbols.SDoisPontos);
 
             if (!NextToken())
             {
                 //TODO - Criar excessao
             }
+
             AnalyzeType();
         }
 
@@ -156,9 +167,10 @@ namespace LPD.Compiler.Syntactic
                 }
                 if (_token.Symbol == Symbols.SIdentificador)
                 {
-                    while(_token.Symbol == Symbols.SIdentificador)
+                    while (_token.Symbol == Symbols.SIdentificador)
                     {
-                        AnalyzeVar();
+                        AnalyzeVars();
+
                         if (_token.Symbol == Symbols.SPontoVirgula)
                         {
                             if (!NextToken())
@@ -176,7 +188,7 @@ namespace LPD.Compiler.Syntactic
                 {
                     throw new SyntacticException();
                 }
-            }            
+            }
         }
 
         private void AnalyzeType()
@@ -202,7 +214,9 @@ namespace LPD.Compiler.Syntactic
                 {
                     //TODO - Criar excessao
                 }
+
                 AnalyzeSimpleCommand();
+
                 while (_token.Symbol != Symbols.SFim)
                 {
                     if (_token.Symbol == Symbols.SPontoVirgula)
@@ -211,24 +225,26 @@ namespace LPD.Compiler.Syntactic
                         {
                             //TODO - Criar excessao
                         }
+
                         if (_token.Symbol != Symbols.SFim)
                         {
                             AnalyzeSimpleCommand();
                         }
-                        else
-                        {
-                            throw new SyntacticException();
-                        }
                     }
                     else
                     {
-                        throw new SyntacticException();
+                        RaiseUnexpectedTokenError("';'");
                     }
+                }
+
+                if (!NextToken())
+                {
+                    //TODO - Criar excessao
                 }
             }
             else
             {
-                throw new SyntacticException();
+                RaiseUnexpectedTokenError("'inicio'");
             }
         }
 
@@ -240,6 +256,7 @@ namespace LPD.Compiler.Syntactic
                 {
                     //TODO - Criar excessao
                 }
+
                 if (_token.Symbol == Symbols.SAtribuicao)
                 {
                     AnalyzeAttribution();
@@ -265,7 +282,7 @@ namespace LPD.Compiler.Syntactic
             {
                 AnalyzeWrite();
             }
-            else 
+            else
             {
                 AnalyzeCommands();
             }
@@ -273,10 +290,6 @@ namespace LPD.Compiler.Syntactic
 
         private void ProcCallAnalyze()
         {
-            if (!NextToken())
-            {
-                //TODO - Criar excessao
-            }
         }
 
         private void AnalyzeRead()
@@ -285,12 +298,14 @@ namespace LPD.Compiler.Syntactic
             {
                 //TODO - Criar excessao
             }
+
             if (_token.Symbol == Symbols.SAbreParenteses)
             {
                 if (!NextToken())
                 {
                     //TODO - Criar excessao
                 }
+
                 if (_token.Symbol == Symbols.SIdentificador)
                 {
                     // doesnt exist yet!
@@ -303,10 +318,12 @@ namespace LPD.Compiler.Syntactic
                     {
                         throw new SyntacticException();
                     }*/
+
                     if (!NextToken())
                     {
                         //TODO - Criar excessao
                     }
+
                     if (_token.Symbol == Symbols.SFechaParenteses)
                     {
                         if (!NextToken())
@@ -328,7 +345,6 @@ namespace LPD.Compiler.Syntactic
             {
                 throw new SyntacticException();
             }
-
         }
 
         private void AnalyzeWrite()
@@ -343,6 +359,7 @@ namespace LPD.Compiler.Syntactic
                 {
                     //TODO - Criar excessao
                 }
+
                 if (_token.Symbol == Symbols.SIdentificador)
                 {
                     // doesnt exist yet!
@@ -355,11 +372,13 @@ namespace LPD.Compiler.Syntactic
                     {
                         throw new SyntacticException();
                     }*/
+
                     if (!NextToken())
                     {
                         //TODO - Criar excessao
                     }
-                    if (_token.Symbol == Symbols.SAbreParenteses)
+
+                    if (_token.Symbol == Symbols.SFechaParenteses)
                     {
                         if (!NextToken())
                         {
@@ -437,7 +456,7 @@ namespace LPD.Compiler.Syntactic
             }
         }
 
-        private void AnalyzeSubRoutine()
+        private void AnalyzeSubRoutines()
         {
             if (_token.Symbol == Symbols.SProcedimento || _token.Symbol == Symbols.SFuncao)
             {
@@ -514,6 +533,11 @@ namespace LPD.Compiler.Syntactic
             if (_token.Symbol != Symbols.SDoisPontos)
             {
                 throw new SyntacticException();
+            }
+
+            if (!NextToken())
+            {
+                //Todo: exception
             }
 
             if (_token.Symbol != Symbols.SInteiro && _token.Symbol != Symbols.SBooleano)
@@ -598,45 +622,41 @@ namespace LPD.Compiler.Syntactic
             {
                 AnalyzeFuncCall();
             }
-            else
+            else if (_token.Symbol == Symbols.SNumero)
             {
-                if (_token.Symbol == Symbols.SNumero)
+                if (!NextToken())
                 {
-                    if (!NextToken())
-                    {
-                        //Todo: exception
-                    }
+                    //Todo: exception
                 }
-                else if (_token.Symbol == Symbols.SNao)
+            }
+            else if (_token.Symbol == Symbols.SNao)
+            {
+                if (!NextToken())
                 {
-                    if (!NextToken())
-                    {
-                        //Todo: exception
-                    }
-
-                    AnalyzeFactor();
+                    //Todo: exception
                 }
-                else if (_token.Symbol == Symbols.SAbreParenteses)
+
+                AnalyzeFactor();
+            }
+            else if (_token.Symbol == Symbols.SAbreParenteses)
+            {
+                if (!NextToken())
                 {
-                    if (!NextToken())
-                    {
-                        //Todo: exception
-                    }
+                    //Todo: exception
+                }
 
-                    AnalyzeExpression();
+                AnalyzeExpression();
 
-                    if (_token.Symbol != Symbols.SFechaParenteses)
-                    {
-                        throw new SyntacticException();
-                    }
-
-                    if (_token.Symbol != Symbols.SVerdadeiro && _token.Symbol != Symbols.SFalso)
-                    {
-                        if (!NextToken())
-                        {
-                            //Todo: exception
-                        }
-                    }
+                if (_token.Symbol != Symbols.SFechaParenteses)
+                {
+                    throw new SyntacticException();
+                }
+            }
+            else if (_token.Symbol == Symbols.SVerdadeiro || _token.Symbol == Symbols.SFalso)
+            {
+                if (!NextToken())
+                {
+                    //Todo: exception
                 }
             }
         }
