@@ -651,6 +651,11 @@ namespace LPD.Compiler.Syntactic
                 {
                     throw new SyntacticException();
                 }
+
+                if (!NextToken())
+                {
+                    //Todo: exception
+                }
             }
             else if (_token.Symbol == Symbols.SVerdadeiro || _token.Symbol == Symbols.SFalso)
             {
