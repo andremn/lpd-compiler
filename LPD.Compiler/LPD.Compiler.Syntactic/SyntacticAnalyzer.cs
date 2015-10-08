@@ -51,22 +51,22 @@ namespace LPD.Compiler.Syntactic
                             }
                             else
                             {
-                                throw new SyntacticException();
+                                RaiseUnexpectedTokenError("'.' ou fim do arquivo");
                             }
                         }
                         else
                         {
-                            throw new SyntacticException();
+                            RaiseUnexpectedTokenError("';'");
                         }
                     }
                     else
                     {
-                        throw new SyntacticException();
+                        RaiseUnexpectedTokenError("identificador");
                     }
                 }
                 else
                 {
-                    throw new SyntacticException();
+                    RaiseUnexpectedTokenError("'programa'");
                 }
 
 
@@ -90,7 +90,7 @@ namespace LPD.Compiler.Syntactic
 
             if (item.Error != null)
             {
-                throw new SyntacticException(item.Error.Message);
+                RaiseLexicalErrorMessage(item.Error.Message);
             }
 
             _token = item.Token;
@@ -102,6 +102,13 @@ namespace LPD.Compiler.Syntactic
             int column = _lexical.Position.Column - _token.Lexeme.Length;
 
             throw new SyntacticException(string.Format(UnexpectedTokenErrorMessage, _lexical.Position.Line, column, message));
+        }
+
+        private void RaiseLexicalErrorMessage(string message)
+        {
+            int column = _lexical.Position.Column - _token.Lexeme.Length;
+
+            throw new SyntacticException(string.Format(LexicalErrorMessage, _lexical.Position.Line, column, message));
         }
 
         private void AnalyzeBlock()
@@ -180,13 +187,13 @@ namespace LPD.Compiler.Syntactic
                         }
                         else
                         {
-                            throw new SyntacticException();
+                            RaiseUnexpectedTokenError("';'");
                         }
                     }
                 }
                 else
                 {
-                    throw new SyntacticException();
+                    RaiseUnexpectedTokenError("identificador");
                 }
             }
         }
@@ -195,7 +202,7 @@ namespace LPD.Compiler.Syntactic
         {
             if (_token.Symbol != Symbols.SInteiro && _token.Symbol != Symbols.SBooleano)
             {
-                throw new SyntacticException();
+                RaiseUnexpectedTokenError("'inteiro' ou 'booleano'");
             }
             else
             {
@@ -333,17 +340,17 @@ namespace LPD.Compiler.Syntactic
                     }
                     else
                     {
-                        throw new SyntacticException();
+                        RaiseUnexpectedTokenError("')'");
                     }
                 }
                 else
                 {
-                    throw new SyntacticException();
+                    RaiseUnexpectedTokenError("identificador");
                 }
             }
             else
             {
-                throw new SyntacticException();
+                RaiseUnexpectedTokenError("'('");
             }
         }
 
@@ -387,17 +394,17 @@ namespace LPD.Compiler.Syntactic
                     }
                     else
                     {
-                        throw new SyntacticException();
+                        RaiseUnexpectedTokenError("')'");
                     }
                 }
                 else
                 {
-                    throw new SyntacticException();
+                    RaiseUnexpectedTokenError("identificador");
                 }
             }
             else
             {
-                throw new SyntacticException();
+                RaiseUnexpectedTokenError("'('");
             }
 
         }
@@ -413,7 +420,7 @@ namespace LPD.Compiler.Syntactic
 
             if (_token.Symbol != Symbols.SFaca)
             {
-                throw new SyntacticException();
+                RaiseUnexpectedTokenError("'faca'");
             }
 
             if (!NextToken())
@@ -435,7 +442,7 @@ namespace LPD.Compiler.Syntactic
 
             if (_token.Symbol != Symbols.SEntao)
             {
-                throw new SyntacticException();
+                RaiseUnexpectedTokenError("'entao'");
             }
 
             if (!NextToken())
@@ -483,7 +490,7 @@ namespace LPD.Compiler.Syntactic
                 }
                 else
                 {
-                    throw new SyntacticException();
+                    RaiseUnexpectedTokenError("';'");
                 }
             }
         }
@@ -497,7 +504,7 @@ namespace LPD.Compiler.Syntactic
 
             if (_token.Symbol != Symbols.SIdentificador)
             {
-                throw new SyntacticException();
+                RaiseUnexpectedTokenError("identificador");
             }
 
             if (!NextToken())
@@ -507,7 +514,7 @@ namespace LPD.Compiler.Syntactic
 
             if (_token.Symbol != Symbols.SPontoVirgula)
             {
-                throw new SyntacticException();
+                RaiseUnexpectedTokenError("';'");
             }
 
             AnalyzeBlock();
@@ -522,7 +529,7 @@ namespace LPD.Compiler.Syntactic
 
             if (_token.Symbol != Symbols.SIdentificador)
             {
-                throw new SyntacticException();
+                RaiseUnexpectedTokenError("identificador");
             }
 
             if (!NextToken())
@@ -532,7 +539,7 @@ namespace LPD.Compiler.Syntactic
 
             if (_token.Symbol != Symbols.SDoisPontos)
             {
-                throw new SyntacticException();
+                RaiseUnexpectedTokenError("':'");
             }
 
             if (!NextToken())
@@ -542,7 +549,7 @@ namespace LPD.Compiler.Syntactic
 
             if (_token.Symbol != Symbols.SInteiro && _token.Symbol != Symbols.SBooleano)
             {
-                throw new SyntacticException();
+                RaiseUnexpectedTokenError("'inteiro' ou 'booleano'");
             }
 
             if (!NextToken())
@@ -552,7 +559,7 @@ namespace LPD.Compiler.Syntactic
 
             if (_token.Symbol != Symbols.SPontoVirgula)
             {
-                throw new SyntacticException();
+                RaiseUnexpectedTokenError("';'");
             }
 
             AnalyzeBlock();
@@ -649,7 +656,7 @@ namespace LPD.Compiler.Syntactic
 
                 if (_token.Symbol != Symbols.SFechaParenteses)
                 {
-                    throw new SyntacticException();
+                    RaiseUnexpectedTokenError("')'");
                 }
 
                 if (!NextToken())
