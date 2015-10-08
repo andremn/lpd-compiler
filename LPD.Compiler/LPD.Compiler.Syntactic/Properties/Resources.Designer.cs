@@ -61,6 +61,15 @@ namespace LPD.Compiler.Syntactic.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Linha {0}, coluna {1}: {2}..
+        /// </summary>
+        internal static string LexicalErrorMessage {
+            get {
+                return ResourceManager.GetString("LexicalErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Linha {0}, coluna {1}: Esperado {2}..
         /// </summary>
         internal static string UnexpectedTokenErrorMessage {
