@@ -107,8 +107,8 @@ namespace LPD.Compiler
             Editor.Text = await FileHelper.GetFileContentAsStringAsync(_selectedFile);
             _modificationsCount = 0;
             UpdateSaveButtons();
-            TokensList.Items.Clear();
-            ErrorTextBlock.Text = string.Empty;
+            TokensList.ItemsSource = null;
+            ErrorListView.ItemsSource = null;
         }
 
         /// <summary>
@@ -193,9 +193,9 @@ namespace LPD.Compiler
                 }
             }
 
-            TokensList.Items.Clear();
-            ErrorTextBlock.Text = string.Empty;
-            
+            TokensList.ItemsSource = null;
+            ErrorListView.ItemsSource = null;
+
             using (LexicalAnalyzer lexical = new LexicalAnalyzer(_selectedFile))
             {
                 SyntacticAnalyzer syntactic = new SyntacticAnalyzer(lexical);
@@ -203,9 +203,16 @@ namespace LPD.Compiler
 
                 if (compileError != null)
                 {
-                    ErrorTextBlock.Text = compileError.Message;
+                    ErrorListView.ItemsSource = new List<ErrorViewModel>
+                    {
+                        new ErrorViewModel()
+                        {
+                            Message = compileError.Message,
+                            Position = compileError.Position
+                        }
+                    };
                 }
-
+                
                 TokensList.ItemsSource = lexical.ReadTokens;
             }
 

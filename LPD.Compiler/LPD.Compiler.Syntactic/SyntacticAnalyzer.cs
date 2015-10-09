@@ -24,7 +24,7 @@ namespace LPD.Compiler.Syntactic
         {
             if (!NextToken())
             {
-                //TODO - Criar excessao
+                RaiseUnexpectedEndOfFileMessage();
             }
 
             try
@@ -33,30 +33,33 @@ namespace LPD.Compiler.Syntactic
                 {
                     if (!NextToken())
                     {
-                        //TODO - Criar excessao
+                        RaiseUnexpectedEndOfFileMessage();
                     }
                     if (_token.Symbol == Symbols.SIdentificador)
                     {
                         if (!NextToken())
                         {
-                            //TODO - Criar excessao
+                            RaiseUnexpectedEndOfFileMessage();
                         }
                         if (_token.Symbol == Symbols.SPontoVirgula)
                         {
                             AnalyzeBlock();
 
-                            if (_token.Symbol == Symbols.SPonto || !NextToken())
+                            if (_token.Symbol == Symbols.SPonto)
                             {
-                                //TODO - SUCESSO
+                                if (NextToken())
+                                {
+                                    RaiseUnexpectedTokenError("fim do arquivo");
+                                }
                             }
                             else
                             {
-                                RaiseUnexpectedTokenError("'.' ou fim do arquivo");
+                                RaiseUnexpectedTokenError("\".\"");
                             }
                         }
                         else
                         {
-                            RaiseUnexpectedTokenError("';'");
+                            RaiseUnexpectedTokenError("\";\"");
                         }
                     }
                     else
@@ -68,8 +71,6 @@ namespace LPD.Compiler.Syntactic
                 {
                     RaiseUnexpectedTokenError("'programa'");
                 }
-
-
             }
             catch (SyntacticException ex)
             {
@@ -97,6 +98,13 @@ namespace LPD.Compiler.Syntactic
             return true;
         }
 
+        private void RaiseMissingInicioError()
+        {
+            int column = _lexical.Position.Column - _token.Lexeme.Length;
+
+            throw new SyntacticException(string.Format(MissingInicioErrorMessage, _lexical.Position.Line, column));
+        }
+
         private void RaiseUnexpectedTokenError(string message)
         {
             int column = _lexical.Position.Column - _token.Lexeme.Length;
@@ -111,11 +119,16 @@ namespace LPD.Compiler.Syntactic
             throw new SyntacticException(string.Format(LexicalErrorMessage, _lexical.Position.Line, column, message));
         }
 
+        private void RaiseUnexpectedEndOfFileMessage()
+        {
+            throw new SyntacticException(string.Format(UnexpectedEndOfFileErrorMessage, _lexical.Position.Line, _lexical.Position.Column));
+        }
+
         private void AnalyzeBlock()
         {
             if (!NextToken())
             {
-                //TODO - Criar excessao
+                RaiseUnexpectedEndOfFileMessage();
             }
 
             AnalyzeVarsDcl();
@@ -131,7 +144,7 @@ namespace LPD.Compiler.Syntactic
                 {
                     if (!NextToken())
                     {
-                        //TODO - Criar excessao
+                        RaiseUnexpectedEndOfFileMessage();
                     }
 
                     if (_token.Symbol == Symbols.SVirgula || _token.Symbol == Symbols.SDoisPontos)
@@ -140,25 +153,25 @@ namespace LPD.Compiler.Syntactic
                         {
                             if (!NextToken())
                             {
-                                //TODO - Criar excessao
+                                RaiseUnexpectedEndOfFileMessage();
                             }
 
                             if (_token.Symbol == Symbols.SDoisPontos)
                             {
-                                RaiseUnexpectedTokenError("':'");
+                                RaiseUnexpectedTokenError("\":\"");
                             }
                         }
                     }
                     else
                     {
-                        RaiseUnexpectedTokenError("',' ou ':'");
+                        RaiseUnexpectedTokenError("\",\" ou \":\"");
                     }
                 }
             } while (_token.Symbol != Symbols.SDoisPontos);
 
             if (!NextToken())
             {
-                //TODO - Criar excessao
+                RaiseUnexpectedEndOfFileMessage();
             }
 
             AnalyzeType();
@@ -170,7 +183,7 @@ namespace LPD.Compiler.Syntactic
             {
                 if (!NextToken())
                 {
-                    //TODO - Criar excessao
+                    RaiseUnexpectedEndOfFileMessage();
                 }
                 if (_token.Symbol == Symbols.SIdentificador)
                 {
@@ -182,12 +195,12 @@ namespace LPD.Compiler.Syntactic
                         {
                             if (!NextToken())
                             {
-                                //TODO - Criar excessao
+                                RaiseUnexpectedEndOfFileMessage();
                             }
                         }
                         else
                         {
-                            RaiseUnexpectedTokenError("';'");
+                            RaiseUnexpectedTokenError("\";\"");
                         }
                     }
                 }
@@ -202,13 +215,13 @@ namespace LPD.Compiler.Syntactic
         {
             if (_token.Symbol != Symbols.SInteiro && _token.Symbol != Symbols.SBooleano)
             {
-                RaiseUnexpectedTokenError("'inteiro' ou 'booleano'");
+                RaiseUnexpectedTokenError("\"inteiro\" ou \"booleano\"");
             }
             else
             {
                 if (!NextToken())
                 {
-                    //TODO - Criar excessao
+                    RaiseUnexpectedEndOfFileMessage();
                 }
             }
         }
@@ -219,7 +232,7 @@ namespace LPD.Compiler.Syntactic
             {
                 if (!NextToken())
                 {
-                    //TODO - Criar excessao
+                    RaiseUnexpectedEndOfFileMessage();
                 }
 
                 AnalyzeSimpleCommand();
@@ -230,7 +243,7 @@ namespace LPD.Compiler.Syntactic
                     {
                         if (!NextToken())
                         {
-                            //TODO - Criar excessao
+                            RaiseUnexpectedEndOfFileMessage();
                         }
 
                         if (_token.Symbol != Symbols.SFim)
@@ -246,12 +259,12 @@ namespace LPD.Compiler.Syntactic
 
                 if (!NextToken())
                 {
-                    //TODO - Criar excessao
+                    RaiseUnexpectedEndOfFileMessage();
                 }
             }
             else
             {
-                RaiseUnexpectedTokenError("'inicio'");
+                RaiseUnexpectedTokenError("\"inicio\"");
             }
         }
 
@@ -261,7 +274,7 @@ namespace LPD.Compiler.Syntactic
             {
                 if (!NextToken())
                 {
-                    //TODO - Criar excessao
+                    RaiseUnexpectedEndOfFileMessage();
                 }
 
                 if (_token.Symbol == Symbols.SAtribuicao)
@@ -303,14 +316,14 @@ namespace LPD.Compiler.Syntactic
         {
             if (!NextToken())
             {
-                //TODO - Criar excessao
+                RaiseUnexpectedEndOfFileMessage();
             }
 
             if (_token.Symbol == Symbols.SAbreParenteses)
             {
                 if (!NextToken())
                 {
-                    //TODO - Criar excessao
+                    RaiseUnexpectedEndOfFileMessage();
                 }
 
                 if (_token.Symbol == Symbols.SIdentificador)
@@ -328,19 +341,19 @@ namespace LPD.Compiler.Syntactic
 
                     if (!NextToken())
                     {
-                        //TODO - Criar excessao
+                        RaiseUnexpectedEndOfFileMessage();
                     }
 
                     if (_token.Symbol == Symbols.SFechaParenteses)
                     {
                         if (!NextToken())
                         {
-                            //TODO - Criar excessao
+                            RaiseUnexpectedEndOfFileMessage();
                         }
                     }
                     else
                     {
-                        RaiseUnexpectedTokenError("')'");
+                        RaiseUnexpectedTokenError("\")\"");
                     }
                 }
                 else
@@ -350,7 +363,7 @@ namespace LPD.Compiler.Syntactic
             }
             else
             {
-                RaiseUnexpectedTokenError("'('");
+                RaiseUnexpectedTokenError("\"(\"");
             }
         }
 
@@ -358,13 +371,13 @@ namespace LPD.Compiler.Syntactic
         {
             if (!NextToken())
             {
-                //TODO - Criar excessao
+                RaiseUnexpectedEndOfFileMessage();
             }
             if (_token.Symbol == Symbols.SAbreParenteses)
             {
                 if (!NextToken())
                 {
-                    //TODO - Criar excessao
+                    RaiseUnexpectedEndOfFileMessage();
                 }
 
                 if (_token.Symbol == Symbols.SIdentificador)
@@ -382,19 +395,19 @@ namespace LPD.Compiler.Syntactic
 
                     if (!NextToken())
                     {
-                        //TODO - Criar excessao
+                        RaiseUnexpectedEndOfFileMessage();
                     }
 
                     if (_token.Symbol == Symbols.SFechaParenteses)
                     {
                         if (!NextToken())
                         {
-                            //TODO - Criar excessao
+                            RaiseUnexpectedEndOfFileMessage();
                         }
                     }
                     else
                     {
-                        RaiseUnexpectedTokenError("')'");
+                        RaiseUnexpectedTokenError("\")\"");
                     }
                 }
                 else
@@ -404,7 +417,7 @@ namespace LPD.Compiler.Syntactic
             }
             else
             {
-                RaiseUnexpectedTokenError("'('");
+                RaiseUnexpectedTokenError("\"(\"");
             }
 
         }
@@ -413,19 +426,19 @@ namespace LPD.Compiler.Syntactic
         {
             if (!NextToken())
             {
-                //Todo: exception
+                RaiseUnexpectedEndOfFileMessage();
             }
 
             AnalyzeExpression();
 
             if (_token.Symbol != Symbols.SFaca)
             {
-                RaiseUnexpectedTokenError("'faca'");
+                RaiseUnexpectedTokenError("\"faca\"");
             }
 
             if (!NextToken())
             {
-                //Todo: exception
+                RaiseUnexpectedEndOfFileMessage();
             }
 
             AnalyzeSimpleCommand();
@@ -435,19 +448,19 @@ namespace LPD.Compiler.Syntactic
         {
             if (!NextToken())
             {
-                //Todo: exception
+                RaiseUnexpectedEndOfFileMessage();
             }
 
             AnalyzeExpression();
 
             if (_token.Symbol != Symbols.SEntao)
             {
-                RaiseUnexpectedTokenError("'entao'");
+                RaiseUnexpectedTokenError("\"entao\"");
             }
 
             if (!NextToken())
             {
-                //Todo: exception
+                RaiseUnexpectedEndOfFileMessage();
             }
 
             AnalyzeSimpleCommand();
@@ -456,7 +469,7 @@ namespace LPD.Compiler.Syntactic
             {
                 if (!NextToken())
                 {
-                    //Todo: exception
+                    RaiseUnexpectedEndOfFileMessage();
                 }
 
                 AnalyzeSimpleCommand();
@@ -485,12 +498,12 @@ namespace LPD.Compiler.Syntactic
                 {
                     if (!NextToken())
                     {
-                        //Todo: exception
+                        RaiseUnexpectedEndOfFileMessage();
                     }
                 }
                 else
                 {
-                    RaiseUnexpectedTokenError("';'");
+                    RaiseUnexpectedTokenError("\";\"");
                 }
             }
         }
@@ -499,7 +512,7 @@ namespace LPD.Compiler.Syntactic
         {
             if (!NextToken())
             {
-                //Todo: exception
+                RaiseUnexpectedEndOfFileMessage();
             }
 
             if (_token.Symbol != Symbols.SIdentificador)
@@ -509,12 +522,12 @@ namespace LPD.Compiler.Syntactic
 
             if (!NextToken())
             {
-                //Todo: exception
+                RaiseUnexpectedEndOfFileMessage();
             }
 
             if (_token.Symbol != Symbols.SPontoVirgula)
             {
-                RaiseUnexpectedTokenError("';'");
+                RaiseUnexpectedTokenError("\";\"");
             }
 
             AnalyzeBlock();
@@ -524,7 +537,7 @@ namespace LPD.Compiler.Syntactic
         {
             if (!NextToken())
             {
-                //Todo: exception
+                RaiseUnexpectedEndOfFileMessage();
             }
 
             if (_token.Symbol != Symbols.SIdentificador)
@@ -534,32 +547,32 @@ namespace LPD.Compiler.Syntactic
 
             if (!NextToken())
             {
-                //Todo: exception
+                RaiseUnexpectedEndOfFileMessage();
             }
 
             if (_token.Symbol != Symbols.SDoisPontos)
             {
-                RaiseUnexpectedTokenError("':'");
+                RaiseUnexpectedTokenError("\":\"");
             }
 
             if (!NextToken())
             {
-                //Todo: exception
+                RaiseUnexpectedEndOfFileMessage();
             }
 
             if (_token.Symbol != Symbols.SInteiro && _token.Symbol != Symbols.SBooleano)
             {
-                RaiseUnexpectedTokenError("'inteiro' ou 'booleano'");
+                RaiseUnexpectedTokenError("\"inteiro\" ou \"booleano\"");
             }
 
             if (!NextToken())
             {
-                //Todo: exception
+                RaiseUnexpectedEndOfFileMessage();
             }
 
             if (_token.Symbol != Symbols.SPontoVirgula)
             {
-                RaiseUnexpectedTokenError("';'");
+                RaiseUnexpectedTokenError("\";\"");
             }
 
             AnalyzeBlock();
@@ -578,7 +591,7 @@ namespace LPD.Compiler.Syntactic
             {
                 if (!NextToken())
                 {
-                    //Todo: exception
+                    RaiseUnexpectedEndOfFileMessage();
                 }
 
                 AnalyzeSimpleExpression();
@@ -591,7 +604,7 @@ namespace LPD.Compiler.Syntactic
             {
                 if (!NextToken())
                 {
-                    //Todo: exception
+                    RaiseUnexpectedEndOfFileMessage();
                 }
             }
 
@@ -601,7 +614,7 @@ namespace LPD.Compiler.Syntactic
             {
                 if (!NextToken())
                 {
-                    //Todo: exception
+                    RaiseUnexpectedEndOfFileMessage();
                 }
 
                 AnalyzeTerm();
@@ -616,7 +629,7 @@ namespace LPD.Compiler.Syntactic
             {
                 if (!NextToken())
                 {
-                    //Todo: exception
+                    RaiseUnexpectedEndOfFileMessage();
                 }
 
                 AnalyzeFactor();
@@ -633,14 +646,14 @@ namespace LPD.Compiler.Syntactic
             {
                 if (!NextToken())
                 {
-                    //Todo: exception
+                    RaiseUnexpectedEndOfFileMessage();
                 }
             }
             else if (_token.Symbol == Symbols.SNao)
             {
                 if (!NextToken())
                 {
-                    //Todo: exception
+                    RaiseUnexpectedEndOfFileMessage();
                 }
 
                 AnalyzeFactor();
@@ -649,26 +662,26 @@ namespace LPD.Compiler.Syntactic
             {
                 if (!NextToken())
                 {
-                    //Todo: exception
+                    RaiseUnexpectedEndOfFileMessage();
                 }
 
                 AnalyzeExpression();
 
                 if (_token.Symbol != Symbols.SFechaParenteses)
                 {
-                    RaiseUnexpectedTokenError("')'");
+                    RaiseUnexpectedTokenError("\")\"");
                 }
 
                 if (!NextToken())
                 {
-                    //Todo: exception
+                    RaiseUnexpectedEndOfFileMessage();
                 }
             }
             else if (_token.Symbol == Symbols.SVerdadeiro || _token.Symbol == Symbols.SFalso)
             {
                 if (!NextToken())
                 {
-                    //Todo: exception
+                    RaiseUnexpectedEndOfFileMessage();
                 }
             }
         }
@@ -677,7 +690,7 @@ namespace LPD.Compiler.Syntactic
         {
             if (!NextToken())
             {
-                //Todo: exception
+                RaiseUnexpectedEndOfFileMessage();
             }
 
             AnalyzeExpression();
@@ -689,7 +702,7 @@ namespace LPD.Compiler.Syntactic
 
             if (!NextToken())
             {
-                //Todo: exception
+                RaiseUnexpectedEndOfFileMessage();
             }
         }
     }

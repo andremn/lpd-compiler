@@ -70,6 +70,24 @@ namespace LPD.Compiler.Syntactic.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Linha {0}, coluna {1}: Encontrado &quot;fim&quot; sem &quot;inicio&quot;..
+        /// </summary>
+        internal static string MissingInicioErrorMessage {
+            get {
+                return ResourceManager.GetString("MissingInicioErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Linha {0}, coluna {1}: Fim inesperado do arquivo..
+        /// </summary>
+        internal static string UnexpectedEndOfFileErrorMessage {
+            get {
+                return ResourceManager.GetString("UnexpectedEndOfFileErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Linha {0}, coluna {1}: Esperado {2}..
         /// </summary>
         internal static string UnexpectedTokenErrorMessage {

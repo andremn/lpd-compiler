@@ -120,6 +120,12 @@
   <data name="LexicalErrorMessage" xml:space="preserve">
     <value>Linha {0}, coluna {1}: {2}.</value>
   </data>
+  <data name="MissingInicioErrorMessage" xml:space="preserve">
+    <value>Linha {0}, coluna {1}: Encontrado "fim" sem "inicio".</value>
+  </data>
+  <data name="UnexpectedEndOfFileErrorMessage" xml:space="preserve">
+    <value>Linha {0}, coluna {1}: Fim inesperado do arquivo.</value>
+  </data>
   <data name="UnexpectedTokenErrorMessage" xml:space="preserve">
     <value>Linha {0}, coluna {1}: Esperado {2}.</value>
   </data>

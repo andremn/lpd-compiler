@@ -89,7 +89,7 @@ namespace LPD.Compiler.Lexical
         public LexicalAnalyzer(string filePath)
         {
             _filePath = filePath;
-            _currentPosition.Column = 0;
+            _currentPosition.Column = 1;
             _currentPosition.Line = 1;
             _currentPosition.Index = -1;
             _reader = new CharReader(filePath, Encoding.UTF8);
@@ -127,7 +127,7 @@ namespace LPD.Compiler.Lexical
                 if (character == CarriageReturnChar)
                 {
                     _currentPosition.Line++;
-                    _currentPosition.Column = 0;
+                    _currentPosition.Column = 1;
                     continue;
                 }
 
@@ -138,7 +138,7 @@ namespace LPD.Compiler.Lexical
                     if (character == CarriageReturnChar)
                     {
                         _currentPosition.Line++;
-                        _currentPosition.Column = 0;
+                        _currentPosition.Column = 1;
                     }
 
                     continue;

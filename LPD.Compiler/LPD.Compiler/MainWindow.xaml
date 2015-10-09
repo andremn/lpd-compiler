@@ -173,7 +173,14 @@
             </Grid>
         </Border>
         <GroupBox Grid.Row="2" Header="Output">
-            <TextBlock x:Name="ErrorTextBlock"/>
+            <ListView x:Name="ErrorListView"
+                      PreviewMouseDoubleClick="OnErrorListViewItemPreviewMouseDoubleClick">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Message}"/>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
         </GroupBox>
     </Grid>
 </Controls:MetroWindow>
