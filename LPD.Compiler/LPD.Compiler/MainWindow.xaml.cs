@@ -203,7 +203,7 @@ namespace LPD.Compiler
 
                 if (compileError != null)
                 {
-
+                    ErrorTextBlock.Text = compileError.Message;
                 }
 
                 TokensList.ItemsSource = lexical.ReadTokens;
