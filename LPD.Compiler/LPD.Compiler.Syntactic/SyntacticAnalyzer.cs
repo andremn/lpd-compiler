@@ -71,9 +71,9 @@ namespace LPD.Compiler.Syntactic
 
 
             }
-            catch (SyntacticException)
+            catch (SyntacticException ex)
             {
-                throw;
+                return new CompileError(_lexical.Position, ex.Message);
             }
 
             return null;
