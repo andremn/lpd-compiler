@@ -36,12 +36,14 @@ namespace LPD.Compiler.Syntactic
                     {
                         RaiseUnexpectedEndOfFileMessage();
                     }
+
                     if (_token.Symbol == Symbols.SIdentificador)
                     {
                         if (!NextToken())
                         {
                             RaiseUnexpectedEndOfFileMessage();
                         }
+
                         if (_token.Symbol == Symbols.SPontoVirgula)
                         {
                             AnalyzeBlock();
@@ -75,6 +77,17 @@ namespace LPD.Compiler.Syntactic
             }
             catch (SyntacticException ex)
             {
+                int column = _lexical.Position.Column - _token.Lexeme.Length;
+
+                if (_token.Symbol == Symbols.SPontoVirgula)
+                {
+                    return new CompileError(_lexical.Position, string.Format("Linha {0}, coluna {1}: Faltando bloco com \"inicio\" ou \"fim\"", _lexical.Position.Line, column));
+                }
+                else if (_token.Symbol != Symbols.SFim)
+                {                    
+                    return new CompileError(_lexical.Position, string.Format(InvalidTerm, _lexical.Position.Line, column));
+                }
+
                 if (_position.HasValue)
                 {
                     return new CompileError(_position.Value, ex.Message);
@@ -102,6 +115,13 @@ namespace LPD.Compiler.Syntactic
 
             _token = item.Token;
             return true;
+        }
+        private void RaiseInvalidTerm()
+        {
+            int column = _lexical.Position.Column - _token.Lexeme.Length;
+
+            _position = null;
+            throw new SyntacticException(string.Format(MissingInicioErrorMessage, _lexical.Position.Line, _lexical.Position.Line, column));
         }
 
         private void RaiseMissingInicioError()
