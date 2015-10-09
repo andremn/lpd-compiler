@@ -335,9 +335,10 @@ namespace LPD.Compiler
             {
                 return;
             }
-            
-            Editor.ScrollToLine(model.Position.Line - 1);
-            Editor.Select(model.Position.Index, 0);
+
+            var offset = Editor.Document.GetOffset(model.Position.Line, model.Position.Column);
+
+            Editor.Select(offset, 0);
             //Forces the focus!
             Dispatcher.BeginInvoke(DispatcherPriority.Input, new Action(delegate ()
             {

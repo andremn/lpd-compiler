@@ -13,6 +13,11 @@ namespace LPD.Compiler.Lexical
             get { return _tokens[index]; }
         }
 
+        public int Count
+        {
+            get { return _tokens.Count; }
+        }
+
         public TokenCollection()
         {
             _tokens = new List<Token>();

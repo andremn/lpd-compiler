@@ -173,13 +173,17 @@
             </Grid>
         </Border>
         <GroupBox Grid.Row="2" Header="Output">
-            <ListView x:Name="ErrorListView"
-                      PreviewMouseDoubleClick="OnErrorListViewItemPreviewMouseDoubleClick">
+            <ListView x:Name="ErrorListView">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <TextBlock Text="{Binding Message}"/>
                     </DataTemplate>
                 </ListView.ItemTemplate>
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <EventSetter Event="PreviewMouseDoubleClick" Handler="OnErrorListViewItemPreviewMouseDoubleClick" />
+                    </Style>
+                </ListView.ItemContainerStyle>
             </ListView>
         </GroupBox>
     </Grid>

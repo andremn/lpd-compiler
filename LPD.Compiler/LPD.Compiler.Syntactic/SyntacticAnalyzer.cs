@@ -9,6 +9,7 @@ namespace LPD.Compiler.Syntactic
     {
         private LexicalAnalyzer _lexical;
         private Token _token;
+        private CodePosition? _position = null;
 
         public SyntacticAnalyzer(LexicalAnalyzer lexical)
         {
@@ -59,7 +60,7 @@ namespace LPD.Compiler.Syntactic
                         }
                         else
                         {
-                            RaiseUnexpectedTokenError("\";\"");
+                            RaiseMissingSemicolonError();
                         }
                     }
                     else
@@ -74,6 +75,11 @@ namespace LPD.Compiler.Syntactic
             }
             catch (SyntacticException ex)
             {
+                if (_position.HasValue)
+                {
+                    return new CompileError(_position.Value, ex.Message);
+                }
+
                 return new CompileError(_lexical.Position, ex.Message);
             }
 
@@ -102,13 +108,24 @@ namespace LPD.Compiler.Syntactic
         {
             int column = _lexical.Position.Column - _token.Lexeme.Length;
 
+            _position = null;
             throw new SyntacticException(string.Format(MissingInicioErrorMessage, _lexical.Position.Line, column));
+        }
+
+        private void RaiseMissingSemicolonError()
+        {
+            ushort column = (ushort)(_lexical.ReadTokens[_lexical.ReadTokens.Count - 1].Lexeme.Length);
+            ushort line = (ushort)(_lexical.Position.Line - 1);
+
+            _position = new CodePosition() { Line = line, Column = column };
+            throw new SyntacticException(string.Format(UnexpectedTokenErrorMessage, line, column, "\";\""));
         }
 
         private void RaiseUnexpectedTokenError(string message)
         {
             int column = _lexical.Position.Column - _token.Lexeme.Length;
 
+            _position = null;
             throw new SyntacticException(string.Format(UnexpectedTokenErrorMessage, _lexical.Position.Line, column, message));
         }
 
@@ -116,11 +133,13 @@ namespace LPD.Compiler.Syntactic
         {
             int column = _lexical.Position.Column - _token.Lexeme.Length;
 
+            _position = null;
             throw new SyntacticException(string.Format(LexicalErrorMessage, _lexical.Position.Line, column, message));
         }
 
         private void RaiseUnexpectedEndOfFileMessage()
         {
+            _position = null;
             throw new SyntacticException(string.Format(UnexpectedEndOfFileErrorMessage, _lexical.Position.Line, _lexical.Position.Column));
         }
 
@@ -195,12 +214,12 @@ namespace LPD.Compiler.Syntactic
                         {
                             if (!NextToken())
                             {
-                                RaiseUnexpectedEndOfFileMessage();
+                                RaiseMissingSemicolonError();
                             }
                         }
                         else
                         {
-                            RaiseUnexpectedTokenError("\";\"");
+                            RaiseMissingSemicolonError();
                         }
                     }
                 }
@@ -253,7 +272,7 @@ namespace LPD.Compiler.Syntactic
                     }
                     else
                     {
-                        RaiseUnexpectedTokenError("';'");
+                        RaiseMissingSemicolonError();
                     }
                 }
 
@@ -503,7 +522,7 @@ namespace LPD.Compiler.Syntactic
                 }
                 else
                 {
-                    RaiseUnexpectedTokenError("\";\"");
+                    RaiseMissingSemicolonError();
                 }
             }
         }
@@ -527,7 +546,7 @@ namespace LPD.Compiler.Syntactic
 
             if (_token.Symbol != Symbols.SPontoVirgula)
             {
-                RaiseUnexpectedTokenError("\";\"");
+                RaiseMissingSemicolonError();
             }
 
             AnalyzeBlock();
@@ -572,7 +591,7 @@ namespace LPD.Compiler.Syntactic
 
             if (_token.Symbol != Symbols.SPontoVirgula)
             {
-                RaiseUnexpectedTokenError("\";\"");
+                RaiseMissingSemicolonError();
             }
 
             AnalyzeBlock();
