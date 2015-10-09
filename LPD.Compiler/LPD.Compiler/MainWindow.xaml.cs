@@ -193,7 +193,7 @@ namespace LPD.Compiler
                 }
             }
 
-            TokensList.Items.Clear();
+            //TokensList.Items.Clear();
             ErrorTextBlock.Text = string.Empty;
             
             using (LexicalAnalyzer lexical = new LexicalAnalyzer(_selectedFile))
