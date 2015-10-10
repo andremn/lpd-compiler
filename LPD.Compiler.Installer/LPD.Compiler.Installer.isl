@@ -341,16 +341,9 @@
 		<col def="S0">ISDotNetInstallerArgsUninstall</col>
 		<col def="S0">ISDotNetInstallerArgsRollback</col>
 		<row><td>LPD.Compiler.Content_Files</td><td>{6FD76B7E-EA49-43C6-8120-E51C53CEA4B9}</td><td>INSTALLDIR</td><td>2</td><td/><td>lpd.compiler.content_files</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>LPD.Compiler.Lexical.Content_Files</td><td>{23020BEF-A2A5-4840-9687-4429E0D6FBF7}</td><td>INSTALLDIR</td><td>2</td><td/><td>lpd.compiler.lexical.content</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>LPD.Compiler.Lexical.Localized_resources</td><td>{60EDF7AD-5A84-454C-9D25-F2F241313180}</td><td>INSTALLDIR</td><td>2</td><td/><td>lpd.compiler.lexical.localiz</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>LPD.Compiler.Lexical.Primary_output</td><td>{4A74D261-46C7-4ED6-9852-474012AB20A5}</td><td>INSTALLDIR</td><td>2</td><td/><td>lpd.compiler.lexical.primary</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>LPD.Compiler.Localized_resources</td><td>{0B2787C6-15BC-4FC9-AEE2-5D1604D3EEC9}</td><td>INSTALLDIR</td><td>2</td><td/><td>lpd.compiler.localized_resou</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>LPD.Compiler.Primary_output</td><td>{63729FAD-833B-4695-8D02-2AEE4F34D98C}</td><td>INSTALLDIR</td><td>2</td><td/><td>lpd.compiler.primary_output</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>LPD.Compiler.Shared.Content_Files</td><td>{753CCA9A-E5D2-4F22-9869-6B9FF753DD57}</td><td>INSTALLDIR</td><td>2</td><td/><td>lpd.compiler.shared.content_</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>LPD.Compiler.Shared.Localized_resources</td><td>{6D180713-4527-45D7-9588-5E56B5A3A5F2}</td><td>INSTALLDIR</td><td>2</td><td/><td>lpd.compiler.shared.localize</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>LPD.Compiler.Shared.Primary_output</td><td>{BB8F2B5C-9E86-4998-BE06-9FF58AD80047}</td><td>INSTALLDIR</td><td>2</td><td/><td>lpd.compiler.shared.primary_</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>LPD.Compiler.Syntactic.Content_Files</td><td>{1178DE9C-5EB4-424F-9A57-6B1B7D30138A}</td><td>INSTALLDIR</td><td>2</td><td/><td>lpd.compiler.syntactic.conte</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>LPD.Compiler.Syntactic.Localized_resources</td><td>{16DFC280-C0F3-4ADC-B700-51DE939B9ABA}</td><td>INSTALLDIR</td><td>2</td><td/><td>lpd.compiler.syntactic.local</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>LPD.Compiler.Syntactic.Primary_output</td><td>{0823BC2E-AFC1-4843-A080-64F35C002D88}</td><td>INSTALLDIR</td><td>2</td><td/><td>lpd.compiler.syntactic.prima</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 	</table>
 
@@ -1062,16 +1055,9 @@
 		<col key="yes" def="s72">Directory_</col>
 		<col key="yes" def="s72">Component_</col>
 		<row><td>INSTALLDIR</td><td>LPD.Compiler.Content_Files</td></row>
-		<row><td>INSTALLDIR</td><td>LPD.Compiler.Lexical.Content_Files</td></row>
-		<row><td>INSTALLDIR</td><td>LPD.Compiler.Lexical.Localized_resources</td></row>
 		<row><td>INSTALLDIR</td><td>LPD.Compiler.Lexical.Primary_output</td></row>
-		<row><td>INSTALLDIR</td><td>LPD.Compiler.Localized_resources</td></row>
 		<row><td>INSTALLDIR</td><td>LPD.Compiler.Primary_output</td></row>
-		<row><td>INSTALLDIR</td><td>LPD.Compiler.Shared.Content_Files</td></row>
-		<row><td>INSTALLDIR</td><td>LPD.Compiler.Shared.Localized_resources</td></row>
 		<row><td>INSTALLDIR</td><td>LPD.Compiler.Shared.Primary_output</td></row>
-		<row><td>INSTALLDIR</td><td>LPD.Compiler.Syntactic.Content_Files</td></row>
-		<row><td>INSTALLDIR</td><td>LPD.Compiler.Syntactic.Localized_resources</td></row>
 		<row><td>INSTALLDIR</td><td>LPD.Compiler.Syntactic.Primary_output</td></row>
 	</table>
 
@@ -1887,16 +1873,9 @@
 		<col key="yes" def="s38">Feature_</col>
 		<col key="yes" def="s72">Component_</col>
 		<row><td>AlwaysInstall</td><td>LPD.Compiler.Content_Files</td></row>
-		<row><td>AlwaysInstall</td><td>LPD.Compiler.Lexical.Content_Files</td></row>
-		<row><td>AlwaysInstall</td><td>LPD.Compiler.Lexical.Localized_resources</td></row>
 		<row><td>AlwaysInstall</td><td>LPD.Compiler.Lexical.Primary_output</td></row>
-		<row><td>AlwaysInstall</td><td>LPD.Compiler.Localized_resources</td></row>
 		<row><td>AlwaysInstall</td><td>LPD.Compiler.Primary_output</td></row>
-		<row><td>AlwaysInstall</td><td>LPD.Compiler.Shared.Content_Files</td></row>
-		<row><td>AlwaysInstall</td><td>LPD.Compiler.Shared.Localized_resources</td></row>
 		<row><td>AlwaysInstall</td><td>LPD.Compiler.Shared.Primary_output</td></row>
-		<row><td>AlwaysInstall</td><td>LPD.Compiler.Syntactic.Content_Files</td></row>
-		<row><td>AlwaysInstall</td><td>LPD.Compiler.Syntactic.Localized_resources</td></row>
 		<row><td>AlwaysInstall</td><td>LPD.Compiler.Syntactic.Primary_output</td></row>
 	</table>
 
@@ -1913,16 +1892,9 @@
 		<col def="I4">ISAttributes</col>
 		<col def="S72">ISComponentSubFolder_</col>
 		<row><td>lpd.compiler.content_files</td><td>LPD.Compiler.Content_Files</td><td>LPD.Compiler.Content Files</td><td>0</td><td/><td/><td/><td>1</td><td>&lt;LPD.Compiler&gt;|ContentFiles</td><td>3</td><td/></row>
-		<row><td>lpd.compiler.lexical.content</td><td>LPD.Compiler.Lexical.Content_Files</td><td>LPD.Compiler.Lexical.Content Files</td><td>0</td><td/><td/><td/><td>1</td><td>&lt;LPD.Compiler.Lexical&gt;|ContentFiles</td><td>3</td><td/></row>
-		<row><td>lpd.compiler.lexical.localiz</td><td>LPD.Compiler.Lexical.Localized_resources</td><td>LPD.Compiler.Lexical.Localized resources</td><td>0</td><td/><td/><td/><td>1</td><td>&lt;LPD.Compiler.Lexical&gt;|LocalizedResourceDlls</td><td>3</td><td/></row>
 		<row><td>lpd.compiler.lexical.primary</td><td>LPD.Compiler.Lexical.Primary_output</td><td>LPD.Compiler.Lexical.Primary output</td><td>0</td><td/><td/><td/><td>1</td><td>&lt;LPD.Compiler.Lexical&gt;|Built</td><td>3</td><td/></row>
-		<row><td>lpd.compiler.localized_resou</td><td>LPD.Compiler.Localized_resources</td><td>LPD.Compiler.Localized resources</td><td>0</td><td/><td/><td/><td>1</td><td>&lt;LPD.Compiler&gt;|LocalizedResourceDlls</td><td>3</td><td/></row>
 		<row><td>lpd.compiler.primary_output</td><td>LPD.Compiler.Primary_output</td><td>LPD.Compiler.Primary output</td><td>0</td><td/><td/><td/><td>1</td><td>&lt;LPD.Compiler&gt;|Built</td><td>3</td><td/></row>
-		<row><td>lpd.compiler.shared.content_</td><td>LPD.Compiler.Shared.Content_Files</td><td>LPD.Compiler.Shared.Content Files</td><td>0</td><td/><td/><td/><td>1</td><td>&lt;LPD.Compiler.Shared&gt;|ContentFiles</td><td>3</td><td/></row>
-		<row><td>lpd.compiler.shared.localize</td><td>LPD.Compiler.Shared.Localized_resources</td><td>LPD.Compiler.Shared.Localized resources</td><td>0</td><td/><td/><td/><td>1</td><td>&lt;LPD.Compiler.Shared&gt;|LocalizedResourceDlls</td><td>3</td><td/></row>
 		<row><td>lpd.compiler.shared.primary_</td><td>LPD.Compiler.Shared.Primary_output</td><td>LPD.Compiler.Shared.Primary output</td><td>0</td><td/><td/><td/><td>1</td><td>&lt;LPD.Compiler.Shared&gt;|Built</td><td>3</td><td/></row>
-		<row><td>lpd.compiler.syntactic.conte</td><td>LPD.Compiler.Syntactic.Content_Files</td><td>LPD.Compiler.Syntactic.Content Files</td><td>0</td><td/><td/><td/><td>1</td><td>&lt;LPD.Compiler.Syntactic&gt;|ContentFiles</td><td>3</td><td/></row>
-		<row><td>lpd.compiler.syntactic.local</td><td>LPD.Compiler.Syntactic.Localized_resources</td><td>LPD.Compiler.Syntactic.Localized resources</td><td>0</td><td/><td/><td/><td>1</td><td>&lt;LPD.Compiler.Syntactic&gt;|LocalizedResourceDlls</td><td>3</td><td/></row>
 		<row><td>lpd.compiler.syntactic.prima</td><td>LPD.Compiler.Syntactic.Primary_output</td><td>LPD.Compiler.Syntactic.Primary output</td><td>0</td><td/><td/><td/><td>1</td><td>&lt;LPD.Compiler.Syntactic&gt;|Built</td><td>3</td><td/></row>
 	</table>
 
@@ -2066,16 +2038,9 @@
 		<col def="S0">HTTPLocation</col>
 		<col def="S0">Miscellaneous</col>
 		<row><td>LPD.Compiler.Content_Files</td><td/><td/><td>_6748B893_A2C1_45E8_9F7F_8BA46FA1970E_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>LPD.Compiler.Lexical.Content_Files</td><td/><td/><td>_E8814AB5_656D_44AE_A71F_DF879D55C6A3_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>LPD.Compiler.Lexical.Localized_resources</td><td/><td/><td>_AD792141_94DB_4C88_86F1_E2E4ACEEE3AE_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>LPD.Compiler.Lexical.Primary_output</td><td/><td/><td>_FB7D9996_6FB9_4F56_8DAE_DDE1EBFE299E_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>LPD.Compiler.Localized_resources</td><td/><td/><td>_7DE3A683_52BD_4CFF_A382_F17F58C792CE_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>LPD.Compiler.Primary_output</td><td/><td/><td>_F3330EFF_1558_480E_9608_B556766F9FCC_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>LPD.Compiler.Shared.Content_Files</td><td/><td/><td>_9107D53C_AB2B_465D_AFDF_EF898022AB0B_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>LPD.Compiler.Shared.Localized_resources</td><td/><td/><td>_9B9C428C_CB27_429E_B549_85C9CC1A0949_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>LPD.Compiler.Shared.Primary_output</td><td/><td/><td>_532FF304_34E3_49EC_B4CF_F3EEE36C8DDB_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>LPD.Compiler.Syntactic.Content_Files</td><td/><td/><td>_70F7D24B_0FB6_46EF_81D9_9A27B3028F38_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>LPD.Compiler.Syntactic.Localized_resources</td><td/><td/><td>_9818E5D0_5EEB_4D76_AC83_70E32F3727D7_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>LPD.Compiler.Syntactic.Primary_output</td><td/><td/><td>_70147359_E80F_4609_AAB1_83F3E7461E12_FILTER</td><td/><td/><td/><td/></row>
 	</table>
 

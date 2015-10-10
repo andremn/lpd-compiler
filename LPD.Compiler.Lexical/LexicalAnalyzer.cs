@@ -1,13 +1,14 @@
 ﻿using LPD.Compiler.Shared;
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Text;
 
 namespace LPD.Compiler.Lexical
 {
+    /// <summary>
+    /// The lexical analyzer. It is responsible for reading the file and get the tokens.
+    /// </summary>
     public class LexicalAnalyzer : IDisposable
     {
         #region Error messages
@@ -76,16 +77,26 @@ namespace LPD.Compiler.Lexical
         private CodePosition _currentPosition;
         private TokenCollection _tokenCollection;
 
+        /// <summary>
+        /// Gets the position of the current token.
+        /// </summary>
         public CodePosition Position
         {
             get { return _currentPosition; }
         }
 
+        /// <summary>
+        /// Gets the tokens read.
+        /// </summary>
         public TokenCollection ReadTokens
         {
             get { return _tokenCollection; }
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="LexicalAnalyzer"/> class with the specified file.
+        /// </summary>
+        /// <param name="filePath">The absolute path of the file to be analyzed.</param>
         public LexicalAnalyzer(string filePath)
         {
             _filePath = filePath;
@@ -97,6 +108,11 @@ namespace LPD.Compiler.Lexical
             _tokenCollection = new TokenCollection();
         }
 
+        /// <summary>
+        /// Gets the next token.
+        /// </summary>
+        /// <param name="item">The <see cref="LexicalItem"/> that will contain the next token, if any.</param>
+        /// <returns>true if a next token was found; false otherwise.</returns>
         public bool GetToken(out LexicalItem item)
         {
             LexicalItem nextItem = NextItem();
@@ -112,6 +128,9 @@ namespace LPD.Compiler.Lexical
             return true;
         }
 
+        /// <summary>
+        /// Releases all the resources used by this object.
+        /// </summary>
         public void Dispose()
         {
             _reader.Dispose();

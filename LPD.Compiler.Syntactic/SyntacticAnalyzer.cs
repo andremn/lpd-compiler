@@ -6,7 +6,7 @@ using static LPD.Compiler.Syntactic.Properties.Resources;
 namespace LPD.Compiler.Syntactic
 {
     /// <summary>
-    /// Syntactic analysis.
+    /// Represents the syntactic analyzer. In other words, this is the parser.
     /// </summary>
     public class SyntacticAnalyzer
     {
@@ -14,6 +14,10 @@ namespace LPD.Compiler.Syntactic
         private Token _token;
         private CodePosition? _position = null;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SyntacticAnalyzer"/> class with the specified <see cref="LexicalAnalyzer"/>.
+        /// </summary>
+        /// <param name="lexical">The lexical analyzer.</param>
         public SyntacticAnalyzer(LexicalAnalyzer lexical)
         {
             if (lexical == null)
@@ -24,6 +28,10 @@ namespace LPD.Compiler.Syntactic
             _lexical = lexical;
         }
 
+        /// <summary>
+        /// Performs the code parsing.
+        /// </summary>
+        /// <returns></returns>
         public CompileError DoAnalysis()
         {
             if (!NextToken())
@@ -78,7 +86,7 @@ namespace LPD.Compiler.Syntactic
                     RaiseUnexpectedTokenError("'programa'");
                 }
             }
-            catch (SyntacticException ex)
+            catch (CompilationException ex)
             {
                 int column = _lexical.Position.Column - _token.Lexeme.Length;
 
@@ -124,7 +132,7 @@ namespace LPD.Compiler.Syntactic
             int column = _lexical.Position.Column - _token.Lexeme.Length;
 
             _position = null;
-            throw new SyntacticException(string.Format(MissingInicioErrorMessage, _lexical.Position.Line, _lexical.Position.Line, column));
+            throw new CompilationException(string.Format(MissingInicioErrorMessage, _lexical.Position.Line, _lexical.Position.Line, column));
         }
 
         private void RaiseMissingInicioError()
@@ -132,7 +140,7 @@ namespace LPD.Compiler.Syntactic
             int column = _lexical.Position.Column - _token.Lexeme.Length;
 
             _position = null;
-            throw new SyntacticException(string.Format(MissingInicioErrorMessage, _lexical.Position.Line, column));
+            throw new CompilationException(string.Format(MissingInicioErrorMessage, _lexical.Position.Line, column));
         }
 
         private void RaiseMissingSemicolonError()
@@ -141,7 +149,7 @@ namespace LPD.Compiler.Syntactic
             ushort line = (ushort)(_lexical.Position.Line - 1);
 
             _position = new CodePosition() { Line = line, Column = column };
-            throw new SyntacticException(string.Format(UnexpectedTokenErrorMessage, line, column, "\";\""));
+            throw new CompilationException(string.Format(UnexpectedTokenErrorMessage, line, column, "\";\""));
         }
 
         private void RaiseUnexpectedTokenError(string message)
@@ -149,7 +157,7 @@ namespace LPD.Compiler.Syntactic
             int column = _lexical.Position.Column - _token.Lexeme.Length;
 
             _position = null;
-            throw new SyntacticException(string.Format(UnexpectedTokenErrorMessage, _lexical.Position.Line, column, message));
+            throw new CompilationException(string.Format(UnexpectedTokenErrorMessage, _lexical.Position.Line, column, message));
         }
 
         private void RaiseLexicalErrorMessage(string message)
@@ -157,13 +165,13 @@ namespace LPD.Compiler.Syntactic
             int column = _lexical.Position.Column - _token.Lexeme.Length;
 
             _position = null;
-            throw new SyntacticException(string.Format(LexicalErrorMessage, _lexical.Position.Line, column, message));
+            throw new CompilationException(string.Format(LexicalErrorMessage, _lexical.Position.Line, column, message));
         }
 
         private void RaiseUnexpectedEndOfFileMessage()
         {
             _position = null;
-            throw new SyntacticException(string.Format(UnexpectedEndOfFileErrorMessage, _lexical.Position.Line, _lexical.Position.Column));
+            throw new CompilationException(string.Format(UnexpectedEndOfFileErrorMessage, _lexical.Position.Line, _lexical.Position.Column));
         }
 
         private void AnalyzeBlock()

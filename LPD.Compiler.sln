@@ -10,11 +10,6 @@ EndProject
 Project("{F088123C-0E9E-452A-89E6-6BA2F21D5CAC}") = "LPD.Compiler.Architecture", "LPD.Compiler.Architecture\LPD.Compiler.Architecture.modelproj", "{41EE4447-BBF7-4D83-9F24-74F3095680D2}"
 EndProject
 Project("{6141683F-8A12-4E36-9623-2EB02B2C2303}") = "LPD.Compiler.Installer", "LPD.Compiler.Installer\LPD.Compiler.Installer.isproj", "{C4F75CBE-E09A-4454-ABA3-9A3B43399728}"
-	ProjectSection(ProjectDependencies) = postProject
-		{9E477E1A-4CFC-42EB-826F-1D91E924FAF0} = {9E477E1A-4CFC-42EB-826F-1D91E924FAF0}
-		{44C76A22-259B-4B79-80F2-FC4EF94BD590} = {44C76A22-259B-4B79-80F2-FC4EF94BD590}
-		{A23F12AB-72E1-482D-9057-72E868306069} = {A23F12AB-72E1-482D-9057-72E868306069}
-	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LPD.Compiler.Shared", "LPD.Compiler.Shared\LPD.Compiler.Shared.csproj", "{A196D281-2E94-4E65-9239-65A2800BF79B}"
 EndProject

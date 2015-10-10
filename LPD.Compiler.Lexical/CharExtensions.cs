@@ -1,14 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
+﻿using System.Globalization;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace LPD.Compiler.Lexical
 {
+    /// <summary>
+    /// Helper class for the <see cref="System.Char"/> class.
+    /// </summary>
     public static class CharExtensions
     {
+        /// <summary>
+        /// Finds for a diacritic in the specified <see cref="System.Char"/>.
+        /// </summary>
+        /// <param name="c">The character to look diacritic for.</param>
+        /// <returns>true fi the specified character has a diacritic; false otherwise.</returns>
         public static bool HasDiacritic(this char c)
         {
             var normalized = c.ToString().Normalize(NormalizationForm.FormD);
