@@ -37,5 +37,13 @@
 			<Name>LPD.Compiler.Lexical</Name>
 			<Project>{44C76A22-259B-4B79-80F2-FC4EF94BD590}</Project>
 		</ProjectReference>
+		<ProjectReference Include="..\LPD.Compiler.Shared\LPD.Compiler.Shared.csproj">
+			<Name>LPD.Compiler.Shared</Name>
+			<Project>{A196D281-2E94-4E65-9239-65A2800BF79B}</Project>
+		</ProjectReference>
+		<ProjectReference Include="..\LPD.Compiler.Syntactic\LPD.Compiler.Syntactic.csproj">
+			<Name>LPD.Compiler.Syntactic</Name>
+			<Project>{A23F12AB-72E1-482D-9057-72E868306069}</Project>
+		</ProjectReference>
 	</ItemGroup>
 </Project>

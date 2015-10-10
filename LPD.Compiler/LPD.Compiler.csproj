@@ -9,11 +9,12 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>LPD.Compiler</RootNamespace>
     <AssemblyName>LPD.Compiler</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -140,6 +141,10 @@
     <ProjectReference Include="..\LPD.Compiler.Shared\LPD.Compiler.Shared.csproj">
       <Project>{a196d281-2e94-4e65-9239-65a2800bf79b}</Project>
       <Name>LPD.Compiler.Shared</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LPD.Compiler.syntactic\LPD.Compiler.Syntactic.csproj">
+      <Project>{8c533f75-bed5-42bc-ae76-6643730aff42}</Project>
+      <Name>LPD.Compiler.Syntactic</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

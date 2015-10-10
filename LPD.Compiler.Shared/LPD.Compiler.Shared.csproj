@@ -4,13 +4,14 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{44C76A22-259B-4B79-80F2-FC4EF94BD590}</ProjectGuid>
+    <ProjectGuid>{A196D281-2E94-4E65-9239-65A2800BF79B}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>LPD.Compiler.Lexical</RootNamespace>
-    <AssemblyName>LPD.Compiler.Lexical</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <RootNamespace>LPD.Compiler.Shared</RootNamespace>
+    <AssemblyName>LPD.Compiler.Shared</AssemblyName>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -40,20 +41,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CharExtensions.cs" />
-    <Compile Include="CharReader.cs" />
-    <Compile Include="LexicalItem.cs" />
-    <Compile Include="Symbols.cs" />
-    <Compile Include="LexicalAnalyzer.cs" />
+    <Compile Include="CodePosition.cs" />
+    <Compile Include="CompileError.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Token.cs" />
-    <Compile Include="TokenCollection.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\LPD.Compiler.Shared\LPD.Compiler.Shared.csproj">
-      <Project>{a196d281-2e94-4e65-9239-65a2800bf79b}</Project>
-      <Name>LPD.Compiler.Shared</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
