@@ -141,10 +141,6 @@
       <Project>{a196d281-2e94-4e65-9239-65a2800bf79b}</Project>
       <Name>LPD.Compiler.Shared</Name>
     </ProjectReference>
-    <ProjectReference Include="..\LPD.Compiler.syntactic\LPD.Compiler.Syntactic.csproj">
-      <Project>{8c533f75-bed5-42bc-ae76-6643730aff42}</Project>
-      <Name>LPD.Compiler.Syntactic</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Images\Folder.png">
