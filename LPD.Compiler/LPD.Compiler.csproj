@@ -134,20 +134,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\LPD.Compiler.Lexical\LPD.Compiler.Lexical.csproj">
-      <Project>{44c76a22-259b-4b79-80f2-fc4ef94bd590}</Project>
-      <Name>LPD.Compiler.Lexical</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\LPD.Compiler.Shared\LPD.Compiler.Shared.csproj">
-      <Project>{a196d281-2e94-4e65-9239-65a2800bf79b}</Project>
-      <Name>LPD.Compiler.Shared</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\LPD.Compiler.syntactic\LPD.Compiler.Syntactic.csproj">
-      <Project>{8c533f75-bed5-42bc-ae76-6643730aff42}</Project>
-      <Name>LPD.Compiler.Syntactic</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Images\Folder.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -158,7 +144,20 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\LPD.Compiler.Lexical\LPD.Compiler.Lexical.csproj">
+      <Project>{44c76a22-259b-4b79-80f2-fc4ef94bd590}</Project>
+      <Name>LPD.Compiler.Lexical</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LPD.Compiler.Shared\LPD.Compiler.Shared.csproj">
+      <Project>{a196d281-2e94-4e65-9239-65a2800bf79b}</Project>
+      <Name>LPD.Compiler.Shared</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LPD.Compiler.Syntactic\LPD.Compiler.Syntactic.csproj">
+      <Project>{a23f12ab-72e1-482d-9057-72e868306069}</Project>
+      <Name>LPD.Compiler.Syntactic</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

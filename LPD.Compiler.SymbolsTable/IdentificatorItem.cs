@@ -1,6 +1,6 @@
 ﻿namespace LPD.Compiler.SymbolsTable
 {
-    public class IdentificatorItem : SymbolTableItem
+    public sealed class IdentificatorItem : SymbolTableItem
     {
 
     }

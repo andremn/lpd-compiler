@@ -10,12 +10,21 @@ EndProject
 Project("{F088123C-0E9E-452A-89E6-6BA2F21D5CAC}") = "LPD.Compiler.Architecture", "LPD.Compiler.Architecture\LPD.Compiler.Architecture.modelproj", "{41EE4447-BBF7-4D83-9F24-74F3095680D2}"
 EndProject
 Project("{6141683F-8A12-4E36-9623-2EB02B2C2303}") = "LPD.Compiler.Installer", "LPD.Compiler.Installer\LPD.Compiler.Installer.isproj", "{C4F75CBE-E09A-4454-ABA3-9A3B43399728}"
+	ProjectSection(ProjectDependencies) = postProject
+		{9E477E1A-4CFC-42EB-826F-1D91E924FAF0} = {9E477E1A-4CFC-42EB-826F-1D91E924FAF0}
+		{44C76A22-259B-4B79-80F2-FC4EF94BD590} = {44C76A22-259B-4B79-80F2-FC4EF94BD590}
+		{4D183E80-0C74-43AA-8500-95108E3AF911} = {4D183E80-0C74-43AA-8500-95108E3AF911}
+		{A196D281-2E94-4E65-9239-65A2800BF79B} = {A196D281-2E94-4E65-9239-65A2800BF79B}
+		{A23F12AB-72E1-482D-9057-72E868306069} = {A23F12AB-72E1-482D-9057-72E868306069}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LPD.Compiler.Shared", "LPD.Compiler.Shared\LPD.Compiler.Shared.csproj", "{A196D281-2E94-4E65-9239-65A2800BF79B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LPD.Compiler.Syntactic", "LPD.Compiler.Syntactic\LPD.Compiler.Syntactic.csproj", "{A23F12AB-72E1-482D-9057-72E868306069}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LPD.Compiler.SymbolsTable", "LPD.Compiler.SymbolsTable\LPD.Compiler.SymbolsTable.csproj", "{4D183E80-0C74-43AA-8500-95108E3AF911}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LPD.Compiler.Test", "LPD.Compiler.Test\LPD.Compiler.Test.csproj", "{A88677BE-8D5B-46DA-92BA-4269EACF1DBD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -96,6 +105,16 @@ Global
 		{4D183E80-0C74-43AA-8500-95108E3AF911}.Release|Any CPU.Build.0 = Release|Any CPU
 		{4D183E80-0C74-43AA-8500-95108E3AF911}.SingleImage|Any CPU.ActiveCfg = Release|Any CPU
 		{4D183E80-0C74-43AA-8500-95108E3AF911}.SingleImage|Any CPU.Build.0 = Release|Any CPU
+		{A88677BE-8D5B-46DA-92BA-4269EACF1DBD}.CD_ROM|Any CPU.ActiveCfg = Release|Any CPU
+		{A88677BE-8D5B-46DA-92BA-4269EACF1DBD}.CD_ROM|Any CPU.Build.0 = Release|Any CPU
+		{A88677BE-8D5B-46DA-92BA-4269EACF1DBD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A88677BE-8D5B-46DA-92BA-4269EACF1DBD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A88677BE-8D5B-46DA-92BA-4269EACF1DBD}.DVD-5|Any CPU.ActiveCfg = Debug|Any CPU
+		{A88677BE-8D5B-46DA-92BA-4269EACF1DBD}.DVD-5|Any CPU.Build.0 = Debug|Any CPU
+		{A88677BE-8D5B-46DA-92BA-4269EACF1DBD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A88677BE-8D5B-46DA-92BA-4269EACF1DBD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A88677BE-8D5B-46DA-92BA-4269EACF1DBD}.SingleImage|Any CPU.ActiveCfg = Release|Any CPU
+		{A88677BE-8D5B-46DA-92BA-4269EACF1DBD}.SingleImage|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

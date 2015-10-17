@@ -1,39 +1,49 @@
 ﻿
+using System.Collections.Generic;
+using System.Linq;
+
 namespace LPD.Compiler.SymbolsTable
 {
     public class SymbolsTable
     {
-        private SymbolTableItemCollection itens;
+        private SymbolTableItemCollection _itemsCollection;
+
         public SymbolsTable()
         {
-            itens = new SymbolTableItemCollection();
+            _itemsCollection = new SymbolTableItemCollection();
         }
 
         public void InsertTable(SymbolTableItem item)
         {
-            itens.Add(item);
+            _itemsCollection.Add(item);
         }
 
-        public void RemoveTable(string Lexeme)
+        public void RemoveTable(string lexeme)
         {
-            for (int i = itens.Count - 1; i >= 0; i--)
+            for (int i = _itemsCollection.Count - 1; i >= 0; i--)
             {
-                SymbolTableItem item = itens[i];
-                if (item.Lexeme != Lexeme)
-                {
-                    itens.Remove(item);
-                }
-                else
+                SymbolTableItem item = _itemsCollection[i];
+
+                if (item.Lexeme == lexeme)
                 {
                     break;
                 }
 
+                _itemsCollection.Remove(item);
             }
         }
 
-        public SymbolTableItem SearchTable(string Lexeme)
+        public IList<SymbolTableItem> SearchTable(string lexeme)
         {
+            return _itemsCollection.Search(lexeme);
+        }
 
+        public SymbolTableItem SearchTableByLevel(string lexeme, string level)
+        {
+            var items = _itemsCollection.Search(lexeme);
+            var funcs = items.Select(item => item as FunctionItem);
+
+            return funcs.SingleOrDefault(function => function.Level == level);
         }
     }
 }

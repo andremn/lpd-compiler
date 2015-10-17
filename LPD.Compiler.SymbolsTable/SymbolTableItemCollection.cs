@@ -8,36 +8,36 @@ namespace LPD.Compiler.SymbolsTable
 {
     public class SymbolTableItemCollection
     {
-        private List<SymbolTableItem> itens;
+        private IList<SymbolTableItem> _items;
 
         public SymbolTableItem this[int index]
         {
-            get
-            {
-                return itens[index];
-            }
+            get { return _items[index]; }
         }
 
-        public int Count { get { return itens.Count; } }
+        public int Count
+        {
+            get { return _items.Count; }
+        }
 
         public SymbolTableItemCollection()
         {
-            itens = new List<SymbolTableItem>();
+            _items = new List<SymbolTableItem>();
         }
 
         public void Add(SymbolTableItem item)
         {
-            itens.Add(item);
+            _items.Add(item);
         }
 
         public void Remove(SymbolTableItem item)
         {
-            itens.Remove(item);
-        }
-        public SymbolTableItem Search(string Lexeme)
-        {
-            return itens.SingleOrDefault(item => item.Lexeme == Lexeme);
+            _items.Remove(item);
         }
 
+        public IList<SymbolTableItem> Search(string lexeme)
+        {
+            return _items.Where(item => item.Lexeme == lexeme).ToList();
+        }
     }
 }

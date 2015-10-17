@@ -28,6 +28,7 @@
 		</TaggedOutputs> -->
 	</ItemGroup>
 	<Import Project="$(MSBuildExtensionsPath32)\InstallShield\2015Limited\InstallShield.targets"/>
+	<ItemGroup/>
 	<ItemGroup>
 		<ProjectReference Include="..\LPD.Compiler\LPD.Compiler.csproj">
 			<Name>LPD.Compiler</Name>
@@ -40,6 +41,10 @@
 		<ProjectReference Include="..\LPD.Compiler.Shared\LPD.Compiler.Shared.csproj">
 			<Name>LPD.Compiler.Shared</Name>
 			<Project>{A196D281-2E94-4E65-9239-65A2800BF79B}</Project>
+		</ProjectReference>
+		<ProjectReference Include="..\LPD.Compiler.SymbolsTable\LPD.Compiler.SymbolsTable.csproj">
+			<Name>LPD.Compiler.SymbolsTable</Name>
+			<Project>{4D183E80-0C74-43AA-8500-95108E3AF911}</Project>
 		</ProjectReference>
 		<ProjectReference Include="..\LPD.Compiler.Syntactic\LPD.Compiler.Syntactic.csproj">
 			<Name>LPD.Compiler.Syntactic</Name>

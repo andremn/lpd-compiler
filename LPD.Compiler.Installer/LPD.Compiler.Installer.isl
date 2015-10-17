@@ -340,11 +340,12 @@
 		<col def="S0">ISDotNetInstallerArgsCommit</col>
 		<col def="S0">ISDotNetInstallerArgsUninstall</col>
 		<col def="S0">ISDotNetInstallerArgsRollback</col>
-		<row><td>LPD.Compiler.Content_Files</td><td>{6FD76B7E-EA49-43C6-8120-E51C53CEA4B9}</td><td>INSTALLDIR</td><td>2</td><td/><td>lpd.compiler.content_files</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>LPD.Compiler.Lexical.Primary_output</td><td>{4A74D261-46C7-4ED6-9852-474012AB20A5}</td><td>INSTALLDIR</td><td>2</td><td/><td>lpd.compiler.lexical.primary</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>LPD.Compiler.Primary_output</td><td>{63729FAD-833B-4695-8D02-2AEE4F34D98C}</td><td>INSTALLDIR</td><td>2</td><td/><td>lpd.compiler.primary_output</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>LPD.Compiler.Shared.Primary_output</td><td>{BB8F2B5C-9E86-4998-BE06-9FF58AD80047}</td><td>INSTALLDIR</td><td>2</td><td/><td>lpd.compiler.shared.primary_</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>LPD.Compiler.Syntactic.Primary_output</td><td>{0823BC2E-AFC1-4843-A080-64F35C002D88}</td><td>INSTALLDIR</td><td>2</td><td/><td>lpd.compiler.syntactic.prima</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>LPD.Compiler.Content_Files</td><td>{5CF5AED7-F4A4-4325-BC9C-53E46E477627}</td><td>INSTALLDIR</td><td>2</td><td/><td>lpd.compiler.content_files</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>LPD.Compiler.Lexical.Primary_output</td><td>{EB0F5F7F-5E21-4BD8-9FE4-3CE0CBEDDE64}</td><td>INSTALLDIR</td><td>2</td><td/><td>lpd.compiler.lexical.primary</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>LPD.Compiler.Primary_output</td><td>{E5C08D50-CC43-4D33-B6E8-EBDF2A34687E}</td><td>INSTALLDIR</td><td>2</td><td/><td>lpd.compiler.primary_output</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>LPD.Compiler.Shared.Primary_output</td><td>{96D961C0-6446-45AA-A271-EF545B55FCE5}</td><td>INSTALLDIR</td><td>2</td><td/><td>lpd.compiler.shared.primary_</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>LPD.Compiler.SymbolsTable.Primary_output</td><td>{5BAF3D09-D15A-466D-8F76-119AE684C628}</td><td>INSTALLDIR</td><td>2</td><td/><td>lpd.compiler.symbolstable.pr</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>LPD.Compiler.Syntactic.Primary_output</td><td>{EC916129-89E3-45DB-BCE2-0CA57458AE84}</td><td>INSTALLDIR</td><td>2</td><td/><td>lpd.compiler.syntactic.prima</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 	</table>
 
 	<table name="Condition">
@@ -1058,6 +1059,7 @@
 		<row><td>INSTALLDIR</td><td>LPD.Compiler.Lexical.Primary_output</td></row>
 		<row><td>INSTALLDIR</td><td>LPD.Compiler.Primary_output</td></row>
 		<row><td>INSTALLDIR</td><td>LPD.Compiler.Shared.Primary_output</td></row>
+		<row><td>INSTALLDIR</td><td>LPD.Compiler.SymbolsTable.Primary_output</td></row>
 		<row><td>INSTALLDIR</td><td>LPD.Compiler.Syntactic.Primary_output</td></row>
 	</table>
 
@@ -1876,6 +1878,7 @@
 		<row><td>AlwaysInstall</td><td>LPD.Compiler.Lexical.Primary_output</td></row>
 		<row><td>AlwaysInstall</td><td>LPD.Compiler.Primary_output</td></row>
 		<row><td>AlwaysInstall</td><td>LPD.Compiler.Shared.Primary_output</td></row>
+		<row><td>AlwaysInstall</td><td>LPD.Compiler.SymbolsTable.Primary_output</td></row>
 		<row><td>AlwaysInstall</td><td>LPD.Compiler.Syntactic.Primary_output</td></row>
 	</table>
 
@@ -1895,6 +1898,7 @@
 		<row><td>lpd.compiler.lexical.primary</td><td>LPD.Compiler.Lexical.Primary_output</td><td>LPD.Compiler.Lexical.Primary output</td><td>0</td><td/><td/><td/><td>1</td><td>&lt;LPD.Compiler.Lexical&gt;|Built</td><td>3</td><td/></row>
 		<row><td>lpd.compiler.primary_output</td><td>LPD.Compiler.Primary_output</td><td>LPD.Compiler.Primary output</td><td>0</td><td/><td/><td/><td>1</td><td>&lt;LPD.Compiler&gt;|Built</td><td>3</td><td/></row>
 		<row><td>lpd.compiler.shared.primary_</td><td>LPD.Compiler.Shared.Primary_output</td><td>LPD.Compiler.Shared.Primary output</td><td>0</td><td/><td/><td/><td>1</td><td>&lt;LPD.Compiler.Shared&gt;|Built</td><td>3</td><td/></row>
+		<row><td>lpd.compiler.symbolstable.pr</td><td>LPD.Compiler.SymbolsTable.Primary_output</td><td>LPD.Compiler.SymbolsTable.Primary output</td><td>0</td><td/><td/><td/><td>1</td><td>&lt;LPD.Compiler.SymbolsTable&gt;|Built</td><td>3</td><td/></row>
 		<row><td>lpd.compiler.syntactic.prima</td><td>LPD.Compiler.Syntactic.Primary_output</td><td>LPD.Compiler.Syntactic.Primary output</td><td>0</td><td/><td/><td/><td>1</td><td>&lt;LPD.Compiler.Syntactic&gt;|Built</td><td>3</td><td/></row>
 	</table>
 
@@ -2037,11 +2041,12 @@
 		<col def="S0">FTPLocation</col>
 		<col def="S0">HTTPLocation</col>
 		<col def="S0">Miscellaneous</col>
-		<row><td>LPD.Compiler.Content_Files</td><td/><td/><td>_6748B893_A2C1_45E8_9F7F_8BA46FA1970E_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>LPD.Compiler.Lexical.Primary_output</td><td/><td/><td>_FB7D9996_6FB9_4F56_8DAE_DDE1EBFE299E_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>LPD.Compiler.Primary_output</td><td/><td/><td>_F3330EFF_1558_480E_9608_B556766F9FCC_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>LPD.Compiler.Shared.Primary_output</td><td/><td/><td>_532FF304_34E3_49EC_B4CF_F3EEE36C8DDB_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>LPD.Compiler.Syntactic.Primary_output</td><td/><td/><td>_70147359_E80F_4609_AAB1_83F3E7461E12_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>LPD.Compiler.Content_Files</td><td/><td/><td>_D7B8E581_8F72_4E00_A09C_EEEFF19EB273_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>LPD.Compiler.Lexical.Primary_output</td><td/><td/><td>_B65B3433_58DE_4A8F_B633_FA82A54360C0_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>LPD.Compiler.Primary_output</td><td/><td/><td>_089D0F59_BF28_4F75_ABDE_C7844A63B519_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>LPD.Compiler.Shared.Primary_output</td><td/><td/><td>_C291B77B_BA4D_47C3_A461_508CC0810728_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>LPD.Compiler.SymbolsTable.Primary_output</td><td/><td/><td>_2DE8DCCF_EF6D_4CF2_AFBD_B7BE59CDA6EB_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>LPD.Compiler.Syntactic.Primary_output</td><td/><td/><td>_F112A0BA_939A_4F2C_9027_C62B38398579_FILTER</td><td/><td/><td/><td/></row>
 	</table>
 
 	<table name="ISCustomActionReference">
@@ -2327,6 +2332,7 @@
 		<row><td>LPD.Compiler</td><td>LPD.Compiler\LPD.Compiler.csproj</td><td/><td>2</td></row>
 		<row><td>LPD.Compiler.Lexical</td><td>LPD.Compiler.Lexical\LPD.Compiler.Lexical.csproj</td><td/><td>2</td></row>
 		<row><td>LPD.Compiler.Shared</td><td>LPD.Compiler.Shared\LPD.Compiler.Shared.csproj</td><td/><td>2</td></row>
+		<row><td>LPD.Compiler.SymbolsTable</td><td>LPD.Compiler.SymbolsTable\LPD.Compiler.SymbolsTable.csproj</td><td/><td>2</td></row>
 		<row><td>LPD.Compiler.Syntactic</td><td>LPD.Compiler.Syntactic\LPD.Compiler.Syntactic.csproj</td><td/><td>2</td></row>
 		<row><td>ProgramFilesFolder</td><td/><td/><td>1</td></row>
 		<row><td>SystemFolder</td><td/><td/><td>1</td></row>
