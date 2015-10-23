@@ -43,10 +43,11 @@
   <ItemGroup>
     <Compile Include="FunctionItem.cs" />
     <Compile Include="IdentificatorItem.cs" />
+    <Compile Include="ItemType.cs" />
     <Compile Include="ProcItem.cs" />
     <Compile Include="ProgramNameItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SymbolsTable.cs" />
+    <Compile Include="VectorSymbolsTable.cs" />
     <Compile Include="SymbolTableItem.cs" />
     <Compile Include="SymbolTableItemCollection.cs" />
   </ItemGroup>

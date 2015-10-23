@@ -53,8 +53,8 @@
   </Choose>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SymbolsTable\SymbolsTableItemCollectionTests.cs" />
-    <Compile Include="SymbolsTable\SymbolsTableTests.cs" />
+    <Compile Include="SymbolsTableTests\SymbolsTableItemCollectionTests.cs" />
+    <Compile Include="SymbolsTableTests\SymbolsTableTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\LPD.Compiler.SymbolsTable\LPD.Compiler.SymbolsTable.csproj">

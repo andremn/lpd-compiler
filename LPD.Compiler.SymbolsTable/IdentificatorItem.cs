@@ -2,6 +2,6 @@
 {
     public sealed class IdentificatorItem : SymbolTableItem
     {
-
+        public ItemType Type { get; set; }
     }
 }

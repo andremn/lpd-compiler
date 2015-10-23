@@ -3,7 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
 using System;
 
-namespace LPD.Compiler.Test.SymbolsTable
+namespace LPD.Compiler.Test.SymbolsTableTests
 {
     [TestClass]
     public class SymbolsTableItemCollectionTests
