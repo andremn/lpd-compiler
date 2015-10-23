@@ -86,8 +86,7 @@ namespace LPD.Compiler.Test.SymbolsTableTests
             Assert.AreEqual(innerCollection[0], item);
 
             var searchResult = collection.Search(item.Lexeme);
-
-            Assert.IsTrue(searchResult.Count == 1);
+            
             Assert.AreEqual(searchResult[0], item);
         }
 
