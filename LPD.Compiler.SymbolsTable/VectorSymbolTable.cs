@@ -80,6 +80,33 @@ namespace LPD.Compiler.SymbolsTable
             }
         }
 
+        public void SetFunctionType(string lexeme, ItemType type)
+        {
+            var func = (from item in _itemsCollection
+                        select item as FunctionItem)
+                        .Where(item => item != null)
+                        .SingleOrDefault(item => item.Lexeme == lexeme);
+
+            if (func == null)
+            {
+                throw new ArgumentException($"Function with lexeme {lexeme} not found.");
+            }
+
+            func.Type = type;
+        }
+
+        public void SetTypeLastestVars(ItemType type)
+        {
+            var identificators = (from item in _itemsCollection
+                                  select item as IdentificatorItem)
+                                  .Where(item => item != null && item.Type == ItemType.None);
+
+            foreach (var identificator in identificators)
+            {
+                identificator.Type = type;
+            }
+        }
+
         private IEnumerable<SymbolTableItem> GetIdentificatorsByLevel(string level)
         {
             bool found = false;
@@ -122,33 +149,6 @@ namespace LPD.Compiler.SymbolsTable
                 {
                     yield return item;
                 }
-            }
-        }
-
-        public void SetFunctionType(string lexeme, ItemType type)
-        {
-            var func = (from item in _itemsCollection
-                         select item as FunctionItem)
-                        .Where(item => item != null)
-                        .SingleOrDefault(item => item.Lexeme == lexeme);
-
-            if (func == null)
-            {
-                throw new ArgumentException($"Function with lexeme {lexeme} not found.");
-            }
-
-            func.Type = type;
-        }
-
-        public void SetTypeLastestVars(ItemType type)
-        {
-            var identificators = (from item in _itemsCollection
-                                  select item as IdentificatorItem)
-                                  .Where(item => item != null && item.Type == ItemType.None);
-
-            foreach (var identificator in identificators)
-            {
-                identificator.Type = type;
             }
         }
     }
