@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace LPD.Compiler.SymbolsTable
 {
-    public class VectorSymbolsTable
+    public class VectorSymbolTable
     {
         private SymbolTableItemCollection _itemsCollection;
         
@@ -13,7 +13,7 @@ namespace LPD.Compiler.SymbolsTable
             get { return _itemsCollection.ToList().AsReadOnly(); }
         }
 
-        public VectorSymbolsTable()
+        public VectorSymbolTable()
         {
             _itemsCollection = new SymbolTableItemCollection();
         }
@@ -53,6 +53,31 @@ namespace LPD.Compiler.SymbolsTable
             var ids = GetIdentificatorsByLevel(level);
 
             return ids.SingleOrDefault(item => item.Lexeme == lexeme);
+        }
+
+        public void CleanUpToLevel(string level)
+        {
+            var identificators = GetIdentificatorsByLevel(level).ToList();
+
+            for (int i = 0; i < identificators.Count; i++)
+            {
+                _itemsCollection.Remove(identificators[i]);
+            }
+        }
+
+        public void CleanUp()
+        {
+            for (int i = _itemsCollection.Count; i >= 0; i--)
+            {
+                var item = _itemsCollection[i];
+
+                if (item is FunctionItem || item is ProcItem)
+                {
+                    break;
+                }
+
+                _itemsCollection.RemoveAt(i);
+            }
         }
 
         private IEnumerable<SymbolTableItem> GetIdentificatorsByLevel(string level)
