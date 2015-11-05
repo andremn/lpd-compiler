@@ -13,6 +13,7 @@ namespace LPD.Compiler.Syntactic
         private LexicalAnalyzer _lexical;
         private Token _token;
         private CodePosition? _position = null;
+       
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SyntacticAnalyzer"/> class with the specified <see cref="LexicalAnalyzer"/>.
@@ -90,14 +91,14 @@ namespace LPD.Compiler.Syntactic
             {
                 int column = _lexical.Position.Column - _token.Lexeme.Length;
 
-                if (_token.Symbol == Symbols.SPontoVirgula)
-                {
-                    return new CompileError(_lexical.Position, string.Format("Linha {0}, coluna {1}: Faltando bloco com \"inicio\" ou \"fim\"", _lexical.Position.Line, column));
-                }
-                else if (_token.Symbol != Symbols.SFim)
-                {                    
-                    return new CompileError(_lexical.Position, string.Format(InvalidTerm, _lexical.Position.Line, column));
-                }
+                //if (_token.Symbol == Symbols.SPontoVirgula)
+                //{
+                //    return new CompileError(_lexical.Position, string.Format("Linha {0}, coluna {1}: Faltando bloco com \"inicio\" ou \"fim\"", _lexical.Position.Line, column));
+                //}
+                //else if (_token.Symbol != Symbols.SFim)
+                //{                    
+                //    return new CompileError(_lexical.Position, string.Format(InvalidTerm, _lexical.Position.Line, column));
+                //}
 
                 if (_position.HasValue)
                 {
@@ -174,6 +175,13 @@ namespace LPD.Compiler.Syntactic
             throw new CompilationException(string.Format(UnexpectedEndOfFileErrorMessage, _lexical.Position.Line, _lexical.Position.Column));
         }
 
+        private void RaiseInvalidToken()
+        {
+            _position = null;
+            throw new CompilationException(string.Format(InvalidTokenErrorMessage, _lexical.Position.Line, _lexical.Position.Column,_token.Lexeme));
+        }
+
+
         private void AnalyzeBlock()
         {
             if (!NextToken())
@@ -208,7 +216,7 @@ namespace LPD.Compiler.Syntactic
 
                             if (_token.Symbol == Symbols.SDoisPontos)
                             {
-                                RaiseUnexpectedTokenError("\":\"");
+                                RaiseLexicalErrorMessage("Esperado identificador");
                             }
                         }
                     }
@@ -314,7 +322,7 @@ namespace LPD.Compiler.Syntactic
             }
             else
             {
-                RaiseUnexpectedTokenError("\"inicio\"");
+                RaiseInvalidToken();
             }
         }
 
@@ -434,15 +442,15 @@ namespace LPD.Compiler.Syntactic
                 {
                     // doesnt exist yet!
                     /*
-                    if(pesquisa_declvar_tabela(token.lexema))
+                    if(Search(token.lexema))
                     {
                         
                     }
                     else
                     {
                         throw new SyntacticException();
-                    }*/
-
+                    }
+                    */
                     if (!NextToken())
                     {
                         RaiseUnexpectedEndOfFileMessage();

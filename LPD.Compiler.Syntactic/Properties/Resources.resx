@@ -120,6 +120,9 @@
   <data name="InvalidTerm" xml:space="preserve">
     <value>Linha {0}, coluna {1}: Termo inválido.</value>
   </data>
+  <data name="InvalidTokenErrorMessage" xml:space="preserve">
+    <value>Linha {0}, coluna {1}: Simbolo {2} invalido.</value>
+  </data>
   <data name="LexicalErrorMessage" xml:space="preserve">
     <value>Linha {0}, coluna {1}: {2}.</value>
   </data>

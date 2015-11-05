@@ -70,6 +70,15 @@ namespace LPD.Compiler.Syntactic.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Linha {0}, coluna {1}: Simbolo {2} invalido..
+        /// </summary>
+        internal static string InvalidTokenErrorMessage {
+            get {
+                return ResourceManager.GetString("InvalidTokenErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Linha {0}, coluna {1}: {2}..
         /// </summary>
         internal static string LexicalErrorMessage {
