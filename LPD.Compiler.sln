@@ -26,6 +26,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LPD.Compiler.SymbolsTable",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LPD.Compiler.Test", "LPD.Compiler.Test\LPD.Compiler.Test.csproj", "{A88677BE-8D5B-46DA-92BA-4269EACF1DBD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LPD.Compiler.Semantic", "LPD.Compiler.Semantic\LPD.Compiler.Semantic.csproj", "{31310585-1A66-4D64-A415-78595A23BE7F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		CD_ROM|Any CPU = CD_ROM|Any CPU
@@ -115,6 +117,16 @@ Global
 		{A88677BE-8D5B-46DA-92BA-4269EACF1DBD}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A88677BE-8D5B-46DA-92BA-4269EACF1DBD}.SingleImage|Any CPU.ActiveCfg = Release|Any CPU
 		{A88677BE-8D5B-46DA-92BA-4269EACF1DBD}.SingleImage|Any CPU.Build.0 = Release|Any CPU
+		{31310585-1A66-4D64-A415-78595A23BE7F}.CD_ROM|Any CPU.ActiveCfg = Release|Any CPU
+		{31310585-1A66-4D64-A415-78595A23BE7F}.CD_ROM|Any CPU.Build.0 = Release|Any CPU
+		{31310585-1A66-4D64-A415-78595A23BE7F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{31310585-1A66-4D64-A415-78595A23BE7F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{31310585-1A66-4D64-A415-78595A23BE7F}.DVD-5|Any CPU.ActiveCfg = Debug|Any CPU
+		{31310585-1A66-4D64-A415-78595A23BE7F}.DVD-5|Any CPU.Build.0 = Debug|Any CPU
+		{31310585-1A66-4D64-A415-78595A23BE7F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{31310585-1A66-4D64-A415-78595A23BE7F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{31310585-1A66-4D64-A415-78595A23BE7F}.SingleImage|Any CPU.ActiveCfg = Release|Any CPU
+		{31310585-1A66-4D64-A415-78595A23BE7F}.SingleImage|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
