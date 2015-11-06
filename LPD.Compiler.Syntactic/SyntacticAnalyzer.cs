@@ -90,16 +90,7 @@ namespace LPD.Compiler.Syntactic
             catch (CompilationException ex)
             {
                 int column = _lexical.Position.Column - _token.Lexeme.Length;
-
-                //if (_token.Symbol == Symbols.SPontoVirgula)
-                //{
-                //    return new CompileError(_lexical.Position, string.Format("Linha {0}, coluna {1}: Faltando bloco com \"inicio\" ou \"fim\"", _lexical.Position.Line, column));
-                //}
-                //else if (_token.Symbol != Symbols.SFim)
-                //{                    
-                //    return new CompileError(_lexical.Position, string.Format(InvalidTerm, _lexical.Position.Line, column));
-                //}
-
+                
                 if (_position.HasValue)
                 {
                     return new CompileError(_position.Value, ex.Message);

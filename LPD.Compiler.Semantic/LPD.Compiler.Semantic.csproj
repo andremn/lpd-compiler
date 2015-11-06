@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataType.cs" />
     <Compile Include="ExpressionAnalyzer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -47,6 +48,10 @@
     <ProjectReference Include="..\LPD.Compiler.Lexical\LPD.Compiler.Lexical.csproj">
       <Project>{44c76a22-259b-4b79-80f2-fc4ef94bd590}</Project>
       <Name>LPD.Compiler.Lexical</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LPD.Compiler.SymbolsTable\LPD.Compiler.SymbolsTable.csproj">
+      <Project>{4d183e80-0c74-43aa-8500-95108e3af911}</Project>
+      <Name>LPD.Compiler.SymbolsTable</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

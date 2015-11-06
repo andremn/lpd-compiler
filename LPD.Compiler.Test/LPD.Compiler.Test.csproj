@@ -53,10 +53,19 @@
   </Choose>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SemanticTests\ExpressionAnalyzerTests.cs" />
     <Compile Include="SymbolsTableTests\SymbolsTableItemCollectionTests.cs" />
     <Compile Include="SymbolsTableTests\SymbolsTableTests.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\LPD.Compiler.Lexical\LPD.Compiler.Lexical.csproj">
+      <Project>{44c76a22-259b-4b79-80f2-fc4ef94bd590}</Project>
+      <Name>LPD.Compiler.Lexical</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LPD.Compiler.Semantic\LPD.Compiler.Semantic.csproj">
+      <Project>{31310585-1a66-4d64-a415-78595a23be7f}</Project>
+      <Name>LPD.Compiler.Semantic</Name>
+    </ProjectReference>
     <ProjectReference Include="..\LPD.Compiler.SymbolsTable\LPD.Compiler.SymbolsTable.csproj">
       <Project>{4d183e80-0c74-43aa-8500-95108e3af911}</Project>
       <Name>LPD.Compiler.SymbolsTable</Name>
