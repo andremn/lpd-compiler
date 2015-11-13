@@ -1,4 +1,5 @@
 ﻿using LPD.Compiler.Lexical;
+using static LPD.Compiler.Semantic.Properties.Resource;
 using LPD.Compiler.SymbolsTable;
 using System;
 using System.Collections.Generic;
@@ -15,6 +16,9 @@ namespace LPD.Compiler.Semantic
 
         private readonly Dictionary<Symbols, ushort> _priorities = new Dictionary<Symbols, ushort>
         {
+            [Symbols.SNao] = 5,
+            [Symbols.SMaisUnario] = 5,
+            [Symbols.SMenosUnario] = 5,
             [Symbols.SMult] = 4,
             [Symbols.SDiv] = 4,
             [Symbols.SMais] = 3,
@@ -37,14 +41,42 @@ namespace LPD.Compiler.Semantic
 
         public void Add(Token token)
         {
-            if (token.Symbol != Symbols.SNumero && token.Symbol != Symbols.SIdentificador)
+            if (token.Symbol != Symbols.SNumero && token.Symbol != Symbols.SIdentificador && token.Symbol != Symbols.SAbreParenteses)
             {
+                if (token.Symbol == Symbols.SFechaParenteses)
+                {
+                    for (int i = _tokens.Count - 1; i >= 0; i--)
+                    {
+                        var current = _tokens[i];
+
+                        if (current.Symbol != Symbols.SAbreParenteses)
+                        {
+                            _output.Add(current);
+                        }
+                        else
+                        {
+                            _tokens.RemoveAt(i);
+                            break;
+                        }
+
+                        _tokens.RemoveAt(i);
+                    }
+
+                    return;                 
+                }
+
                 for (int i = _tokens.Count - 1; i >= 0; i--)
                 {
                     var current = _tokens[i];
-                    var priority1 = _priorities[current.Symbol];
-                    var priority2 = _priorities[token.Symbol];
 
+                    if (current.Symbol == Symbols.SAbreParenteses)
+                    {
+                        break;
+                    }
+
+                    var priority1 = _priorities[current.Symbol];
+                    var priority2 = _priorities[token.Symbol]; 
+                    
                     if (priority1 >= priority2)
                     {
                         _output.Add(current);
@@ -52,30 +84,58 @@ namespace LPD.Compiler.Semantic
                     }
                 }
 
-                _tokens.Add(token);
+                if (token.Symbol != Symbols.SAbreParenteses)
+                {
+                    _tokens.Add(token);
+                }
             }
             else
             {
-                _output.Add(token);
+                if (token.Symbol == Symbols.SAbreParenteses)
+                {
+                    _tokens.Add(token);
+                }
+                else
+                {
+                    if (token.Symbol != Symbols.SFechaParenteses)
+                    {
+                        _output.Add(token);
+                    }
+                }
             }
         }
 
-        public ItemType AnalyzeDataTypes(VectorSymbolTable symbolsTable)
+        public ItemType Analyze(VectorSymbolTable symbolTable)
         {
             for (int i = _tokens.Count - 1; i >= 0; i--)
             {
                 _output.Add(_tokens[i]);
             }
 
-            Stack<ItemType> finalTypes = new Stack<ItemType>();
+            ItemType result = ItemType.None;
             Stack<ItemType> types = new Stack<ItemType>();
-            string output = GetOutput();
-            
+
             foreach (var token in _output)
             {
-                if (token.Symbol == Symbols.SIdentificador || token.Symbol == Symbols.SFuncao)
+                var symbol = token.Symbol;
+
+                if (symbol == Symbols.SNao)
                 {
-                    var identificator = symbolsTable.Search(token.Lexeme) as IdentificatorItem;
+                    var firstOperand = types.Pop();
+
+                    if (firstOperand == ItemType.Boolean)
+                    {
+                        types.Push(ItemType.Boolean);
+                        result = ItemType.Boolean;
+                    }
+                    else
+                    {
+                        throw new InvalidOperationException(InvalidOperandNotOperator);
+                    }
+                }
+                else if (symbol == Symbols.SIdentificador)
+                {
+                    var identificator = symbolTable.Search(token.Lexeme) as IdentificatorItem;
 
                     if (identificator != null)
                     {
@@ -83,7 +143,7 @@ namespace LPD.Compiler.Semantic
                         continue;
                     }
 
-                    var func = symbolsTable.Search(token.Lexeme) as FunctionItem;
+                    var func = symbolTable.Search(token.Lexeme) as FunctionItem;
 
                     if (func != null)
                     {
@@ -96,79 +156,109 @@ namespace LPD.Compiler.Semantic
                 }
                 else
                 {
-                    ItemType expectedType = ItemType.None;
+                    var firstType = types.Pop();
+                    var type = ItemType.None;
 
-                    if (token.Symbol == Symbols.SNao)
+                    //Unary operator expects only one operand and it always results in a integer expression.
+                    if (token.Symbol == Symbols.SMaisUnario || token.Symbol == Symbols.SMenosUnario)
                     {
-                        var item = types.Pop();
-
-                        if (item != ItemType.Boolean)
+                        if (firstType != ItemType.Integer)
                         {
-                            throw new InvalidOperationException("Operador inválido");
+                            throw new InvalidOperationException(string.Format(InvalidOperatorInExpression, token.Lexeme, firstType));
                         }
 
-                        finalTypes.Push(ItemType.Boolean);
+                        type = ItemType.Integer;
                     }
-                    else if (token.Symbol == Symbols.SMais || token.Symbol == Symbols.SMenos ||
-                        token.Symbol == Symbols.SDiv || token.Symbol == Symbols.SMult)
+                    else
                     {
-                        var item1 = types.Pop();
-                        var item2 = types.Pop();
-
-                        if (item1 != ItemType.Integer || item2 != ItemType.Integer)
-                        {
-                            throw new InvalidOperationException("Operador inválido");
-                        }
-
-                        finalTypes.Push(ItemType.Integer);
+                        type = GetExpressionType(token, firstType, types.Pop());
                     }
-                    else if (token.Symbol == Symbols.SMaior || token.Symbol == Symbols.SMenor ||
-                        token.Symbol == Symbols.SMaiorIg || token.Symbol == Symbols.SMenorIg ||
-                        token.Symbol == Symbols.SIg || token.Symbol == Symbols.SDif)
+
+                    if (type == ItemType.None)
                     {
-                        var item1 = types.Pop();
-                        var item2 = types.Pop();
-
-                        if (item1 != ItemType.Integer || item2 != ItemType.Integer)
-                        {
-                            throw new InvalidOperationException("Operador inválido");
-                        }
-
-                        finalTypes.Push(ItemType.Boolean);
-                    }
-                    else if (token.Symbol == Symbols.SE || token.Symbol == Symbols.SOu)
-                    {
-                        var item1 = types.Pop();
-                        var item2 = types.Pop();
-
-                        if (item1 != ItemType.Boolean || item2 != ItemType.Boolean)
-                        {
-                            throw new InvalidOperationException("Operador inválido");
-                        }
-
-                        finalTypes.Push(ItemType.Boolean);
+                        throw new InvalidOperationException("Token inválido.");
                     }
 
-                    finalTypes.Push(expectedType);
+                    types.Push(type);
+                    result = type;
                 }
             }
 
-            if (finalTypes.All(item => item == ItemType.Integer))
-            {
-                return ItemType.Integer;
-            }
-
-            if (finalTypes.All(item => item == ItemType.Boolean))
-            {
-                return ItemType.Boolean;
-            }
-
-            throw new InvalidOperationException("Operador inválido");
+            return result;
         }
 
         public string GetOutput()
         {
-            return string.Join(string.Empty, _output);
+            return string.Join(string.Empty, _output.Select(token => token.Lexeme));
+        }
+
+        public void Reset()
+        {
+            _tokens.Clear();
+            _output.Clear();
+        }
+
+        private ItemType GetExpressionType(Token op, ItemType firstType, ItemType secondType)
+        {
+            if (op.Symbol == Symbols.SMais || op.Symbol == Symbols.SMenos ||
+                    op.Symbol == Symbols.SDiv || op.Symbol == Symbols.SMult)
+            {
+                if (firstType == ItemType.Integer && secondType == ItemType.Integer)
+                {
+                    return ItemType.Integer;
+                }
+                else
+                {
+                    ThrowInvalidOperandError(op.Lexeme, firstType, secondType);
+                }
+            }
+            else if (op.Symbol == Symbols.SMaior || op.Symbol == Symbols.SMenor ||
+                       op.Symbol == Symbols.SMaiorIg || op.Symbol == Symbols.SMenorIg ||
+                       op.Symbol == Symbols.SIg || op.Symbol == Symbols.SDif)
+            {
+                if (firstType == ItemType.Integer && secondType == ItemType.Integer)
+                {
+                    return ItemType.Boolean;
+                }
+                else
+                {
+                    ThrowInvalidOperandError(op.Lexeme, firstType, secondType);
+                }
+            }
+            else if (op.Symbol == Symbols.SE || op.Symbol == Symbols.SOu)
+            {
+                if (firstType == ItemType.Boolean && secondType == ItemType.Boolean)
+                {
+                    return ItemType.Boolean;
+                }
+                else
+                {
+                    ThrowInvalidOperandError(op.Lexeme, firstType, secondType);
+                }
+            }
+
+            return ItemType.None;
+        }
+
+        private void ThrowInvalidOperandError(string operatorLexeme, ItemType firstType, ItemType secondType)
+        {
+            string message = string.Empty;
+
+            if (firstType == secondType)
+            {
+                var type = firstType == ItemType.Boolean ? "booleanos" : "inteiros";
+
+                message = string.Format(InvalidOperatorInExpression, operatorLexeme, type);
+            }
+            else
+            {
+                var type1 = firstType == ItemType.Boolean ? "booleano" : "inteiro";
+                var type2 = secondType == ItemType.Boolean ? "booleano" : "inteiro";
+
+                message = string.Format(InvalidOperandsInExpression, operatorLexeme, type1, type2);
+            }
+            
+            throw new InvalidOperationException(message);
         }
     }
 }

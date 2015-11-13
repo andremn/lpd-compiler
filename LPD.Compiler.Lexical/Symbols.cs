@@ -162,8 +162,16 @@
         /// </summary>
         SFalso = 38,
         /// <summary>
+        /// Mais unário.
+        /// </summary>
+        SMaisUnario = 39,
+        /// <summary>
+        /// Menos unário.
+        /// </summary>
+        SMenosUnario = 40,
+        /// <summary>
         /// None.
         /// </summary>
-        None = 39
+        None = 41
     }
 }

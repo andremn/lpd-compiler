@@ -1,5 +1,7 @@
 ﻿using LPD.Compiler.Lexical;
+using LPD.Compiler.Semantic;
 using LPD.Compiler.Shared;
+using LPD.Compiler.SymbolsTable;
 using System;
 using static LPD.Compiler.Syntactic.Properties.Resources;
 
@@ -13,7 +15,9 @@ namespace LPD.Compiler.Syntactic
         private LexicalAnalyzer _lexical;
         private Token _token;
         private CodePosition? _position = null;
-       
+        private ExpressionAnalyzer _expressionAnalyzer;
+        private VectorSymbolTable _symbolTable;
+
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SyntacticAnalyzer"/> class with the specified <see cref="LexicalAnalyzer"/>.
@@ -27,6 +31,8 @@ namespace LPD.Compiler.Syntactic
             }
 
             _lexical = lexical;
+            _symbolTable = new VectorSymbolTable();
+            _expressionAnalyzer = new ExpressionAnalyzer();
         }
 
         /// <summary>
@@ -191,6 +197,8 @@ namespace LPD.Compiler.Syntactic
             {
                 if (_token.Symbol == Symbols.SIdentificador)
                 {
+                    _symbolTable.Insert(new IdentificatorItem() { Lexeme = _token.Lexeme });
+
                     if (!NextToken())
                     {
                         RaiseUnexpectedEndOfFileMessage();
@@ -268,6 +276,8 @@ namespace LPD.Compiler.Syntactic
             }
             else
             {
+                _symbolTable.SetTypeLastestVars(_token.Symbol == Symbols.SInteiro ? ItemType.Integer : ItemType.Boolean);
+
                 if (!NextToken())
                 {
                     RaiseUnexpectedEndOfFileMessage();
@@ -478,7 +488,15 @@ namespace LPD.Compiler.Syntactic
                 RaiseUnexpectedEndOfFileMessage();
             }
 
+            _expressionAnalyzer.Reset();
             AnalyzeExpression();
+
+            var type = _expressionAnalyzer.Analyze(_symbolTable);
+
+            if (type == ItemType.Boolean)
+            {
+
+            }
 
             if (_token.Symbol != Symbols.SFaca)
             {
@@ -500,7 +518,15 @@ namespace LPD.Compiler.Syntactic
                 RaiseUnexpectedEndOfFileMessage();
             }
 
+            _expressionAnalyzer.Reset();
             AnalyzeExpression();
+
+            var type = _expressionAnalyzer.Analyze(_symbolTable);
+
+            if (type == ItemType.Boolean)
+            {
+
+            }
 
             if (_token.Symbol != Symbols.SEntao)
             {
@@ -594,6 +620,8 @@ namespace LPD.Compiler.Syntactic
                 RaiseUnexpectedTokenError("identificador");
             }
 
+            var funcItem = new FunctionItem() { Lexeme = _token.Lexeme };
+            
             if (!NextToken())
             {
                 RaiseUnexpectedEndOfFileMessage();
@@ -613,6 +641,11 @@ namespace LPD.Compiler.Syntactic
             {
                 RaiseUnexpectedTokenError("\"inteiro\" ou \"booleano\"");
             }
+
+            var type = _token.Symbol == Symbols.SInteiro ? ItemType.Integer : ItemType.Boolean;
+
+            funcItem.Type = type;
+            _symbolTable.Insert(funcItem);
 
             if (!NextToken())
             {
@@ -638,6 +671,8 @@ namespace LPD.Compiler.Syntactic
                 _token.Symbol == Symbols.SIg ||
                 _token.Symbol == Symbols.SDif)
             {
+                _expressionAnalyzer.Add(_token);
+
                 if (!NextToken())
                 {
                     RaiseUnexpectedEndOfFileMessage();
@@ -651,6 +686,19 @@ namespace LPD.Compiler.Syntactic
         {
             if (_token.Symbol == Symbols.SMais || _token.Symbol == Symbols.SMenos)
             {
+                var token = new Token() { Lexeme = _token.Lexeme };
+
+                if (_token.Symbol == Symbols.SMais)
+                {
+                    token.Symbol = Symbols.SMaisUnario;
+                }
+                else
+                {
+                    token.Symbol = Symbols.SMenosUnario;
+                }
+
+                _expressionAnalyzer.Add(token);
+
                 if (!NextToken())
                 {
                     RaiseUnexpectedEndOfFileMessage();
@@ -661,6 +709,8 @@ namespace LPD.Compiler.Syntactic
 
             while (_token.Symbol == Symbols.SMais || _token.Symbol == Symbols.SMenos || _token.Symbol == Symbols.SOu)
             {
+                _expressionAnalyzer.Add(_token);
+
                 if (!NextToken())
                 {
                     RaiseUnexpectedEndOfFileMessage();
@@ -676,6 +726,8 @@ namespace LPD.Compiler.Syntactic
 
             while (_token.Symbol == Symbols.SMult || _token.Symbol == Symbols.SDiv || _token.Symbol == Symbols.SE)
             {
+                _expressionAnalyzer.Add(_token);
+
                 if (!NextToken())
                 {
                     RaiseUnexpectedEndOfFileMessage();
@@ -693,6 +745,8 @@ namespace LPD.Compiler.Syntactic
             }
             else if (_token.Symbol == Symbols.SNumero)
             {
+                _expressionAnalyzer.Add(_token);
+
                 if (!NextToken())
                 {
                     RaiseUnexpectedEndOfFileMessage();
@@ -700,6 +754,8 @@ namespace LPD.Compiler.Syntactic
             }
             else if (_token.Symbol == Symbols.SNao)
             {
+                _expressionAnalyzer.Add(_token);
+
                 if (!NextToken())
                 {
                     RaiseUnexpectedEndOfFileMessage();
@@ -709,6 +765,8 @@ namespace LPD.Compiler.Syntactic
             }
             else if (_token.Symbol == Symbols.SAbreParenteses)
             {
+                _expressionAnalyzer.Add(_token);
+
                 if (!NextToken())
                 {
                     RaiseUnexpectedEndOfFileMessage();
@@ -721,6 +779,8 @@ namespace LPD.Compiler.Syntactic
                     RaiseUnexpectedTokenError("\")\"");
                 }
 
+                _expressionAnalyzer.Add(_token);
+
                 if (!NextToken())
                 {
                     RaiseUnexpectedEndOfFileMessage();
@@ -728,6 +788,8 @@ namespace LPD.Compiler.Syntactic
             }
             else if (_token.Symbol == Symbols.SVerdadeiro || _token.Symbol == Symbols.SFalso)
             {
+                _expressionAnalyzer.Add(_token);
+
                 if (!NextToken())
                 {
                     RaiseUnexpectedEndOfFileMessage();
@@ -742,12 +804,21 @@ namespace LPD.Compiler.Syntactic
                 RaiseUnexpectedEndOfFileMessage();
             }
 
+            _expressionAnalyzer.Reset();
             AnalyzeExpression();
+
+            var type = _expressionAnalyzer.Analyze(_symbolTable);
+
+            if (type == ItemType.Boolean)
+            {
+
+            }
         }
 
         private void AnalyzeFuncCall()
         {
             //Todo: semântico deve verificar se o tipo do identificador é o mesmo da função
+            _expressionAnalyzer.Add(_token);
 
             if (!NextToken())
             {
