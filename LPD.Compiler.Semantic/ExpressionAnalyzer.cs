@@ -154,6 +154,10 @@ namespace LPD.Compiler.Semantic
                 {
                     types.Push(ItemType.Integer);
                 }
+                else if (token.Symbol == Symbols.SVerdadeiro || token.Symbol == Symbols.SFalso)
+                {
+                    types.Push(ItemType.Boolean);
+                }
                 else
                 {
                     var firstType = types.Pop();
