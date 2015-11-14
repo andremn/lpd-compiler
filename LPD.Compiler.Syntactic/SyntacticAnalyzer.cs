@@ -18,6 +18,9 @@ namespace LPD.Compiler.Syntactic
         private ExpressionAnalyzer _expressionAnalyzer;
         private VectorSymbolTable _symbolTable;
 
+        private bool _isAnalyzingFunction = false;
+        private string _currentFunctionLexeme = null;
+        private bool _foundFuntionReturn = false;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SyntacticAnalyzer"/> class with the specified <see cref="LexicalAnalyzer"/>.
@@ -178,6 +181,12 @@ namespace LPD.Compiler.Syntactic
             throw new CompilationException(string.Format(InvalidTokenErrorMessage, _lexical.Position.Line, _lexical.Position.Column,_token.Lexeme));
         }
 
+        private void RaiseMissingFunctionReturn()
+        {
+            var line = _lexical.Position.Line - 1;
+
+            throw new CompilationException(string.Format(MissingFunctionReturnMessage, line, 0, _currentFunctionLexeme));
+        }
 
         private void AnalyzeBlock()
         {
@@ -295,7 +304,7 @@ namespace LPD.Compiler.Syntactic
                 }
 
                 AnalyzeSimpleCommand();
-
+                
                 while (_token.Symbol != Symbols.SFim)
                 {
                     if (_token.Symbol == Symbols.SPontoVirgula)
@@ -331,18 +340,37 @@ namespace LPD.Compiler.Syntactic
         {
             if (_token.Symbol == Symbols.SIdentificador)
             {
-                if (!NextToken())
-                {
-                    RaiseUnexpectedEndOfFileMessage();
-                }
+                var funcItem = _symbolTable.Search(_token.Lexeme) as FunctionItem;
 
-                if (_token.Symbol == Symbols.SAtribuicao)
+                if (funcItem?.Lexeme == _currentFunctionLexeme)
                 {
-                    AnalyzeAttribution();
+                    if (!NextToken())
+                    {
+                        RaiseUnexpectedEndOfFileMessage();
+                    }
+
+                    if (_token.Symbol == Symbols.SAtribuicao)
+                    {
+                        AnalyzeAttribution();
+                    }
+
+                    _foundFuntionReturn = true;
                 }
                 else
                 {
-                    ProcCallAnalyze();
+                    if (!NextToken())
+                    {
+                        RaiseUnexpectedEndOfFileMessage();
+                    }
+
+                    if (_token.Symbol == Symbols.SAtribuicao)
+                    {
+                        AnalyzeAttribution();
+                    }
+                    else
+                    {
+                        ProcCallAnalyze();
+                    }
                 }
             }
             else if (_token.Symbol == Symbols.SSe)
@@ -610,6 +638,8 @@ namespace LPD.Compiler.Syntactic
 
         private void AnalyzeFuncDcl()
         {
+            _isAnalyzingFunction = true;
+
             if (!NextToken())
             {
                 RaiseUnexpectedEndOfFileMessage();
@@ -621,7 +651,9 @@ namespace LPD.Compiler.Syntactic
             }
 
             var funcItem = new FunctionItem() { Lexeme = _token.Lexeme };
-            
+
+            _currentFunctionLexeme = _token.Lexeme;
+
             if (!NextToken())
             {
                 RaiseUnexpectedEndOfFileMessage();
@@ -658,6 +690,15 @@ namespace LPD.Compiler.Syntactic
             }
 
             AnalyzeBlock();
+
+            if (!_foundFuntionReturn)
+            {
+                RaiseMissingFunctionReturn();
+            }  
+
+            _foundFuntionReturn = false;
+            _currentFunctionLexeme = null;
+            _isAnalyzingFunction = false;
         }
 
         private void AnalyzeExpression()

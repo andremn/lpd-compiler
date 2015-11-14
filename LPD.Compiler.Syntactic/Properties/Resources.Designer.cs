@@ -88,6 +88,15 @@ namespace LPD.Compiler.Syntactic.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Linha {0}, coluna {1}: Valor de retorno da função &apos;{2}&apos; não encontrado..
+        /// </summary>
+        internal static string MissingFunctionReturnMessage {
+            get {
+                return ResourceManager.GetString("MissingFunctionReturnMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Linha {0}, coluna {1}: Encontrado &quot;fim&quot; sem &quot;inicio&quot;..
         /// </summary>
         internal static string MissingInicioErrorMessage {
