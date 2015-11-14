@@ -49,44 +49,6 @@ namespace LPD.Compiler
             InitializeComponent();
             UpdateSaveButtons();
             Editor.SyntaxHighlighting = HighlightingLoader.Load(FileHelper.GetSyntaxHighlighting(), HighlightingManager.Instance);
-
-            #region Needs to be removed
-            /*System.Diagnostics.Stopwatch watch = new System.Diagnostics.Stopwatch();
-            List<Token> tokens = new List<Token>(1000);
-            int counter = 0;
-
-            watch.Start();
-
-            for (int i = 0; i < 1000; i++)
-            {
-                for (int j = 0; j < 1000; j++)
-                {
-                    tokens.Add(new Token() { Lexeme = "Test", Symbol = Symbols.None });
-                }
-
-                for (int k = 0; k < 1000; k++)
-                {
-                    if (tokens[k].Lexeme == "Test")
-                    {
-                        if (tokens[k].Symbol == Symbols.None)
-                        {
-                            counter++;
-                        }
-                    }
-                }
-
-                if (counter < 20)
-                {
-                    MessageBox.Show("Here!", "Oh noo!");
-                }
-
-                counter = 0;
-                tokens.Clear();
-            }
-            
-            watch.Stop();
-            MessageBox.Show(watch.Elapsed.TotalMilliseconds + " ms", "Time");*/
-            #endregion
         }
         /// <summary>
         /// Refresh the file 
