@@ -17,8 +17,7 @@ namespace LPD.Compiler.Syntactic
         private CodePosition? _position = null;
         private ExpressionAnalyzer _expressionAnalyzer;
         private VectorSymbolTable _symbolTable;
-
-        private bool _isAnalyzingFunction = false;
+        
         private string _currentFunctionLexeme = null;
         private bool _foundFuntionReturn = false;
 
@@ -638,8 +637,6 @@ namespace LPD.Compiler.Syntactic
 
         private void AnalyzeFuncDcl()
         {
-            _isAnalyzingFunction = true;
-
             if (!NextToken())
             {
                 RaiseUnexpectedEndOfFileMessage();
@@ -698,7 +695,6 @@ namespace LPD.Compiler.Syntactic
 
             _foundFuntionReturn = false;
             _currentFunctionLexeme = null;
-            _isAnalyzingFunction = false;
         }
 
         private void AnalyzeExpression()
