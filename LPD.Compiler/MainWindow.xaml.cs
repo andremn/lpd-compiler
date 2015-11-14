@@ -190,6 +190,17 @@ namespace LPD.Compiler
             }
         }
 
+        private async Task SaveAsync()
+        {
+            if (string.IsNullOrEmpty(_selectedFile))
+            {
+                await SaveAsFileAsync();
+                return;
+            }
+
+            await SaveFileAsync();
+        }
+
         /// <summary>
         /// Called when this window is about to close.
         /// </summary>
@@ -265,13 +276,7 @@ namespace LPD.Compiler
         /// <param name="e">The data of the event.</param>
         private async void OnSaveFileButtonClick(object sender, RoutedEventArgs e)
         {
-            if (string.IsNullOrEmpty(_selectedFile))
-            {
-                await SaveAsFileAsync();
-                return;
-            }
-
-            await SaveFileAsync();
+            await SaveAsync();
         }
 
         /// <summary>
@@ -318,7 +323,7 @@ namespace LPD.Compiler
         {
             if (e.Key == Key.S && Keyboard.Modifiers == ModifierKeys.Control)
             {
-                await SaveFileAsync();
+                await SaveAsync();
             }
 
             if (e.Key == Key.F6)
