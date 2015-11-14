@@ -14,12 +14,12 @@ namespace LPD.Compiler.Test.SymbolsTableTests
 
             for (int i = 0; i < 5; i++)
             {
-                symbolsTable.Insert(new IdentificatorItem() { Name = "variavel", Lexeme = "Item " + i, Type = ItemType.Boolean });
+                symbolsTable.Insert(new IdentificatorItem() { Lexeme = "Item " + i, Type = ItemType.Boolean });
             }
 
             for (int i = 5; i < 8; i++)
             {
-                symbolsTable.Insert(new IdentificatorItem() { Name = "variavel", Lexeme = "Item " + i });
+                symbolsTable.Insert(new IdentificatorItem() { Lexeme = "Item " + i });
             }
 
             symbolsTable.SetTypeLastestVars(ItemType.Integer);
@@ -38,8 +38,8 @@ namespace LPD.Compiler.Test.SymbolsTableTests
         {
             var symbolsTable = new VectorSymbolTable();
 
-            symbolsTable.Insert(new FunctionItem() { Name = "funcao", Lexeme = "Func1" });
-            symbolsTable.Insert(new FunctionItem() { Name = "funcao", Lexeme = "Func2" });
+            symbolsTable.Insert(new FunctionItem() { Lexeme = "Func1" });
+            symbolsTable.Insert(new FunctionItem() { Lexeme = "Func2" });
             symbolsTable.SetFunctionType("Func1", ItemType.Boolean);
 
             var func = symbolsTable.Search("Func1") as FunctionItem;
@@ -53,21 +53,21 @@ namespace LPD.Compiler.Test.SymbolsTableTests
         public void REMOVE_UNTIL_TEST()
         {
             var symbolsTable = new VectorSymbolTable();
-            var func1 = new FunctionItem() { Name = "funcao", Lexeme = "Func1", Level = "L1" };
-            var func2 = new FunctionItem() { Name = "funcao", Lexeme = "Func2", Level = "L2" };
+            var func1 = new FunctionItem() { Lexeme = "Func1", Level = "L1" };
+            var func2 = new FunctionItem() { Lexeme = "Func2", Level = "L2" };
 
             symbolsTable.Insert(func1);
 
             for (int i = 0; i < 5; i++)
             {
-                symbolsTable.Insert(new IdentificatorItem() { Name = "variavel", Lexeme = "Item " + i, Type = ItemType.Boolean });
+                symbolsTable.Insert(new IdentificatorItem() { Lexeme = "Item " + i, Type = ItemType.Boolean });
             }
 
             symbolsTable.Insert(func2);
 
             for (int i = 5; i < 8; i++)
             {
-                symbolsTable.Insert(new IdentificatorItem() { Name = "variavel", Lexeme = "Item " + i, Type = ItemType.Boolean });
+                symbolsTable.Insert(new IdentificatorItem() { Lexeme = "Item " + i, Type = ItemType.Boolean });
             }
 
             symbolsTable.RemoveUntil("L2");
@@ -88,15 +88,15 @@ namespace LPD.Compiler.Test.SymbolsTableTests
         public void SEARCH_BY_LEVEL_TEST()
         {
             var symbolsTable = new VectorSymbolTable();
-            var func = new FunctionItem() { Name = "funcao", Lexeme = "Func1", Level = "L1" };
-            var proc = new ProcItem() { Name = "procedimento", Lexeme = "Proc1", Level = "L2" };
-            var item1 = new IdentificatorItem() { Name = "variavel", Lexeme = "x", Type = ItemType.Boolean };
-            var item2 = new IdentificatorItem() { Name = "variavel", Lexeme = "a", Type = ItemType.Integer };
-            var item3 = new IdentificatorItem() { Name = "variavel", Lexeme = "b", Type = ItemType.Integer };
+            var func = new FunctionItem() { Lexeme = "Func1", Level = "L1" };
+            var proc = new ProcItem() { Lexeme = "Proc1", Level = "L2" };
+            var item1 = new IdentificatorItem() { Lexeme = "x", Type = ItemType.Boolean };
+            var item2 = new IdentificatorItem() { Lexeme = "a", Type = ItemType.Integer };
+            var item3 = new IdentificatorItem() { Lexeme = "b", Type = ItemType.Integer };
 
             for (int i = 0; i < 5; i++)
             {
-                symbolsTable.Insert(new IdentificatorItem() { Name = "variavel", Lexeme = "Item " + i, Type = ItemType.Boolean });
+                symbolsTable.Insert(new IdentificatorItem() { Lexeme = "Item " + i, Type = ItemType.Boolean });
             }
 
             symbolsTable.Insert(func);
@@ -126,9 +126,9 @@ namespace LPD.Compiler.Test.SymbolsTableTests
         public void SEARCH_DOUBLE()
         {
             var symbolsTable = new VectorSymbolTable();
-            var item1 = new IdentificatorItem() { Name = "variavel", Lexeme = "x", Type = ItemType.Boolean };
-            var item2 = new IdentificatorItem() { Name = "variavel", Lexeme = "x", Type = ItemType.Integer };
-            var item3 = new IdentificatorItem() { Name = "variavel", Lexeme = "y", Type = ItemType.Integer };
+            var item1 = new IdentificatorItem() { Lexeme = "x", Type = ItemType.Boolean };
+            var item2 = new IdentificatorItem() { Lexeme = "x", Type = ItemType.Integer };
+            var item3 = new IdentificatorItem() { Lexeme = "y", Type = ItemType.Integer };
 
             symbolsTable.Insert(item1);
             symbolsTable.Insert(item3);

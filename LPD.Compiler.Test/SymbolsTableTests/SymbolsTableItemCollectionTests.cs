@@ -16,7 +16,6 @@ namespace LPD.Compiler.Test.SymbolsTableTests
             var item = new IdentificatorItem
             {
                 Lexeme = "x",
-                Name = "variavel"
             };
 
             collection.Add(item);
@@ -33,13 +32,11 @@ namespace LPD.Compiler.Test.SymbolsTableTests
             var item1 = new FunctionItem
             {
                 Lexeme = "func",
-                Name = "funcao",
                 Level = "L1"
             };
             var item2 = new ProcItem
             {
                 Lexeme = "proc",
-                Name = "procedimento",
                 Level = "L2"
             };
 
@@ -59,7 +56,6 @@ namespace LPD.Compiler.Test.SymbolsTableTests
             var item = new ProgramNameItem
             {
                 Lexeme = "teste",
-                Name = "nomedoprograma"
             };
 
             collection.Add(item);
@@ -77,7 +73,6 @@ namespace LPD.Compiler.Test.SymbolsTableTests
             var item = new FunctionItem
             {
                 Lexeme = "func",
-                Name = "funcao",
                 Level = "L1"
             };
 
@@ -97,7 +92,6 @@ namespace LPD.Compiler.Test.SymbolsTableTests
             var item = new FunctionItem
             {
                 Lexeme = "func",
-                Name = "funcao",
                 Level = "L1"
             };
 
