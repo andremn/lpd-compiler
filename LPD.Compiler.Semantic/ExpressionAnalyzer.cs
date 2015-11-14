@@ -11,8 +11,9 @@ namespace LPD.Compiler.Semantic
 {
     public class ExpressionAnalyzer
     {
-        private List<Token> _output;
-        private List<Token> _tokens;
+        private List<ExpressionItem> _output;
+        private List<ExpressionItem> _items;
+        private VectorSymbolTable _symbolTable;
 
         private readonly Dictionary<Symbols, ushort> _priorities = new Dictionary<Symbols, ushort>
         {
@@ -33,21 +34,52 @@ namespace LPD.Compiler.Semantic
             [Symbols.SOu] = 0,
         };
 
-        public ExpressionAnalyzer()
+        private readonly Dictionary<Symbols, ItemType> _operatorsType = new Dictionary<Symbols, ItemType>
         {
-            _tokens = new List<Token>();
-            _output = new List<Token>();
+            [Symbols.SMaisUnario] = ItemType.Integer,
+            [Symbols.SMenosUnario] = ItemType.Integer,
+            [Symbols.SMult] = ItemType.Integer,
+            [Symbols.SDiv] = ItemType.Integer,
+            [Symbols.SMais] = ItemType.Integer,
+            [Symbols.SMenos] = ItemType.Integer,
+            [Symbols.SNao] = ItemType.Boolean,
+            [Symbols.SMaior] = ItemType.Boolean,
+            [Symbols.SMaiorIg] = ItemType.Boolean,
+            [Symbols.SMenor] = ItemType.Boolean,
+            [Symbols.SMenorIg] = ItemType.Boolean,
+            [Symbols.SDif] = ItemType.Boolean,
+            [Symbols.SIg] = ItemType.Boolean,
+            [Symbols.SE] = ItemType.Boolean,
+            [Symbols.SOu] = ItemType.Boolean,
+            [Symbols.SNumero] = ItemType.Integer,
+            [Symbols.SVerdadeiro] = ItemType.Boolean,
+            [Symbols.SFalso] = ItemType.Boolean
+        };
+
+        public ExpressionAnalyzer(VectorSymbolTable symbolTable)
+        {
+            _items = new List<ExpressionItem>();
+            _output = new List<ExpressionItem>();
+            _symbolTable = symbolTable;
         }
 
         public void Add(Token token)
         {
-            if (token.Symbol != Symbols.SNumero && token.Symbol != Symbols.SIdentificador && token.Symbol != Symbols.SAbreParenteses)
+            var item = new ExpressionItem
+            {
+                Lexeme = token.Lexeme,
+                Symbol = token.Symbol
+            };
+
+            if (token.Symbol != Symbols.SNumero && token.Symbol != Symbols.SIdentificador && 
+                token.Symbol != Symbols.SVerdadeiro && token.Symbol != Symbols.SFalso && 
+                token.Symbol != Symbols.SAbreParenteses)
             {
                 if (token.Symbol == Symbols.SFechaParenteses)
                 {
-                    for (int i = _tokens.Count - 1; i >= 0; i--)
+                    for (int i = _items.Count - 1; i >= 0; i--)
                     {
-                        var current = _tokens[i];
+                        var current = _items[i];
 
                         if (current.Symbol != Symbols.SAbreParenteses)
                         {
@@ -55,19 +87,19 @@ namespace LPD.Compiler.Semantic
                         }
                         else
                         {
-                            _tokens.RemoveAt(i);
+                            _items.RemoveAt(i);
                             break;
                         }
 
-                        _tokens.RemoveAt(i);
+                        _items.RemoveAt(i);
                     }
 
                     return;                 
                 }
 
-                for (int i = _tokens.Count - 1; i >= 0; i--)
+                for (int i = _items.Count - 1; i >= 0; i--)
                 {
-                    var current = _tokens[i];
+                    var current = _items[i];
 
                     if (current.Symbol == Symbols.SAbreParenteses)
                     {
@@ -80,114 +112,87 @@ namespace LPD.Compiler.Semantic
                     if (priority1 >= priority2)
                     {
                         _output.Add(current);
-                        _tokens.RemoveAt(i);
+                        _items.RemoveAt(i);
                     }
                 }
 
                 if (token.Symbol != Symbols.SAbreParenteses)
                 {
-                    _tokens.Add(token);
+                    item.Type = _operatorsType[token.Symbol];
+                    _items.Add(item);
                 }
             }
             else
             {
                 if (token.Symbol == Symbols.SAbreParenteses)
                 {
-                    _tokens.Add(token);
+                    item.Type = ItemType.None;
+                    _items.Add(item);
                 }
                 else
                 {
                     if (token.Symbol != Symbols.SFechaParenteses)
                     {
-                        _output.Add(token);
+                        if (token.Symbol == Symbols.SIdentificador)
+                        {
+                            item.Type = GetIdentificatorType(token.Lexeme);
+                        }
+                        else
+                        {
+                            item.Type = _operatorsType[token.Symbol];
+                        }
+
+                        _output.Add(item);
                     }
                 }
             }
         }
 
-        public ItemType Analyze(VectorSymbolTable symbolTable)
+        public ItemType Analyze()
         {
-            for (int i = _tokens.Count - 1; i >= 0; i--)
+            for (int i = _items.Count - 1; i >= 0; i--)
             {
-                _output.Add(_tokens[i]);
+                _output.Add(_items[i]);
             }
 
             ItemType result = ItemType.None;
             Stack<ItemType> types = new Stack<ItemType>();
 
-            foreach (var token in _output)
+            foreach (var item in _output)
             {
-                var symbol = token.Symbol;
+                var symbol = item.Symbol;
 
                 if (symbol == Symbols.SNao)
                 {
                     var firstOperand = types.Pop();
 
-                    if (firstOperand == ItemType.Boolean)
-                    {
-                        types.Push(ItemType.Boolean);
-                        result = ItemType.Boolean;
-                    }
-                    else
+                    if (firstOperand != ItemType.Boolean)
                     {
                         throw new InvalidOperationException(InvalidOperandNotOperator);
                     }
                 }
-                else if (symbol == Symbols.SIdentificador)
-                {
-                    var identificator = symbolTable.Search(token.Lexeme) as IdentificatorItem;
-
-                    if (identificator != null)
-                    {
-                        types.Push(identificator.Type);
-                        result = identificator.Type;
-                        continue;
-                    }
-
-                    var func = symbolTable.Search(token.Lexeme) as FunctionItem;
-
-                    if (func != null)
-                    {
-                        types.Push(func.Type);
-                        result = identificator.Type;
-                    }
-                }
-                else if (token.Symbol == Symbols.SNumero)
-                {
-                    types.Push(ItemType.Integer);
-                }
-                else if (token.Symbol == Symbols.SVerdadeiro || token.Symbol == Symbols.SFalso)
-                {
-                    types.Push(ItemType.Boolean);
-                }
-                else
+                else if (symbol != Symbols.SIdentificador && item.Symbol != Symbols.SNumero &&
+                         symbol != Symbols.SVerdadeiro && symbol != Symbols.SFalso)
                 {
                     var firstType = types.Pop();
-                    var type = ItemType.None;
+                    var type = item.Type;
 
                     //Unary operator expects only one operand and it always results in a integer expression.
-                    if (token.Symbol == Symbols.SMaisUnario || token.Symbol == Symbols.SMenosUnario)
+                    if (symbol == Symbols.SMaisUnario || symbol == Symbols.SMenosUnario)
                     {
                         if (firstType != ItemType.Integer)
                         {
-                            throw new InvalidOperationException(string.Format(InvalidOperatorInExpression, token.Lexeme, firstType));
+                            throw new InvalidOperationException(string.Format(InvalidOperatorInExpression, item.Lexeme, firstType));
                         }
-
-                        type = ItemType.Integer;
                     }
                     else
                     {
-                        type = GetExpressionType(token, firstType, types.Pop());
+                        type = GetExpressionType(item, firstType, types.Pop());
                     }
-
-                    if (type == ItemType.None)
-                    {
-                        throw new InvalidOperationException("Token inválido.");
-                    }
-
-                    types.Push(type);
-                    result = type;
                 }
+
+                types.Push(item.Type);
+                result = item.Type;
             }
 
             return result;
@@ -200,14 +205,14 @@ namespace LPD.Compiler.Semantic
 
         public void Reset()
         {
-            _tokens.Clear();
+            _items.Clear();
             _output.Clear();
         }
 
-        private ItemType GetExpressionType(Token op, ItemType firstType, ItemType secondType)
+        private ItemType GetExpressionType(ExpressionItem item, ItemType firstType, ItemType secondType)
         {
-            if (op.Symbol == Symbols.SMais || op.Symbol == Symbols.SMenos ||
-                    op.Symbol == Symbols.SDiv || op.Symbol == Symbols.SMult)
+            if (item.Symbol == Symbols.SMais || item.Symbol == Symbols.SMenos ||
+                    item.Symbol == Symbols.SDiv || item.Symbol == Symbols.SMult)
             {
                 if (firstType == ItemType.Integer && secondType == ItemType.Integer)
                 {
@@ -215,12 +220,12 @@ namespace LPD.Compiler.Semantic
                 }
                 else
                 {
-                    ThrowInvalidOperandError(op.Lexeme, firstType, secondType);
+                    ThrowInvalidOperandError(item.Lexeme, firstType, secondType);
                 }
             }
-            else if (op.Symbol == Symbols.SMaior || op.Symbol == Symbols.SMenor ||
-                       op.Symbol == Symbols.SMaiorIg || op.Symbol == Symbols.SMenorIg ||
-                       op.Symbol == Symbols.SIg || op.Symbol == Symbols.SDif)
+            else if (item.Symbol == Symbols.SMaior || item.Symbol == Symbols.SMenor ||
+                       item.Symbol == Symbols.SMaiorIg || item.Symbol == Symbols.SMenorIg ||
+                       item.Symbol == Symbols.SIg || item.Symbol == Symbols.SDif)
             {
                 if (firstType == ItemType.Integer && secondType == ItemType.Integer)
                 {
@@ -228,10 +233,10 @@ namespace LPD.Compiler.Semantic
                 }
                 else
                 {
-                    ThrowInvalidOperandError(op.Lexeme, firstType, secondType);
+                    ThrowInvalidOperandError(item.Lexeme, firstType, secondType);
                 }
             }
-            else if (op.Symbol == Symbols.SE || op.Symbol == Symbols.SOu)
+            else if (item.Symbol == Symbols.SE || item.Symbol == Symbols.SOu)
             {
                 if (firstType == ItemType.Boolean && secondType == ItemType.Boolean)
                 {
@@ -239,11 +244,35 @@ namespace LPD.Compiler.Semantic
                 }
                 else
                 {
-                    ThrowInvalidOperandError(op.Lexeme, firstType, secondType);
+                    ThrowInvalidOperandError(item.Lexeme, firstType, secondType);
                 }
             }
 
             return ItemType.None;
+        }
+
+        private ItemType GetIdentificatorType(string lexeme)
+        {
+            var item = _symbolTable.Search(lexeme);
+
+            if (item != null)
+            {
+                var identificator = item as IdentificatorItem;
+
+                if (identificator != null)
+                {
+                    return identificator.Type;
+                }
+
+                var func = item as FunctionItem;
+
+                if (func != null)
+                {
+                    return func.Type;
+                }
+            }
+
+            throw new ExpressionException(lexeme);
         }
 
         private void ThrowInvalidOperandError(string operatorLexeme, ItemType firstType, ItemType secondType)

@@ -70,6 +70,15 @@ namespace LPD.Compiler.Syntactic.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Linha {0}, coluna {1}: Esperado expressão do tipo &apos;booleano&apos; dentro de um comando &apos;se&apos;..
+        /// </summary>
+        internal static string IncompatibleIfExpressionErrorMessage {
+            get {
+                return ResourceManager.GetString("IncompatibleIfExpressionErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Linha {0}, coluna {1}: Termo inválido..
         /// </summary>
         internal static string InvalidTerm {
@@ -111,6 +120,15 @@ namespace LPD.Compiler.Syntactic.Properties {
         internal static string MissingInicioErrorMessage {
             get {
                 return ResourceManager.GetString("MissingInicioErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Linha {0}, coluna {1}: Identificador &apos;{2}&apos; não declarado..
+        /// </summary>
+        internal static string NotFoundIdentifierErrorMessage {
+            get {
+                return ResourceManager.GetString("NotFoundIdentifierErrorMessage", resourceCulture);
             }
         }
         

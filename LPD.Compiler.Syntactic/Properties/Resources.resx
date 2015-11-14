@@ -120,6 +120,9 @@
   <data name="IncompatibleAttributionErrorMessage" xml:space="preserve">
     <value>Linha {0}, coluna {1}: Tipo '{2}' não pode ser atribuido a variável do tipo '{3}'.</value>
   </data>
+  <data name="IncompatibleIfExpressionErrorMessage" xml:space="preserve">
+    <value>Linha {0}, coluna {1}: Esperado expressão do tipo 'booleano' dentro de um comando 'se'.</value>
+  </data>
   <data name="InvalidTerm" xml:space="preserve">
     <value>Linha {0}, coluna {1}: Termo inválido.</value>
   </data>
@@ -134,6 +137,9 @@
   </data>
   <data name="MissingInicioErrorMessage" xml:space="preserve">
     <value>Linha {0}, coluna {1}: Encontrado "fim" sem "inicio".</value>
+  </data>
+  <data name="NotFoundIdentifierErrorMessage" xml:space="preserve">
+    <value>Linha {0}, coluna {1}: Identificador '{2}' não declarado.</value>
   </data>
   <data name="UnexpectedEndOfFileErrorMessage" xml:space="preserve">
     <value>Linha {0}, coluna {1}: Fim inesperado do arquivo.</value>

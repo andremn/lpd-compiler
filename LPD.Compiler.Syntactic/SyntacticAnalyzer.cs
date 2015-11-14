@@ -34,7 +34,6 @@ namespace LPD.Compiler.Syntactic
 
             _lexical = lexical;
             _symbolTable = new VectorSymbolTable();
-            _expressionAnalyzer = new ExpressionAnalyzer();
         }
 
         /// <summary>
@@ -339,9 +338,16 @@ namespace LPD.Compiler.Syntactic
         {
             if (_token.Symbol == Symbols.SIdentificador)
             {
+                var item = _symbolTable.Search(_token.Lexeme);
+
+                if (item == null)
+                {
+                    RaiseNotFoundIdentificatorError(_token.Lexeme);
+                }
+
                 _analyzingLexeme = _token.Lexeme;
 
-                var funcItem = _symbolTable.Search(_token.Lexeme) as FunctionItem;
+                var funcItem = item as FunctionItem;
 
                 if (funcItem?.Lexeme == _currentFunctionLexeme)
                 {
@@ -394,6 +400,14 @@ namespace LPD.Compiler.Syntactic
             {
                 AnalyzeCommands();
             }
+        }
+
+        private void RaiseNotFoundIdentificatorError(string lexeme)
+        {
+            ushort column = _lexical.Position.Column;
+            ushort line = _lexical.Position.Line;
+
+            throw new CompilationException(string.Format(NotFoundIdentifierErrorMessage, line, column, lexeme));
         }
 
         private void ProcCallAnalyze()
@@ -517,15 +531,7 @@ namespace LPD.Compiler.Syntactic
                 RaiseUnexpectedEndOfFileMessage();
             }
 
-            _expressionAnalyzer.Reset();
-            AnalyzeExpression();
-
-            var type = _expressionAnalyzer.Analyze(_symbolTable);
-
-            if (type == ItemType.Boolean)
-            {
-
-            }
+            var type = AnalyzeExpressionType();
 
             if (_token.Symbol != Symbols.SFaca)
             {
@@ -546,15 +552,15 @@ namespace LPD.Compiler.Syntactic
             {
                 RaiseUnexpectedEndOfFileMessage();
             }
+            
+            var expressionType = AnalyzeExpressionType();
 
-            _expressionAnalyzer.Reset();
-            AnalyzeExpression();
-
-            var type = _expressionAnalyzer.Analyze(_symbolTable);
-
-            if (type == ItemType.Boolean)
+            if (expressionType != ItemType.Boolean)
             {
+                ushort column = _lexical.Position.Column;
+                ushort line = _lexical.Position.Line;
 
+                throw new CompilationException(string.Format(IncompatibleIfExpressionErrorMessage, line, column));
             }
 
             if (_token.Symbol != Symbols.SEntao)
@@ -763,6 +769,11 @@ namespace LPD.Compiler.Syntactic
         {
             AnalyzeFactor();
 
+            if (_token.Symbol == Symbols.SIdentificador)
+            {
+                RaiseUnexpectedTokenError($"um operador, mas o identificador '{_token.Lexeme}' foi encontrado no lugar");
+            }
+
             while (_token.Symbol == Symbols.SMult || _token.Symbol == Symbols.SDiv || _token.Symbol == Symbols.SE)
             {
                 _expressionAnalyzer.Add(_token);
@@ -842,12 +853,9 @@ namespace LPD.Compiler.Syntactic
             {
                 RaiseUnexpectedEndOfFileMessage();
             }
-
-            _expressionAnalyzer.Reset();
-            AnalyzeExpression();
             
-            var rightType = _expressionAnalyzer.Analyze(_symbolTable);
-            var item = _symbolTable.Search(_analyzingLexeme);
+            var item = _symbolTable.Search(_analyzingLexeme);            
+            var rightType = AnalyzeExpressionType();
             var leftType = ItemType.None;
             var identificatorItem = item as IdentificatorItem;
             var funcItem = item as FunctionItem;
@@ -874,13 +882,31 @@ namespace LPD.Compiler.Syntactic
 
         private void AnalyzeFuncCall()
         {
-            //Todo: semântico deve verificar se o tipo do identificador é o mesmo da função
             _expressionAnalyzer.Add(_token);
 
             if (!NextToken())
             {
                 RaiseUnexpectedEndOfFileMessage();
             }
+        }
+
+        private ItemType AnalyzeExpressionType()
+        {
+            _expressionAnalyzer = new ExpressionAnalyzer(_symbolTable);
+            AnalyzeExpression();
+
+            var type = ItemType.None;
+
+            try
+            {
+                type = _expressionAnalyzer.Analyze();
+            }
+            catch (ExpressionException ex)
+            {
+                RaiseNotFoundIdentificatorError(ex.Message);
+            }
+
+            return type;
         }
     }
 }

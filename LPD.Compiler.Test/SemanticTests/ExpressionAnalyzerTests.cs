@@ -28,7 +28,7 @@ namespace LPD.Compiler.Test.SemanticTests
         [TestMethod]
         public void INTEGER_EXPRESSION_TEST()
         {
-            var expressionAnalyzer = new ExpressionAnalyzer();
+            var expressionAnalyzer = new ExpressionAnalyzer(_symbolTable);
             var output = string.Empty;
             var expectedOutput = "ab+cd*+e+";
             var token = new Token { Lexeme = "a", Symbol = Symbols.SIdentificador };
@@ -52,7 +52,7 @@ namespace LPD.Compiler.Test.SemanticTests
             token = new Token { Lexeme = "e", Symbol = Symbols.SIdentificador };
             expressionAnalyzer.Add(token);
 
-            type = expressionAnalyzer.Analyze(_symbolTable);
+            type = expressionAnalyzer.Analyze();
             output = expressionAnalyzer.GetOutput();
 
             Assert.AreEqual(type, ItemType.Integer);
@@ -62,9 +62,9 @@ namespace LPD.Compiler.Test.SemanticTests
         [TestMethod]
         public void INTEGER_UNARY_EXPRESSION_TEST()
         {
-            var expressionAnalyzer = new ExpressionAnalyzer();
+            var expressionAnalyzer = new ExpressionAnalyzer(_symbolTable);
             var output = string.Empty;
-            var expectedOutput = "a-cd-+e*";
+            var expectedOutput = "a-cd-e*+";
             var token = new Token { Lexeme = "-", Symbol = Symbols.SMaisUnario };
             var type = ItemType.None;
 
@@ -88,43 +88,7 @@ namespace LPD.Compiler.Test.SemanticTests
             token = new Token { Lexeme = "e", Symbol = Symbols.SIdentificador };
             expressionAnalyzer.Add(token);
 
-            type = expressionAnalyzer.Analyze(_symbolTable);
-            output = expressionAnalyzer.GetOutput();
-
-            Assert.AreEqual(type, ItemType.Integer);
-            Assert.AreEqual(output, expectedOutput);
-        }
-
-        [TestMethod]
-        public void INTEGER_UNARY_EXPRESSION_COMPLEX_TEST()
-        {
-            var expressionAnalyzer = new ExpressionAnalyzer();
-            var output = string.Empty;
-            var expectedOutput = "a-cd-+e*";
-            var token = new Token { Lexeme = "-", Symbol = Symbols.SMaisUnario };
-            var type = ItemType.None;
-
-            expressionAnalyzer.Add(token);
-            token = new Token { Lexeme = "a", Symbol = Symbols.SIdentificador };
-            expressionAnalyzer.Add(token);
-            token = new Token { Lexeme = "+", Symbol = Symbols.SMais };
-            expressionAnalyzer.Add(token);
-            token = new Token { Lexeme = "(", Symbol = Symbols.SAbreParenteses };
-            expressionAnalyzer.Add(token);
-            token = new Token { Lexeme = "c", Symbol = Symbols.SIdentificador };
-            expressionAnalyzer.Add(token);
-            token = new Token { Lexeme = "-", Symbol = Symbols.SMenos };
-            expressionAnalyzer.Add(token);
-            token = new Token { Lexeme = "d", Symbol = Symbols.SIdentificador };
-            expressionAnalyzer.Add(token);
-            token = new Token { Lexeme = ")", Symbol = Symbols.SFechaParenteses };
-            expressionAnalyzer.Add(token);
-            token = new Token { Lexeme = "*", Symbol = Symbols.SMult };
-            expressionAnalyzer.Add(token);
-            token = new Token { Lexeme = "e", Symbol = Symbols.SIdentificador };
-            expressionAnalyzer.Add(token);
-
-            type = expressionAnalyzer.Analyze(_symbolTable);
+            type = expressionAnalyzer.Analyze();
             output = expressionAnalyzer.GetOutput();
 
             Assert.AreEqual(type, ItemType.Integer);
@@ -134,7 +98,7 @@ namespace LPD.Compiler.Test.SemanticTests
         [TestMethod]
         public void INTEGER_CONSTS_ONLY_TEST()
         {
-            var expressionAnalyzer = new ExpressionAnalyzer();
+            var expressionAnalyzer = new ExpressionAnalyzer(_symbolTable);
             var output = string.Empty;
             var expectedOutput = "32-45*+";
             var token = new Token { Lexeme = "3", Symbol = Symbols.SNumero };
@@ -154,7 +118,7 @@ namespace LPD.Compiler.Test.SemanticTests
             token = new Token { Lexeme = "5", Symbol = Symbols.SNumero };
             expressionAnalyzer.Add(token);
 
-            type = expressionAnalyzer.Analyze(_symbolTable);
+            type = expressionAnalyzer.Analyze();
             output = expressionAnalyzer.GetOutput();
 
             Assert.AreEqual(type, ItemType.Integer);
@@ -164,7 +128,7 @@ namespace LPD.Compiler.Test.SemanticTests
         [TestMethod]
         public void INTEGER_BOOLEAN_EXPRESSION_TEST()
         {
-            var expressionAnalyzer = new ExpressionAnalyzer();
+            var expressionAnalyzer = new ExpressionAnalyzer(_symbolTable);
             var output = string.Empty;
             var expectedOutput = "ab+cd-<";
             var token = new Token { Lexeme = "(", Symbol = Symbols.SAbreParenteses };
@@ -192,7 +156,7 @@ namespace LPD.Compiler.Test.SemanticTests
             token = new Token { Lexeme = ")", Symbol = Symbols.SFechaParenteses };
             expressionAnalyzer.Add(token);
 
-            type = expressionAnalyzer.Analyze(_symbolTable);
+            type = expressionAnalyzer.Analyze();
             output = expressionAnalyzer.GetOutput();
 
             Assert.AreEqual(type, ItemType.Boolean);
@@ -202,9 +166,9 @@ namespace LPD.Compiler.Test.SemanticTests
         [TestMethod]
         public void INTEGER_BOOLEAN_EXPRESSION_COMPLEX_TEST()
         {
-            var expressionAnalyzer = new ExpressionAnalyzer();
+            var expressionAnalyzer = new ExpressionAnalyzer(_symbolTable);
             var output = string.Empty;
-            var expectedOutput = "ab+cd-<";
+            var expectedOutput = "a-badivab-**<nao";
             var token = new Token { Lexeme = "nao", Symbol = Symbols.SNao };
             var type = ItemType.None;
 
@@ -233,13 +197,13 @@ namespace LPD.Compiler.Test.SemanticTests
             expressionAnalyzer.Add(token);
             token = new Token { Lexeme = ")", Symbol = Symbols.SFechaParenteses };
             expressionAnalyzer.Add(token);
-            token = new Token { Lexeme = "mult", Symbol = Symbols.SMult };
+            token = new Token { Lexeme = "*", Symbol = Symbols.SMult };
             expressionAnalyzer.Add(token);
             token = new Token { Lexeme = "(", Symbol = Symbols.SAbreParenteses };
             expressionAnalyzer.Add(token);
             token = new Token { Lexeme = "a", Symbol = Symbols.SIdentificador };
             expressionAnalyzer.Add(token);
-            token = new Token { Lexeme = "mult", Symbol = Symbols.SMult };
+            token = new Token { Lexeme = "*", Symbol = Symbols.SMult };
             expressionAnalyzer.Add(token);
             token = new Token { Lexeme = "(", Symbol = Symbols.SAbreParenteses };
             expressionAnalyzer.Add(token);
@@ -256,7 +220,7 @@ namespace LPD.Compiler.Test.SemanticTests
             token = new Token { Lexeme = ")", Symbol = Symbols.SFechaParenteses };
             expressionAnalyzer.Add(token);
 
-            type = expressionAnalyzer.Analyze(_symbolTable);
+            type = expressionAnalyzer.Analyze();
             output = expressionAnalyzer.GetOutput();
 
             Assert.AreEqual(type, ItemType.Boolean);
@@ -266,7 +230,7 @@ namespace LPD.Compiler.Test.SemanticTests
         [TestMethod]
         public void BOOLEAN_EXPRESSION_TEST()
         {
-            var expressionAnalyzer = new ExpressionAnalyzer();
+            var expressionAnalyzer = new ExpressionAnalyzer(_symbolTable);
             var output = string.Empty;
             var expectedOutput = "fnaogou";
             var token = new Token { Lexeme = "nao", Symbol = Symbols.SNao };
@@ -280,7 +244,7 @@ namespace LPD.Compiler.Test.SemanticTests
             token = new Token { Lexeme = "g", Symbol = Symbols.SIdentificador };
             expressionAnalyzer.Add(token);
 
-            type = expressionAnalyzer.Analyze(_symbolTable);
+            type = expressionAnalyzer.Analyze();
             output = expressionAnalyzer.GetOutput();
 
             Assert.AreEqual(type, ItemType.Boolean);
