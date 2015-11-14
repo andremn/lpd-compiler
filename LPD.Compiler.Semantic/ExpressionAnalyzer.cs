@@ -140,6 +140,7 @@ namespace LPD.Compiler.Semantic
                     if (identificator != null)
                     {
                         types.Push(identificator.Type);
+                        result = identificator.Type;
                         continue;
                     }
 
@@ -148,6 +149,7 @@ namespace LPD.Compiler.Semantic
                     if (func != null)
                     {
                         types.Push(func.Type);
+                        result = identificator.Type;
                     }
                 }
                 else if (token.Symbol == Symbols.SNumero)
@@ -250,16 +252,12 @@ namespace LPD.Compiler.Semantic
 
             if (firstType == secondType)
             {
-                var type = firstType == ItemType.Boolean ? "booleanos" : "inteiros";
-
-                message = string.Format(InvalidOperatorInExpression, operatorLexeme, type);
+                message = string.Format(InvalidOperatorInExpression, operatorLexeme, firstType.GetFriendlyName());
             }
             else
             {
-                var type1 = firstType == ItemType.Boolean ? "booleano" : "inteiro";
-                var type2 = secondType == ItemType.Boolean ? "booleano" : "inteiro";
-
-                message = string.Format(InvalidOperandsInExpression, operatorLexeme, type1, type2);
+                message = string.Format(InvalidOperandsInExpression, operatorLexeme, 
+                    firstType.GetFriendlyName(), secondType.GetFriendlyName());
             }
             
             throw new InvalidOperationException(message);

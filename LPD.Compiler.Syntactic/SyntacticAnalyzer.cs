@@ -17,7 +17,7 @@ namespace LPD.Compiler.Syntactic
         private CodePosition? _position = null;
         private ExpressionAnalyzer _expressionAnalyzer;
         private VectorSymbolTable _symbolTable;
-        
+        private string _analyzingLexeme = null;
         private string _currentFunctionLexeme = null;
         private bool _foundFuntionReturn = false;
 
@@ -339,6 +339,8 @@ namespace LPD.Compiler.Syntactic
         {
             if (_token.Symbol == Symbols.SIdentificador)
             {
+                _analyzingLexeme = _token.Lexeme;
+
                 var funcItem = _symbolTable.Search(_token.Lexeme) as FunctionItem;
 
                 if (funcItem?.Lexeme == _currentFunctionLexeme)
@@ -843,12 +845,30 @@ namespace LPD.Compiler.Syntactic
 
             _expressionAnalyzer.Reset();
             AnalyzeExpression();
+            
+            var rightType = _expressionAnalyzer.Analyze(_symbolTable);
+            var item = _symbolTable.Search(_analyzingLexeme);
+            var leftType = ItemType.None;
+            var identificatorItem = item as IdentificatorItem;
+            var funcItem = item as FunctionItem;
 
-            var type = _expressionAnalyzer.Analyze(_symbolTable);
-
-            if (type == ItemType.Boolean)
+            if (identificatorItem != null)
             {
+                leftType = identificatorItem.Type;
+            }
 
+            if (funcItem != null)
+            {
+                leftType = funcItem.Type;
+            }
+
+            if (leftType != rightType)
+            {
+                ushort column = _lexical.Position.Column;
+                ushort line = _lexical.Position.Line;
+
+                throw new CompilationException(string.Format(IncompatibleAttributionErrorMessage, line, column, 
+                    rightType.GetFriendlyName(), leftType.GetFriendlyName()));
             }
         }
 

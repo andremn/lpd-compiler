@@ -117,28 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="IncompatibleAttributionErrorMessage" xml:space="preserve">
-    <value>Linha {0}, coluna {1}: Tipo '{2}' não pode ser atribuido a variável do tipo '{3}'.</value>
+  <data name="BooleanName" xml:space="preserve">
+    <value>Booleano</value>
   </data>
-  <data name="InvalidTerm" xml:space="preserve">
-    <value>Linha {0}, coluna {1}: Termo inválido.</value>
-  </data>
-  <data name="InvalidTokenErrorMessage" xml:space="preserve">
-    <value>Linha {0}, coluna {1}: Simbolo {2} invalido.</value>
-  </data>
-  <data name="LexicalErrorMessage" xml:space="preserve">
-    <value>Linha {0}, coluna {1}: {2}.</value>
-  </data>
-  <data name="MissingFunctionReturnMessage" xml:space="preserve">
-    <value>Linha {0}, coluna {1}: Valor de retorno da função '{2}' não encontrado.</value>
-  </data>
-  <data name="MissingInicioErrorMessage" xml:space="preserve">
-    <value>Linha {0}, coluna {1}: Encontrado "fim" sem "inicio".</value>
-  </data>
-  <data name="UnexpectedEndOfFileErrorMessage" xml:space="preserve">
-    <value>Linha {0}, coluna {1}: Fim inesperado do arquivo.</value>
-  </data>
-  <data name="UnexpectedTokenErrorMessage" xml:space="preserve">
-    <value>Linha {0}, coluna {1}: Esperado {2}.</value>
+  <data name="IntegerName" xml:space="preserve">
+    <value>Inteiro</value>
   </data>
 </root>

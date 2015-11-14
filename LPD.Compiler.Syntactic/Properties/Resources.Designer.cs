@@ -61,6 +61,15 @@ namespace LPD.Compiler.Syntactic.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Linha {0}, coluna {1}: Tipo &apos;{2}&apos; não pode ser atribuido a variável do tipo &apos;{3}&apos;..
+        /// </summary>
+        internal static string IncompatibleAttributionErrorMessage {
+            get {
+                return ResourceManager.GetString("IncompatibleAttributionErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Linha {0}, coluna {1}: Termo inválido..
         /// </summary>
         internal static string InvalidTerm {
