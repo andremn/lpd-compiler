@@ -56,7 +56,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\LPD.Compiler.CodeGenerator\LPD.Compiler.CodeGenerator.csproj">
+    <ProjectReference Include="..\LPD.Compiler.CodeGenerator\LPD.Compiler.CodeGeneration.csproj">
       <Project>{599d1f50-a17b-4070-8d70-9865ca95ce26}</Project>
       <Name>LPD.Compiler.CodeGenerator</Name>
     </ProjectReference>
