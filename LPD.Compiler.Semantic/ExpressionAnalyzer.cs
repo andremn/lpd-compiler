@@ -224,10 +224,21 @@ namespace LPD.Compiler.Semantic
                 }
             }
             else if (item.Symbol == Symbols.SMaior || item.Symbol == Symbols.SMenor ||
-                       item.Symbol == Symbols.SMaiorIg || item.Symbol == Symbols.SMenorIg ||
-                       item.Symbol == Symbols.SIg || item.Symbol == Symbols.SDif)
+                       item.Symbol == Symbols.SMaiorIg || item.Symbol == Symbols.SMenorIg)
             {
                 if (firstType == ItemType.Integer && secondType == ItemType.Integer)
+                {
+                    return ItemType.Boolean;
+                }
+                else
+                {
+                    ThrowInvalidOperandError(item.Lexeme, firstType, secondType);
+                }
+            }
+            else if (item.Symbol == Symbols.SIg || item.Symbol == Symbols.SDif)
+            {
+                if ((firstType == ItemType.Integer && secondType == ItemType.Integer) || 
+                    (firstType == ItemType.Boolean && secondType == ItemType.Boolean))
                 {
                     return ItemType.Boolean;
                 }

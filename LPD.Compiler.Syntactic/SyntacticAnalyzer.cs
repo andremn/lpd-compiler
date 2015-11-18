@@ -1,8 +1,10 @@
-﻿using LPD.Compiler.Lexical;
+﻿using LPD.Compiler.CodeGeneration;
+using LPD.Compiler.Lexical;
 using LPD.Compiler.Semantic;
 using LPD.Compiler.Shared;
 using LPD.Compiler.SymbolsTable;
 using System;
+using static LPD.Compiler.CodeGeneration.Instructions;
 using static LPD.Compiler.Syntactic.Properties.Resources;
 
 namespace LPD.Compiler.Syntactic
@@ -17,6 +19,8 @@ namespace LPD.Compiler.Syntactic
         private CodePosition? _position = null;
         private ExpressionAnalyzer _expressionAnalyzer;
         private VectorSymbolTable _symbolTable;
+        private CodeGenerator _codeGenerator;
+        private uint _lastLabel = 0;
         private ushort _level = 0;
         private string _analyzingLexeme = null;
         private string _currentFunctionLexeme = null;
@@ -35,6 +39,7 @@ namespace LPD.Compiler.Syntactic
 
             _lexical = lexical;
             _symbolTable = new VectorSymbolTable();
+            _codeGenerator = new CodeGenerator();
         }
 
         /// <summary>
@@ -54,6 +59,7 @@ namespace LPD.Compiler.Syntactic
                     if (_token.Symbol == Symbols.SIdentificador)
                     {
                         _symbolTable.Insert(new ProgramNameItem() { Lexeme = _token.Lexeme });
+                        _codeGenerator.GenerateInstruction(START);
                         NextToken();
 
                         if (_token.Symbol == Symbols.SPontoVirgula)
@@ -109,6 +115,8 @@ namespace LPD.Compiler.Syntactic
                 _level = 0;
             }
 
+            _codeGenerator.GenerateInstruction(HLT);
+            _codeGenerator.SaveToFileAsync(@"C:\Users\andre\Desktop\Facul\Compiladores\Gerado\generated.asmd");
             return null;
         }
 
@@ -325,7 +333,7 @@ namespace LPD.Compiler.Syntactic
 
         private void AnalyzeProcCall()
         {
-            var procItem = _symbolTable.Search(_analyzingLexeme) as ProcItem;            
+            var procItem = _symbolTable.Search(_analyzingLexeme) as ProcItem;        
 
             if (procItem == null)
             {
@@ -389,14 +397,17 @@ namespace LPD.Compiler.Syntactic
                 {
                     var item = _symbolTable.Search(_token.Lexeme);
 
+                    if (item == null)
+                    {
+                        RaiseNotFoundIdentificatorError(_token.Lexeme);
+                    }
+
                     if (item != null)
                     {
                         if (!(item is FunctionItem) && !(item is IdentificatorItem))
                         {
                             throw new CompilationException(string.Format(NotAFuncVarErrorMessage, _lexical.Position.Line, _lexical.Position.Column, _token.Lexeme));
-                        }
-
-                        RaiseNotFoundIdentificatorError(_token.Lexeme);
+                        }                        
                     }
 
                     NextToken();
@@ -424,6 +435,11 @@ namespace LPD.Compiler.Syntactic
 
         private void AnalyzeWhile()
         {
+            uint label1 = _lastLabel;
+            uint label2;
+
+            _codeGenerator.GenerateLabel(_lastLabel);
+            _lastLabel++;
             NextToken();
 
             var type = AnalyzeExpressionType();
@@ -438,8 +454,15 @@ namespace LPD.Compiler.Syntactic
                 RaiseUnexpectedTokenError("\"faca\"");
             }
 
+            label2 = _lastLabel;
+            _codeGenerator.GenerateInstruction(JMPF, _codeGenerator.GetStringLabelFor(_lastLabel));
+            _lastLabel++;
+
             NextToken();
             AnalyzeSimpleCommand();
+
+            _codeGenerator.GenerateInstruction(JMP, _codeGenerator.GetStringLabelFor(label1));
+            _codeGenerator.GenerateLabel(label2);
         }
 
         private void AnalyzeIf()
@@ -470,9 +493,14 @@ namespace LPD.Compiler.Syntactic
 
         private void AnalyzeSubRoutines()
         {
+            uint label = _lastLabel;
+            var hasGenerated = false;
+
             if (_token.Symbol == Symbols.SProcedimento || _token.Symbol == Symbols.SFuncao)
             {
-                //Todo: code generator
+                _codeGenerator.GenerateInstruction(JMP, _codeGenerator.GetStringLabelFor(_lastLabel));
+                _lastLabel++;
+                hasGenerated = true;
             }
 
             while (_token.Symbol == Symbols.SProcedimento || _token.Symbol == Symbols.SFuncao)
@@ -494,6 +522,11 @@ namespace LPD.Compiler.Syntactic
                 {
                     RaiseMissingSemicolonError();
                 }
+            }
+
+            if (hasGenerated)
+            {
+                _codeGenerator.GenerateLabel(label);
             }
         }
 
