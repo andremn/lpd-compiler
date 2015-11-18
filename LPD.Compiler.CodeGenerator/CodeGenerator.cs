@@ -4,9 +4,9 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static LPD.Compiler.CodeGenerator.Instructions;
+using static LPD.Compiler.CodeGeneration.Instructions;
 
-namespace LPD.Compiler.CodeGenerator
+namespace LPD.Compiler.CodeGeneration
 {
     public class CodeGenerator
     {
@@ -17,7 +17,7 @@ namespace LPD.Compiler.CodeGenerator
             _output = new StringBuilder();
         }
 
-        public void GenerateLabel(int labelNumber)
+        public void GenerateLabel(uint labelNumber)
         {
             GenerateInstruction("L" + labelNumber, NULL);
         }

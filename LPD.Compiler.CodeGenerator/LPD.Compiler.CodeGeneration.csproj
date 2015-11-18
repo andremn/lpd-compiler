@@ -7,8 +7,8 @@
     <ProjectGuid>{599D1F50-A17B-4070-8D70-9865CA95CE26}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>LPD.Compiler.CodeGenerator</RootNamespace>
-    <AssemblyName>LPD.Compiler.CodeGenerator</AssemblyName>
+    <RootNamespace>LPD.Compiler.CodeGeneration</RootNamespace>
+    <AssemblyName>LPD.Compiler.CodeGeneration</AssemblyName>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

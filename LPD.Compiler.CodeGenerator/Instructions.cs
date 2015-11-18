@@ -1,4 +1,4 @@
-﻿namespace LPD.Compiler.CodeGenerator
+﻿namespace LPD.Compiler.CodeGeneration
 {
     public static class Instructions
     {
