@@ -19,7 +19,7 @@ namespace LPD.Compiler.CodeGeneration
 
         public void GenerateInstruction(string instructionName) => GenerateInstruction(instructionName, null);
 
-        public void GenerateInstruction(string instructionName, params string[] arguments)
+        public void GenerateInstruction(string instructionName, params object[] arguments)
         {
             _output.Append(instructionName);
 

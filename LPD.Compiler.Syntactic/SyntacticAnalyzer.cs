@@ -4,6 +4,7 @@ using LPD.Compiler.Semantic;
 using LPD.Compiler.Shared;
 using LPD.Compiler.SymbolsTable;
 using System;
+using System.Collections.Generic;
 using static LPD.Compiler.CodeGeneration.Instructions;
 using static LPD.Compiler.Syntactic.Properties.Resources;
 
@@ -99,7 +100,7 @@ namespace LPD.Compiler.Syntactic
             catch (CompilationException ex)
             {
                 int column = _lexical.Position.Column - _token.Lexeme.Length;
-                
+
                 if (_position.HasValue)
                 {
                     return new CompileError(_position.Value, ex.Message);
@@ -235,7 +236,7 @@ namespace LPD.Compiler.Syntactic
             {
                 NextToken();
                 AnalyzeSimpleCommand();
-                
+
                 while (_token.Symbol != Symbols.SFim)
                 {
                     if (_token.Symbol == Symbols.SPontoVirgula)
@@ -333,7 +334,7 @@ namespace LPD.Compiler.Syntactic
 
         private void AnalyzeProcCall()
         {
-            var procItem = _symbolTable.Search(_analyzingLexeme) as ProcItem;        
+            var procItem = _symbolTable.Search(_analyzingLexeme) as ProcItem;
 
             if (procItem == null)
             {
@@ -407,7 +408,7 @@ namespace LPD.Compiler.Syntactic
                         if (!(item is FunctionItem) && !(item is IdentificatorItem))
                         {
                             throw new CompilationException(string.Format(NotAFuncVarErrorMessage, _lexical.Position.Line, _lexical.Position.Column, _token.Lexeme));
-                        }                        
+                        }
                     }
 
                     NextToken();
@@ -750,7 +751,7 @@ namespace LPD.Compiler.Syntactic
         {
             NextToken();
 
-            var item = _symbolTable.Search(_analyzingLexeme);            
+            var item = _symbolTable.Search(_analyzingLexeme);
             var rightType = AnalyzeExpressionType();
             var leftType = ItemType.None;
             var identificatorItem = item as IdentificatorItem;
@@ -771,7 +772,7 @@ namespace LPD.Compiler.Syntactic
                 ushort column = _lexical.Position.Column;
                 ushort line = _lexical.Position.Line;
 
-                throw new CompilationException(string.Format(IncompatibleAttributionErrorMessage, line, column, 
+                throw new CompilationException(string.Format(IncompatibleAttributionErrorMessage, line, column,
                     rightType.GetFriendlyName(), leftType.GetFriendlyName()));
             }
         }
@@ -791,7 +792,9 @@ namespace LPD.Compiler.Syntactic
 
             try
             {
-                type = _expressionAnalyzer.Analyze();
+                var tokens = _expressionAnalyzer.Analyze(out type);
+
+                GenerateCodeForExpression(tokens);
             }
             catch (ExpressionException ex)
             {
@@ -799,6 +802,30 @@ namespace LPD.Compiler.Syntactic
             }
 
             return type;
+        }
+
+        private void GenerateCodeForExpression(IEnumerable<Token> tokens)
+        {
+            foreach (var token in tokens)
+            {
+                switch (token.Symbol)
+                {
+                    case Symbols.SNumero:
+                        _codeGenerator.GenerateInstruction(LDC, token.Lexeme);
+                        break;
+                    case Symbols.SVerdadeiro:
+                        _codeGenerator.GenerateInstruction(LDC, 1);
+                        break;
+                    case Symbols.SFalso:
+                        _codeGenerator.GenerateInstruction(LDC, 0);
+                        break;
+                    case Symbols.SIdentificador:
+                        var item = _symbolTable.Search(token.Lexeme) as IdentificatorItem;
+
+                        _codeGenerator.GenerateInstruction(LDV, item.Memory);
+                        break;
+                }
+            }
         }
 
         #region Errors

@@ -148,7 +148,7 @@ namespace LPD.Compiler.Semantic
             }
         }
 
-        public ItemType Analyze()
+        public IEnumerable<Token> Analyze(out ItemType resultingType)
         {
             for (int i = _items.Count - 1; i >= 0; i--)
             {
@@ -195,7 +195,8 @@ namespace LPD.Compiler.Semantic
                 result = item.Type;
             }
 
-            return result;
+            resultingType = result;
+            return _output.Select(expItem => new Token { Lexeme = expItem.Lexeme, Symbol = expItem.Symbol });
         }
 
         public string GetOutput()
