@@ -17,6 +17,7 @@ namespace LPD.Compiler.Syntactic
         private CodePosition? _position = null;
         private ExpressionAnalyzer _expressionAnalyzer;
         private VectorSymbolTable _symbolTable;
+        private ushort _level = 0;
         private string _analyzingLexeme = null;
         private string _currentFunctionLexeme = null;
         private bool _foundFuntionReturn = false;
@@ -42,26 +43,18 @@ namespace LPD.Compiler.Syntactic
         /// <returns></returns>
         public CompileError DoAnalysis()
         {
-            if (!NextToken())
-            {
-                RaiseUnexpectedEndOfFileMessage();
-            }
+            NextToken();
 
             try
             {
                 if (_token.Symbol == Symbols.SPrograma)
                 {
-                    if (!NextToken())
-                    {
-                        RaiseUnexpectedEndOfFileMessage();
-                    }
+                    NextToken();
 
                     if (_token.Symbol == Symbols.SIdentificador)
                     {
-                        if (!NextToken())
-                        {
-                            RaiseUnexpectedEndOfFileMessage();
-                        }
+                        _symbolTable.Insert(new ProgramNameItem() { Lexeme = _token.Lexeme });
+                        NextToken();
 
                         if (_token.Symbol == Symbols.SPontoVirgula)
                         {
@@ -69,8 +62,11 @@ namespace LPD.Compiler.Syntactic
 
                             if (_token.Symbol == Symbols.SPonto)
                             {
-                                if (NextToken())
+                                LexicalItem lexicalItem;
+
+                                if (_lexical.GetToken(out lexicalItem))
                                 {
+                                    _token = lexicalItem.Token;
                                     RaiseUnexpectedTokenError("fim do arquivo");
                                 }
                             }
@@ -105,17 +101,24 @@ namespace LPD.Compiler.Syntactic
 
                 return new CompileError(_lexical.Position, ex.Message);
             }
+            finally
+            {
+                _expressionAnalyzer = null;
+                _symbolTable.Clear();
+                _currentFunctionLexeme = null;
+                _level = 0;
+            }
 
             return null;
         }
 
-        private bool NextToken()
+        private void NextToken()
         {
             LexicalItem item = new LexicalItem();
 
             if (!_lexical.GetToken(out item))
             {
-                return false;
+                RaiseUnexpectedEndOfFileMessage();
             }
 
             if (item.Error != null)
@@ -124,8 +127,649 @@ namespace LPD.Compiler.Syntactic
             }
 
             _token = item.Token;
-            return true;
         }
+
+        private void AnalyzeBlock()
+        {
+            NextToken();
+            AnalyzeVarsDcl();
+            AnalyzeSubRoutines();
+            AnalyzeCommands();
+        }
+
+        private void AnalyzeVars()
+        {
+            do
+            {
+                if (_token.Symbol == Symbols.SIdentificador)
+                {
+                    if (_symbolTable.SearchDouble(_token.Lexeme))
+                    {
+                        RaiseDoubleIdentificatorError();
+                    }
+
+                    _symbolTable.Insert(new IdentificatorItem()
+                    {
+                        Lexeme = _token.Lexeme,
+                        Level = _level
+                    });
+
+                    NextToken();
+
+                    if (_token.Symbol == Symbols.SVirgula || _token.Symbol == Symbols.SDoisPontos)
+                    {
+                        if (_token.Symbol == Symbols.SVirgula)
+                        {
+                            NextToken();
+
+                            if (_token.Symbol == Symbols.SDoisPontos)
+                            {
+                                RaiseLexicalErrorMessage("Esperado identificador");
+                            }
+                        }
+                    }
+                    else
+                    {
+                        RaiseUnexpectedTokenError("\",\" ou \":\"");
+                    }
+                }
+            } while (_token.Symbol != Symbols.SDoisPontos);
+
+            NextToken();
+            AnalyzeType();
+        }
+
+        private void AnalyzeVarsDcl()
+        {
+            if (_token.Symbol == Symbols.SVar)
+            {
+                NextToken();
+
+                if (_token.Symbol == Symbols.SIdentificador)
+                {
+                    while (_token.Symbol == Symbols.SIdentificador)
+                    {
+                        AnalyzeVars();
+
+                        if (_token.Symbol == Symbols.SPontoVirgula)
+                        {
+                            NextToken();
+                        }
+                        else
+                        {
+                            RaiseMissingSemicolonError();
+                        }
+                    }
+                }
+                else
+                {
+                    RaiseUnexpectedTokenError("identificador");
+                }
+            }
+        }
+
+        private void AnalyzeType()
+        {
+            if (_token.Symbol != Symbols.SInteiro && _token.Symbol != Symbols.SBooleano)
+            {
+                RaiseUnexpectedTokenError("\"inteiro\" ou \"booleano\"");
+            }
+            else
+            {
+                _symbolTable.SetTypeLastestVars(_token.Symbol == Symbols.SInteiro ? ItemType.Integer : ItemType.Boolean);
+                NextToken();
+            }
+        }
+
+        private void AnalyzeCommands()
+        {
+            if (_token.Symbol == Symbols.SInicio)
+            {
+                NextToken();
+                AnalyzeSimpleCommand();
+                
+                while (_token.Symbol != Symbols.SFim)
+                {
+                    if (_token.Symbol == Symbols.SPontoVirgula)
+                    {
+                        NextToken();
+
+                        if (_token.Symbol != Symbols.SFim)
+                        {
+                            AnalyzeSimpleCommand();
+                        }
+                    }
+                    else
+                    {
+                        RaiseMissingSemicolonError();
+                    }
+                }
+
+                NextToken();
+            }
+            else
+            {
+                RaiseInvalidToken();
+            }
+        }
+
+        private void AnalyzeSimpleCommand()
+        {
+            if (_token.Symbol == Symbols.SIdentificador)
+            {
+                var item = _symbolTable.Search(_token.Lexeme);
+
+                if (item == null)
+                {
+                    RaiseNotFoundIdentificatorError(_token.Lexeme);
+                }
+
+                _analyzingLexeme = _token.Lexeme;
+
+                var funcItem = item as FunctionItem;
+
+                if (funcItem?.Lexeme == _currentFunctionLexeme)
+                {
+                    NextToken();
+
+                    if (_token.Symbol == Symbols.SAtribuicao)
+                    {
+                        AnalyzeAttribution();
+                    }
+
+                    _foundFuntionReturn = true;
+                }
+                else
+                {
+                    NextToken();
+
+                    if (_token.Symbol == Symbols.SAtribuicao)
+                    {
+                        AnalyzeAttribution();
+                    }
+                    else
+                    {
+                        AnalyzeProcCall();
+                    }
+                }
+            }
+            else if (_token.Symbol == Symbols.SSe)
+            {
+                AnalyzeIf();
+            }
+            else if (_token.Symbol == Symbols.SEnquanto)
+            {
+                AnalyzeWhile();
+            }
+            else if (_token.Symbol == Symbols.SLeia)
+            {
+                AnalyzeRead();
+            }
+            else if (_token.Symbol == Symbols.SEscreva)
+            {
+                AnalyzeWrite();
+            }
+            else
+            {
+                AnalyzeCommands();
+            }
+        }
+
+        private void RaiseNotFoundIdentificatorError(string lexeme)
+        {
+            ushort column = _lexical.Position.Column;
+            ushort line = _lexical.Position.Line;
+
+            throw new CompilationException(string.Format(NotFoundIdentifierErrorMessage, line, column, lexeme));
+        }
+
+        private void AnalyzeProcCall()
+        {
+            var procItem = _symbolTable.Search(_analyzingLexeme) as ProcItem;            
+
+            if (procItem == null)
+            {
+                RaiseMissingProcError();
+            }
+
+            if (_token.Symbol != Symbols.SPontoVirgula)
+            {
+                RaiseMissingSemicolonError();
+            }
+        }
+
+        private void AnalyzeRead()
+        {
+            NextToken();
+
+            if (_token.Symbol == Symbols.SAbreParenteses)
+            {
+                NextToken();
+
+                if (_token.Symbol == Symbols.SIdentificador)
+                {
+                    var item = _symbolTable.Search(_token.Lexeme);
+
+                    if (item == null)
+                    {
+                        RaiseNotFoundIdentificatorError(_token.Lexeme);
+                    }
+
+                    NextToken();
+
+                    if (_token.Symbol == Symbols.SFechaParenteses)
+                    {
+                        NextToken();
+                    }
+                    else
+                    {
+                        RaiseUnexpectedTokenError("\")\"");
+                    }
+                }
+                else
+                {
+                    RaiseUnexpectedTokenError("identificador");
+                }
+            }
+            else
+            {
+                RaiseUnexpectedTokenError("\"(\"");
+            }
+        }
+
+        private void AnalyzeWrite()
+        {
+            NextToken();
+
+            if (_token.Symbol == Symbols.SAbreParenteses)
+            {
+                NextToken();
+
+                if (_token.Symbol == Symbols.SIdentificador)
+                {
+                    var item = _symbolTable.Search(_token.Lexeme);
+
+                    if (item != null)
+                    {
+                        if (!(item is FunctionItem) && !(item is IdentificatorItem))
+                        {
+                            throw new CompilationException(string.Format(NotAFuncVarErrorMessage, _lexical.Position.Line, _lexical.Position.Column, _token.Lexeme));
+                        }
+
+                        RaiseNotFoundIdentificatorError(_token.Lexeme);
+                    }
+
+                    NextToken();
+
+                    if (_token.Symbol == Symbols.SFechaParenteses)
+                    {
+                        NextToken();
+                    }
+                    else
+                    {
+                        RaiseUnexpectedTokenError("\")\"");
+                    }
+                }
+                else
+                {
+                    RaiseUnexpectedTokenError("identificador");
+                }
+            }
+            else
+            {
+                RaiseUnexpectedTokenError("\"(\"");
+            }
+
+        }
+
+        private void AnalyzeWhile()
+        {
+            NextToken();
+
+            var type = AnalyzeExpressionType();
+
+            if (type != ItemType.Boolean)
+            {
+                RaiseIncompatibleTypeError();
+            }
+
+            if (_token.Symbol != Symbols.SFaca)
+            {
+                RaiseUnexpectedTokenError("\"faca\"");
+            }
+
+            NextToken();
+            AnalyzeSimpleCommand();
+        }
+
+        private void AnalyzeIf()
+        {
+            NextToken();
+
+            var expressionType = AnalyzeExpressionType();
+
+            if (expressionType != ItemType.Boolean)
+            {
+                RaiseIncompatibleTypeError();
+            }
+
+            if (_token.Symbol != Symbols.SEntao)
+            {
+                RaiseUnexpectedTokenError("\"entao\"");
+            }
+
+            NextToken();
+            AnalyzeSimpleCommand();
+
+            if (_token.Symbol == Symbols.SSenao)
+            {
+                NextToken();
+                AnalyzeSimpleCommand();
+            }
+        }
+
+        private void AnalyzeSubRoutines()
+        {
+            if (_token.Symbol == Symbols.SProcedimento || _token.Symbol == Symbols.SFuncao)
+            {
+                //Todo: code generator
+            }
+
+            while (_token.Symbol == Symbols.SProcedimento || _token.Symbol == Symbols.SFuncao)
+            {
+                if (_token.Symbol == Symbols.SProcedimento)
+                {
+                    AnalyzeProcDcl();
+                }
+                else
+                {
+                    AnalyzeFuncDcl();
+                }
+
+                if (_token.Symbol == Symbols.SPontoVirgula)
+                {
+                    NextToken();
+                }
+                else
+                {
+                    RaiseMissingSemicolonError();
+                }
+            }
+        }
+
+        private void AnalyzeProcDcl()
+        {
+            NextToken();
+
+            if (_token.Symbol != Symbols.SIdentificador)
+            {
+                RaiseUnexpectedTokenError("identificador");
+            }
+
+            var item = _symbolTable.SearchByLevel(_token.Lexeme, _level);
+
+            if (item != null)
+            {
+                RaiseDoubleIdentificatorError();
+            }
+
+            item = new ProcItem
+            {
+                Lexeme = _token.Lexeme,
+                Level = _level
+            };
+
+            _symbolTable.Insert(item);
+            _level++;
+            NextToken();
+
+            if (_token.Symbol != Symbols.SPontoVirgula)
+            {
+                RaiseMissingSemicolonError();
+            }
+
+            AnalyzeBlock();
+            _symbolTable.CleanUpToLevel(_level);
+            _level--;
+        }
+
+        private void AnalyzeFuncDcl()
+        {
+            NextToken();
+
+            if (_token.Symbol != Symbols.SIdentificador)
+            {
+                RaiseUnexpectedTokenError("identificador");
+            }
+
+            var item = _symbolTable.Search(_token.Lexeme);
+
+            if (item != null)
+            {
+                RaiseDoubleIdentificatorError();
+            }
+
+            var funcItem = new FunctionItem
+            {
+                Lexeme = _token.Lexeme,
+                Level = _level
+            };
+
+            _currentFunctionLexeme = _token.Lexeme;
+            _level++;
+            NextToken();
+
+            if (_token.Symbol != Symbols.SDoisPontos)
+            {
+                RaiseUnexpectedTokenError("\":\"");
+            }
+
+            NextToken();
+
+            if (_token.Symbol != Symbols.SInteiro && _token.Symbol != Symbols.SBooleano)
+            {
+                RaiseUnexpectedTokenError("\"inteiro\" ou \"booleano\"");
+            }
+
+            var type = _token.Symbol == Symbols.SInteiro ? ItemType.Integer : ItemType.Boolean;
+
+            funcItem.Type = type;
+            _symbolTable.Insert(funcItem);
+            NextToken();
+
+            if (_token.Symbol != Symbols.SPontoVirgula)
+            {
+                RaiseMissingSemicolonError();
+            }
+
+            AnalyzeBlock();
+
+            if (!_foundFuntionReturn)
+            {
+                RaiseMissingFunctionReturn();
+            }
+
+            _symbolTable.CleanUpToLevel(_level);
+            _foundFuntionReturn = false;
+            _currentFunctionLexeme = null;
+            _level--;
+        }
+
+        private void AnalyzeExpression()
+        {
+            AnalyzeSimpleExpression();
+
+            if (_token.Symbol == Symbols.SMaior ||
+                _token.Symbol == Symbols.SMaiorIg ||
+                _token.Symbol == Symbols.SMenor ||
+                _token.Symbol == Symbols.SMenorIg ||
+                _token.Symbol == Symbols.SIg ||
+                _token.Symbol == Symbols.SDif)
+            {
+                _expressionAnalyzer.Add(_token);
+                NextToken();
+                AnalyzeSimpleExpression();
+            }
+        }
+
+        private void AnalyzeSimpleExpression()
+        {
+            if (_token.Symbol == Symbols.SMais || _token.Symbol == Symbols.SMenos)
+            {
+                var token = new Token() { Lexeme = _token.Lexeme };
+
+                if (_token.Symbol == Symbols.SMais)
+                {
+                    token.Symbol = Symbols.SMaisUnario;
+                }
+                else
+                {
+                    token.Symbol = Symbols.SMenosUnario;
+                }
+
+                _expressionAnalyzer.Add(token);
+                NextToken();
+            }
+
+            AnalyzeTerm();
+
+            while (_token.Symbol == Symbols.SMais || _token.Symbol == Symbols.SMenos || _token.Symbol == Symbols.SOu)
+            {
+                _expressionAnalyzer.Add(_token);
+                NextToken();
+                AnalyzeTerm();
+            }
+        }
+
+        private void AnalyzeTerm()
+        {
+            AnalyzeFactor();
+
+            if (_token.Symbol == Symbols.SIdentificador)
+            {
+                RaiseUnexpectedTokenError($"um operador, mas o identificador '{_token.Lexeme}' foi encontrado no lugar");
+            }
+
+            while (_token.Symbol == Symbols.SMult || _token.Symbol == Symbols.SDiv || _token.Symbol == Symbols.SE)
+            {
+                _expressionAnalyzer.Add(_token);
+                NextToken();
+                AnalyzeFactor();
+            }
+        }
+
+        private void AnalyzeFactor()
+        {
+            if (_token.Symbol == Symbols.SIdentificador)
+            {
+                var item = _symbolTable.SearchByLevel(_token.Lexeme, _level);
+
+                if (item == null)
+                {
+                    RaiseNotFoundIdentificatorError(_token.Lexeme);
+                }
+
+                var funcItem = item as FunctionItem;
+
+                if (funcItem != null)
+                {
+                    AnalyzeFuncCall();
+                }
+                else
+                {
+                    _expressionAnalyzer.Add(_token);
+                    NextToken();
+                }
+            }
+            else if (_token.Symbol == Symbols.SNumero)
+            {
+                _expressionAnalyzer.Add(_token);
+                NextToken();
+            }
+            else if (_token.Symbol == Symbols.SNao)
+            {
+                _expressionAnalyzer.Add(_token);
+                NextToken();
+                AnalyzeFactor();
+            }
+            else if (_token.Symbol == Symbols.SAbreParenteses)
+            {
+                _expressionAnalyzer.Add(_token);
+                NextToken();
+                AnalyzeExpression();
+
+                if (_token.Symbol != Symbols.SFechaParenteses)
+                {
+                    RaiseUnexpectedTokenError("\")\"");
+                }
+
+                _expressionAnalyzer.Add(_token);
+                NextToken();
+            }
+            else if (_token.Symbol == Symbols.SVerdadeiro || _token.Symbol == Symbols.SFalso)
+            {
+                _expressionAnalyzer.Add(_token);
+                NextToken();
+            }
+        }
+
+        private void AnalyzeAttribution()
+        {
+            NextToken();
+
+            var item = _symbolTable.Search(_analyzingLexeme);            
+            var rightType = AnalyzeExpressionType();
+            var leftType = ItemType.None;
+            var identificatorItem = item as IdentificatorItem;
+            var funcItem = item as FunctionItem;
+
+            if (identificatorItem != null)
+            {
+                leftType = identificatorItem.Type;
+            }
+
+            if (funcItem != null)
+            {
+                leftType = funcItem.Type;
+            }
+
+            if (leftType != rightType)
+            {
+                ushort column = _lexical.Position.Column;
+                ushort line = _lexical.Position.Line;
+
+                throw new CompilationException(string.Format(IncompatibleAttributionErrorMessage, line, column, 
+                    rightType.GetFriendlyName(), leftType.GetFriendlyName()));
+            }
+        }
+
+        private void AnalyzeFuncCall()
+        {
+            _expressionAnalyzer.Add(_token);
+            NextToken();
+        }
+
+        private ItemType AnalyzeExpressionType()
+        {
+            _expressionAnalyzer = new ExpressionAnalyzer(_symbolTable);
+            AnalyzeExpression();
+
+            var type = ItemType.None;
+
+            try
+            {
+                type = _expressionAnalyzer.Analyze();
+            }
+            catch (ExpressionException ex)
+            {
+                RaiseNotFoundIdentificatorError(ex.Message);
+            }
+
+            return type;
+        }
+
+        #region Errors
+
         private void RaiseInvalidTerm()
         {
             int column = _lexical.Position.Column - _token.Lexeme.Length;
@@ -176,7 +820,7 @@ namespace LPD.Compiler.Syntactic
         private void RaiseInvalidToken()
         {
             _position = null;
-            throw new CompilationException(string.Format(InvalidTokenErrorMessage, _lexical.Position.Line, _lexical.Position.Column,_token.Lexeme));
+            throw new CompilationException(string.Format(InvalidTokenErrorMessage, _lexical.Position.Line, _lexical.Position.Column, _token.Lexeme));
         }
 
         private void RaiseMissingFunctionReturn()
@@ -186,727 +830,30 @@ namespace LPD.Compiler.Syntactic
             throw new CompilationException(string.Format(MissingFunctionReturnMessage, line, 0, _currentFunctionLexeme));
         }
 
-        private void AnalyzeBlock()
+        private void RaiseMissingProcError()
         {
-            if (!NextToken())
-            {
-                RaiseUnexpectedEndOfFileMessage();
-            }
-
-            AnalyzeVarsDcl();
-            AnalyzeSubRoutines();
-            AnalyzeCommands();
+            _position = null;
+            throw new CompilationException(string.Format(NotFoundProcErrorMessage, _lexical.Position.Line, _lexical.Position.Column, _token.Lexeme));
         }
 
-        private void AnalyzeVars()
+        private void RaiseMissingFuncError()
         {
-            do
-            {
-                if (_token.Symbol == Symbols.SIdentificador)
-                {
-                    _symbolTable.Insert(new IdentificatorItem() { Lexeme = _token.Lexeme });
-
-                    if (!NextToken())
-                    {
-                        RaiseUnexpectedEndOfFileMessage();
-                    }
-
-                    if (_token.Symbol == Symbols.SVirgula || _token.Symbol == Symbols.SDoisPontos)
-                    {
-                        if (_token.Symbol == Symbols.SVirgula)
-                        {
-                            if (!NextToken())
-                            {
-                                RaiseUnexpectedEndOfFileMessage();
-                            }
-
-                            if (_token.Symbol == Symbols.SDoisPontos)
-                            {
-                                RaiseLexicalErrorMessage("Esperado identificador");
-                            }
-                        }
-                    }
-                    else
-                    {
-                        RaiseUnexpectedTokenError("\",\" ou \":\"");
-                    }
-                }
-            } while (_token.Symbol != Symbols.SDoisPontos);
-
-            if (!NextToken())
-            {
-                RaiseUnexpectedEndOfFileMessage();
-            }
-
-            AnalyzeType();
+            _position = null;
+            throw new CompilationException(string.Format(NotFoundFuncErrorMessage, _lexical.Position.Line, _lexical.Position.Column, _token.Lexeme));
         }
 
-        private void AnalyzeVarsDcl()
+        private void RaiseDoubleIdentificatorError()
         {
-            if (_token.Symbol == Symbols.SVar)
-            {
-                if (!NextToken())
-                {
-                    RaiseUnexpectedEndOfFileMessage();
-                }
-                if (_token.Symbol == Symbols.SIdentificador)
-                {
-                    while (_token.Symbol == Symbols.SIdentificador)
-                    {
-                        AnalyzeVars();
-
-                        if (_token.Symbol == Symbols.SPontoVirgula)
-                        {
-                            if (!NextToken())
-                            {
-                                RaiseMissingSemicolonError();
-                            }
-                        }
-                        else
-                        {
-                            RaiseMissingSemicolonError();
-                        }
-                    }
-                }
-                else
-                {
-                    RaiseUnexpectedTokenError("identificador");
-                }
-            }
+            _position = null;
+            throw new CompilationException(string.Format(DoubleIdentificatorErrorMessage, _lexical.Position.Line, _lexical.Position.Column, _token.Lexeme));
         }
 
-        private void AnalyzeType()
+        private void RaiseIncompatibleTypeError()
         {
-            if (_token.Symbol != Symbols.SInteiro && _token.Symbol != Symbols.SBooleano)
-            {
-                RaiseUnexpectedTokenError("\"inteiro\" ou \"booleano\"");
-            }
-            else
-            {
-                _symbolTable.SetTypeLastestVars(_token.Symbol == Symbols.SInteiro ? ItemType.Integer : ItemType.Boolean);
-
-                if (!NextToken())
-                {
-                    RaiseUnexpectedEndOfFileMessage();
-                }
-            }
+            _position = null;
+            throw new CompilationException(string.Format(IncompatibleIfExpressionErrorMessage, _lexical.Position.Line, _lexical.Position.Column));
         }
 
-        private void AnalyzeCommands()
-        {
-            if (_token.Symbol == Symbols.SInicio)
-            {
-                if (!NextToken())
-                {
-                    RaiseUnexpectedEndOfFileMessage();
-                }
-
-                AnalyzeSimpleCommand();
-                
-                while (_token.Symbol != Symbols.SFim)
-                {
-                    if (_token.Symbol == Symbols.SPontoVirgula)
-                    {
-                        if (!NextToken())
-                        {
-                            RaiseUnexpectedEndOfFileMessage();
-                        }
-
-                        if (_token.Symbol != Symbols.SFim)
-                        {
-                            AnalyzeSimpleCommand();
-                        }
-                    }
-                    else
-                    {
-                        RaiseMissingSemicolonError();
-                    }
-                }
-
-                if (!NextToken())
-                {
-                    RaiseUnexpectedEndOfFileMessage();
-                }
-            }
-            else
-            {
-                RaiseInvalidToken();
-            }
-        }
-
-        private void AnalyzeSimpleCommand()
-        {
-            if (_token.Symbol == Symbols.SIdentificador)
-            {
-                var item = _symbolTable.Search(_token.Lexeme);
-
-                if (item == null)
-                {
-                    RaiseNotFoundIdentificatorError(_token.Lexeme);
-                }
-
-                _analyzingLexeme = _token.Lexeme;
-
-                var funcItem = item as FunctionItem;
-
-                if (funcItem?.Lexeme == _currentFunctionLexeme)
-                {
-                    if (!NextToken())
-                    {
-                        RaiseUnexpectedEndOfFileMessage();
-                    }
-
-                    if (_token.Symbol == Symbols.SAtribuicao)
-                    {
-                        AnalyzeAttribution();
-                    }
-
-                    _foundFuntionReturn = true;
-                }
-                else
-                {
-                    if (!NextToken())
-                    {
-                        RaiseUnexpectedEndOfFileMessage();
-                    }
-
-                    if (_token.Symbol == Symbols.SAtribuicao)
-                    {
-                        AnalyzeAttribution();
-                    }
-                    else
-                    {
-                        ProcCallAnalyze();
-                    }
-                }
-            }
-            else if (_token.Symbol == Symbols.SSe)
-            {
-                AnalyzeIf();
-            }
-            else if (_token.Symbol == Symbols.SEnquanto)
-            {
-                AnalyzeWhile();
-            }
-            else if (_token.Symbol == Symbols.SLeia)
-            {
-                AnalyzeRead();
-            }
-            else if (_token.Symbol == Symbols.SEscreva)
-            {
-                AnalyzeWrite();
-            }
-            else
-            {
-                AnalyzeCommands();
-            }
-        }
-
-        private void RaiseNotFoundIdentificatorError(string lexeme)
-        {
-            ushort column = _lexical.Position.Column;
-            ushort line = _lexical.Position.Line;
-
-            throw new CompilationException(string.Format(NotFoundIdentifierErrorMessage, line, column, lexeme));
-        }
-
-        private void ProcCallAnalyze()
-        {
-        }
-
-        private void AnalyzeRead()
-        {
-            if (!NextToken())
-            {
-                RaiseUnexpectedEndOfFileMessage();
-            }
-
-            if (_token.Symbol == Symbols.SAbreParenteses)
-            {
-                if (!NextToken())
-                {
-                    RaiseUnexpectedEndOfFileMessage();
-                }
-
-                if (_token.Symbol == Symbols.SIdentificador)
-                {
-                    // doesnt exist yet!
-                    /*
-                    if(pesquisa_declvar_tabela(token.lexema))
-                    {
-                        
-                    }
-                    else
-                    {
-                        throw new SyntacticException();
-                    }*/
-
-                    if (!NextToken())
-                    {
-                        RaiseUnexpectedEndOfFileMessage();
-                    }
-
-                    if (_token.Symbol == Symbols.SFechaParenteses)
-                    {
-                        if (!NextToken())
-                        {
-                            RaiseUnexpectedEndOfFileMessage();
-                        }
-                    }
-                    else
-                    {
-                        RaiseUnexpectedTokenError("\")\"");
-                    }
-                }
-                else
-                {
-                    RaiseUnexpectedTokenError("identificador");
-                }
-            }
-            else
-            {
-                RaiseUnexpectedTokenError("\"(\"");
-            }
-        }
-
-        private void AnalyzeWrite()
-        {
-            if (!NextToken())
-            {
-                RaiseUnexpectedEndOfFileMessage();
-            }
-            if (_token.Symbol == Symbols.SAbreParenteses)
-            {
-                if (!NextToken())
-                {
-                    RaiseUnexpectedEndOfFileMessage();
-                }
-
-                if (_token.Symbol == Symbols.SIdentificador)
-                {
-                    // doesnt exist yet!
-                    /*
-                    if(Search(token.lexema))
-                    {
-                        
-                    }
-                    else
-                    {
-                        throw new SyntacticException();
-                    }
-                    */
-                    if (!NextToken())
-                    {
-                        RaiseUnexpectedEndOfFileMessage();
-                    }
-
-                    if (_token.Symbol == Symbols.SFechaParenteses)
-                    {
-                        if (!NextToken())
-                        {
-                            RaiseUnexpectedEndOfFileMessage();
-                        }
-                    }
-                    else
-                    {
-                        RaiseUnexpectedTokenError("\")\"");
-                    }
-                }
-                else
-                {
-                    RaiseUnexpectedTokenError("identificador");
-                }
-            }
-            else
-            {
-                RaiseUnexpectedTokenError("\"(\"");
-            }
-
-        }
-
-        private void AnalyzeWhile()
-        {
-            if (!NextToken())
-            {
-                RaiseUnexpectedEndOfFileMessage();
-            }
-
-            var type = AnalyzeExpressionType();
-
-            if (_token.Symbol != Symbols.SFaca)
-            {
-                RaiseUnexpectedTokenError("\"faca\"");
-            }
-
-            if (!NextToken())
-            {
-                RaiseUnexpectedEndOfFileMessage();
-            }
-
-            AnalyzeSimpleCommand();
-        }
-
-        private void AnalyzeIf()
-        {
-            if (!NextToken())
-            {
-                RaiseUnexpectedEndOfFileMessage();
-            }
-            
-            var expressionType = AnalyzeExpressionType();
-
-            if (expressionType != ItemType.Boolean)
-            {
-                ushort column = _lexical.Position.Column;
-                ushort line = _lexical.Position.Line;
-
-                throw new CompilationException(string.Format(IncompatibleIfExpressionErrorMessage, line, column));
-            }
-
-            if (_token.Symbol != Symbols.SEntao)
-            {
-                RaiseUnexpectedTokenError("\"entao\"");
-            }
-
-            if (!NextToken())
-            {
-                RaiseUnexpectedEndOfFileMessage();
-            }
-
-            AnalyzeSimpleCommand();
-
-            if (_token.Symbol == Symbols.SSenao)
-            {
-                if (!NextToken())
-                {
-                    RaiseUnexpectedEndOfFileMessage();
-                }
-
-                AnalyzeSimpleCommand();
-            }
-        }
-
-        private void AnalyzeSubRoutines()
-        {
-            if (_token.Symbol == Symbols.SProcedimento || _token.Symbol == Symbols.SFuncao)
-            {
-                //Todo: code generator
-            }
-
-            while (_token.Symbol == Symbols.SProcedimento || _token.Symbol == Symbols.SFuncao)
-            {
-                if (_token.Symbol == Symbols.SProcedimento)
-                {
-                    AnalyzeProcDcl();
-                }
-                else
-                {
-                    AnalyzeFuncDcl();
-                }
-
-                if (_token.Symbol == Symbols.SPontoVirgula)
-                {
-                    if (!NextToken())
-                    {
-                        RaiseUnexpectedEndOfFileMessage();
-                    }
-                }
-                else
-                {
-                    RaiseMissingSemicolonError();
-                }
-            }
-        }
-
-        private void AnalyzeProcDcl()
-        {
-            if (!NextToken())
-            {
-                RaiseUnexpectedEndOfFileMessage();
-            }
-
-            if (_token.Symbol != Symbols.SIdentificador)
-            {
-                RaiseUnexpectedTokenError("identificador");
-            }
-
-            if (!NextToken())
-            {
-                RaiseUnexpectedEndOfFileMessage();
-            }
-
-            if (_token.Symbol != Symbols.SPontoVirgula)
-            {
-                RaiseMissingSemicolonError();
-            }
-
-            AnalyzeBlock();
-        }
-
-        private void AnalyzeFuncDcl()
-        {
-            if (!NextToken())
-            {
-                RaiseUnexpectedEndOfFileMessage();
-            }
-
-            if (_token.Symbol != Symbols.SIdentificador)
-            {
-                RaiseUnexpectedTokenError("identificador");
-            }
-
-            var funcItem = new FunctionItem() { Lexeme = _token.Lexeme };
-
-            _currentFunctionLexeme = _token.Lexeme;
-
-            if (!NextToken())
-            {
-                RaiseUnexpectedEndOfFileMessage();
-            }
-
-            if (_token.Symbol != Symbols.SDoisPontos)
-            {
-                RaiseUnexpectedTokenError("\":\"");
-            }
-
-            if (!NextToken())
-            {
-                RaiseUnexpectedEndOfFileMessage();
-            }
-
-            if (_token.Symbol != Symbols.SInteiro && _token.Symbol != Symbols.SBooleano)
-            {
-                RaiseUnexpectedTokenError("\"inteiro\" ou \"booleano\"");
-            }
-
-            var type = _token.Symbol == Symbols.SInteiro ? ItemType.Integer : ItemType.Boolean;
-
-            funcItem.Type = type;
-            _symbolTable.Insert(funcItem);
-
-            if (!NextToken())
-            {
-                RaiseUnexpectedEndOfFileMessage();
-            }
-
-            if (_token.Symbol != Symbols.SPontoVirgula)
-            {
-                RaiseMissingSemicolonError();
-            }
-
-            AnalyzeBlock();
-
-            if (!_foundFuntionReturn)
-            {
-                RaiseMissingFunctionReturn();
-            }  
-
-            _foundFuntionReturn = false;
-            _currentFunctionLexeme = null;
-        }
-
-        private void AnalyzeExpression()
-        {
-            AnalyzeSimpleExpression();
-
-            if (_token.Symbol == Symbols.SMaior ||
-                _token.Symbol == Symbols.SMaiorIg ||
-                _token.Symbol == Symbols.SMenor ||
-                _token.Symbol == Symbols.SMenorIg ||
-                _token.Symbol == Symbols.SIg ||
-                _token.Symbol == Symbols.SDif)
-            {
-                _expressionAnalyzer.Add(_token);
-
-                if (!NextToken())
-                {
-                    RaiseUnexpectedEndOfFileMessage();
-                }
-
-                AnalyzeSimpleExpression();
-            }
-        }
-
-        private void AnalyzeSimpleExpression()
-        {
-            if (_token.Symbol == Symbols.SMais || _token.Symbol == Symbols.SMenos)
-            {
-                var token = new Token() { Lexeme = _token.Lexeme };
-
-                if (_token.Symbol == Symbols.SMais)
-                {
-                    token.Symbol = Symbols.SMaisUnario;
-                }
-                else
-                {
-                    token.Symbol = Symbols.SMenosUnario;
-                }
-
-                _expressionAnalyzer.Add(token);
-
-                if (!NextToken())
-                {
-                    RaiseUnexpectedEndOfFileMessage();
-                }
-            }
-
-            AnalyzeTerm();
-
-            while (_token.Symbol == Symbols.SMais || _token.Symbol == Symbols.SMenos || _token.Symbol == Symbols.SOu)
-            {
-                _expressionAnalyzer.Add(_token);
-
-                if (!NextToken())
-                {
-                    RaiseUnexpectedEndOfFileMessage();
-                }
-
-                AnalyzeTerm();
-            }
-        }
-
-        private void AnalyzeTerm()
-        {
-            AnalyzeFactor();
-
-            if (_token.Symbol == Symbols.SIdentificador)
-            {
-                RaiseUnexpectedTokenError($"um operador, mas o identificador '{_token.Lexeme}' foi encontrado no lugar");
-            }
-
-            while (_token.Symbol == Symbols.SMult || _token.Symbol == Symbols.SDiv || _token.Symbol == Symbols.SE)
-            {
-                _expressionAnalyzer.Add(_token);
-
-                if (!NextToken())
-                {
-                    RaiseUnexpectedEndOfFileMessage();
-                }
-
-                AnalyzeFactor();
-            }
-        }
-
-        private void AnalyzeFactor()
-        {
-            if (_token.Symbol == Symbols.SIdentificador)
-            {
-                AnalyzeFuncCall();
-            }
-            else if (_token.Symbol == Symbols.SNumero)
-            {
-                _expressionAnalyzer.Add(_token);
-
-                if (!NextToken())
-                {
-                    RaiseUnexpectedEndOfFileMessage();
-                }
-            }
-            else if (_token.Symbol == Symbols.SNao)
-            {
-                _expressionAnalyzer.Add(_token);
-
-                if (!NextToken())
-                {
-                    RaiseUnexpectedEndOfFileMessage();
-                }
-
-                AnalyzeFactor();
-            }
-            else if (_token.Symbol == Symbols.SAbreParenteses)
-            {
-                _expressionAnalyzer.Add(_token);
-
-                if (!NextToken())
-                {
-                    RaiseUnexpectedEndOfFileMessage();
-                }
-
-                AnalyzeExpression();
-
-                if (_token.Symbol != Symbols.SFechaParenteses)
-                {
-                    RaiseUnexpectedTokenError("\")\"");
-                }
-
-                _expressionAnalyzer.Add(_token);
-
-                if (!NextToken())
-                {
-                    RaiseUnexpectedEndOfFileMessage();
-                }
-            }
-            else if (_token.Symbol == Symbols.SVerdadeiro || _token.Symbol == Symbols.SFalso)
-            {
-                _expressionAnalyzer.Add(_token);
-
-                if (!NextToken())
-                {
-                    RaiseUnexpectedEndOfFileMessage();
-                }
-            }
-        }
-
-        private void AnalyzeAttribution()
-        {
-            if (!NextToken())
-            {
-                RaiseUnexpectedEndOfFileMessage();
-            }
-            
-            var item = _symbolTable.Search(_analyzingLexeme);            
-            var rightType = AnalyzeExpressionType();
-            var leftType = ItemType.None;
-            var identificatorItem = item as IdentificatorItem;
-            var funcItem = item as FunctionItem;
-
-            if (identificatorItem != null)
-            {
-                leftType = identificatorItem.Type;
-            }
-
-            if (funcItem != null)
-            {
-                leftType = funcItem.Type;
-            }
-
-            if (leftType != rightType)
-            {
-                ushort column = _lexical.Position.Column;
-                ushort line = _lexical.Position.Line;
-
-                throw new CompilationException(string.Format(IncompatibleAttributionErrorMessage, line, column, 
-                    rightType.GetFriendlyName(), leftType.GetFriendlyName()));
-            }
-        }
-
-        private void AnalyzeFuncCall()
-        {
-            _expressionAnalyzer.Add(_token);
-
-            if (!NextToken())
-            {
-                RaiseUnexpectedEndOfFileMessage();
-            }
-        }
-
-        private ItemType AnalyzeExpressionType()
-        {
-            _expressionAnalyzer = new ExpressionAnalyzer(_symbolTable);
-            AnalyzeExpression();
-
-            var type = ItemType.None;
-
-            try
-            {
-                type = _expressionAnalyzer.Analyze();
-            }
-            catch (ExpressionException ex)
-            {
-                RaiseNotFoundIdentificatorError(ex.Message);
-            }
-
-            return type;
-        }
+        #endregion
     }
 }

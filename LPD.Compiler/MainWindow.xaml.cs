@@ -360,7 +360,14 @@ namespace LPD.Compiler
         /// <param name="e">The data of the event.</param>
         private async void OnCompileButtonClick(object sender, RoutedEventArgs e)
         {
-            await CompileAsync();
+            try
+            {
+                await CompileAsync();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Erro!");
+            }
         }
 
         private async void Refresh_Click(object sender, RoutedEventArgs e)

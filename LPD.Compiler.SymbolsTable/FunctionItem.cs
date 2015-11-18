@@ -1,9 +1,9 @@
 ﻿namespace LPD.Compiler.SymbolsTable
 {
-    public sealed class FunctionItem : SymbolTableItem
+    public sealed class FunctionItem : LeveledItem
     {
-        public string Level { get; set; }
-
         public ItemType Type { get; set; }
+
+        public string Label { get; set; }
     }
 }

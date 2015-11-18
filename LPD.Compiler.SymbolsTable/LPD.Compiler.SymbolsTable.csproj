@@ -45,6 +45,7 @@
     <Compile Include="IdentificatorItem.cs" />
     <Compile Include="ItemType.cs" />
     <Compile Include="ItemTypeExtensions.cs" />
+    <Compile Include="LeveledItem.cs" />
     <Compile Include="ProcItem.cs" />
     <Compile Include="ProgramNameItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

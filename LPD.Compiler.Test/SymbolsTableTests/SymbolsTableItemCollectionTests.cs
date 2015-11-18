@@ -31,13 +31,11 @@ namespace LPD.Compiler.Test.SymbolsTableTests
             var internalCollection = GetInternalCollection(collection);
             var item1 = new FunctionItem
             {
-                Lexeme = "func",
-                Level = "L1"
+                Lexeme = "func"
             };
             var item2 = new ProcItem
             {
-                Lexeme = "proc",
-                Level = "L2"
+                Lexeme = "proc"
             };
 
             collection.Add(item1);
@@ -72,8 +70,7 @@ namespace LPD.Compiler.Test.SymbolsTableTests
             var innerCollection = GetInternalCollection(collection);
             var item = new FunctionItem
             {
-                Lexeme = "func",
-                Level = "L1"
+                Lexeme = "func"
             };
 
             collection.Add(item);
@@ -91,8 +88,7 @@ namespace LPD.Compiler.Test.SymbolsTableTests
             var collection = new SymbolTableItemCollection();
             var item = new FunctionItem
             {
-                Lexeme = "func",
-                Level = "L1"
+                Lexeme = "func"
             };
 
             collection.Add(item);

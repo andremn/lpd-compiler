@@ -2,6 +2,6 @@
 {
     public sealed class ProgramNameItem : SymbolTableItem
     {
-
+        public uint Level { get { return 0; } }
     }
 }

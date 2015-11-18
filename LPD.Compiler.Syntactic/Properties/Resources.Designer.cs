@@ -61,6 +61,24 @@ namespace LPD.Compiler.Syntactic.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Linha {0}, coluna {1}: Já existe um identificador chamado &apos;{2}&apos;..
+        /// </summary>
+        internal static string DoubleIdentificatorErrorMessage {
+            get {
+                return ResourceManager.GetString("DoubleIdentificatorErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Função.
+        /// </summary>
+        internal static string Function {
+            get {
+                return ResourceManager.GetString("Function", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Linha {0}, coluna {1}: Tipo &apos;{2}&apos; não pode ser atribuido a variável do tipo &apos;{3}&apos;..
         /// </summary>
         internal static string IncompatibleAttributionErrorMessage {
@@ -124,11 +142,47 @@ namespace LPD.Compiler.Syntactic.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Linha {0}, coluna {1}:  &apos;{2}&apos; não é uma função ou uma variável..
+        /// </summary>
+        internal static string NotAFuncVarErrorMessage {
+            get {
+                return ResourceManager.GetString("NotAFuncVarErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Linha {0}, coluna {1}: Função &apos;{2}&apos; não declarada..
+        /// </summary>
+        internal static string NotFoundFuncErrorMessage {
+            get {
+                return ResourceManager.GetString("NotFoundFuncErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Linha {0}, coluna {1}: Identificador &apos;{2}&apos; não declarado..
         /// </summary>
         internal static string NotFoundIdentifierErrorMessage {
             get {
                 return ResourceManager.GetString("NotFoundIdentifierErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Linha {0}, coluna {1}: Procedimento &apos;{2}&apos; não declarado..
+        /// </summary>
+        internal static string NotFoundProcErrorMessage {
+            get {
+                return ResourceManager.GetString("NotFoundProcErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Procedimento.
+        /// </summary>
+        internal static string Procedure {
+            get {
+                return ResourceManager.GetString("Procedure", resourceCulture);
             }
         }
         

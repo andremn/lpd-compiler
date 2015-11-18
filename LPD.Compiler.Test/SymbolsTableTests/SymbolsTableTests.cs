@@ -53,24 +53,24 @@ namespace LPD.Compiler.Test.SymbolsTableTests
         public void REMOVE_UNTIL_TEST()
         {
             var symbolsTable = new VectorSymbolTable();
-            var func1 = new FunctionItem() { Lexeme = "Func1", Level = "L1" };
-            var func2 = new FunctionItem() { Lexeme = "Func2", Level = "L2" };
+            var func1 = new FunctionItem() { Lexeme = "Func1" };
+            var func2 = new FunctionItem() { Lexeme = "Func2" };
 
             symbolsTable.Insert(func1);
 
             for (int i = 0; i < 5; i++)
             {
-                symbolsTable.Insert(new IdentificatorItem() { Lexeme = "Item " + i, Type = ItemType.Boolean });
+                symbolsTable.Insert(new IdentificatorItem() { Lexeme = "Item " + i, Type = ItemType.Boolean, Level = 1 });
             }
 
             symbolsTable.Insert(func2);
 
             for (int i = 5; i < 8; i++)
             {
-                symbolsTable.Insert(new IdentificatorItem() { Lexeme = "Item " + i, Type = ItemType.Boolean });
+                symbolsTable.Insert(new IdentificatorItem() { Lexeme = "Item " + i, Type = ItemType.Boolean, Level = 2 });
             }
 
-            symbolsTable.RemoveUntil("L2");
+            symbolsTable.RemoveUntil(2);
 
             Assert.IsTrue(symbolsTable.Items.Contains(func1));
             Assert.IsTrue(symbolsTable.Items.Contains(func2));
@@ -88,11 +88,11 @@ namespace LPD.Compiler.Test.SymbolsTableTests
         public void SEARCH_BY_LEVEL_TEST()
         {
             var symbolsTable = new VectorSymbolTable();
-            var func = new FunctionItem() { Lexeme = "Func1", Level = "L1" };
-            var proc = new ProcItem() { Lexeme = "Proc1", Level = "L2" };
-            var item1 = new IdentificatorItem() { Lexeme = "x", Type = ItemType.Boolean };
-            var item2 = new IdentificatorItem() { Lexeme = "a", Type = ItemType.Integer };
-            var item3 = new IdentificatorItem() { Lexeme = "b", Type = ItemType.Integer };
+            var func = new FunctionItem() { Lexeme = "Func1" };
+            var proc = new ProcItem() { Lexeme = "Proc1"};
+            var item1 = new IdentificatorItem() { Lexeme = "x", Type = ItemType.Boolean, Level = 1 };
+            var item2 = new IdentificatorItem() { Lexeme = "a", Type = ItemType.Integer, Level = 2 };
+            var item3 = new IdentificatorItem() { Lexeme = "b", Type = ItemType.Integer, Level = 2 };
 
             for (int i = 0; i < 5; i++)
             {
@@ -105,20 +105,20 @@ namespace LPD.Compiler.Test.SymbolsTableTests
             symbolsTable.Insert(item2);
             symbolsTable.Insert(item3);
 
-            var result = symbolsTable.SearchByLevel(item1.Lexeme, func.Level);
+            var result = symbolsTable.SearchByLevel(item1.Lexeme, 1);
 
             Assert.AreEqual(result, item1);
 
-            result = symbolsTable.SearchByLevel(item2.Lexeme, func.Level);
+            result = symbolsTable.SearchByLevel(item2.Lexeme, 1);
             Assert.IsNull(result);
 
-            result = symbolsTable.SearchByLevel(item1.Lexeme, proc.Level);
+            result = symbolsTable.SearchByLevel(item1.Lexeme, 2);
             Assert.IsNull(result);
 
-            result = symbolsTable.SearchByLevel(item2.Lexeme, proc.Level);
+            result = symbolsTable.SearchByLevel(item2.Lexeme, 2);
             Assert.AreEqual(result, item2);
 
-            result = symbolsTable.SearchByLevel(item3.Lexeme, proc.Level);
+            result = symbolsTable.SearchByLevel(item3.Lexeme, 2);
             Assert.AreEqual(result, item3);
         }
 
@@ -141,11 +141,11 @@ namespace LPD.Compiler.Test.SymbolsTableTests
         public void CLEAN_UP_TEST()
         {
             var symbolsTable = new VectorSymbolTable();
-            var item1 = new IdentificatorItem() { Lexeme = "a", Type = ItemType.Boolean };
-            var item2 = new IdentificatorItem() { Lexeme = "x", Type = ItemType.Integer };
-            var item3 = new IdentificatorItem() { Lexeme = "y", Type = ItemType.Integer };
-            var func = new FunctionItem() { Lexeme = "func", Type = ItemType.Integer, Level = "L1" };
-            var proc = new ProcItem() { Lexeme = "proc", Level = "L2" };
+            var item1 = new IdentificatorItem() { Lexeme = "a", Type = ItemType.Boolean, Level = 1 };
+            var item2 = new IdentificatorItem() { Lexeme = "x", Type = ItemType.Integer, Level = 2 };
+            var item3 = new IdentificatorItem() { Lexeme = "y", Type = ItemType.Integer, Level = 1 };
+            var func = new FunctionItem() { Lexeme = "func", Type = ItemType.Integer, };
+            var proc = new ProcItem() { Lexeme = "proc" };
 
             symbolsTable.Insert(func);
             symbolsTable.Insert(item1);
@@ -153,9 +153,9 @@ namespace LPD.Compiler.Test.SymbolsTableTests
             symbolsTable.Insert(proc);
             symbolsTable.Insert(item2);
 
-            symbolsTable.CleanUpToLevel("L2");
+            symbolsTable.CleanUpToLevel(2);
             Assert.IsNull(symbolsTable.Search(item2.Lexeme));
-            symbolsTable.CleanUpToLevel("L1");
+            symbolsTable.CleanUpToLevel(1);
             Assert.IsNull(symbolsTable.Search(item1.Lexeme));
             Assert.IsNull(symbolsTable.Search(item3.Lexeme));
         }

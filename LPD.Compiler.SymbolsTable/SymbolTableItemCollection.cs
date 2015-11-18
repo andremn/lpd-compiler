@@ -55,5 +55,10 @@ namespace LPD.Compiler.SymbolsTable
         {
             return _items.GetEnumerator();
         }
+
+        public void Clear()
+        {
+            _items.Clear();
+        }
     }
 }

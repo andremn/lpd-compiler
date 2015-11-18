@@ -117,6 +117,12 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="DoubleIdentificatorErrorMessage" xml:space="preserve">
+    <value>Linha {0}, coluna {1}: Já existe um identificador chamado '{2}'.</value>
+  </data>
+  <data name="Function" xml:space="preserve">
+    <value>Função</value>
+  </data>
   <data name="IncompatibleAttributionErrorMessage" xml:space="preserve">
     <value>Linha {0}, coluna {1}: Tipo '{2}' não pode ser atribuido a variável do tipo '{3}'.</value>
   </data>
@@ -138,8 +144,20 @@
   <data name="MissingInicioErrorMessage" xml:space="preserve">
     <value>Linha {0}, coluna {1}: Encontrado "fim" sem "inicio".</value>
   </data>
+  <data name="NotAFuncVarErrorMessage" xml:space="preserve">
+    <value>Linha {0}, coluna {1}:  '{2}' não é uma função ou uma variável.</value>
+  </data>
+  <data name="NotFoundFuncErrorMessage" xml:space="preserve">
+    <value>Linha {0}, coluna {1}: Função '{2}' não declarada.</value>
+  </data>
   <data name="NotFoundIdentifierErrorMessage" xml:space="preserve">
     <value>Linha {0}, coluna {1}: Identificador '{2}' não declarado.</value>
+  </data>
+  <data name="NotFoundProcErrorMessage" xml:space="preserve">
+    <value>Linha {0}, coluna {1}: Procedimento '{2}' não declarado.</value>
+  </data>
+  <data name="Procedure" xml:space="preserve">
+    <value>Procedimento</value>
   </data>
   <data name="UnexpectedEndOfFileErrorMessage" xml:space="preserve">
     <value>Linha {0}, coluna {1}: Fim inesperado do arquivo.</value>

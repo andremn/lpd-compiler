@@ -23,18 +23,15 @@ namespace LPD.Compiler.SymbolsTable
             _itemsCollection.Add(item);
         }
 
-        public void RemoveUntil(string level)
+        public void RemoveUntil(uint level)
         {
-            for (int i = _itemsCollection.Count - 1; i >= 0; i--)
-            {
-                FunctionItem functionItem = _itemsCollection[i] as FunctionItem;
-                
-                if (functionItem != null && functionItem.Level == level)
-                {
-                    break;
-                }
+            var items = _itemsCollection.Select(item => item as LeveledItem)
+                                        .Where(item => item != null && item.Level == level)
+                                        .ToList();
 
-                _itemsCollection.RemoveAt(i);
+            foreach (var item in items)
+            {
+                _itemsCollection.Remove(item);
             }
         }
 
@@ -48,14 +45,14 @@ namespace LPD.Compiler.SymbolsTable
             return _itemsCollection.Search(lexeme).Count > 1;
         }
 
-        public SymbolTableItem SearchByLevel(string lexeme, string level)
+        public SymbolTableItem SearchByLevel(string lexeme, uint level)
         {
             var ids = GetIdentificatorsByLevel(level);
 
             return ids.SingleOrDefault(item => item.Lexeme == lexeme);
         }
 
-        public void CleanUpToLevel(string level)
+        public void CleanUpToLevel(uint level)
         {
             var identificators = GetIdentificatorsByLevel(level).ToList();
 
@@ -107,49 +104,14 @@ namespace LPD.Compiler.SymbolsTable
             }
         }
 
-        private IEnumerable<SymbolTableItem> GetIdentificatorsByLevel(string level)
+        public void Clear()
         {
-            bool found = false;
+            _itemsCollection.Clear();
+        }
 
-            for (int i = 0; i < _itemsCollection.Count; i++)
-            {
-                var item = _itemsCollection[i];
-                var func = item as FunctionItem;
-                var proc = item as ProcItem;
-
-                if (func != null)
-                {
-                    if (found)
-                    {
-                        break;
-                    }
-
-                    if (func.Level == level)
-                    {
-                        found = true;
-                        continue;
-                    }
-                }
-
-                if (proc != null)
-                {
-                    if (found)
-                    {
-                        break;
-                    }
-
-                    if (proc.Level == level)
-                    {
-                        found = true;
-                        continue;
-                    }
-                }
-
-                if (found)
-                {
-                    yield return item;
-                }
-            }
+        private IEnumerable<SymbolTableItem> GetIdentificatorsByLevel(uint level)
+        {
+            return _itemsCollection.Select(item => item as LeveledItem).Where(item => item != null && item.Level == level);
         }
     }
 }
