@@ -58,7 +58,10 @@ namespace LPD.Compiler.SymbolsTable
 
             for (int i = 0; i < identificators.Count; i++)
             {
-                _itemsCollection.Remove(identificators[i]);
+                if (identificators[i] is IdentificatorItem)
+                {
+                    _itemsCollection.Remove(identificators[i]);
+                }
             }
         }
 
@@ -111,7 +114,7 @@ namespace LPD.Compiler.SymbolsTable
 
         private IEnumerable<SymbolTableItem> GetIdentificatorsByLevel(uint level)
         {
-            return _itemsCollection.Select(item => item as LeveledItem).Where(item => item != null && item.Level == level);
+            return _itemsCollection.Select(item => item as LeveledItem).Where(item => item != null && item.Level <= level);
         }
     }
 }
