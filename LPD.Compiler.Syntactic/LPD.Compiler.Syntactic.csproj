@@ -56,6 +56,10 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\LPD.Compiler.CodeGenerator\LPD.Compiler.CodeGenerator.csproj">
+      <Project>{599d1f50-a17b-4070-8d70-9865ca95ce26}</Project>
+      <Name>LPD.Compiler.CodeGenerator</Name>
+    </ProjectReference>
     <ProjectReference Include="..\LPD.Compiler.Lexical\LPD.Compiler.Lexical.csproj">
       <Project>{44c76a22-259b-4b79-80f2-fc4ef94bd590}</Project>
       <Name>LPD.Compiler.Lexical</Name>
