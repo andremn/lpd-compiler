@@ -35,8 +35,6 @@ namespace LPD.Compiler.Syntactic
         /// <param name="lexical">The lexical analyzer.</param>
         public SyntacticAnalyzer(LexicalAnalyzer lexical)
         {
-            //Todo: FIX FUNCTION RETURN AND VARIABLES DECLARATIONS NOT FOUND!
-
             if (lexical == null)
             {
                 throw new ArgumentNullException(nameof(lexical));
@@ -142,7 +140,7 @@ namespace LPD.Compiler.Syntactic
             _token = item.Token;
         }
 
-        private void AnalyzeBlock()
+        private void AnalyzeBlock(bool isFunction = false)
         {
             uint totalVars;
 
@@ -161,7 +159,16 @@ namespace LPD.Compiler.Syntactic
             if (totalVars > 0)
             {
                 _allocBase -= totalVars;
-                _codeGenerator.GenerateInstruction(DALLOC, _allocBase, totalVars);
+
+                if (isFunction)
+                {
+                    _codeGenerator.GenerateInstruction(RETURNF, _allocBase, totalVars);
+                }
+                else
+                {
+                    _codeGenerator.GenerateInstruction(DALLOC, _allocBase, totalVars);
+                }
+
                 _memory -= totalVars;
             }
 
@@ -309,7 +316,7 @@ namespace LPD.Compiler.Syntactic
 
                 var funcItem = item as FunctionItem;
 
-                if (funcItem?.Lexeme == _currentFunctionLexeme)
+                if (_currentFunctionLexeme != null && funcItem?.Lexeme == _currentFunctionLexeme)
                 {
                     NextToken();
 
@@ -465,7 +472,6 @@ namespace LPD.Compiler.Syntactic
             {
                 RaiseUnexpectedTokenError("\"(\"");
             }
-
         }
 
         private void AnalyzeWhile()
@@ -587,19 +593,23 @@ namespace LPD.Compiler.Syntactic
                 RaiseUnexpectedTokenError("identificador");
             }
 
-            var item = _symbolTable.SearchByLevel(_token.Lexeme, _level);
+            var item = _symbolTable.Search(_token.Lexeme);
 
             if (item != null)
             {
                 RaiseDoubleIdentificatorError();
             }
 
+            _codeGenerator.GenerateLabel(_lastLabel);
+
             item = new ProcItem
             {
                 Lexeme = _token.Lexeme,
-                Level = _level
+                Level = _level,
+                Label = _codeGenerator.GetStringLabelFor(_lastLabel)
             };
 
+            _lastLabel++;
             _symbolTable.Insert(item);
             _level++;
             NextToken();
@@ -612,6 +622,7 @@ namespace LPD.Compiler.Syntactic
             AnalyzeBlock();
             _symbolTable.CleanUpToLevel(_level);
             _level--;
+            _codeGenerator.GenerateInstruction(RETURN);
         }
 
         private void AnalyzeFuncDcl()
@@ -633,11 +644,14 @@ namespace LPD.Compiler.Syntactic
             var funcItem = new FunctionItem
             {
                 Lexeme = _token.Lexeme,
-                Level = _level
+                Level = _level,
+                Label = _codeGenerator.GetStringLabelFor(_lastLabel)
             };
 
+            _codeGenerator.GenerateLabel(_lastLabel);
             _currentFunctionLexeme = _token.Lexeme;
             _level++;
+            _lastLabel++;
             NextToken();
 
             if (_token.Symbol != Symbols.SDoisPontos)
@@ -663,7 +677,7 @@ namespace LPD.Compiler.Syntactic
                 RaiseMissingSemicolonError();
             }
 
-            AnalyzeBlock();
+            AnalyzeBlock(true);
 
             if (!_foundFuntionReturn)
             {
@@ -743,7 +757,7 @@ namespace LPD.Compiler.Syntactic
         {
             if (_token.Symbol == Symbols.SIdentificador)
             {
-                var item = _symbolTable.SearchByLevel(_token.Lexeme, _level);
+                var item = _symbolTable.Search(_token.Lexeme);
 
                 if (item == null)
                 {
@@ -802,10 +816,16 @@ namespace LPD.Compiler.Syntactic
             var rightType = AnalyzeExpressionType();
             var leftType = ItemType.None;
             var identificatorItem = item as IdentificatorItem;
+            var functionItem = item as FunctionItem;
 
             if (identificatorItem != null)
             {
                 leftType = identificatorItem.Type;
+            }
+
+            if (functionItem != null)
+            {
+                leftType = functionItem.Type;
             }
 
             if (leftType != rightType)
@@ -817,12 +837,14 @@ namespace LPD.Compiler.Syntactic
                     rightType.GetFriendlyName(), leftType.GetFriendlyName()));
             }
 
-            _codeGenerator.GenerateInstruction(STR, identificatorItem.Memory);
+            if (identificatorItem != null)
+            {
+                _codeGenerator.GenerateInstruction(STR, identificatorItem.Memory);
+            }
         }
 
         private void AnalyzeFuncCall(FunctionItem currentFunction)
         {
-            _codeGenerator.GenerateInstruction(CALL, currentFunction.Label);
             _expressionAnalyzer.Add(_token);
             NextToken();
         }
@@ -906,9 +928,19 @@ namespace LPD.Compiler.Syntactic
                         _codeGenerator.GenerateInstruction(CMEQ);
                         break;
                     case Symbols.SIdentificador:
-                        var item = _symbolTable.Search(token.Lexeme) as IdentificatorItem;
+                        var item = _symbolTable.Search(token.Lexeme);
+                        var identificatorItem = item as IdentificatorItem;
+                        var funcItem = item as FunctionItem;
 
-                        _codeGenerator.GenerateInstruction(LDV, item.Memory);
+                        if (identificatorItem != null)
+                        {
+                            _codeGenerator.GenerateInstruction(LDV, identificatorItem.Memory);
+                        }
+                        else if (funcItem != null)
+                        {
+                            _codeGenerator.GenerateInstruction(CALL, funcItem.Label);
+                        }
+
                         break;
                 }
             }

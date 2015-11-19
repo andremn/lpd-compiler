@@ -114,7 +114,7 @@ namespace LPD.Compiler.SymbolsTable
 
         private IEnumerable<SymbolTableItem> GetIdentificatorsByLevel(uint level)
         {
-            return _itemsCollection.Select(item => item as LeveledItem).Where(item => item != null && item.Level <= level);
+            return _itemsCollection.Select(item => item as LeveledItem).Where(item => item != null && item.Level == level);
         }
     }
 }
