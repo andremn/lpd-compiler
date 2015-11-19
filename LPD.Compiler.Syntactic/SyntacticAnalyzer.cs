@@ -35,6 +35,8 @@ namespace LPD.Compiler.Syntactic
         /// <param name="lexical">The lexical analyzer.</param>
         public SyntacticAnalyzer(LexicalAnalyzer lexical)
         {
+            //Todo: FIX FUNCTION RETURN AND VARIABLES DECLARATIONS NOT FOUND!
+
             if (lexical == null)
             {
                 throw new ArgumentNullException(nameof(lexical));
@@ -102,7 +104,7 @@ namespace LPD.Compiler.Syntactic
             catch (CompilationException ex)
             {
                 int column = _lexical.Position.Column - _token.Lexeme.Length;
-                
+
                 if (_position.HasValue)
                 {
                     return new CompileError(_position.Value, ex.Message);
@@ -146,21 +148,22 @@ namespace LPD.Compiler.Syntactic
 
             NextToken();
             totalVars = AnalyzeVarsDcl();
-            //ALLOC
+
             if (totalVars > 0)
             {
                 _codeGenerator.GenerateInstruction(ALLOC, _allocBase, totalVars);
                 _allocBase += totalVars;
             }
+
             AnalyzeSubRoutines();
             AnalyzeCommands();
-            //DALLOC
+
             if (totalVars > 0)
             {
                 _allocBase -= totalVars;
                 _codeGenerator.GenerateInstruction(DALLOC, _allocBase, totalVars);
                 _memory -= totalVars;
-        }
+            }
 
         }
 
@@ -183,6 +186,7 @@ namespace LPD.Compiler.Syntactic
                         Level = _level,
                         Memory = _memory
                     });
+
                     count++;
                     _memory++;
                     NextToken();
@@ -224,7 +228,6 @@ namespace LPD.Compiler.Syntactic
                 {
                     while (_token.Symbol == Symbols.SIdentificador)
                     {
-                        //retornar valor
                         count += AnalyzeVars();
 
                         if (_token.Symbol == Symbols.SPontoVirgula)
@@ -265,7 +268,7 @@ namespace LPD.Compiler.Syntactic
             {
                 NextToken();
                 AnalyzeSimpleCommand();
-                
+
                 while (_token.Symbol != Symbols.SFim)
                 {
                     if (_token.Symbol == Symbols.SPontoVirgula)
@@ -353,18 +356,9 @@ namespace LPD.Compiler.Syntactic
             }
         }
 
-        private void RaiseNotFoundIdentificatorError(string lexeme)
-        {
-            ushort column = _lexical.Position.Column;
-            ushort line = _lexical.Position.Line;
-
-            throw new CompilationException(string.Format(NotFoundIdentifierErrorMessage, line, column, lexeme));
-        }
-
         private void AnalyzeProcCall()
         {
-
-            var procItem = _symbolTable.Search(_analyzingLexeme) as ProcItem;        
+            var procItem = _symbolTable.Search(_analyzingLexeme) as ProcItem;
 
             if (procItem == null)
             {
@@ -377,12 +371,10 @@ namespace LPD.Compiler.Syntactic
             }
 
             _codeGenerator.GenerateInstruction(CALL, procItem.Label);
-
         }
 
         private void AnalyzeRead()
         {
-            
             NextToken();
 
             if (_token.Symbol == Symbols.SAbreParenteses)
@@ -410,7 +402,7 @@ namespace LPD.Compiler.Syntactic
                     }
 
                     _codeGenerator.GenerateInstruction(RD);
-                    _codeGenerator.GenerateInstruction(STR, (item as IdentificatorItem).Memory );
+                    _codeGenerator.GenerateInstruction(STR, (item as IdentificatorItem).Memory);
                 }
                 else
                 {
@@ -422,7 +414,7 @@ namespace LPD.Compiler.Syntactic
                 RaiseUnexpectedTokenError("\"(\"");
             }
 
-            
+
         }
 
         private void AnalyzeWrite()
@@ -447,7 +439,7 @@ namespace LPD.Compiler.Syntactic
                         if (!(item is FunctionItem) && !(item is IdentificatorItem))
                         {
                             throw new CompilationException(string.Format(NotAFuncVarErrorMessage, _lexical.Position.Line, _lexical.Position.Column, _token.Lexeme));
-                        }                        
+                        }
                     }
 
                     NextToken();
@@ -460,7 +452,7 @@ namespace LPD.Compiler.Syntactic
                     {
                         RaiseUnexpectedTokenError("\")\"");
                     }
-                    
+
                     _codeGenerator.GenerateInstruction(LDV, (item as IdentificatorItem).Memory);
                     _codeGenerator.GenerateInstruction(PRN);
                 }
@@ -510,6 +502,11 @@ namespace LPD.Compiler.Syntactic
 
         private void AnalyzeIf()
         {
+            uint firstLabel;
+            uint secondLabel;
+
+            _lastLabel++;
+            firstLabel = secondLabel = _lastLabel;
             NextToken();
 
             var expressionType = AnalyzeExpressionType();
@@ -518,6 +515,8 @@ namespace LPD.Compiler.Syntactic
             {
                 RaiseIncompatibleTypeError();
             }
+
+            _codeGenerator.GenerateInstruction(JMPF, _codeGenerator.GetStringLabelFor(firstLabel));
 
             if (_token.Symbol != Symbols.SEntao)
             {
@@ -529,9 +528,15 @@ namespace LPD.Compiler.Syntactic
 
             if (_token.Symbol == Symbols.SSenao)
             {
+                _lastLabel++;
+                secondLabel = _lastLabel;
+                _codeGenerator.GenerateInstruction(JMP, _codeGenerator.GetStringLabelFor(secondLabel));
+                _codeGenerator.GenerateLabel(firstLabel);
                 NextToken();
                 AnalyzeSimpleCommand();
             }
+
+            _codeGenerator.GenerateLabel(secondLabel);
         }
 
         private void AnalyzeSubRoutines()
@@ -749,7 +754,7 @@ namespace LPD.Compiler.Syntactic
 
                 if (funcItem != null)
                 {
-                    AnalyzeFuncCall();
+                    AnalyzeFuncCall(funcItem);
                 }
                 else
                 {
@@ -793,20 +798,14 @@ namespace LPD.Compiler.Syntactic
         {
             NextToken();
 
-            var item = _symbolTable.Search(_analyzingLexeme);            
+            var item = _symbolTable.Search(_analyzingLexeme);
             var rightType = AnalyzeExpressionType();
             var leftType = ItemType.None;
             var identificatorItem = item as IdentificatorItem;
-            var funcItem = item as FunctionItem;
 
             if (identificatorItem != null)
             {
                 leftType = identificatorItem.Type;
-            }
-
-            if (funcItem != null)
-            {
-                leftType = funcItem.Type;
             }
 
             if (leftType != rightType)
@@ -814,13 +813,16 @@ namespace LPD.Compiler.Syntactic
                 ushort column = _lexical.Position.Column;
                 ushort line = _lexical.Position.Line;
 
-                throw new CompilationException(string.Format(IncompatibleAttributionErrorMessage, line, column, 
+                throw new CompilationException(string.Format(IncompatibleAttributionErrorMessage, line, column,
                     rightType.GetFriendlyName(), leftType.GetFriendlyName()));
             }
+
+            _codeGenerator.GenerateInstruction(STR, identificatorItem.Memory);
         }
 
-        private void AnalyzeFuncCall()
+        private void AnalyzeFuncCall(FunctionItem currentFunction)
         {
+            _codeGenerator.GenerateInstruction(CALL, currentFunction.Label);
             _expressionAnalyzer.Add(_token);
             NextToken();
         }
@@ -861,6 +863,48 @@ namespace LPD.Compiler.Syntactic
                     case Symbols.SFalso:
                         _codeGenerator.GenerateInstruction(LDC, 0);
                         break;
+                    case Symbols.SNao:
+                        _codeGenerator.GenerateInstruction(NEG);
+                        break;
+                    case Symbols.SMenosUnario:
+                        _codeGenerator.GenerateInstruction(INV);
+                        break;
+                    case Symbols.SMais:
+                        _codeGenerator.GenerateInstruction(ADD);
+                        break;
+                    case Symbols.SMenos:
+                        _codeGenerator.GenerateInstruction(SUB);
+                        break;
+                    case Symbols.SMult:
+                        _codeGenerator.GenerateInstruction(MULT);
+                        break;
+                    case Symbols.SDiv:
+                        _codeGenerator.GenerateInstruction(DIVI);
+                        break;
+                    case Symbols.SE:
+                        _codeGenerator.GenerateInstruction(AND);
+                        break;
+                    case Symbols.SOu:
+                        _codeGenerator.GenerateInstruction(OR);
+                        break;
+                    case Symbols.SIg:
+                        _codeGenerator.GenerateInstruction(CEQ);
+                        break;
+                    case Symbols.SDif:
+                        _codeGenerator.GenerateInstruction(CDIF);
+                        break;
+                    case Symbols.SMaior:
+                        _codeGenerator.GenerateInstruction(CMA);
+                        break;
+                    case Symbols.SMaiorIg:
+                        _codeGenerator.GenerateInstruction(CMAQ);
+                        break;
+                    case Symbols.SMenor:
+                        _codeGenerator.GenerateInstruction(CME);
+                        break;
+                    case Symbols.SMenorIg:
+                        _codeGenerator.GenerateInstruction(CMEQ);
+                        break;
                     case Symbols.SIdentificador:
                         var item = _symbolTable.Search(token.Lexeme) as IdentificatorItem;
 
@@ -871,6 +915,14 @@ namespace LPD.Compiler.Syntactic
         }
 
         #region Errors
+
+        private void RaiseNotFoundIdentificatorError(string lexeme)
+        {
+            ushort column = _lexical.Position.Column;
+            ushort line = _lexical.Position.Line;
+
+            throw new CompilationException(string.Format(NotFoundIdentifierErrorMessage, line, column, lexeme));
+        }
 
         private void RaiseInvalidTerm()
         {

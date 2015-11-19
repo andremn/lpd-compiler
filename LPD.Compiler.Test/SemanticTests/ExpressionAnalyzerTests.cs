@@ -52,7 +52,7 @@ namespace LPD.Compiler.Test.SemanticTests
             token = new Token { Lexeme = "e", Symbol = Symbols.SIdentificador };
             expressionAnalyzer.Add(token);
 
-            type = expressionAnalyzer.Analyze();
+            expressionAnalyzer.Analyze(out type);
             output = expressionAnalyzer.GetOutput();
 
             Assert.AreEqual(type, ItemType.Integer);
@@ -88,7 +88,7 @@ namespace LPD.Compiler.Test.SemanticTests
             token = new Token { Lexeme = "e", Symbol = Symbols.SIdentificador };
             expressionAnalyzer.Add(token);
 
-            type = expressionAnalyzer.Analyze();
+            expressionAnalyzer.Analyze(out type);
             output = expressionAnalyzer.GetOutput();
 
             Assert.AreEqual(type, ItemType.Integer);
@@ -118,7 +118,7 @@ namespace LPD.Compiler.Test.SemanticTests
             token = new Token { Lexeme = "5", Symbol = Symbols.SNumero };
             expressionAnalyzer.Add(token);
 
-            type = expressionAnalyzer.Analyze();
+            expressionAnalyzer.Analyze(out type);
             output = expressionAnalyzer.GetOutput();
 
             Assert.AreEqual(type, ItemType.Integer);
@@ -156,7 +156,7 @@ namespace LPD.Compiler.Test.SemanticTests
             token = new Token { Lexeme = ")", Symbol = Symbols.SFechaParenteses };
             expressionAnalyzer.Add(token);
 
-            type = expressionAnalyzer.Analyze();
+            expressionAnalyzer.Analyze(out type);
             output = expressionAnalyzer.GetOutput();
 
             Assert.AreEqual(type, ItemType.Boolean);
@@ -220,7 +220,7 @@ namespace LPD.Compiler.Test.SemanticTests
             token = new Token { Lexeme = ")", Symbol = Symbols.SFechaParenteses };
             expressionAnalyzer.Add(token);
 
-            type = expressionAnalyzer.Analyze();
+            expressionAnalyzer.Analyze(out type);
             output = expressionAnalyzer.GetOutput();
 
             Assert.AreEqual(type, ItemType.Boolean);
@@ -244,7 +244,7 @@ namespace LPD.Compiler.Test.SemanticTests
             token = new Token { Lexeme = "g", Symbol = Symbols.SIdentificador };
             expressionAnalyzer.Add(token);
 
-            type = expressionAnalyzer.Analyze();
+            expressionAnalyzer.Analyze(out type);
             output = expressionAnalyzer.GetOutput();
 
             Assert.AreEqual(type, ItemType.Boolean);
