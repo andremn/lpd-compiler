@@ -162,13 +162,17 @@
         /// </summary>
         SFalso = 38,
         /// <summary>
-        /// Mais unário.
+        /// Unary plus.
         /// </summary>
         SMaisUnario = 39,
         /// <summary>
-        /// Menos unário.
+        /// Unary minus.
         /// </summary>
         SMenosUnario = 40,
+        /// <summary>
+        /// Function return. 
+        /// </summary>
+        SRetorno = 42,
         /// <summary>
         /// None.
         /// </summary>

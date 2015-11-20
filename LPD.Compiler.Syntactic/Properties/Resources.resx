@@ -139,7 +139,7 @@
     <value>Linha {0}, coluna {1}: {2}.</value>
   </data>
   <data name="MissingFunctionReturnMessage" xml:space="preserve">
-    <value>Linha {0}, coluna {1}: Valor de retorno da função '{2}' não encontrado.</value>
+    <value>Linha {0}, coluna {1}: Nem todos os caminhos retornam um valor na função '{2}'.</value>
   </data>
   <data name="MissingInicioErrorMessage" xml:space="preserve">
     <value>Linha {0}, coluna {1}: Encontrado "fim" sem "inicio".</value>

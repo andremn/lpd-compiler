@@ -124,7 +124,7 @@ namespace LPD.Compiler.Syntactic.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Linha {0}, coluna {1}: Valor de retorno da função &apos;{2}&apos; não encontrado..
+        ///   Looks up a localized string similar to Linha {0}, coluna {1}: Nem todos os caminhos retornam um valor na função &apos;{2}&apos;..
         /// </summary>
         internal static string MissingFunctionReturnMessage {
             get {

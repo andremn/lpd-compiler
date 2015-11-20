@@ -21,12 +21,13 @@ namespace LPD.Compiler.Syntactic
         private ExpressionAnalyzer _expressionAnalyzer;
         private VectorSymbolTable _symbolTable;
         private CodeGenerator _codeGenerator;
+        private SyntaxTreeNode _rootNode;
+        private SyntaxTreeNode _currentNode;
         private uint _lastLabel = 0;
         private ushort _level = 0;
         private uint _memory = 0;
         private string _analyzingLexeme = null;
-        private string _currentFunctionLexeme = null;
-        private bool _foundFuntionReturn = false;
+        private FunctionInfo _funcInfo = null;
         private uint _allocBase = 0;
 
         /// <summary>
@@ -114,10 +115,10 @@ namespace LPD.Compiler.Syntactic
             {
                 _expressionAnalyzer = null;
                 _symbolTable.Clear();
-                _currentFunctionLexeme = null;
+                _funcInfo = null;
                 _level = 0;
             }
-
+            
             _codeGenerator.GenerateInstruction(HLT);
             _codeGenerator.SaveToFileAsync(@"C:\Users\andre\Desktop\Facul\Compiladores\Gerado\generated.asmd");
             return null;
@@ -149,26 +150,23 @@ namespace LPD.Compiler.Syntactic
 
             if (totalVars > 0)
             {
+                if (isFunction)
+                {
+                    _funcInfo.VarsCount = totalVars;
+                    _funcInfo.FirstVarAddress = _allocBase;
+                }
+
                 _codeGenerator.GenerateInstruction(ALLOC, _allocBase, totalVars);
                 _allocBase += totalVars;
             }
 
             AnalyzeSubRoutines();
-            AnalyzeCommands();
+            AnalyzeCommands(true);
 
             if (totalVars > 0)
             {
                 _allocBase -= totalVars;
-
-                if (isFunction)
-                {
-                    _codeGenerator.GenerateInstruction(RETURNF, _allocBase, totalVars);
-                }
-                else
-                {
-                    _codeGenerator.GenerateInstruction(DALLOC, _allocBase, totalVars);
-                }
-
+                _codeGenerator.GenerateInstruction(DALLOC, _allocBase, totalVars);
                 _memory -= totalVars;
             }
 
@@ -269,22 +267,28 @@ namespace LPD.Compiler.Syntactic
             }
         }
 
-        private void AnalyzeCommands()
+        private void AnalyzeCommands(bool isFunction = false)
         {
             if (_token.Symbol == Symbols.SInicio)
             {
                 NextToken();
-                AnalyzeSimpleCommand();
+                AnalyzeSimpleCommand(isFunction);
 
                 while (_token.Symbol != Symbols.SFim)
                 {
                     if (_token.Symbol == Symbols.SPontoVirgula)
                     {
+
+                        if (_funcInfo != null)
+                        {
+                            _currentNode = _currentNode?.Parent;
+                        }
+
                         NextToken();
 
                         if (_token.Symbol != Symbols.SFim)
                         {
-                            AnalyzeSimpleCommand();
+                            AnalyzeSimpleCommand(isFunction);
                         }
                     }
                     else
@@ -301,7 +305,7 @@ namespace LPD.Compiler.Syntactic
             }
         }
 
-        private void AnalyzeSimpleCommand()
+        private void AnalyzeSimpleCommand(bool isFunction = false)
         {
             if (_token.Symbol == Symbols.SIdentificador)
             {
@@ -316,7 +320,7 @@ namespace LPD.Compiler.Syntactic
 
                 var funcItem = item as FunctionItem;
 
-                if (_currentFunctionLexeme != null && funcItem?.Lexeme == _currentFunctionLexeme)
+                if (_funcInfo != null && funcItem?.Lexeme == _funcInfo.Name)
                 {
                     NextToken();
 
@@ -325,7 +329,18 @@ namespace LPD.Compiler.Syntactic
                         AnalyzeAttribution();
                     }
 
-                    _foundFuntionReturn = true;
+                    if (isFunction)
+                    {
+                        _currentNode = _rootNode;
+                    }
+
+                    _currentNode.Children.Add(new SyntaxTreeNode
+                    {
+                        Parent = _currentNode,
+                        Value = Symbols.SRetorno
+                    });
+
+                    _codeGenerator.GenerateInstruction(RETURNF, _funcInfo.FirstVarAddress, _funcInfo.VarsCount);
                 }
                 else
                 {
@@ -510,6 +525,16 @@ namespace LPD.Compiler.Syntactic
         {
             uint firstLabel;
             uint secondLabel;
+            SyntaxTreeNode node = null;
+            SyntaxTreeNode parent = null;
+
+            if (_funcInfo != null)
+            {
+                parent = _currentNode;
+                node = GetNode(parent);
+                parent.Children.Add(node);
+                _currentNode = node;
+            }
 
             _lastLabel++;
             firstLabel = secondLabel = _lastLabel;
@@ -528,7 +553,7 @@ namespace LPD.Compiler.Syntactic
             {
                 RaiseUnexpectedTokenError("\"entao\"");
             }
-
+            
             NextToken();
             AnalyzeSimpleCommand();
 
@@ -538,11 +563,28 @@ namespace LPD.Compiler.Syntactic
                 secondLabel = _lastLabel;
                 _codeGenerator.GenerateInstruction(JMP, _codeGenerator.GetStringLabelFor(secondLabel));
                 _codeGenerator.GenerateLabel(firstLabel);
+
+                if (_funcInfo != null)
+                {
+                    node = GetNode(parent);
+                    parent.Children.Add(node);
+                    _currentNode = node;
+                }
+
                 NextToken();
                 AnalyzeSimpleCommand();
             }
 
             _codeGenerator.GenerateLabel(secondLabel);
+        }
+
+        private SyntaxTreeNode GetNode(SyntaxTreeNode parent)
+        {
+            return new SyntaxTreeNode
+            {
+                Parent = parent,
+                Value = _token.Symbol
+            };
         }
 
         private void AnalyzeSubRoutines()
@@ -648,8 +690,10 @@ namespace LPD.Compiler.Syntactic
                 Label = _codeGenerator.GetStringLabelFor(_lastLabel)
             };
 
+            _funcInfo = new FunctionInfo { Name = _token.Lexeme };
+            _rootNode = new SyntaxTreeNode { Value = _token.Symbol };
+            _currentNode = _rootNode;
             _codeGenerator.GenerateLabel(_lastLabel);
-            _currentFunctionLexeme = _token.Lexeme;
             _level++;
             _lastLabel++;
             NextToken();
@@ -678,16 +722,16 @@ namespace LPD.Compiler.Syntactic
             }
 
             AnalyzeBlock(true);
-
-            if (!_foundFuntionReturn)
+            
+            if (!FunctionHelper.AllPathsReturns(_rootNode))
             {
                 RaiseMissingFunctionReturn();
             }
-
+            
             _symbolTable.CleanUpToLevel(_level);
-            _foundFuntionReturn = false;
-            _currentFunctionLexeme = null;
             _level--;
+            _rootNode = _currentNode = null;
+            _funcInfo = null;
         }
 
         private void AnalyzeExpression()
@@ -1013,7 +1057,7 @@ namespace LPD.Compiler.Syntactic
         {
             var line = _lexical.Position.Line - 1;
 
-            throw new CompilationException(string.Format(MissingFunctionReturnMessage, line, 0, _currentFunctionLexeme));
+            throw new CompilationException(string.Format(MissingFunctionReturnMessage, line, 0, _funcInfo.Name));
         }
 
         private void RaiseMissingProcError()
