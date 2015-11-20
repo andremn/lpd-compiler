@@ -5,6 +5,7 @@ using LPD.Compiler.Shared;
 using LPD.Compiler.SymbolsTable;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using static LPD.Compiler.CodeGeneration.Instructions;
 using static LPD.Compiler.Syntactic.Properties.Resources;
 
@@ -23,11 +24,11 @@ namespace LPD.Compiler.Syntactic
         private CodeGenerator _codeGenerator;
         private SyntaxTreeNode _rootNode;
         private SyntaxTreeNode _currentNode;
+        private FunctionInfo _funcInfo = null;
         private uint _lastLabel = 0;
         private ushort _level = 0;
         private uint _memory = 0;
         private string _analyzingLexeme = null;
-        private FunctionInfo _funcInfo = null;
         private uint _allocBase = 0;
 
         /// <summary>
@@ -47,58 +48,14 @@ namespace LPD.Compiler.Syntactic
         }
 
         /// <summary>
-        /// Performs the code parsing.
+        /// Performs the code parsing, asynchronously.
         /// </summary>
         /// <returns></returns>
-        public CompileError DoAnalysis()
+        public async Task<CompileError> DoAnalysisAsync()
         {
-            NextToken();
-
             try
             {
-                if (_token.Symbol == Symbols.SPrograma)
-                {
-                    NextToken();
-
-                    if (_token.Symbol == Symbols.SIdentificador)
-                    {
-                        _symbolTable.Insert(new ProgramNameItem() { Lexeme = _token.Lexeme });
-                        _codeGenerator.GenerateInstruction(START);
-                        NextToken();
-
-                        if (_token.Symbol == Symbols.SPontoVirgula)
-                        {
-                            AnalyzeBlock();
-
-                            if (_token.Symbol == Symbols.SPonto)
-                            {
-                                LexicalItem lexicalItem;
-
-                                if (_lexical.GetToken(out lexicalItem))
-                                {
-                                    _token = lexicalItem.Token;
-                                    RaiseUnexpectedTokenError("fim do arquivo");
-                                }
-                            }
-                            else
-                            {
-                                RaiseUnexpectedTokenError("\".\"");
-                            }
-                        }
-                        else
-                        {
-                            RaiseMissingSemicolonError();
-                        }
-                    }
-                    else
-                    {
-                        RaiseUnexpectedTokenError("identificador");
-                    }
-                }
-                else
-                {
-                    RaiseUnexpectedTokenError("'programa'");
-                }
+                await Task.Factory.StartNew(StartAnalysis);
             }
             catch (CompilationException ex)
             {
@@ -118,10 +75,60 @@ namespace LPD.Compiler.Syntactic
                 _funcInfo = null;
                 _level = 0;
             }
-            
-            _codeGenerator.GenerateInstruction(HLT);
-            _codeGenerator.SaveToFileAsync(@"C:\Users\andre\Desktop\Facul\Compiladores\Gerado\generated.asmd");
+
+            await _codeGenerator.SaveToFileAsync(@"C:\Users\andre\Desktop\Facul\Compiladores\Gerado\generated.asmd");
             return null;
+        }
+
+        private void StartAnalysis()
+        {
+            NextToken();
+
+            if (_token.Symbol == Symbols.SPrograma)
+            {
+                NextToken();
+
+                if (_token.Symbol == Symbols.SIdentificador)
+                {
+                    _symbolTable.Insert(new ProgramNameItem() { Lexeme = _token.Lexeme });
+                    _codeGenerator.GenerateInstruction(START);
+                    NextToken();
+
+                    if (_token.Symbol == Symbols.SPontoVirgula)
+                    {
+                        AnalyzeBlock();
+
+                        if (_token.Symbol == Symbols.SPonto)
+                        {
+                            LexicalItem lexicalItem;
+
+                            if (_lexical.GetToken(out lexicalItem))
+                            {
+                                _token = lexicalItem.Token;
+                                RaiseUnexpectedTokenError("fim do arquivo");
+                            }
+                        }
+                        else
+                        {
+                            RaiseUnexpectedTokenError("\".\"");
+                        }
+                    }
+                    else
+                    {
+                        RaiseMissingSemicolonError();
+                    }
+                }
+                else
+                {
+                    RaiseUnexpectedTokenError("identificador");
+                }
+            }
+            else
+            {
+                RaiseUnexpectedTokenError("'programa'");
+            }
+
+            _codeGenerator.GenerateInstruction(HLT);
         }
 
         private void NextToken()

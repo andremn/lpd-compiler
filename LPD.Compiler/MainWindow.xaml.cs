@@ -161,7 +161,7 @@ namespace LPD.Compiler
             using (LexicalAnalyzer lexical = new LexicalAnalyzer(_selectedFile))
             {
                 SyntacticAnalyzer syntactic = new SyntacticAnalyzer(lexical);
-                CompileError compileError = syntactic.DoAnalysis();
+                CompileError compileError = await syntactic.DoAnalysisAsync();
 
                 if (compileError != null)
                 {
