@@ -213,7 +213,7 @@ namespace LPD.Compiler.Lexical
             }
             else
             {
-                return BuildLexicalItem(Token.Empty, new CompileError(_currentPosition, string.Format(UnknownTokenErrorMessageFormat, character)));
+                return BuildLexicalItem(Token.Empty, new CompilationError(_currentPosition, string.Format(UnknownTokenErrorMessageFormat, character)));
             }
 
             return item;
@@ -267,7 +267,7 @@ namespace LPD.Compiler.Lexical
                 {
                     return new LexicalItem()
                     {
-                        Error = new CompileError(_currentPosition, string.Format(ExpectedTokenErrorMessageFormat, EqualChar, ExclamationChar))
+                        Error = new CompilationError(_currentPosition, string.Format(ExpectedTokenErrorMessageFormat, EqualChar, ExclamationChar))
                     };
                 }
 
@@ -378,7 +378,7 @@ namespace LPD.Compiler.Lexical
 
                     return new LexicalItem()
                     {
-                        Error = new CompileError(_currentPosition, string.Format(UnknownTokenErrorMessageFormat, character))
+                        Error = new CompilationError(_currentPosition, string.Format(UnknownTokenErrorMessageFormat, character))
                     };
                 }
 
@@ -441,7 +441,7 @@ namespace LPD.Compiler.Lexical
             }
         }
 
-        private LexicalItem BuildLexicalItem(Token token, CompileError error)
+        private LexicalItem BuildLexicalItem(Token token, CompilationError error)
         {
             if (error == null)
             {

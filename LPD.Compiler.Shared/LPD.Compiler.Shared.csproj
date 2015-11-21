@@ -42,7 +42,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CodePosition.cs" />
-    <Compile Include="CompileError.cs" />
+    <Compile Include="CompilationRestult.cs" />
+    <Compile Include="CompilationError.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -15,6 +15,6 @@ namespace LPD.Compiler.Lexical
         /// <summary>
         /// Gets or sets the compilation error.
         /// </summary>
-        public CompileError Error { get; set; }
+        public CompilationError Error { get; set; }
     }
 }

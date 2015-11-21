@@ -1,27 +1,25 @@
-﻿using System;
-
-namespace LPD.Compiler.Shared
+﻿namespace LPD.Compiler.Shared
 {
     /// <summary>
-    /// The exception that is thrown when the <see cref="LexicalAnalizer"/> finds an invalid token.
+    /// Contains informations of an unsuccessful compilation.
     /// </summary>
-    public class CompileError
+    public class CompilationError
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="CompileError"/> class with the specified program posistion.
+        /// Initializes a new instance of the <see cref="CompilationError"/> class with the specified program posistion.
         /// </summary>
         /// <param name="position">The position of the program this exception is being thrown.</param>
-        public CompileError(CodePosition position)
+        public CompilationError(CodePosition position)
         {
             Position = position;
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="CompileError"/> class with the specified program posistion and message.
+        /// Initializes a new instance of the <see cref="CompilationError"/> class with the specified program posistion and message.
         /// </summary>
         /// <param name="position">The position of the program this exception is being thrown.</param>
         /// <param name="message">The exception message describing the error.</param>
-        public CompileError(CodePosition position, string message)
+        public CompilationError(CodePosition position, string message)
         {
             Position = position;
             Message = message;
@@ -32,6 +30,9 @@ namespace LPD.Compiler.Shared
         /// </summary>
         public CodePosition Position { get; set; }
 
+        /// <summary>
+        /// Gets or sets the error message.
+        /// </summary>
         public string Message { get; set; }
     }
 }

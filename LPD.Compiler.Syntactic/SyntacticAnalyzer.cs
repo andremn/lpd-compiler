@@ -51,7 +51,7 @@ namespace LPD.Compiler.Syntactic
         /// Performs the code parsing, asynchronously.
         /// </summary>
         /// <returns></returns>
-        public async Task<CompileError> DoAnalysisAsync()
+        public async Task<CompilationResult> DoAnalysisAsync()
         {
             try
             {
@@ -63,10 +63,10 @@ namespace LPD.Compiler.Syntactic
 
                 if (_position.HasValue)
                 {
-                    return new CompileError(_position.Value, ex.Message);
+                    return new CompilationResult { Error = new CompilationError(_position.Value, ex.Message) };
                 }
 
-                return new CompileError(_lexical.Position, ex.Message);
+                return new CompilationResult { Error = new CompilationError(_lexical.Position, ex.Message) };
             }
             finally
             {
@@ -76,8 +76,10 @@ namespace LPD.Compiler.Syntactic
                 _level = 0;
             }
 
-            await _codeGenerator.SaveToFileAsync(@"C:\Users\andre\Desktop\Facul\Compiladores\Gerado\generated.asmd");
-            return null;
+            var tempFile = System.IO.Path.GetTempFileName();
+
+            await _codeGenerator.SaveToFileAsync(tempFile);
+            return new CompilationResult { Error = null, AssemblyFilePath = tempFile };
         }
 
         private void StartAnalysis()

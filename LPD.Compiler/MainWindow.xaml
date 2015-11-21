@@ -148,6 +148,7 @@
                     <ColumnDefinition Width=".25*"/>
                 </Grid.ColumnDefinitions>
                 <AvalonEdit:TextEditor x:Name="Editor"
+                                       Drop="OnEditorDrop"
                                        Grid.Column="0"
                                        xmlns:AvalonEdit="http://icsharpcode.net/sharpdevelop/avalonedit"
                                        ShowLineNumbers="True"

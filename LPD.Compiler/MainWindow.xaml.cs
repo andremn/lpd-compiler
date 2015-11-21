@@ -42,12 +42,13 @@ namespace LPD.Compiler
         private const string ExecuteButtonEnabledSource = "Images/Execute.png";
         private const string ExecuteButtonDisabledSource = "Images/Execute_Disabled.png";
 
+        #endregion
+
         private string _selectedFile;
+        private string _outputFile;
         private string _vmInstallationPath = null;
         private bool _hasTextChanged = true;
         private ushort _modificationsCount = 0;
-
-        #endregion
 
         /// <summary>
         /// Initializes a new instance of the <see cref="MainWindow"/> class.
@@ -185,11 +186,11 @@ namespace LPD.Compiler
         /// Compiles the source code.
         /// </summary>
         /// <returns><see cref="Task"/></returns>
-        private async Task CompileAsync()
+        private async Task<bool> CompileAsync()
         {
             if (string.IsNullOrEmpty(Editor.Text))
             {
-                return;
+                return false;
             }
 
             if (_modificationsCount > 0)
@@ -207,21 +208,28 @@ namespace LPD.Compiler
             TokensList.ItemsSource = null;
             ErrorListView.ItemsSource = null;
 
+            var success = false;
+
             using (LexicalAnalyzer lexical = new LexicalAnalyzer(_selectedFile))
             {
                 SyntacticAnalyzer syntactic = new SyntacticAnalyzer(lexical);
-                CompileError compileError = await syntactic.DoAnalysisAsync();
+                CompilationResult compilationResult = await syntactic.DoAnalysisAsync();
 
-                if (compileError != null)
+                if (compilationResult.Error != null)
                 {
                     ErrorListView.ItemsSource = new List<ErrorViewModel>
                     {
                         new ErrorViewModel()
                         {
-                            Message = compileError.Message,
-                            Position = compileError.Position
+                            Message = compilationResult.Error.Message,
+                            Position = compilationResult.Error.Position
                         }
                     };
+                }
+                else
+                {
+                    _outputFile = compilationResult.AssemblyFilePath;
+                    success = true;
                 }
 
                 TokensList.ItemsSource = lexical.ReadTokens;
@@ -237,6 +245,8 @@ namespace LPD.Compiler
             {
                 TokenGroupBox.Header = "Nenhum token";
             }
+
+            return success;
         }
 
         /// <summary>
@@ -247,11 +257,14 @@ namespace LPD.Compiler
         {
             if (_vmInstallationPath != null)
             {
-                await CompileAsync();
+                var success = await CompileAsync();
 
-                var exePath = Path.Combine(_vmInstallationPath, VirtualMachineExeName);
+                if (success)
+                {
+                    var exePath = Path.Combine(_vmInstallationPath, VirtualMachineExeName);
 
-                ProcessHelper.StartProcess(exePath, _selectedFile);
+                    ProcessHelper.StartProcess(exePath, _outputFile);
+                }
             }
         }
 
@@ -470,6 +483,18 @@ namespace LPD.Compiler
             _modificationsCount++;
             UpdateSaveButtons();
             UpdateCompileExecuteButtons();
+        }
+
+        private async void OnEditorDrop(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(DataFormats.FileDrop))
+            {
+                string file = ((string[])e.Data.GetData(DataFormats.FileDrop))[0];
+
+                _selectedFile = file;
+                Title = string.Format(WindowTitleFormat, Path.GetFileNameWithoutExtension(_selectedFile));
+                await ReadAndShowFileAsync();
+            }
         }
     }
 }
