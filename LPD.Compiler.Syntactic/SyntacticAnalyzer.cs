@@ -396,11 +396,6 @@ namespace LPD.Compiler.Syntactic
                 RaiseMissingProcError();
             }
 
-            if (_token.Symbol != Symbols.SPontoVirgula)
-            {
-                RaiseMissingSemicolonError();
-            }
-
             _codeGenerator.GenerateInstruction(CALL, procItem.Label);
         }
 
