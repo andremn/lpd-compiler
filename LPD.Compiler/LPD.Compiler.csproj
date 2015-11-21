@@ -112,8 +112,9 @@
     <Content Include="Images\Compile.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Resource Include="Images\refresh.png" />
-    <Resource Include="Images\refresh_disabled.png" />
+    <Content Include="Images\Compile_Disabled.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Images\SaveAs.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

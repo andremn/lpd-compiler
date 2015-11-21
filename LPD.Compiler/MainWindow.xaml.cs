@@ -35,8 +35,8 @@ namespace LPD.Compiler
         private const string SaveButtonDisabledSource = "Images/Save_Disabled.png";
         private const string SaveAsButtonEnabledSource = "Images/SaveAs.png";
         private const string SaveAsButtonDisabledSource = "Images/SaveAs_Disabled.png";
-        private const string RefreshButtonDisabledSource = "Images/refresh_disabled.png";
-        private const string RefreshButtonEnabledSource = "Images/refresh.png";
+        private const string CompileButtonDisabledSource = "Images/Compile_Disabled.png";
+        private const string CompileButtonEnabledSource = "Images/Compile.png";
 
         private string _selectedFile;
         private bool _hasTextChanged = true;
@@ -49,6 +49,7 @@ namespace LPD.Compiler
         {
             InitializeComponent();
             UpdateSaveButtons();
+            UpdateCompileButton();
             Editor.SyntaxHighlighting = HighlightingLoader.Load(FileHelper.GetSyntaxHighlighting(), HighlightingManager.Instance);
         }
 
@@ -97,6 +98,25 @@ namespace LPD.Compiler
 
             _selectedFile = saveFileDialog.FileName;
             await SaveFileAsync();
+        }
+
+        /// <summary>
+        /// Updates CompileButton.
+        /// </summary>
+        private void UpdateCompileButton()
+        {
+            Image compileButtonContent = CompileButton.Content as Image;
+
+            if (Editor.Text.Length > 0)
+            {
+                compileButtonContent.Source = new BitmapImage(new Uri(CompileButtonEnabledSource, UriKind.Relative));
+                CompileButton.IsEnabled = true;
+            }
+            else
+            {
+                compileButtonContent.Source = new BitmapImage(new Uri(CompileButtonDisabledSource, UriKind.Relative));
+                CompileButton.IsEnabled = false;
+            }
         }
 
         /// <summary>
@@ -399,6 +419,7 @@ namespace LPD.Compiler
 
             _modificationsCount++;
             UpdateSaveButtons();
+            UpdateCompileButton();
         }
     }
 }
