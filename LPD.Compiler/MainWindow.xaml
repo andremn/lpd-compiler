@@ -123,11 +123,6 @@
                 <Image Source="Images/SaveAs.png"
                    Height="28" Width="28"/>
             </Button>
-            <Button x:Name="Refresh" Style="{StaticResource CustomButtonStyle}" ToolTip="Refrescar"
-                    Click="Refresh_Click">
-                <Image Source="Images/refresh.png"
-                   Height="28" Width="28"/>
-            </Button>
             <Separator BorderBrush="LightGray" BorderThickness="2" Height="2"  Margin="10,10">
                 <Separator.LayoutTransform>
                     <RotateTransform Angle="90" />

@@ -2,12 +2,15 @@
 using ICSharpCode.AvalonEdit.Highlighting.Xshd;
 using LPD.Compiler.Helpers;
 using LPD.Compiler.Lexical;
+using LPD.Compiler.Shared;
+using LPD.Compiler.Syntactic;
 using LPD.Compiler.ViewModel;
 using MahApps.Metro.Controls;
 using MahApps.Metro.Controls.Dialogs;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Threading.Tasks;
 using System.Windows;
@@ -15,10 +18,6 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
 using System.Windows.Threading;
-using System.ComponentModel;
-using System.Linq;
-using LPD.Compiler.Shared;
-using LPD.Compiler.Syntactic;
 
 namespace LPD.Compiler
 {
@@ -29,6 +28,8 @@ namespace LPD.Compiler
     {
         private const string WindowTitleFormat = "LPD COMPILER - {0}";
         private const string FileDialogFilter = "Arquivo LPD,TXT|*.lpd;*.txt| Todos os arquivos|*.*";
+        private const string VirtualMachineName = "LPD Virtual Machine";
+        private const string VirtualMachineExeName = "LPD.VirtualMachine.exe";
 
         private const string SaveButtonEnabledSource = "Images/Save.png";
         private const string SaveButtonDisabledSource = "Images/Save_Disabled.png";
@@ -50,15 +51,6 @@ namespace LPD.Compiler
             UpdateSaveButtons();
             Editor.SyntaxHighlighting = HighlightingLoader.Load(FileHelper.GetSyntaxHighlighting(), HighlightingManager.Instance);
         }
-        /// <summary>
-        /// Refresh the file 
-        /// </summary>
-        /// <returns><see cref="Task"/></returns>
-        private async Task RefreshFileAsync(string file)
-        {
-            Editor.Text = await FileHelper.GetFileContentAsStringAsync(file);
-        }
-
 
         /// <summary>
         /// Reads all the contents of the selected file and shows it to the user.
@@ -114,21 +106,18 @@ namespace LPD.Compiler
         {
             Image saveButtonContent = SaveButton.Content as Image;
             Image saveAsButtonContent = SaveAsButton.Content as Image;
-            Image refreshButtonContent = Refresh.Content as Image;
 
-            if  (_modificationsCount > 0)
+            if (_modificationsCount > 0)
             {
                 saveButtonContent.Source = new BitmapImage(new Uri(SaveButtonEnabledSource, UriKind.Relative));
                 saveAsButtonContent.Source = new BitmapImage(new Uri(SaveAsButtonEnabledSource, UriKind.Relative));
-                refreshButtonContent.Source = new BitmapImage(new Uri(RefreshButtonEnabledSource,UriKind.Relative));
-                SaveButton.IsEnabled = SaveAsButton.IsEnabled = Refresh.IsEnabled= true;
+                SaveButton.IsEnabled = SaveAsButton.IsEnabled = true;
             }
             else
             {
                 saveButtonContent.Source = new BitmapImage(new Uri(SaveButtonDisabledSource, UriKind.Relative));
                 saveAsButtonContent.Source = new BitmapImage(new Uri(SaveAsButtonDisabledSource, UriKind.Relative));
-                refreshButtonContent.Source = new BitmapImage(new Uri(RefreshButtonDisabledSource, UriKind.Relative));
-                SaveButton.IsEnabled = SaveAsButton.IsEnabled = Refresh.IsEnabled = false;
+                SaveButton.IsEnabled = SaveAsButton.IsEnabled = false;
             }
         }
 
@@ -174,7 +163,7 @@ namespace LPD.Compiler
                         }
                     };
                 }
-                
+
                 TokensList.ItemsSource = lexical.ReadTokens;
             }
 
@@ -190,6 +179,28 @@ namespace LPD.Compiler
             }
         }
 
+        /// <summary>
+        /// Opens the virtual machine with the current file, if the VM is installed.
+        /// </summary>
+        /// <returns><see cref="Task"/>.</returns>
+        private async Task LaunchVirtualMachineAsync()
+        {
+            string virtualMachineInstallPath = RegistryHelper.GetProgramInstallationPath(VirtualMachineName);
+
+            if (virtualMachineInstallPath != null)
+            {
+                await SaveAsync();
+
+                var exePath = Path.Combine(virtualMachineInstallPath, VirtualMachineExeName);
+
+                ProcessHelper.StartProcess(exePath, _selectedFile);
+            }
+        }
+
+        /// <summary>
+        /// Saves the modified file or asks the user to create a new one.
+        /// </summary>
+        /// <returns><see cref="Task"/>.</returns>
         private async Task SaveAsync()
         {
             if (string.IsNullOrEmpty(_selectedFile))
@@ -219,8 +230,8 @@ namespace LPD.Compiler
                 };
 
                 e.Cancel = true;
-                 result = await this.ShowMessageAsync("Salvar mudanças", "O arquivo foi modificado. Deseja salvar as mudanças?", 
-                     MessageDialogStyle.AffirmativeAndNegative, settings);
+                result = await this.ShowMessageAsync("Salvar mudanças", "O arquivo foi modificado. Deseja salvar as mudanças?",
+                    MessageDialogStyle.AffirmativeAndNegative, settings);
 
                 if (result == MessageDialogResult.Affirmative)
                 {
@@ -325,10 +336,13 @@ namespace LPD.Compiler
             {
                 await SaveAsync();
             }
-
-            if (e.Key == Key.F6)
+            else if (e.Key == Key.F6)
             {
                 await CompileAsync();
+            }
+            else if (e.Key == Key.F5)
+            {
+                await LaunchVirtualMachineAsync();
             }
         }
 
@@ -370,16 +384,11 @@ namespace LPD.Compiler
             }
         }
 
-        private async void Refresh_Click(object sender, RoutedEventArgs e)
-        {
-            if (!string.IsNullOrEmpty(_selectedFile))
-            {
-                await RefreshFileAsync(_selectedFile);
-
-                return;
-            }
-        }
-
+        /// <summary>
+        /// Occurs then the text in the editor changes.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The data of the event.</param>
         private void OnEditorTextChanged(object sender, EventArgs e)
         {
             if (!_hasTextChanged)

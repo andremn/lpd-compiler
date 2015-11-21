@@ -34,9 +34,17 @@
 			<Name>LPD.Compiler</Name>
 			<Project>{9E477E1A-4CFC-42EB-826F-1D91E924FAF0}</Project>
 		</ProjectReference>
+		<ProjectReference Include="..\LPD.Compiler.CodeGenerator\LPD.Compiler.CodeGeneration.csproj">
+			<Name>LPD.Compiler.CodeGeneration</Name>
+			<Project>{599D1F50-A17B-4070-8D70-9865CA95CE26}</Project>
+		</ProjectReference>
 		<ProjectReference Include="..\LPD.Compiler.Lexical\LPD.Compiler.Lexical.csproj">
 			<Name>LPD.Compiler.Lexical</Name>
 			<Project>{44C76A22-259B-4B79-80F2-FC4EF94BD590}</Project>
+		</ProjectReference>
+		<ProjectReference Include="..\LPD.Compiler.Semantic\LPD.Compiler.Semantic.csproj">
+			<Name>LPD.Compiler.Semantic</Name>
+			<Project>{31310585-1A66-4D64-A415-78595A23BE7F}</Project>
 		</ProjectReference>
 		<ProjectReference Include="..\LPD.Compiler.Shared\LPD.Compiler.Shared.csproj">
 			<Name>LPD.Compiler.Shared</Name>
