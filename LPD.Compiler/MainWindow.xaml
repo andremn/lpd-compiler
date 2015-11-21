@@ -133,6 +133,11 @@
                 <Image Source="Images/Compile.png"
                    Height="28" Width="28"/>
             </Button>
+            <Button x:Name="ExecuteButton" Style="{StaticResource CustomButtonStyle}" ToolTip="Executar"
+                    Click="OnExecuteButtonClick">
+                <Image Source="Images/Execute.png"
+                   Height="28" Width="28"/>
+            </Button>
         </StackPanel>
         <Border Background="White" BorderBrush="{DynamicResource AccentColorBrush}" BorderThickness="1"
                 Margin="5,0"

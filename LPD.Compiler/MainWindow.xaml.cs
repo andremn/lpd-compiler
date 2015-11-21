@@ -37,8 +37,11 @@ namespace LPD.Compiler
         private const string SaveAsButtonDisabledSource = "Images/SaveAs_Disabled.png";
         private const string CompileButtonDisabledSource = "Images/Compile_Disabled.png";
         private const string CompileButtonEnabledSource = "Images/Compile.png";
+        private const string ExecuteButtonEnabledSource = "Images/Execute.png";
+        private const string ExecuteButtonDisabledSource = "Images/Execute_Disabled.png";
 
         private string _selectedFile;
+        private string _vmInstallationPath = null;
         private bool _hasTextChanged = true;
         private ushort _modificationsCount = 0;
 
@@ -49,8 +52,11 @@ namespace LPD.Compiler
         {
             InitializeComponent();
             UpdateSaveButtons();
-            UpdateCompileButton();
             Editor.SyntaxHighlighting = HighlightingLoader.Load(FileHelper.GetSyntaxHighlighting(), HighlightingManager.Instance);
+            _vmInstallationPath = RegistryHelper.GetProgramInstallationPath(VirtualMachineName);
+
+            UpdateExecuteButton(_vmInstallationPath != null);
+            UpdateCompileExecuteButtons();
         }
 
         /// <summary>
@@ -101,19 +107,49 @@ namespace LPD.Compiler
         }
 
         /// <summary>
+        /// Updates ExecuteButton.
+        /// </summary>
+        private void UpdateExecuteButton(bool isEnabled)
+        {
+            Image executeButtonContent = ExecuteButton.Content as Image;
+
+            if (isEnabled)
+            {
+                executeButtonContent.Source = new BitmapImage(new Uri(ExecuteButtonEnabledSource, UriKind.Relative));
+                ExecuteButton.IsEnabled = isEnabled;
+            }
+            else
+            {
+                executeButtonContent.Source = new BitmapImage(new Uri(ExecuteButtonDisabledSource, UriKind.Relative));
+                ExecuteButton.IsEnabled = false;
+            }
+        }
+
+        /// <summary>
         /// Updates CompileButton.
         /// </summary>
-        private void UpdateCompileButton()
+        private void UpdateCompileExecuteButtons()
         {
             Image compileButtonContent = CompileButton.Content as Image;
 
             if (Editor.Text.Length > 0)
             {
+                if (_vmInstallationPath != null)
+                {
+                    UpdateExecuteButton(true);
+                }
+
                 compileButtonContent.Source = new BitmapImage(new Uri(CompileButtonEnabledSource, UriKind.Relative));
                 CompileButton.IsEnabled = true;
             }
+
             else
             {
+                if (_vmInstallationPath != null)
+                {
+                    UpdateExecuteButton(false);
+                }
+
                 compileButtonContent.Source = new BitmapImage(new Uri(CompileButtonDisabledSource, UriKind.Relative));
                 CompileButton.IsEnabled = false;
             }
@@ -205,13 +241,11 @@ namespace LPD.Compiler
         /// <returns><see cref="Task"/>.</returns>
         private async Task LaunchVirtualMachineAsync()
         {
-            string virtualMachineInstallPath = RegistryHelper.GetProgramInstallationPath(VirtualMachineName);
-
-            if (virtualMachineInstallPath != null)
+            if (_vmInstallationPath != null)
             {
-                await SaveAsync();
+                await CompileAsync();
 
-                var exePath = Path.Combine(virtualMachineInstallPath, VirtualMachineExeName);
+                var exePath = Path.Combine(_vmInstallationPath, VirtualMachineExeName);
 
                 ProcessHelper.StartProcess(exePath, _selectedFile);
             }
@@ -377,12 +411,14 @@ namespace LPD.Compiler
             {
                 _modificationsCount--;
                 UpdateSaveButtons();
+                UpdateCompileExecuteButtons();
                 _hasTextChanged = false;
             }
             else if (e.Key == Key.Y && Keyboard.Modifiers == ModifierKeys.Control)
             {
                 _modificationsCount++;
                 UpdateSaveButtons();
+                UpdateCompileExecuteButtons();
                 _hasTextChanged = false;
             }
         }
@@ -405,6 +441,16 @@ namespace LPD.Compiler
         }
 
         /// <summary>
+        /// Occurs when ExecuteButton is pressed.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The data of the event.</param>
+        private async void OnExecuteButtonClick(object sender, RoutedEventArgs e)
+        {
+            await LaunchVirtualMachineAsync();
+        }
+
+        /// <summary>
         /// Occurs then the text in the editor changes.
         /// </summary>
         /// <param name="sender">The source of the event.</param>
@@ -419,7 +465,7 @@ namespace LPD.Compiler
 
             _modificationsCount++;
             UpdateSaveButtons();
-            UpdateCompileButton();
+            UpdateCompileExecuteButtons();
         }
     }
 }
