@@ -1859,7 +1859,7 @@
 		<col def="S255">ProgId_</col>
 		<col def="S64">MIME_</col>
 		<col def="s38">Feature_</col>
-		<row><td>.lpd</td><td>LPD.Compiler.Primary_output</td><td/><td/><td>AlwaysInstall</td></row>
+		<row><td>lpd</td><td>LPD.Compiler.Primary_output</td><td/><td/><td>AlwaysInstall</td></row>
 	</table>
 
 	<table name="Feature">
@@ -4680,7 +4680,7 @@ UwBpAG4AZwBsAGUASQBtAGEAZwBlAAEARQB4AHAAcgBlAHMAcwA=
 		<col def="I2">Sequence</col>
 		<col def="L255">Command</col>
 		<col def="L255">Argument</col>
-		<row><td>.lpd</td><td>Open</td><td/><td/><td>"%1"</td></row>
+		<row><td>lpd</td><td>Open</td><td/><td/><td>"%1"</td></row>
 	</table>
 
 	<table name="_Validation">
