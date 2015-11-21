@@ -53,7 +53,7 @@ namespace LPD.Compiler.Test.SemanticTests
             expressionAnalyzer.Add(token);
 
             expressionAnalyzer.Analyze(out type);
-            output = expressionAnalyzer.GetOutput();
+            output = expressionAnalyzer.ToString();
 
             Assert.AreEqual(type, ItemType.Integer);
             Assert.AreEqual(output, expectedOutput);
@@ -89,7 +89,7 @@ namespace LPD.Compiler.Test.SemanticTests
             expressionAnalyzer.Add(token);
 
             expressionAnalyzer.Analyze(out type);
-            output = expressionAnalyzer.GetOutput();
+            output = expressionAnalyzer.ToString();
 
             Assert.AreEqual(type, ItemType.Integer);
             Assert.AreEqual(output, expectedOutput);
@@ -119,7 +119,7 @@ namespace LPD.Compiler.Test.SemanticTests
             expressionAnalyzer.Add(token);
 
             expressionAnalyzer.Analyze(out type);
-            output = expressionAnalyzer.GetOutput();
+            output = expressionAnalyzer.ToString();
 
             Assert.AreEqual(type, ItemType.Integer);
             Assert.AreEqual(output, expectedOutput);
@@ -157,7 +157,7 @@ namespace LPD.Compiler.Test.SemanticTests
             expressionAnalyzer.Add(token);
 
             expressionAnalyzer.Analyze(out type);
-            output = expressionAnalyzer.GetOutput();
+            output = expressionAnalyzer.ToString();
 
             Assert.AreEqual(type, ItemType.Boolean);
             Assert.AreEqual(output, expectedOutput);
@@ -221,7 +221,7 @@ namespace LPD.Compiler.Test.SemanticTests
             expressionAnalyzer.Add(token);
 
             expressionAnalyzer.Analyze(out type);
-            output = expressionAnalyzer.GetOutput();
+            output = expressionAnalyzer.ToString();
 
             Assert.AreEqual(type, ItemType.Boolean);
             Assert.AreEqual(output, expectedOutput);
@@ -245,7 +245,7 @@ namespace LPD.Compiler.Test.SemanticTests
             expressionAnalyzer.Add(token);
 
             expressionAnalyzer.Analyze(out type);
-            output = expressionAnalyzer.GetOutput();
+            output = expressionAnalyzer.ToString();
 
             Assert.AreEqual(type, ItemType.Boolean);
             Assert.AreEqual(output, expectedOutput);

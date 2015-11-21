@@ -26,6 +26,8 @@ namespace LPD.Compiler
     /// </summary>
     public partial class MainWindow : MetroWindow
     {
+        #region Constants
+
         private const string WindowTitleFormat = "LPD COMPILER - {0}";
         private const string FileDialogFilter = "Arquivo LPD,TXT|*.lpd;*.txt| Todos os arquivos|*.*";
         private const string VirtualMachineName = "LPD Virtual Machine";
@@ -44,6 +46,8 @@ namespace LPD.Compiler
         private string _vmInstallationPath = null;
         private bool _hasTextChanged = true;
         private ushort _modificationsCount = 0;
+
+        #endregion
 
         /// <summary>
         /// Initializes a new instance of the <see cref="MainWindow"/> class.

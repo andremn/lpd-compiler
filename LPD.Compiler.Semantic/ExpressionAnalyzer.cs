@@ -1,14 +1,15 @@
 ﻿using LPD.Compiler.Lexical;
-using static LPD.Compiler.Semantic.Properties.Resource;
 using LPD.Compiler.SymbolsTable;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using static LPD.Compiler.Semantic.Properties.Resource;
 
 namespace LPD.Compiler.Semantic
 {
+    /// <summary>
+    /// Analyzes expressions.
+    /// </summary>
     public class ExpressionAnalyzer
     {
         private List<ExpressionItem> _output;
@@ -56,6 +57,10 @@ namespace LPD.Compiler.Semantic
             [Symbols.SFalso] = ItemType.Boolean
         };
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ExpressionAnalyzer"/> class with the specified <see cref="VectorSymbolTable"/>.
+        /// </summary>
+        /// <param name="symbolTable">The <see cref="VectorSymbolTable"/> to search for tokens.</param>
         public ExpressionAnalyzer(VectorSymbolTable symbolTable)
         {
             _items = new List<ExpressionItem>();
@@ -63,6 +68,10 @@ namespace LPD.Compiler.Semantic
             _symbolTable = symbolTable;
         }
 
+        /// <summary>
+        /// Adds a token to the expression.
+        /// </summary>
+        /// <param name="token">The token to be added to the current expression.</param>
         public void Add(Token token)
         {
             var item = new ExpressionItem
@@ -77,44 +86,11 @@ namespace LPD.Compiler.Semantic
             {
                 if (token.Symbol == Symbols.SFechaParenteses)
                 {
-                    for (int i = _items.Count - 1; i >= 0; i--)
-                    {
-                        var current = _items[i];
-
-                        if (current.Symbol != Symbols.SAbreParenteses)
-                        {
-                            _output.Add(current);
-                        }
-                        else
-                        {
-                            _items.RemoveAt(i);
-                            break;
-                        }
-
-                        _items.RemoveAt(i);
-                    }
-
-                    return;                 
+                    PopUntilOpenParenthesis();
+                    return;
                 }
 
-                for (int i = _items.Count - 1; i >= 0; i--)
-                {
-                    var current = _items[i];
-
-                    if (current.Symbol == Symbols.SAbreParenteses)
-                    {
-                        break;
-                    }
-
-                    var priority1 = _priorities[current.Symbol];
-                    var priority2 = _priorities[token.Symbol]; 
-                    
-                    if (priority1 >= priority2)
-                    {
-                        _output.Add(current);
-                        _items.RemoveAt(i);
-                    }
-                }
+                AddWithPriority(token);
 
                 if (token.Symbol != Symbols.SAbreParenteses)
                 {
@@ -124,30 +100,15 @@ namespace LPD.Compiler.Semantic
             }
             else
             {
-                if (token.Symbol == Symbols.SAbreParenteses)
-                {
-                    item.Type = ItemType.None;
-                    _items.Add(item);
-                }
-                else
-                {
-                    if (token.Symbol != Symbols.SFechaParenteses)
-                    {
-                        if (token.Symbol == Symbols.SIdentificador)
-                        {
-                            item.Type = GetIdentificatorType(token.Lexeme);
-                        }
-                        else
-                        {
-                            item.Type = _operatorsType[token.Symbol];
-                        }
-
-                        _output.Add(item);
-                    }
-                }
+                AddToken(token, item);
             }
         }
 
+        /// <summary>
+        /// Analyzes the current expression, returning its type and the tokens that builds the expresssion.
+        /// </summary>
+        /// <param name="resultingType">The type of the analyzed expression.</param>
+        /// <returns>A collection of tokens that builds the expression.</returns>
         public IEnumerable<Token> Analyze(out ItemType resultingType)
         {
             for (int i = _items.Count - 1; i >= 0; i--)
@@ -199,15 +160,80 @@ namespace LPD.Compiler.Semantic
             return _output.Select(expItem => new Token { Lexeme = expItem.Lexeme, Symbol = expItem.Symbol });
         }
 
-        public string GetOutput()
+        /// <summary>
+        /// Gets the expression, as an string.
+        /// </summary>
+        /// <returns>The expression as an string.</returns>
+        public override string ToString()
         {
             return string.Join(string.Empty, _output.Select(token => token.Lexeme));
         }
-
-        public void Reset()
+        
+        private void AddToken(Token token, ExpressionItem item)
         {
-            _items.Clear();
-            _output.Clear();
+            if (token.Symbol == Symbols.SAbreParenteses)
+            {
+                item.Type = ItemType.None;
+                _items.Add(item);
+            }
+            else
+            {
+                if (token.Symbol != Symbols.SFechaParenteses)
+                {
+                    if (token.Symbol == Symbols.SIdentificador)
+                    {
+                        item.Type = GetIdentificatorType(token.Lexeme);
+                    }
+                    else
+                    {
+                        item.Type = _operatorsType[token.Symbol];
+                    }
+
+                    _output.Add(item);
+                }
+            }
+        }
+
+        private void AddWithPriority(Token token)
+        {
+            for (int i = _items.Count - 1; i >= 0; i--)
+            {
+                var current = _items[i];
+
+                if (current.Symbol == Symbols.SAbreParenteses)
+                {
+                    break;
+                }
+
+                var priority1 = _priorities[current.Symbol];
+                var priority2 = _priorities[token.Symbol];
+
+                if (priority1 >= priority2)
+                {
+                    _output.Add(current);
+                    _items.RemoveAt(i);
+                }
+            }
+        }
+
+        private void PopUntilOpenParenthesis()
+        {
+            for (int i = _items.Count - 1; i >= 0; i--)
+            {
+                var current = _items[i];
+
+                if (current.Symbol != Symbols.SAbreParenteses)
+                {
+                    _output.Add(current);
+                }
+                else
+                {
+                    _items.RemoveAt(i);
+                    break;
+                }
+
+                _items.RemoveAt(i);
+            }
         }
 
         private ItemType GetExpressionType(ExpressionItem item, ItemType firstType, ItemType secondType)

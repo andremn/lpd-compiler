@@ -342,7 +342,7 @@
 		<col def="S0">ISDotNetInstallerArgsRollback</col>
 		<row><td>ISX_DEFAULTCOMPONENT</td><td>{B5398FAB-63E1-4361-8EA2-D8FB754B14DA}</td><td>INSTALLDIR</td><td>2</td><td/><td/><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>LPD.Compiler.CodeGeneration.Primary_output</td><td>{97A3C925-C9F9-4AB7-9B81-A374FCA233F8}</td><td>INSTALLDIR</td><td>2</td><td/><td>lpd.compiler.codegeneration.</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>LPD.Compiler.Content_Files</td><td>{95217422-FE5D-4E3E-BE58-F1983FE90AE0}</td><td>INSTALLDIR</td><td>2</td><td/><td>lpd.compiler.content_files</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>LPD.Compiler.Content_Files</td><td>{E2FFD592-2490-4306-AAD1-94F54DAC69C7}</td><td>INSTALLDIR</td><td>2</td><td/><td>lpd.compiler.content_files</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>LPD.Compiler.Lexical.Primary_output</td><td>{5BAA65EE-CB84-480F-BC6F-129CAE253A6C}</td><td>INSTALLDIR</td><td>2</td><td/><td>lpd.compiler.lexical.primary</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>LPD.Compiler.Primary_output</td><td>{C911DE22-48C3-4CD2-83F4-D6288B548F07}</td><td>INSTALLDIR</td><td>2</td><td/><td>lpd.compiler.primary_output</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>LPD.Compiler.Semantic.Primary_output</td><td>{D342ACF7-0CC8-4ADA-BD72-19FAA907C95E}</td><td>INSTALLDIR</td><td>2</td><td/><td>lpd.compiler.semantic.primar</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
@@ -2055,7 +2055,7 @@
 		<col def="S0">Miscellaneous</col>
 		<row><td>ISX_DEFAULTCOMPONENT</td><td/><td/><td>_08C69072_7E96_47B9_80E8_7F89D54997D9_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>LPD.Compiler.CodeGeneration.Primary_output</td><td/><td/><td>_18C24510_EBBF_4FE9_B9A5_4641D0E1BCD1_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>LPD.Compiler.Content_Files</td><td/><td/><td>_1CAC18CF_9C13_42DD_8096_D7373488FA21_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>LPD.Compiler.Content_Files</td><td/><td/><td>_150E8D0C_7A66_4E3C_B59B_9C625788C47E_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>LPD.Compiler.Lexical.Primary_output</td><td/><td/><td>_CD09AFBB_7E0E_43F9_AFCF_1191A37FDD92_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>LPD.Compiler.Primary_output</td><td/><td/><td>_18E678C1_6952_4888_A0D0_A80E4533DB4C_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>LPD.Compiler.Semantic.Primary_output</td><td/><td/><td>_9C52163A_6D71_4D2F_8281_005FEA791E63_FILTER</td><td/><td/><td/><td/></row>
