@@ -56,10 +56,20 @@ namespace LPD.Compiler
         public MainWindow()
         {
             InitializeComponent();
-            UpdateSaveButtons();
+            Loaded += OnLoaded;
             Editor.SyntaxHighlighting = HighlightingLoader.Load(FileHelper.GetSyntaxHighlighting(), HighlightingManager.Instance);
-            _vmInstallationPath = RegistryHelper.GetProgramInstallationPath(VirtualMachineName);
+        }
 
+        private async void OnLoaded(object sender, RoutedEventArgs e)
+        {
+            if (App.ArgumentFilePath != null)
+            {
+                _selectedFile = App.ArgumentFilePath;
+                await ReadAndShowFileAsync();
+            }
+
+            UpdateSaveButtons();
+            _vmInstallationPath = RegistryHelper.GetProgramInstallationPath(VirtualMachineName);
             UpdateExecuteButton(_vmInstallationPath != null);
             UpdateCompileExecuteButtons();
         }

@@ -13,9 +13,17 @@ namespace LPD.Compiler
     /// </summary>
     public partial class App : Application
     {
+        public static string ArgumentFilePath { get; set; }
+
         public App()
         {
-            
+
+        }
+
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            ArgumentFilePath = e.Args.Length > 0 ? e.Args[0] : null;
+            base.OnStartup(e);
         }
     }
 }
