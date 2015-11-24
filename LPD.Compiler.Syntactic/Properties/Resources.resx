@@ -123,6 +123,9 @@
   <data name="Function" xml:space="preserve">
     <value>Função</value>
   </data>
+  <data name="GenericErrorMessage" xml:space="preserve">
+    <value>Linha {0}, coluna {1}: {2}.</value>
+  </data>
   <data name="IncompatibleAttributionErrorMessage" xml:space="preserve">
     <value>Linha {0}, coluna {1}: Tipo '{2}' não pode ser atribuido a variável do tipo '{3}'.</value>
   </data>
@@ -134,9 +137,6 @@
   </data>
   <data name="InvalidTokenErrorMessage" xml:space="preserve">
     <value>Linha {0}, coluna {1}: Simbolo {2} invalido.</value>
-  </data>
-  <data name="LexicalErrorMessage" xml:space="preserve">
-    <value>Linha {0}, coluna {1}: {2}.</value>
   </data>
   <data name="MissingFunctionReturnMessage" xml:space="preserve">
     <value>Linha {0}, coluna {1}: Nem todos os caminhos retornam um valor na função '{2}'.</value>
@@ -164,5 +164,8 @@
   </data>
   <data name="UnexpectedTokenErrorMessage" xml:space="preserve">
     <value>Linha {0}, coluna {1}: Esperado {2}.</value>
+  </data>
+  <data name="WrongFunctionCall" xml:space="preserve">
+    <value>Linha {0}, coluna {1}: Uma função deve estar dentro de uma expressão.</value>
   </data>
 </root>

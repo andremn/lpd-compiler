@@ -327,7 +327,7 @@ namespace LPD.Compiler.Semantic
                     firstType.GetFriendlyName(), secondType.GetFriendlyName());
             }
             
-            throw new InvalidOperationException(message);
+            throw new ExpressionException(message);
         }
     }
 }

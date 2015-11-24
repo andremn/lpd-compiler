@@ -96,6 +96,7 @@ namespace LPD.Compiler
             await FileHelper.SaveFileStringContentsAsync(_selectedFile, Editor.Text);
             _modificationsCount = 0;
             UpdateSaveButtons();
+            Title = string.Format(WindowTitleFormat, Path.GetFileNameWithoutExtension(_selectedFile));
         }
 
         /// <summary>
@@ -119,6 +120,7 @@ namespace LPD.Compiler
 
             _selectedFile = saveFileDialog.FileName;
             await SaveFileAsync();
+            Title = string.Format(WindowTitleFormat, Path.GetFileNameWithoutExtension(_selectedFile));
         }
 
         /// <summary>
@@ -291,6 +293,7 @@ namespace LPD.Compiler
             }
 
             await SaveFileAsync();
+            Title = string.Format(WindowTitleFormat, Path.GetFileNameWithoutExtension(_selectedFile));
         }
 
         /// <summary>

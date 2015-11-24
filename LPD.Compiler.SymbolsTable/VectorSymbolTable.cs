@@ -42,7 +42,7 @@ namespace LPD.Compiler.SymbolsTable
 
         public bool SearchDouble(string lexeme)
         {
-            return _itemsCollection.Search(lexeme).Count > 1;
+            return _itemsCollection.Search(lexeme).Count > 0;
         }
 
         public SymbolTableItem SearchByLevel(string lexeme, uint level)

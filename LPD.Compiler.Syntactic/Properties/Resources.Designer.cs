@@ -79,6 +79,15 @@ namespace LPD.Compiler.Syntactic.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Linha {0}, coluna {1}: {2}..
+        /// </summary>
+        internal static string GenericErrorMessage {
+            get {
+                return ResourceManager.GetString("GenericErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Linha {0}, coluna {1}: Tipo &apos;{2}&apos; não pode ser atribuido a variável do tipo &apos;{3}&apos;..
         /// </summary>
         internal static string IncompatibleAttributionErrorMessage {
@@ -111,15 +120,6 @@ namespace LPD.Compiler.Syntactic.Properties {
         internal static string InvalidTokenErrorMessage {
             get {
                 return ResourceManager.GetString("InvalidTokenErrorMessage", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Linha {0}, coluna {1}: {2}..
-        /// </summary>
-        internal static string LexicalErrorMessage {
-            get {
-                return ResourceManager.GetString("LexicalErrorMessage", resourceCulture);
             }
         }
         
@@ -201,6 +201,15 @@ namespace LPD.Compiler.Syntactic.Properties {
         internal static string UnexpectedTokenErrorMessage {
             get {
                 return ResourceManager.GetString("UnexpectedTokenErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Linha {0}, coluna {1}: Uma função deve estar dentro de uma expressão..
+        /// </summary>
+        internal static string WrongFunctionCall {
+            get {
+                return ResourceManager.GetString("WrongFunctionCall", resourceCulture);
             }
         }
     }

@@ -41,7 +41,7 @@ namespace LPD.Compiler.Syntactic
             {
                 throw new ArgumentNullException(nameof(lexical));
             }
-
+            
             _lexical = lexical;
             _symbolTable = new VectorSymbolTable();
             _codeGenerator = new CodeGenerator();
@@ -79,6 +79,7 @@ namespace LPD.Compiler.Syntactic
             var tempFile = System.IO.Path.GetTempFileName();
 
             await _codeGenerator.SaveToFileAsync(tempFile);
+            await _codeGenerator.SaveToFileAsync(@"C:\Temp\generated.asmd");
             return new CompilationResult { Error = null, AssemblyFilePath = tempFile };
         }
 
@@ -162,23 +163,45 @@ namespace LPD.Compiler.Syntactic
                 if (isFunction)
                 {
                     _funcInfo.VarsCount = totalVars;
-                    _funcInfo.FirstVarAddress = _allocBase;
+                    _funcInfo.FirstVarAddress = totalVars == 0 ? 0 : _allocBase;
                 }
 
                 _codeGenerator.GenerateInstruction(ALLOC, _allocBase, totalVars);
                 _allocBase += totalVars;
             }
 
-            AnalyzeSubRoutines();
-            AnalyzeCommands(true);
+            if (isFunction)
+            {
+                //Saves the current values
+                //We'll need this values saved in case a function has other functions inside it
+                var rootNode = _rootNode;
+                var funcInfo = _funcInfo;
+                var currentNode = _currentNode;
 
+                AnalyzeSubRoutines();
+
+                _rootNode = rootNode;
+                _funcInfo = funcInfo;
+                _currentNode = currentNode;
+            }
+            else
+            {
+                AnalyzeSubRoutines();
+            }
+
+            AnalyzeCommands(true);
+            
             if (totalVars > 0)
             {
                 _allocBase -= totalVars;
-                _codeGenerator.GenerateInstruction(DALLOC, _allocBase, totalVars);
+
+                if (!isFunction)
+                {
+                    _codeGenerator.GenerateInstruction(DALLOC, _allocBase, totalVars);
+                }
+
                 _memory -= totalVars;
             }
-
         }
 
         private uint AnalyzeVars()
@@ -337,17 +360,24 @@ namespace LPD.Compiler.Syntactic
                     {
                         AnalyzeAttribution();
                     }
+                    else
+                    {
+                        throw new CompilationException(string.Format(WrongFunctionCall, _lexical.Position.Line, _lexical.Position.Column));
+                    }
 
                     if (isFunction)
                     {
                         _currentNode = _rootNode;
                     }
 
-                    _currentNode.Children.Add(new SyntaxTreeNode
+                    if (_currentNode != null)
                     {
-                        Parent = _currentNode,
-                        Value = Symbols.SRetorno
-                    });
+                        _currentNode.Children.Add(new SyntaxTreeNode
+                        {
+                            Parent = _currentNode,
+                            Value = Symbols.SRetorno
+                        });
+                    }
 
                     _codeGenerator.GenerateInstruction(RETURNF, _funcInfo.FirstVarAddress, _funcInfo.VarsCount);
                 }
@@ -479,7 +509,19 @@ namespace LPD.Compiler.Syntactic
                         RaiseUnexpectedTokenError("\")\"");
                     }
 
-                    _codeGenerator.GenerateInstruction(LDV, (item as IdentificatorItem).Memory);
+                    var identificator = item as IdentificatorItem;
+                    var function = item as FunctionItem;
+
+                    if (identificator != null)
+                    {
+                        _codeGenerator.GenerateInstruction(LDV, identificator.Memory);
+                    }
+
+                    if (function != null)
+                    {
+                        _codeGenerator.GenerateInstruction(CALL, function.Label);
+                    }
+
                     _codeGenerator.GenerateInstruction(PRN);
                 }
                 else
@@ -693,13 +735,12 @@ namespace LPD.Compiler.Syntactic
                 Level = _level,
                 Label = _codeGenerator.GetStringLabelFor(_lastLabel)
             };
-
+            
             _funcInfo = new FunctionInfo { Name = _token.Lexeme };
             _rootNode = new SyntaxTreeNode { Value = _token.Symbol };
             _currentNode = _rootNode;
             _codeGenerator.GenerateLabel(_lastLabel);
             _level++;
-            _lastLabel++;
             NextToken();
 
             if (_token.Symbol != Symbols.SDoisPontos)
@@ -912,7 +953,8 @@ namespace LPD.Compiler.Syntactic
             }
             catch (ExpressionException ex)
             {
-                RaiseNotFoundIdentificatorError(ex.Message);
+                throw new CompilationException(string.Format(GenericErrorMessage, _lexical.Position.Line, 
+                    _lexical.Position.Column, ex.Message));
             }
 
             return type;
@@ -1042,7 +1084,7 @@ namespace LPD.Compiler.Syntactic
             int column = _lexical.Position.Column - _token.Lexeme.Length;
 
             _position = null;
-            throw new CompilationException(string.Format(LexicalErrorMessage, _lexical.Position.Line, column, message));
+            throw new CompilationException(string.Format(GenericErrorMessage, _lexical.Position.Line, column, message));
         }
 
         private void RaiseUnexpectedEndOfFileMessage()
