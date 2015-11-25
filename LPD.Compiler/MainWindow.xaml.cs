@@ -28,6 +28,7 @@ namespace LPD.Compiler
     {
         #region Constants
 
+        private const string OutputFileExtension = ".asmd";
         private const string WindowTitleFormat = "LPD COMPILER - {0}";
         private const string FileDialogFilter = "Arquivo LPD,TXT|*.lpd;*.txt| Todos os arquivos|*.*";
         private const string VirtualMachineName = "LPD Virtual Machine";
@@ -49,6 +50,7 @@ namespace LPD.Compiler
         private string _vmInstallationPath = null;
         private bool _hasTextChanged = true;
         private ushort _modificationsCount = 0;
+        private string _currentProgramName;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="MainWindow"/> class.
@@ -224,8 +226,9 @@ namespace LPD.Compiler
 
             using (LexicalAnalyzer lexical = new LexicalAnalyzer(_selectedFile))
             {
+                string outputFilePath = FileHelper.GetOutputFilePath(Path.GetFileNameWithoutExtension(_selectedFile) + OutputFileExtension);
                 SyntacticAnalyzer syntactic = new SyntacticAnalyzer(lexical);
-                CompilationResult compilationResult = await syntactic.DoAnalysisAsync();
+                CompilationResult compilationResult = await syntactic.DoAnalysisAsync(outputFilePath);
 
                 if (compilationResult.Error != null)
                 {
@@ -240,7 +243,8 @@ namespace LPD.Compiler
                 }
                 else
                 {
-                    _outputFile = compilationResult.AssemblyFilePath;
+                    _currentProgramName = compilationResult.ProgramName;
+                    _outputFile = outputFilePath;
                     success = true;
                 }
 
@@ -275,7 +279,7 @@ namespace LPD.Compiler
                 {
                     var exePath = Path.Combine(_vmInstallationPath, VirtualMachineExeName);
 
-                    ProcessHelper.StartProcess(exePath, _outputFile);
+                    ProcessHelper.StartProcess(exePath, _outputFile + " " + _currentProgramName);
                 }
             }
         }

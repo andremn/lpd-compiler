@@ -18,6 +18,12 @@ namespace LPD.Compiler.SymbolsTable
             _itemsCollection = new SymbolTableItemCollection();
         }
 
+        public string GetProgramName()
+        {
+            return _itemsCollection.Select(item => item as ProgramNameItem)
+                                   .SingleOrDefault(programNameItem => programNameItem != null)?.Lexeme;
+        }
+
         public void Insert(SymbolTableItem item)
         {
             _itemsCollection.Add(item);

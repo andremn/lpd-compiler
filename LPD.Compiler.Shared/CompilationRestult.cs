@@ -11,8 +11,8 @@
         public CompilationError Error { get; set; }
 
         /// <summary>
-        /// Gets or sets the path of the resulting assembly file, if the compilation went successful.
+        /// Gets or sets the program's name, if the compilation went successful.
         /// </summary>
-        public string AssemblyFilePath { get; set; }
+        public string ProgramName { get; set; }
     }
 }

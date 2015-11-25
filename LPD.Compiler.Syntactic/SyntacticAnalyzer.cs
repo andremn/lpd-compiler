@@ -51,8 +51,10 @@ namespace LPD.Compiler.Syntactic
         /// Performs the code parsing, asynchronously.
         /// </summary>
         /// <returns></returns>
-        public async Task<CompilationResult> DoAnalysisAsync()
+        public async Task<CompilationResult> DoAnalysisAsync(string outputFilePath)
         {
+            string programName = null;
+
             try
             {
                 await Task.Factory.StartNew(StartAnalysis);
@@ -71,16 +73,15 @@ namespace LPD.Compiler.Syntactic
             finally
             {
                 _expressionAnalyzer = null;
+                programName = _symbolTable.GetProgramName();
                 _symbolTable.Clear();
                 _funcInfo = null;
                 _level = 0;
             }
-
-            var tempFile = System.IO.Path.GetTempFileName();
-
-            await _codeGenerator.SaveToFileAsync(tempFile);
+            
+            await _codeGenerator.SaveToFileAsync(outputFilePath);
             await _codeGenerator.SaveToFileAsync(@"C:\Temp\generated.asmd");
-            return new CompilationResult { Error = null, AssemblyFilePath = tempFile };
+            return new CompilationResult { Error = null, ProgramName = programName };
         }
 
         private void StartAnalysis()
