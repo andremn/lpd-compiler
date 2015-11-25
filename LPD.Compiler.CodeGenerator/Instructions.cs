@@ -73,9 +73,9 @@
         public const string CMA = "CMA";
 
         /// <summary>
-        /// The CMQ instruction name.
+        /// The CEQ instruction name.
         /// </summary>
-        public const string CEQ = "CMQ";
+        public const string CEQ = "CEQ";
 
         /// <summary>
         /// The CDIF instruction name.

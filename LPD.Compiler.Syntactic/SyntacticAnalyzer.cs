@@ -170,6 +170,8 @@ namespace LPD.Compiler.Syntactic
                 _allocBase += totalVars;
             }
 
+            _lastLabel++;
+
             if (isFunction)
             {
                 //Saves the current values
@@ -582,8 +584,8 @@ namespace LPD.Compiler.Syntactic
                 _currentNode = node;
             }
 
-            _lastLabel++;
             firstLabel = secondLabel = _lastLabel;
+            _lastLabel++;
             NextToken();
 
             var expressionType = AnalyzeExpressionType();
@@ -605,8 +607,8 @@ namespace LPD.Compiler.Syntactic
 
             if (_token.Symbol == Symbols.SSenao)
             {
-                _lastLabel++;
                 secondLabel = _lastLabel;
+                _lastLabel++;
                 _codeGenerator.GenerateInstruction(JMP, _codeGenerator.GetStringLabelFor(secondLabel));
                 _codeGenerator.GenerateLabel(firstLabel);
 
