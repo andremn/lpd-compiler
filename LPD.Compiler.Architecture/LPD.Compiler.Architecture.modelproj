@@ -29,6 +29,13 @@
       <SubType>Content</SubType>
       <DependentUpon>Compiler.classdiagram</DependentUpon>
     </Content>
+    <Content Include="LPDCompiler.classdiagram">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="LPDCompiler.classdiagram.layout">
+      <SubType>Content</SubType>
+      <DependentUpon>LPDCompiler.classdiagram</DependentUpon>
+    </Content>
     <Content Include="Syntactic.classdiagram">
       <SubType>Content</SubType>
     </Content>

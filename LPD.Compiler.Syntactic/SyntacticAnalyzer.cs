@@ -699,8 +699,7 @@ namespace LPD.Compiler.Syntactic
                 Level = _level,
                 Label = _codeGenerator.GetStringLabelFor(_lastLabel)
             };
-
-            _lastLabel++;
+                        
             _symbolTable.Insert(item);
             _level++;
             NextToken();

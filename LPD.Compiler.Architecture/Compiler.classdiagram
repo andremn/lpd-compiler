@@ -1,25 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <logicalClassDesignerModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm4="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm5="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/ModelStore" dslVersion="1.0.0.0" Id="4bbba84b-ca35-4a65-9d68-c64694180c92" name="Compiler" linkedPackageId="29f83a94-61f6-4301-8369-e20aba840f75" xmlns="http://schemas.microsoft.com/dsltools/LogicalClassDesigner">
-  <profileInstances>
-    <packageHasProfileInstances Id="53da90af-1b12-4972-8c1c-0ffa2f63a098">
-      <profileInstance Id="9a8ae8ee-7d13-4caa-b717-c9c3c03172d8" name="StandardProfileL2">
-        <elementDefinition Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791" />
-      </profileInstance>
-      <elementDefinition Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b" />
-    </packageHasProfileInstances>
-    <packageHasProfileInstances Id="61b2da70-cd57-4e86-883d-950447524ab8">
-      <profileInstance Id="76892c36-937a-49b2-876c-e848ac6b713a" name="StandardProfileL3">
-        <elementDefinition Id="532ea607-fb19-44b8-8502-3351b05452be" />
-      </profileInstance>
-      <elementDefinition Id="29349502-908c-4fda-9054-c48619c59ed0" />
-    </packageHasProfileInstances>
-  </profileInstances>
   <packagedElements>
-    <packageHasNamedElement>
-      <referencedType Id="761df3bb-6a5a-4d06-8a7a-3559f0161a69" name="LexicalAnalyzer" isAbstract="false" isLeaf="false" cachedFullName="LPD.Compiler.Architecture::LexicalAnalyzer">
-        <elementDefinition Id="7e07092d-12e7-4901-a8ef-122491668e1f" />
-      </referencedType>
-    </packageHasNamedElement>
     <packageHasNamedElement>
       <referencedType Id="8c4a52ca-8e01-4f73-afd5-0a854927ef44" name="Symbols" isAbstract="false" isLeaf="false" cachedFullName="Symbols">
         <elementDefinition Id="58d7ebe8-9e23-4ca9-a61a-3d242f2759b9" />
@@ -184,17 +165,99 @@
             </relationshipOwnedElementsInternal>
             <elementDefinition Id="c626de44-8f44-4aa1-ba80-4114d83f40ca" />
           </association>
+          <association Id="d4bcd07b-6bd0-4205-b0b1-5846dc382e3e" isDerived="false" sourceEndRoleName="SyntacticAnalyzer" targetEndRoleName="VectorSymbolTable" isLeaf="false" isAbstract="false">
+            <classMoniker Id="75f08d33-2e56-42c9-9db5-31485c00ac89" LastKnownName="VectorSymbolTable" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="b0cf5d8d-5bc5-4dba-9964-f0ca467d867c" name="SyntacticAnalyzer" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="f0c0427b-c1bd-447a-86a3-79c14386a561" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="55f5d7d9-629f-4622-a4a6-70bdcd966559" name="VectorSymbolTable" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="f6061079-6f73-4fa8-8c50-16a884b2f49b" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="8e83673d-36d7-41ae-88a6-504523ccd0d7" />
+          </association>
         </targetEnds>
         <ownedAttributesInternal>
-          <property Id="e0326906-ad6c-4c0f-9c20-1b951a026652" name="lexical" visibility="Private" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+          <property Id="e0326906-ad6c-4c0f-9c20-1b951a026652" name="_lexical" visibility="Private" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
             <elementDefinition Id="73ecef63-446f-4b51-a61b-dd90582b904c" />
             <type_NamedElement>
-              <referencedTypeMoniker Id="761df3bb-6a5a-4d06-8a7a-3559f0161a69" LastKnownName="LexicalAnalyzer" />
+              <referencedTypeMoniker Id="d2b4e41d-39a3-4fd7-86ef-86129a665b7b" LastKnownName="LexicalAnalyzer" />
+            </type_NamedElement>
+          </property>
+          <property Id="208620a0-c0fc-4340-ad08-3550a3f1b136" name="_expressionAnalyzer" visibility="Private" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="7af2fd6c-5434-4947-a475-b3c6851e8de4" />
+            <type_NamedElement>
+              <referencedTypeMoniker Id="4615cd35-39c8-45cf-b37c-17a43907fb0a" LastKnownName="ExpressionAnalyzer" />
+            </type_NamedElement>
+          </property>
+          <property Id="de599db2-1347-4c0e-b80a-beb8210b122f" name="_symbolTable" visibility="Private" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="e1a468ff-35bc-401c-a512-95804981a1c9" />
+            <type_NamedElement>
+              <referencedTypeMoniker Id="ae56f8f8-c6f0-45ef-a07e-481cf3c0f215" LastKnownName="VectorSymbolTable" />
+            </type_NamedElement>
+          </property>
+          <property Id="a69c916a-7b5a-4af1-ad0c-b2647346f73a" name="_codeGenerator" visibility="Private" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="e6529f10-7d48-445b-a466-77f3a25b1507" />
+            <type_NamedElement>
+              <referencedTypeMoniker Id="ce72f7ea-87b4-4794-8212-c685aa240658" LastKnownName="CodeGenerator" />
+            </type_NamedElement>
+          </property>
+          <property Id="0ee1aeef-e4df-4d9f-8dac-61f9badfe89f" name="_rootNode" visibility="Private" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="ab0324b5-b660-4652-824d-9a717c39376f" />
+            <type_NamedElement>
+              <referencedTypeMoniker Id="c82e8766-31f5-4bb0-9964-e78d90fa80b2" LastKnownName="SyntaxTreeNode" />
+            </type_NamedElement>
+          </property>
+          <property Id="af740cec-f0f3-4df4-b1fc-aa3c818f5bfd" name="_currentNode" visibility="Private" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="9db11310-1c8a-4f40-9c8e-5af2b5b89dfa" />
+            <type_NamedElement>
+              <referencedTypeMoniker Id="c82e8766-31f5-4bb0-9964-e78d90fa80b2" LastKnownName="SyntaxTreeNode" />
+            </type_NamedElement>
+          </property>
+          <property Id="f3f27e72-664e-43fd-acb8-6284ddc197ee" name="_funcInfo" visibility="Private" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="3f1967ad-5fd3-4540-a6e1-e35c9cd2b62e" />
+            <type_NamedElement>
+              <referencedTypeMoniker Id="c001f172-7bc9-4d29-9e44-29b735513674" LastKnownName="FunctionInfo" />
+            </type_NamedElement>
+          </property>
+          <property Id="68826d59-9a8f-469b-8999-e8a374e65017" name="_lastLabel" visibility="Private" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="f30a43d2-821a-43cb-9699-c4342530dd29" />
+            <type_NamedElement>
+              <referencedTypeMoniker Id="01cb2922-af40-4e4a-b108-bb985dc6ea53" LastKnownName="uint" />
+            </type_NamedElement>
+          </property>
+          <property Id="477d738d-1b88-4b12-9185-d8b44edf094f" name="_level" visibility="Private" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="a27a32de-d061-4c8b-a2cf-1613924d98fc" />
+            <type_NamedElement>
+              <referencedTypeMoniker Id="f5398201-199e-4cf8-bcf0-18cc00476b00" LastKnownName="ushort" />
+            </type_NamedElement>
+          </property>
+          <property Id="0b8020b3-27af-4a43-9618-02a8b82963d1" name="_memory" visibility="Private" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="9fd73cf1-eb8f-4d28-a84e-600fb378ac19" />
+            <type_NamedElement>
+              <referencedTypeMoniker Id="01cb2922-af40-4e4a-b108-bb985dc6ea53" LastKnownName="uint" />
+            </type_NamedElement>
+          </property>
+          <property Id="55217dc5-15f2-48cf-9b86-76d5eba5b33c" name="_analyzingLexeme" visibility="Private" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="6bf94f7e-3619-4d8f-a354-6a8e14592de1" />
+            <type_NamedElement>
+              <referencedTypeMoniker Id="c02c7a43-2d77-4df8-a2d3-302cdd82fbe9" LastKnownName="string" />
+            </type_NamedElement>
+          </property>
+          <property Id="046387e0-275d-46fe-bcff-9433af3e724f" name="_allocBase" visibility="Private" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="ddaf2e01-4529-470b-ad34-918531cd6c6d" />
+            <type_NamedElement>
+              <referencedTypeMoniker Id="01cb2922-af40-4e4a-b108-bb985dc6ea53" LastKnownName="uint" />
             </type_NamedElement>
           </property>
         </ownedAttributesInternal>
         <ownedOperationsInternal>
-          <operation Id="3196a907-d863-49f6-bd86-0c5f87f7c729" name="Analyze" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+          <operation Id="3196a907-d863-49f6-bd86-0c5f87f7c729" name="DoAnalysisAsync" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
             <elementDefinition Id="54af52c6-4b03-42d6-acde-4b3a8f4a822d" />
           </operation>
           <operation Id="3241d774-b99c-4cad-a5e0-ee2dc990be81" name="AnalyzeBlock" visibility="Private" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
@@ -256,6 +319,9 @@
           </operation>
           <operation Id="5b6df149-3a81-4386-80ff-45eb5b8ab362" name="AnalyzeFuncCall" visibility="Private" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
             <elementDefinition Id="be1bbc44-e8f9-448e-a8da-302a77e54bce" />
+          </operation>
+          <operation Id="f322d23f-0c79-45b0-80f5-0d649525b472" name="StartAnalysis" visibility="Private" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="b113db05-131b-47e9-8062-1321104e90f5" />
           </operation>
         </ownedOperationsInternal>
       </class>
@@ -919,8 +985,173 @@
         </ownedOperationsInternal>
       </class>
     </logicalClassDesignerModelHasTypes>
+    <packageHasNamedElement>
+      <referencedType Id="d2b4e41d-39a3-4fd7-86ef-86129a665b7b" name="LexicalAnalyzer" isAbstract="false" isLeaf="false" cachedFullName="LPD.Compiler.Architecture::LexicalAnalyzer">
+        <elementDefinition Id="7e07092d-12e7-4901-a8ef-122491668e1f" />
+      </referencedType>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <referencedType Id="4615cd35-39c8-45cf-b37c-17a43907fb0a" name="ExpressionAnalyzer" isAbstract="false" isLeaf="false" cachedFullName="ExpressionAnalyzer">
+        <elementDefinition Id="1b726e2f-221e-4b2e-8d2c-e8f69c271e38" />
+      </referencedType>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <referencedType Id="ae56f8f8-c6f0-45ef-a07e-481cf3c0f215" name="VectorSymbolTable" isAbstract="false" isLeaf="false" cachedFullName="VectorSymbolTable">
+        <elementDefinition Id="0ce9d8b7-0e2d-4f58-9f28-6b46a41d206a" />
+      </referencedType>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <referencedType Id="ce72f7ea-87b4-4794-8212-c685aa240658" name="CodeGenerator" isAbstract="false" isLeaf="false" cachedFullName="CodeGenerator">
+        <elementDefinition Id="6c85012e-39d7-430b-9b7b-1ad215948e19" />
+      </referencedType>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <referencedType Id="c82e8766-31f5-4bb0-9964-e78d90fa80b2" name="SyntaxTreeNode" isAbstract="false" isLeaf="false" cachedFullName="SyntaxTreeNode">
+        <elementDefinition Id="d8c19740-a398-4357-9cff-cfb6e2b69a32" />
+      </referencedType>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <referencedType Id="c001f172-7bc9-4d29-9e44-29b735513674" name="FunctionInfo" isAbstract="false" isLeaf="false" cachedFullName="FunctionInfo">
+        <elementDefinition Id="4b80035c-fea4-4dc5-8372-a9b28e147ad6" />
+      </referencedType>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <referencedType Id="01cb2922-af40-4e4a-b108-bb985dc6ea53" name="uint" isAbstract="false" isLeaf="false" cachedFullName="uint">
+        <elementDefinition Id="48eaac46-559b-465e-a10c-b3af2caee3d4" />
+      </referencedType>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <referencedType Id="f5398201-199e-4cf8-bcf0-18cc00476b00" name="ushort" isAbstract="false" isLeaf="false" cachedFullName="ushort">
+        <elementDefinition Id="8e021518-e65e-4904-bda9-b0fe8a8ebee6" />
+      </referencedType>
+    </packageHasNamedElement>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="300453a3-b284-40c8-9d2b-c6396d64c812" name="SymbolTableItem" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="385a0b5c-6dbb-4881-a73c-c584775e1f75" />
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="8ceb1a65-e801-4471-9180-4449af64740a" name="FunctionItem" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="894f4396-2620-442c-b4b0-46f1f69ae852" />
+        <generalsInternal>
+          <generalization Id="590ec8d6-9719-43e9-8f46-7f27aa4b0e48" isSubstitutable="false">
+            <classMoniker Id="bc1fecb3-f9f0-4a27-9638-cb74df7ea9bf" LastKnownName="LeveledItem" />
+            <elementDefinition Id="a84bd3f9-12ca-4859-8598-a8e970d7b43c" />
+          </generalization>
+        </generalsInternal>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="4b855ee1-9f64-4b49-addd-4e772261d26c" name="ProcItem" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="7f5728c0-4aed-4439-9460-8d79b4333886" />
+        <generalsInternal>
+          <generalization Id="ffb8f6ed-f5e3-4f81-99c0-b5b4117ff0b4" isSubstitutable="false">
+            <classMoniker Id="bc1fecb3-f9f0-4a27-9638-cb74df7ea9bf" LastKnownName="LeveledItem" />
+            <elementDefinition Id="e99cab2b-9f92-498a-a766-5f1f08441a74" />
+          </generalization>
+        </generalsInternal>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="bc1fecb3-f9f0-4a27-9638-cb74df7ea9bf" name="LeveledItem" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="1a018827-a065-49eb-b39f-e9eaf2358703" />
+        <generalsInternal>
+          <generalization Id="7dfb46d4-6db6-484f-90fe-2c4d50699e23" isSubstitutable="false">
+            <classMoniker Id="300453a3-b284-40c8-9d2b-c6396d64c812" LastKnownName="SymbolTableItem" />
+            <elementDefinition Id="7b6147ae-60d8-448e-ad04-90ff354e3407" />
+          </generalization>
+        </generalsInternal>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="6bfc31b6-4d0c-4509-b310-b735633cd3f0" name="ProgramNameItem" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="9d598031-6994-46ad-9b27-3a053a40f0e3" />
+        <generalsInternal>
+          <generalization Id="85467a59-8927-4961-b5e1-52c5d718a5b1" isSubstitutable="false">
+            <classMoniker Id="300453a3-b284-40c8-9d2b-c6396d64c812" LastKnownName="SymbolTableItem" />
+            <elementDefinition Id="07723a3e-e78f-4584-9236-9066e5bbba54" />
+          </generalization>
+        </generalsInternal>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="c9c1b0fd-f647-4ccb-987f-49c358ced9bb" name="IdentificatorItem" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="40562628-47cd-4faf-b940-6d606570570b" />
+        <generalsInternal>
+          <generalization Id="a38a6732-117b-4780-bab4-aabcf0e9245a" isSubstitutable="false">
+            <classMoniker Id="bc1fecb3-f9f0-4a27-9638-cb74df7ea9bf" LastKnownName="LeveledItem" />
+            <elementDefinition Id="58da9ba4-74fb-4751-a336-86e6d156fc70" />
+          </generalization>
+        </generalsInternal>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="75f08d33-2e56-42c9-9db5-31485c00ac89" name="VectorSymbolTable" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="76be623d-848d-47d9-904a-8199c785bcfc" />
+        <targetEnds>
+          <association Id="2faf1b36-32c0-46ee-9d0d-3c32b94c4e3b" isDerived="false" sourceEndRoleName="VectorSymbolTable" targetEndRoleName="SymbolTableItemCollection" isLeaf="false" isAbstract="false">
+            <classMoniker Id="8594d0eb-8b98-4b10-b43d-69bbc4c8ab93" LastKnownName="SymbolTableItemCollection" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="b9691ee7-ad8b-4ddf-80b1-5306dd07b328" name="VectorSymbolTable" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="3ae4cddf-5430-4e92-b049-fbf066fcba2d" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="cb076164-e98f-4a4d-b1cd-7e35f0ff7b08" name="SymbolTableItemCollection" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="201dd150-6c2f-43a7-baac-b3e76a0e6eb0" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="23133b76-aae4-42bf-aba5-f59d2ff9a5b3" />
+          </association>
+        </targetEnds>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="8594d0eb-8b98-4b10-b43d-69bbc4c8ab93" name="SymbolTableItemCollection" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="703977f0-d39a-4aeb-9f9e-d83ea94f8584" />
+        <targetEnds>
+          <association Id="2b7b16fe-b99e-495a-a906-dfa794ae48c3" isDerived="false" sourceEndRoleName="SymbolTableItemCollection" targetEndRoleName="SymbolTableItem" isLeaf="false" isAbstract="false">
+            <classMoniker Id="300453a3-b284-40c8-9d2b-c6396d64c812" LastKnownName="SymbolTableItem" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="72217c00-4db1-4960-b330-892f999f64c9" name="SymbolTableItemCollection" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="b6b0ef9a-05f7-419d-94b5-2bf8f1447091" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="c66fccd4-2df3-4ec4-af31-a4c8eeb61c09" name="SymbolTableItem" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="03f67970-8688-47da-b68f-75a573da8c13" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="2b7ee7ae-c541-4d3a-9472-440bc384a37b" />
+          </association>
+        </targetEnds>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="612908a4-3ed3-4d90-8ddd-7a5dff03fd55" name="ItemType" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="56100f24-c544-4dfa-aa42-559a8a1026ac" />
+      </class>
+    </logicalClassDesignerModelHasTypes>
   </packagedElements>
   <package Id="29f83a94-61f6-4301-8369-e20aba840f75" name="LPD.Compiler.Architecture">
     <elementDefinition Id="bd7a0be5-ddf7-4fa4-859b-fc160849711d" />
+    <profileInstances>
+      <packageHasProfileInstances Id="53da90af-1b12-4972-8c1c-0ffa2f63a098">
+        <profileInstance Id="9a8ae8ee-7d13-4caa-b717-c9c3c03172d8" name="StandardProfileL2">
+          <elementDefinition Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791" />
+        </profileInstance>
+        <elementDefinition Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b" />
+      </packageHasProfileInstances>
+      <packageHasProfileInstances Id="61b2da70-cd57-4e86-883d-950447524ab8">
+        <profileInstance Id="76892c36-937a-49b2-876c-e848ac6b713a" name="StandardProfileL3">
+          <elementDefinition Id="532ea607-fb19-44b8-8502-3351b05452be" />
+        </profileInstance>
+        <elementDefinition Id="29349502-908c-4fda-9054-c48619c59ed0" />
+      </packageHasProfileInstances>
+    </profileInstances>
   </package>
 </logicalClassDesignerModel>
