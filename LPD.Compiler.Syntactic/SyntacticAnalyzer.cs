@@ -958,6 +958,11 @@ namespace LPD.Compiler.Syntactic
                 throw new CompilationException(string.Format(GenericErrorMessage, _lexical.Position.Line, 
                     _lexical.Position.Column, ex.Message));
             }
+            catch (Exception ex)
+            {
+                //Todo: log error here.
+                throw new CompilationException(ex.Message);
+            }
 
             return type;
         }

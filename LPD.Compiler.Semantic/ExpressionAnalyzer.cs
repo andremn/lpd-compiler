@@ -210,8 +210,11 @@ namespace LPD.Compiler.Semantic
 
                 if (priority1 >= priority2)
                 {
-                    _output.Add(current);
-                    _items.RemoveAt(i);
+                    if (token.Symbol != Symbols.SNao || current.Symbol != Symbols.SNao)
+                    {
+                        _output.Add(current);
+                        _items.RemoveAt(i);
+                    }
                 }
             }
         }
