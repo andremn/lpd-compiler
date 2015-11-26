@@ -284,6 +284,28 @@ namespace LPD.Compiler
             }
         }
 
+        private async Task AskToSaveAsync()
+        {
+            MessageDialogResult result;
+            MetroDialogSettings settings = new MetroDialogSettings()
+            {
+                AffirmativeButtonText = "Salvar",
+                NegativeButtonText = "Não salvar"
+            };
+
+            result = await this.ShowMessageAsync("Salvar mudanças", "O arquivo foi modificado. Deseja salvar as mudanças?",
+                MessageDialogStyle.AffirmativeAndNegative, settings);
+
+            if (result == MessageDialogResult.Affirmative)
+            {
+                await SaveFileAsync();
+            }
+            else
+            {
+                _modificationsCount = 0;
+            }
+        }
+
         /// <summary>
         /// Saves the modified file or asks the user to create a new one.
         /// </summary>
@@ -310,26 +332,8 @@ namespace LPD.Compiler
 
             if (_modificationsCount > 0)
             {
-                MessageDialogResult result;
-                MetroDialogSettings settings = new MetroDialogSettings()
-                {
-                    AffirmativeButtonText = "Salvar",
-                    NegativeButtonText = "Não salvar"
-                };
-
                 e.Cancel = true;
-                result = await this.ShowMessageAsync("Salvar mudanças", "O arquivo foi modificado. Deseja salvar as mudanças?",
-                    MessageDialogStyle.AffirmativeAndNegative, settings);
-
-                if (result == MessageDialogResult.Affirmative)
-                {
-                    await SaveFileAsync();
-                }
-                else
-                {
-                    _modificationsCount = 0;
-                }
-
+                await AskToSaveAsync();
                 Close();
             }
         }
@@ -339,9 +343,19 @@ namespace LPD.Compiler
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">The data of the event.</param>
-        private void OnNewFileButtonClick(object sender, RoutedEventArgs e)
+        private async void OnNewFileButtonClick(object sender, RoutedEventArgs e)
         {
+            if (_modificationsCount > 0)
+            {
+                await AskToSaveAsync();
+            }
 
+            _selectedFile = null;
+            Title = string.Format(WindowTitleFormat, "SEM TÍTULO");
+            _hasTextChanged = false;
+            Editor.Text = string.Empty;
+            UpdateCompileExecuteButtons();
+            UpdateSaveButtons();
         }
 
         /// <summary>
