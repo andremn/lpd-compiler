@@ -61,7 +61,7 @@ namespace LPD.Compiler.Semantic.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Operador &apos;nao&apos; não pode ser aplicado a inteiros.
+        ///   Looks up a localized string similar to Operador &apos;nao&apos; não pode ser aplicado a inteiros..
         /// </summary>
         internal static string InvalidOperandNotOperator {
             get {
@@ -70,7 +70,7 @@ namespace LPD.Compiler.Semantic.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Operador &apos;{0}&apos; não pode ser aplicado aos tipos {1} e {2}.
+        ///   Looks up a localized string similar to Operador &apos;{0}&apos; não pode ser aplicado aos tipos {1} e {2}..
         /// </summary>
         internal static string InvalidOperandsInExpression {
             get {
@@ -79,7 +79,7 @@ namespace LPD.Compiler.Semantic.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Operador &apos;{0}&apos; não pode ser aplicado a {1}.
+        ///   Looks up a localized string similar to Operador &apos;{0}&apos; não pode ser aplicado a {1}..
         /// </summary>
         internal static string InvalidOperatorInExpression {
             get {

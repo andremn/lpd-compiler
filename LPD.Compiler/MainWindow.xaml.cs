@@ -232,9 +232,9 @@ namespace LPD.Compiler
 
                 if (compilationResult.Error != null)
                 {
-                    ErrorListView.ItemsSource = new List<ErrorViewModel>
+                    ErrorListView.ItemsSource = new List<CompilationResultViewModel>
                     {
-                        new ErrorViewModel()
+                        new CompilationResultViewModel()
                         {
                             Message = compilationResult.Error.Message,
                             Position = compilationResult.Error.Position
@@ -246,6 +246,15 @@ namespace LPD.Compiler
                     _currentProgramName = compilationResult.ProgramName;
                     _outputFile = outputFilePath;
                     success = true;
+
+                    ErrorListView.ItemsSource = new List<CompilationResultViewModel>
+                    {
+                        new CompilationResultViewModel()
+                        {
+                            Message = "Compilação sem erros.",
+                            Position = new CodePosition { Line = 0, Column = 0, Index = 0 }
+                        }
+                    };
                 }
 
                 TokensList.ItemsSource = lexical.ReadTokens;
@@ -409,7 +418,7 @@ namespace LPD.Compiler
         /// <param name="e">The data of the event.</param>
         private void OnErrorListViewItemPreviewMouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            var model = (sender as ListViewItem).Content as ErrorViewModel;
+            var model = (sender as ListViewItem).Content as CompilationResultViewModel;
 
             if (model == null)
             {

@@ -118,12 +118,12 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="InvalidOperandNotOperator" xml:space="preserve">
-    <value>Operador 'nao' não pode ser aplicado a inteiros</value>
+    <value>Operador 'nao' não pode ser aplicado a inteiros.</value>
   </data>
   <data name="InvalidOperandsInExpression" xml:space="preserve">
-    <value>Operador '{0}' não pode ser aplicado aos tipos {1} e {2}</value>
+    <value>Operador '{0}' não pode ser aplicado aos tipos {1} e {2}.</value>
   </data>
   <data name="InvalidOperatorInExpression" xml:space="preserve">
-    <value>Operador '{0}' não pode ser aplicado a {1}</value>
+    <value>Operador '{0}' não pode ser aplicado a {1}.</value>
   </data>
 </root>

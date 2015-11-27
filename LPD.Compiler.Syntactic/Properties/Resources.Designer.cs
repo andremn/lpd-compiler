@@ -106,7 +106,7 @@ namespace LPD.Compiler.Syntactic.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Linha {0}, coluna {1}: {2}..
+        ///   Looks up a localized string similar to Linha {0}, coluna {1}: {2}.
         /// </summary>
         internal static string GenericErrorMessage {
             get {

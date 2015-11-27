@@ -177,7 +177,7 @@
             <ListView x:Name="ErrorListView">
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <TextBlock Text="{Binding Message}"/>
+                        <TextBlock FontSize="15" Text="{Binding Message}"/>
                     </DataTemplate>
                 </ListView.ItemTemplate>
                 <ListView.ItemContainerStyle>

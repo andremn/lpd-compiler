@@ -133,7 +133,7 @@
     <value>Função</value>
   </data>
   <data name="GenericErrorMessage" xml:space="preserve">
-    <value>Linha {0}, coluna {1}: {2}.</value>
+    <value>Linha {0}, coluna {1}: {2}</value>
   </data>
   <data name="IncompatibleAttributionErrorMessage" xml:space="preserve">
     <value>Linha {0}, coluna {1}: Tipo '{2}' não pode ser atribuido a variável do tipo '{3}'.</value>

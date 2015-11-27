@@ -76,7 +76,7 @@
     </ApplicationDefinition>
     <Compile Include="Helpers\ProcessHelper.cs" />
     <Compile Include="Helpers\RegistryHelper.cs" />
-    <Compile Include="ViewModel\ErrorViewModel.cs" />
+    <Compile Include="ViewModel\CompilationResultViewModel.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
