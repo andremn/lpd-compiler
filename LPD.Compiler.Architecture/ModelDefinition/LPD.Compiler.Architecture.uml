@@ -4244,45 +4244,6 @@
             </relationshipOwnedElementsInternal>
           </association>
           <association
-            Id="c626de44-8f44-4aa1-ba80-4114d83f40ca"
-            isDerived="false"
-            sourceEndRoleName="SyntacticAnalyzer"
-            targetEndRoleName="CompileError"
-            isLeaf="false"
-            isAbstract="false">
-            <classMoniker
-              Id="d7ab4254-0d43-4535-8486-9e6d3ecb766f"
-              LastKnownName="CompileError"
-              LastKnownLocation="LPD.Compiler.Architecture.uml" />
-            <relationshipOwnedElementsInternal>
-              <associationHasOwnedEnds>
-                <memberEnd
-                  Id="d6977237-f942-4ef0-97d2-efb232cde738"
-                  name="SyntacticAnalyzer"
-                  isLeaf="false"
-                  isStatic="false"
-                  isReadOnly="false"
-                  isDerived="false"
-                  isDerivedUnion="false"
-                  aggregation="None"
-                  isComposite="false"
-                  isNavigableOwned="false" />
-              </associationHasOwnedEnds>
-              <associationHasOwnedEnds>
-                <memberEnd
-                  Id="5727eb4d-6747-44b4-a46f-5a876574dbad"
-                  name="CompileError"
-                  isLeaf="false"
-                  isStatic="false"
-                  isReadOnly="false"
-                  isDerived="false"
-                  isDerivedUnion="false"
-                  aggregation="None"
-                  isComposite="false" />
-              </associationHasOwnedEnds>
-            </relationshipOwnedElementsInternal>
-          </association>
-          <association
             Id="8e83673d-36d7-41ae-88a6-504523ccd0d7"
             isDerived="false"
             sourceEndRoleName="SyntacticAnalyzer"
@@ -4311,6 +4272,201 @@
                 <memberEnd
                   Id="f6061079-6f73-4fa8-8c50-16a884b2f49b"
                   name="VectorSymbolTable"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+          <association
+            Id="1128c452-0378-41f9-ac13-6883d9d9a7ef"
+            isDerived="false"
+            sourceEndRoleName="SyntacticAnalyzer"
+            targetEndRoleName="ExpressionAnalyzer"
+            isLeaf="false"
+            isAbstract="false">
+            <classMoniker
+              Id="7cf10b90-2d79-4577-b640-c88694b024b7"
+              LastKnownName="ExpressionAnalyzer"
+              LastKnownLocation="LPD.Compiler.Architecture.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="a20c693c-04f7-47c2-8a45-ed4bc290ea75"
+                  name="SyntacticAnalyzer"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="8882fd53-3a7a-4279-9d5c-364d53d0572b"
+                  name="ExpressionAnalyzer"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+          <association
+            Id="a4f2d3e2-e90f-4368-9752-a4c9332fb26f"
+            isDerived="false"
+            sourceEndRoleName="SyntacticAnalyzer"
+            targetEndRoleName="FunctionInfo"
+            isLeaf="false"
+            isAbstract="false">
+            <classMoniker
+              Id="a8dde546-4c25-4951-a9d1-bedd8aaa82b4"
+              LastKnownName="FunctionInfo"
+              LastKnownLocation="LPD.Compiler.Architecture.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="209d39c9-e8db-46f1-b954-f0948a7f0ba7"
+                  name="SyntacticAnalyzer"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="ceed3850-0027-45e2-a778-ffb14af4a7c4"
+                  name="FunctionInfo"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+          <association
+            Id="53d17a15-a782-440a-bec3-ff0c0fbecda8"
+            isDerived="false"
+            sourceEndRoleName="SyntacticAnalyzer"
+            targetEndRoleName="FunctionReturnAnalyzer"
+            isLeaf="false"
+            isAbstract="false">
+            <classMoniker
+              Id="04d3c845-3f91-4f13-b790-be0710a9dbdd"
+              LastKnownName="FunctionReturnAnalyzer"
+              LastKnownLocation="LPD.Compiler.Architecture.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="81f08f3b-2969-4bc5-b233-249ac5e678b0"
+                  name="SyntacticAnalyzer"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="4b76e0f2-c9cf-488a-95f9-3bf0ce865f92"
+                  name="FunctionReturnAnalyzer"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+          <association
+            Id="c38c8a5f-78f1-428c-8f8c-bbf8566f417b"
+            isDerived="false"
+            sourceEndRoleName="SyntacticAnalyzer"
+            targetEndRoleName="SyntaxTreeNode"
+            isLeaf="false"
+            isAbstract="false">
+            <classMoniker
+              Id="1a7b9808-b34d-4bfb-84b8-ef8eb1820d8a"
+              LastKnownName="SyntaxTreeNode"
+              LastKnownLocation="LPD.Compiler.Architecture.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="d99537f6-08c2-4ac3-bd94-47c6d6d2b939"
+                  name="SyntacticAnalyzer"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="84b37b6d-67d6-4e44-aaa4-a99b9f11cc44"
+                  name="SyntaxTreeNode"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+          <association
+            Id="a043b2be-7d51-432c-8564-f57dff9a33d1"
+            isDerived="false"
+            sourceEndRoleName="SyntacticAnalyzer"
+            targetEndRoleName="CompilationResult"
+            isLeaf="false"
+            isAbstract="false">
+            <classMoniker
+              Id="da141a64-d7ce-4e42-99a6-a554a36f45b5"
+              LastKnownName="CompilationResult"
+              LastKnownLocation="LPD.Compiler.Architecture.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="44149c14-d9e6-4e91-a61a-2b32474601ec"
+                  name="SyntacticAnalyzer"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="3a38a3d1-8b3c-4a39-b1fa-011f45405362"
+                  name="CompilationResult"
                   isLeaf="false"
                   isStatic="false"
                   isReadOnly="false"
@@ -4560,7 +4716,23 @@
             isStatic="false"
             isAbstract="false"
             concurrency="Sequential"
-            isQuery="false" />
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="309ac5d4-5fa4-438b-bba5-649523f9f0b3"
+                  direction="Return"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <undefinedTypeMoniker
+                      Id="08c01a71-6aa4-42d7-986e-212ad3dd3403"
+                      LastKnownName="CompilationResult"
+                      LastKnownLocation="LPD.Compiler.Architecture.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
           <operation
             Id="a7557279-8faa-427a-9494-9f2e1cafb65f"
             name="AnalyzeBlock"
@@ -4569,16 +4741,42 @@
             isStatic="false"
             isAbstract="false"
             concurrency="Sequential"
-            isQuery="false" />
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="235e38b1-b1ca-4cc2-90fa-642ed59b66ce"
+                  name="bool isFunction"
+                  direction="In"
+                  isUnique="false" />
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
           <operation
             Id="12b1c4eb-3b07-43f6-a376-e2eea8ee4ce9"
-            name="AnalyzeVariables"
+            name="AnalyzeVars"
             visibility="Private"
             isLeaf="false"
             isStatic="false"
             isAbstract="false"
             concurrency="Sequential"
-            isQuery="false" />
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="dcd9937c-d122-40fe-b744-367f635fa2bb"
+                  direction="Return"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <undefinedTypeMoniker
+                      Id="48eaac46-559b-465e-a10c-b3af2caee3d4"
+                      LastKnownName="uint"
+                      LastKnownLocation="LPD.Compiler.Architecture.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
           <operation
             Id="615c05db-e552-4fb6-b7d5-b143c88eb8d2"
             name="AnalyzeSubroutine"
@@ -4680,7 +4878,7 @@
             isQuery="false" />
           <operation
             Id="d67e4171-3a37-41ad-8bc6-0e7665f0bc7e"
-            name="AnalyzeProcDeclaration"
+            name="AnalyzeProcDcl"
             visibility="Private"
             isLeaf="false"
             isStatic="false"
@@ -4689,7 +4887,7 @@
             isQuery="false" />
           <operation
             Id="668b9282-761f-4b69-8130-1e4a007201e8"
-            name="AnalyzeFuncDeclaration"
+            name="AnalyzeFuncDcl"
             visibility="Private"
             isLeaf="false"
             isStatic="false"
@@ -4750,6 +4948,105 @@
             isAbstract="false"
             concurrency="Sequential"
             isQuery="false" />
+          <operation
+            Id="142d8b5a-44e8-4834-9ded-8e43a7de0e20"
+            name="AnalyzeExpressionType"
+            visibility="Private"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="49000366-a97d-4abe-bed8-f7c602fbe7e7"
+                  direction="Return"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <classMoniker
+                      Id="56100f24-c544-4dfa-aa42-559a8a1026ac"
+                      LastKnownName="ItemType"
+                      LastKnownLocation="LPD.Compiler.Architecture.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation
+            Id="12dceb6c-baf0-47c1-add8-1ae09ea0ce93"
+            name="GenerateCodeForExpression"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="4c24b14b-9234-4fda-b7bf-8e1c3ff6944d"
+                  name="IEnumerable&lt;Token&gt; tokens"
+                  direction="In"
+                  isUnique="false" />
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation
+            Id="4f51f875-3471-4ac7-a576-e2bce7322655"
+            name="GetNode"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="a3d04f39-5d46-47c8-b2d5-de2d8e8aa1a9"
+                  name="SyntaxTreeNode parent"
+                  direction="In"
+                  isUnique="false" />
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="49aca30e-349f-465c-a13a-a74e5f0958f3"
+                  direction="Return"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <undefinedTypeMoniker
+                      Id="d8c19740-a398-4357-9cff-cfb6e2b69a32"
+                      LastKnownName="SyntaxTreeNode"
+                      LastKnownLocation="LPD.Compiler.Architecture.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation
+            Id="1ef663c2-7ca0-4ad4-b932-ed92300d5d4e"
+            name="AnalyzeVarsDcl"
+            visibility="Private"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="c7211986-e4e3-442c-a073-523bc93f731a"
+                  direction="Return"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <undefinedTypeMoniker
+                      Id="48eaac46-559b-465e-a10c-b3af2caee3d4"
+                      LastKnownName="uint"
+                      LastKnownLocation="LPD.Compiler.Architecture.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
         </ownedOperationsInternal>
       </class>
     </packageHasNamedElement>
@@ -5880,7 +6177,21 @@
         name="SymbolTableItem"
         isAbstract="false"
         isLeaf="false"
-        isActiveClass="false" />
+        isActiveClass="false">
+        <ownedAttributesInternal>
+          <property
+            Id="17bfbb7c-4e0b-43f8-98a1-227ba44ac03c"
+            name="Lexeme"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false" />
+        </ownedAttributesInternal>
+      </class>
     </packageHasNamedElement>
     <packageHasNamedElement>
       <class
@@ -5899,6 +6210,124 @@
               LastKnownLocation="LPD.Compiler.Architecture.uml" />
           </generalization>
         </generalsInternal>
+        <targetEnds>
+          <association
+            Id="8619347e-1afa-4804-b8bc-589e77501842"
+            isDerived="false"
+            sourceEndRoleName="FunctionItem"
+            targetEndRoleName="ItemType"
+            isLeaf="false"
+            isAbstract="false">
+            <classMoniker
+              Id="56100f24-c544-4dfa-aa42-559a8a1026ac"
+              LastKnownName="ItemType"
+              LastKnownLocation="LPD.Compiler.Architecture.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="c2f3458f-0c67-4481-8a1a-81c10a4e3325"
+                  name="FunctionItem"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="74453410-da1e-401c-8766-40ff89da179e"
+                  name="ItemType"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+          <association
+            Id="67fa5b2a-f759-44c8-8eb6-0bcf58fd84c2"
+            isDerived="false"
+            sourceEndRoleName="FunctionItem"
+            targetEndRoleName="Enumeration1"
+            isLeaf="false"
+            isAbstract="false">
+            <enumerationMoniker
+              Id="e0a86cd2-8af9-4b28-89d0-2a5dc4803905"
+              LastKnownName="ItemType"
+              LastKnownLocation="LPD.Compiler.Architecture.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="c5cf94e3-5a03-438f-9990-c9b4a2655b6b"
+                  name="FunctionItem"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="307e52c7-2374-4bfa-89e6-f44a7746e270"
+                  name="Enumeration1"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+        </targetEnds>
+        <ownedAttributesInternal>
+          <property
+            Id="aee192a4-572b-4ca7-b701-9d531a64de74"
+            name="Type"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <classMoniker
+                Id="56100f24-c544-4dfa-aa42-559a8a1026ac"
+                LastKnownName="ItemType"
+                LastKnownLocation="LPD.Compiler.Architecture.uml" />
+            </type_NamedElement>
+          </property>
+          <property
+            Id="4ad9acc4-ea34-40f9-ac76-8715c75f0a60"
+            name="Label"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <undefinedTypeMoniker
+                Id="6d40bfab-aee5-4831-91e2-286b52eddfcf"
+                LastKnownName="string"
+                LastKnownLocation="LPD.Compiler.Architecture.uml" />
+            </type_NamedElement>
+          </property>
+        </ownedAttributesInternal>
       </class>
     </packageHasNamedElement>
     <packageHasNamedElement>
@@ -5918,6 +6347,26 @@
               LastKnownLocation="LPD.Compiler.Architecture.uml" />
           </generalization>
         </generalsInternal>
+        <ownedAttributesInternal>
+          <property
+            Id="d8f5106e-688d-4d1f-8d6a-97a68c164f77"
+            name="Label"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <undefinedTypeMoniker
+                Id="6d40bfab-aee5-4831-91e2-286b52eddfcf"
+                LastKnownName="string"
+                LastKnownLocation="LPD.Compiler.Architecture.uml" />
+            </type_NamedElement>
+          </property>
+        </ownedAttributesInternal>
       </class>
     </packageHasNamedElement>
     <packageHasNamedElement>
@@ -5937,6 +6386,26 @@
               LastKnownLocation="LPD.Compiler.Architecture.uml" />
           </generalization>
         </generalsInternal>
+        <ownedAttributesInternal>
+          <property
+            Id="fa6e9f4f-5b81-4968-b933-7bb822728c1a"
+            name="Level"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <undefinedTypeMoniker
+                Id="48eaac46-559b-465e-a10c-b3af2caee3d4"
+                LastKnownName="uint"
+                LastKnownLocation="LPD.Compiler.Architecture.uml" />
+            </type_NamedElement>
+          </property>
+        </ownedAttributesInternal>
       </class>
     </packageHasNamedElement>
     <packageHasNamedElement>
@@ -5956,6 +6425,26 @@
               LastKnownLocation="LPD.Compiler.Architecture.uml" />
           </generalization>
         </generalsInternal>
+        <ownedAttributesInternal>
+          <property
+            Id="e39af4c6-9ea9-449b-889b-0d354305dd59"
+            name="Level"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <undefinedTypeMoniker
+                Id="48eaac46-559b-465e-a10c-b3af2caee3d4"
+                LastKnownName="uint"
+                LastKnownLocation="LPD.Compiler.Architecture.uml" />
+            </type_NamedElement>
+          </property>
+        </ownedAttributesInternal>
       </class>
     </packageHasNamedElement>
     <packageHasNamedElement>
@@ -5975,6 +6464,124 @@
               LastKnownLocation="LPD.Compiler.Architecture.uml" />
           </generalization>
         </generalsInternal>
+        <targetEnds>
+          <association
+            Id="eab9c9fa-8812-4a07-beaf-2b27a09397ff"
+            isDerived="false"
+            sourceEndRoleName="IdentificatorItem"
+            targetEndRoleName="ItemType"
+            isLeaf="false"
+            isAbstract="false">
+            <classMoniker
+              Id="56100f24-c544-4dfa-aa42-559a8a1026ac"
+              LastKnownName="ItemType"
+              LastKnownLocation="LPD.Compiler.Architecture.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="3918c0cb-8272-48e0-b0be-6131b1e98da3"
+                  name="IdentificatorItem"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="6c99f5b8-a52e-421e-9d77-c1670ccf4c8f"
+                  name="ItemType"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+          <association
+            Id="adb45a22-9a49-4aa3-b8f7-e0967071836a"
+            isDerived="false"
+            sourceEndRoleName="IdentificatorItem"
+            targetEndRoleName="Enumeration1"
+            isLeaf="false"
+            isAbstract="false">
+            <enumerationMoniker
+              Id="e0a86cd2-8af9-4b28-89d0-2a5dc4803905"
+              LastKnownName="ItemType"
+              LastKnownLocation="LPD.Compiler.Architecture.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="eaddb4a9-ab5b-4f93-8048-f1e479329b6a"
+                  name="IdentificatorItem"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="fa3208d5-27b2-4b26-90e3-88238b4f071e"
+                  name="Enumeration1"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+        </targetEnds>
+        <ownedAttributesInternal>
+          <property
+            Id="9e6e0f85-3a9d-48ce-bb3e-881022fe94eb"
+            name="Type"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <undefinedTypeMoniker
+                Id="47ee4361-658f-42d5-b9fb-1b47761d955a"
+                LastKnownName="ITemType"
+                LastKnownLocation="LPD.Compiler.Architecture.uml" />
+            </type_NamedElement>
+          </property>
+          <property
+            Id="0353067f-d300-4abf-b06d-3eb324739bca"
+            name="Memory"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <undefinedTypeMoniker
+                Id="6d40bfab-aee5-4831-91e2-286b52eddfcf"
+                LastKnownName="string"
+                LastKnownLocation="LPD.Compiler.Architecture.uml" />
+            </type_NamedElement>
+          </property>
+        </ownedAttributesInternal>
       </class>
     </packageHasNamedElement>
     <packageHasNamedElement>
@@ -6025,6 +6632,232 @@
             </relationshipOwnedElementsInternal>
           </association>
         </targetEnds>
+        <ownedAttributesInternal>
+          <property
+            Id="2d524d43-bc5a-4221-b918-1c9887752b5b"
+            name="Items"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <undefinedTypeMoniker
+                Id="bd1d85f7-6482-403b-8204-283502b41e2a"
+                LastKnownName="IReadOnlyCollection&lt;SymbolTableItem&gt;"
+                LastKnownLocation="LPD.Compiler.Architecture.uml" />
+            </type_NamedElement>
+          </property>
+        </ownedAttributesInternal>
+        <ownedOperationsInternal>
+          <operation
+            Id="a27cf335-5a19-4d88-a934-28d97930180b"
+            name="GetProgramName"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="b640eda4-fc9a-4c17-b7f9-fc540bfdb39f"
+                  direction="Return"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <undefinedTypeMoniker
+                      Id="6d40bfab-aee5-4831-91e2-286b52eddfcf"
+                      LastKnownName="string"
+                      LastKnownLocation="LPD.Compiler.Architecture.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation
+            Id="aab7a2ad-668b-4611-8003-9097244c9dc9"
+            name="Insert"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="1b301183-4ef0-4fad-a17b-7ce5007ab53d"
+                  name="SymbolTableItem item"
+                  direction="In"
+                  isUnique="false" />
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation
+            Id="47fc7811-f291-4b44-b40b-5dc93f22f394"
+            name="RemoveUntil"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="e271477c-97a4-4b9e-8d18-23ccebd92f3a"
+                  name="uint level"
+                  direction="In"
+                  isUnique="false" />
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation
+            Id="3bc1fd3c-844f-4b19-9cb1-eaf37614d4f1"
+            name="Search"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="f8754309-ace4-4486-a9f0-241a8985ca25"
+                  name="string lexeme"
+                  direction="In"
+                  isUnique="false" />
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="06eb76c7-ede1-4657-bc0c-5b26a60e81b2"
+                  direction="Return"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <classMoniker
+                      Id="385a0b5c-6dbb-4881-a73c-c584775e1f75"
+                      LastKnownName="SymbolTableItem"
+                      LastKnownLocation="LPD.Compiler.Architecture.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation
+            Id="4f35d4ae-53ec-4347-899d-878161b1f906"
+            name="SearchDouble"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="9c4119e8-9aaa-408b-bc6d-bbe11c0c7a00"
+                  name="string lexeme"
+                  direction="In"
+                  isUnique="false" />
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="30b08c3d-b98e-4cb6-94d5-c866d11e93ef"
+                  direction="Return"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <undefinedTypeMoniker
+                      Id="6fd1f915-511b-4244-9598-4d17e4a33b07"
+                      LastKnownName="bool"
+                      LastKnownLocation="LPD.Compiler.Architecture.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation
+            Id="4a1c8eed-dc97-47c4-9083-69692d2aa317"
+            name="SearchByLevel"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="4c8382df-39f6-43b9-b4a3-0d3fbbb8084f"
+                  name="string lexeme"
+                  direction="In"
+                  isUnique="false" />
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="ce82a02c-7704-40a7-a94e-eeb49e7bac37"
+                  name="uint level"
+                  direction="In"
+                  isUnique="false" />
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="fbb1237b-aa61-4f67-93b8-95a6b58e9084"
+                  direction="Return"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <classMoniker
+                      Id="385a0b5c-6dbb-4881-a73c-c584775e1f75"
+                      LastKnownName="SymbolTableItem"
+                      LastKnownLocation="LPD.Compiler.Architecture.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation
+            Id="5a7b2c2f-23c0-4ab9-a413-e5850d5f1dc7"
+            name="CleanUpToLevel"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="d8b785b1-df24-4ee1-b381-2ee3014b3714"
+                  name="uint level"
+                  direction="In"
+                  isUnique="false" />
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation
+            Id="61012680-569e-42c8-b319-f24f879ab937"
+            name="SetTypeLastestVars"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="c2cc6bdb-7de9-4806-816a-8d643b637e17"
+                  name="ItemType type"
+                  direction="In"
+                  isUnique="false" />
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation
+            Id="9f0bf918-a52b-405d-a48d-a0d0dbb04427"
+            name="Clear"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false" />
+        </ownedOperationsInternal>
       </class>
     </packageHasNamedElement>
     <packageHasNamedElement>
@@ -6058,7 +6891,20 @@
                   isDerivedUnion="false"
                   aggregation="None"
                   isComposite="false"
-                  isNavigableOwned="false" />
+                  isNavigableOwned="false">
+                  <lowerValueInternal>
+                    <literalString
+                      Id="2308176d-e39a-44f3-8953-3f9228179b73"
+                      name="Lower"
+                      value="1" />
+                  </lowerValueInternal>
+                  <upperValueInternal>
+                    <literalString
+                      Id="3020a913-dca7-4466-8c40-a6ee17d29dff"
+                      name="Upper"
+                      value="*" />
+                  </upperValueInternal>
+                </memberEnd>
               </associationHasOwnedEnds>
               <associationHasOwnedEnds>
                 <memberEnd
@@ -6070,11 +6916,139 @@
                   isDerived="false"
                   isDerivedUnion="false"
                   aggregation="None"
-                  isComposite="false" />
+                  isComposite="false">
+                  <lowerValueInternal>
+                    <literalString
+                      Id="58ade876-5a91-4998-abf1-e9e61a00dc57"
+                      name="Lower"
+                      value="1" />
+                  </lowerValueInternal>
+                  <upperValueInternal>
+                    <literalString
+                      Id="1b97b7b9-dcd8-48c5-b482-8e751179dfd7"
+                      name="Upper"
+                      value="*" />
+                  </upperValueInternal>
+                </memberEnd>
               </associationHasOwnedEnds>
             </relationshipOwnedElementsInternal>
           </association>
         </targetEnds>
+        <ownedAttributesInternal>
+          <property
+            Id="478dad5b-7ebc-4f81-8617-d590e8ca5cee"
+            name="Count"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <undefinedTypeMoniker
+                Id="1bd4138a-e0c4-4e6f-9173-15ce9b5c37fe"
+                LastKnownName="int"
+                LastKnownLocation="LPD.Compiler.Architecture.uml" />
+            </type_NamedElement>
+          </property>
+        </ownedAttributesInternal>
+        <ownedOperationsInternal>
+          <operation
+            Id="f21613e7-3925-48ac-a712-a4f94555fce6"
+            name="Add"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="1376f4d9-7215-4686-a15e-cc71b37833cf"
+                  name="SymbolTableItem item"
+                  direction="In"
+                  isUnique="false" />
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation
+            Id="d396d759-80ae-4bf5-bdf6-7e55d2b6591e"
+            name="Remove"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="35203563-9dd3-47f5-a2a9-b8473817760c"
+                  name="SymbolTableItem"
+                  direction="In"
+                  isUnique="false" />
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation
+            Id="80025985-f7fb-4ce4-8fa2-2e57e170edc4"
+            name="Search"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="84efae46-66cf-4e99-a749-d023908f7c68"
+                  direction="Return"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <undefinedTypeMoniker
+                      Id="a6e8c2f6-0006-4499-86d2-27af698fa58c"
+                      LastKnownName="IList&lt;SymbolTableItem&gt;"
+                      LastKnownLocation="LPD.Compiler.Architecture.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="8a1671ae-d16e-4b94-959f-008fa06f97f1"
+                  name="string lexeme"
+                  direction="In"
+                  isUnique="false" />
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation
+            Id="9ef987f3-6105-477e-ac89-36bdc08b0d31"
+            name="RemoveAt"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="e3890a03-740f-4397-9494-41af75b1bb6f"
+                  name="int index"
+                  direction="In"
+                  isUnique="false" />
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation
+            Id="cf85549a-3991-40d7-87a7-480b7b8758e1"
+            name="Clear"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false" />
+        </ownedOperationsInternal>
       </class>
     </packageHasNamedElement>
     <packageHasNamedElement>
@@ -6084,6 +7058,864 @@
         isAbstract="false"
         isLeaf="false"
         isActiveClass="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <undefinedType
+        Id="47ee4361-658f-42d5-b9fb-1b47761d955a"
+        name="ITemType" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <enumeration
+        Id="e0a86cd2-8af9-4b28-89d0-2a5dc4803905"
+        name="ItemType"
+        isAbstract="false"
+        isLeaf="false">
+        <ownedLiterals>
+          <enumerationLiteral
+            Id="4448ab95-d233-4017-b7ce-379bf9d1316d"
+            name="None" />
+          <enumerationLiteral
+            Id="1394e4c5-69c8-42b0-957c-4b1277ce52fc"
+            name="Integer" />
+          <enumerationLiteral
+            Id="8e4f950a-8cbc-4ab5-a713-66aa82a06165"
+            name="Boolean" />
+        </ownedLiterals>
+      </enumeration>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <undefinedType
+        Id="a6e8c2f6-0006-4499-86d2-27af698fa58c"
+        name="IList&lt;SymbolTableItem&gt;" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <undefinedType
+        Id="08c01a71-6aa4-42d7-986e-212ad3dd3403"
+        name="CompilationResult" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <undefinedType
+        Id="1bd4138a-e0c4-4e6f-9173-15ce9b5c37fe"
+        name="int" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <undefinedType
+        Id="bd1d85f7-6482-403b-8204-283502b41e2a"
+        name="IReadOnlyCollection&lt;SymbolTableItem&gt;" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <undefinedType
+        Id="6fd1f915-511b-4244-9598-4d17e4a33b07"
+        name="bool" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="7cf10b90-2d79-4577-b640-c88694b024b7"
+        name="ExpressionAnalyzer"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <targetEnds>
+          <association
+            Id="b2a3e952-8ab3-49dc-a1b3-74b001c76fa0"
+            isDerived="false"
+            sourceEndRoleName="ExpressionAnalyzer"
+            targetEndRoleName="VectorSymbolTable"
+            isLeaf="false"
+            isAbstract="false">
+            <classMoniker
+              Id="76be623d-848d-47d9-904a-8199c785bcfc"
+              LastKnownName="VectorSymbolTable"
+              LastKnownLocation="LPD.Compiler.Architecture.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="d56b4506-14d0-44db-8747-6971c6b3ab7e"
+                  name="ExpressionAnalyzer"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="23169ba3-9aa7-4f53-adb6-a2a2039546f9"
+                  name="VectorSymbolTable"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+        </targetEnds>
+        <ownedAttributesInternal>
+          <property
+            Id="89d822b0-8dce-4920-8f1b-056d8ab9a65b"
+            name="_symbolTable"
+            visibility="Private"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <classMoniker
+                Id="76be623d-848d-47d9-904a-8199c785bcfc"
+                LastKnownName="VectorSymbolTable"
+                LastKnownLocation="LPD.Compiler.Architecture.uml" />
+            </type_NamedElement>
+          </property>
+        </ownedAttributesInternal>
+        <ownedOperationsInternal>
+          <operation
+            Id="014830d9-9784-482e-905b-f7074e8fd167"
+            name="Analyze"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="e3bc69a7-1f17-4cb7-bee7-eda4614b5833"
+                  name="ItemType resultingType"
+                  direction="Out"
+                  isUnique="false" />
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="c34a04f8-14d4-45e0-905d-cc665c0449b7"
+                  direction="Return"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <undefinedTypeMoniker
+                      Id="7d8b9f36-b4bf-4760-890e-0d1d7bbc5755"
+                      LastKnownName="IEnumerable&lt;Token&gt;"
+                      LastKnownLocation="LPD.Compiler.Architecture.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation
+            Id="96079487-4da6-4ee2-b34a-cb07cf7515ee"
+            name="Add"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="063c317f-c9d9-4f0e-ab21-23b3acc4bc89"
+                  name="Token token"
+                  direction="In"
+                  isUnique="false" />
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation
+            Id="d67be836-be9c-4d65-b077-24dba769f51c"
+            name="ToString"
+            visibility="Private"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="f03d050f-55fd-4df0-930e-d06c21824303"
+                  direction="Return"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <undefinedTypeMoniker
+                      Id="6d40bfab-aee5-4831-91e2-286b52eddfcf"
+                      LastKnownName="string"
+                      LastKnownLocation="LPD.Compiler.Architecture.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+        </ownedOperationsInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <undefinedType
+        Id="7d8b9f36-b4bf-4760-890e-0d1d7bbc5755"
+        name="IEnumerable&lt;Token&gt;" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="83e84fbf-e837-464e-aa1d-c3afc350391e"
+        name="ExpressionItem"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <targetEnds>
+          <association
+            Id="e2b244ec-7d8d-4801-85ba-bf90150c9a27"
+            isDerived="false"
+            sourceEndRoleName="ExpressionItem"
+            targetEndRoleName="ExpressionAnalyzer"
+            isLeaf="false"
+            isAbstract="false">
+            <classMoniker
+              Id="7cf10b90-2d79-4577-b640-c88694b024b7"
+              LastKnownName="ExpressionAnalyzer"
+              LastKnownLocation="LPD.Compiler.Architecture.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="1098f677-8820-4249-9ffa-6b33c981d7e8"
+                  name="ExpressionItem"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false">
+                  <lowerValueInternal>
+                    <literalString
+                      Id="029e9ad7-8c80-452f-ae87-58fe4ed30add"
+                      name="Lower"
+                      value="1" />
+                  </lowerValueInternal>
+                  <upperValueInternal>
+                    <literalString
+                      Id="6825dd4d-d83f-4b89-8d8c-07b53e2a0aa2"
+                      name="Upper"
+                      value="*" />
+                  </upperValueInternal>
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="30c8d0a7-6dfb-422e-b350-0ddd32233c20"
+                  name="ExpressionAnalyzer"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+        </targetEnds>
+        <ownedAttributesInternal>
+          <property
+            Id="831092b3-c5a8-4684-af1f-b3cea5fb0d06"
+            name="Symbol"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <enumerationMoniker
+                Id="62bfef8c-e0a2-4850-a0f9-719c19484a1b"
+                LastKnownName="Symbols"
+                LastKnownLocation="LPD.Compiler.Architecture.uml" />
+            </type_NamedElement>
+          </property>
+          <property
+            Id="34376661-c1d2-4968-9cac-d811a25884ec"
+            name="Lexeme"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <undefinedTypeMoniker
+                Id="48c2316b-daa3-4a1d-8bb4-bcad8ed071bd"
+                LastKnownName="Lexeme"
+                LastKnownLocation="LPD.Compiler.Architecture.uml" />
+            </type_NamedElement>
+          </property>
+          <property
+            Id="bb4bcccc-5bd7-45aa-bab7-797d4036a8d7"
+            name="Type"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <classMoniker
+                Id="56100f24-c544-4dfa-aa42-559a8a1026ac"
+                LastKnownName="ItemType"
+                LastKnownLocation="LPD.Compiler.Architecture.uml" />
+            </type_NamedElement>
+          </property>
+        </ownedAttributesInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <undefinedType
+        Id="48c2316b-daa3-4a1d-8bb4-bcad8ed071bd"
+        name="Lexeme" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="a8dde546-4c25-4951-a9d1-bedd8aaa82b4"
+        name="FunctionInfo"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <ownedAttributesInternal>
+          <property
+            Id="2f2a854d-f229-4ca8-b19d-9b44790ea6d5"
+            name="FirstVarAddress"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <undefinedTypeMoniker
+                Id="48eaac46-559b-465e-a10c-b3af2caee3d4"
+                LastKnownName="uint"
+                LastKnownLocation="LPD.Compiler.Architecture.uml" />
+            </type_NamedElement>
+          </property>
+          <property
+            Id="1b83ac06-1985-4b63-96c8-f98f07d5e801"
+            name="VarsCount"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <undefinedTypeMoniker
+                Id="48eaac46-559b-465e-a10c-b3af2caee3d4"
+                LastKnownName="uint"
+                LastKnownLocation="LPD.Compiler.Architecture.uml" />
+            </type_NamedElement>
+          </property>
+          <property
+            Id="7737588d-e1f0-4f05-b584-e68fe257ca2f"
+            name="Name"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <undefinedTypeMoniker
+                Id="6d40bfab-aee5-4831-91e2-286b52eddfcf"
+                LastKnownName="string"
+                LastKnownLocation="LPD.Compiler.Architecture.uml" />
+            </type_NamedElement>
+          </property>
+        </ownedAttributesInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="04d3c845-3f91-4f13-b790-be0710a9dbdd"
+        name="FunctionReturnAnalyzer"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <targetEnds>
+          <association
+            Id="efa4bdf7-8f49-4a6d-94e8-b4bf998b5b7e"
+            isDerived="false"
+            sourceEndRoleName="FunctionReturnAnalyzer"
+            targetEndRoleName="SyntaxTreeNode"
+            isLeaf="false"
+            isAbstract="false">
+            <classMoniker
+              Id="1a7b9808-b34d-4bfb-84b8-ef8eb1820d8a"
+              LastKnownName="SyntaxTreeNode"
+              LastKnownLocation="LPD.Compiler.Architecture.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="388ba79d-e589-49c7-9f37-db863513ff14"
+                  name="FunctionReturnAnalyzer"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="e2537849-8d11-4b15-b90e-50587665e309"
+                  name="SyntaxTreeNode"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+        </targetEnds>
+        <ownedOperationsInternal>
+          <operation
+            Id="482ffeef-d946-4144-ad11-51ec72301f47"
+            name="AllPathsReturns"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="949a50c5-9a46-4943-8e12-afc2150f3b07"
+                  direction="Return"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <undefinedTypeMoniker
+                      Id="6fd1f915-511b-4244-9598-4d17e4a33b07"
+                      LastKnownName="bool"
+                      LastKnownLocation="LPD.Compiler.Architecture.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="e65e04f0-cc10-4c55-a7a8-558145dab044"
+                  name="SyntaxTreeNode rootNode"
+                  direction="In"
+                  isUnique="false" />
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+        </ownedOperationsInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="1a7b9808-b34d-4bfb-84b8-ef8eb1820d8a"
+        name="SyntaxTreeNode"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <ownedAttributesInternal>
+          <property
+            Id="9025cdeb-7751-4e7c-9ffc-d2255a66b13b"
+            name="Value"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <enumerationMoniker
+                Id="62bfef8c-e0a2-4850-a0f9-719c19484a1b"
+                LastKnownName="Symbols"
+                LastKnownLocation="LPD.Compiler.Architecture.uml" />
+            </type_NamedElement>
+          </property>
+          <property
+            Id="5d33a26b-244c-4026-a5e9-f41c5233f335"
+            name="Parent"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <classMoniker
+                Id="1a7b9808-b34d-4bfb-84b8-ef8eb1820d8a"
+                LastKnownName="SyntaxTreeNode"
+                LastKnownLocation="LPD.Compiler.Architecture.uml" />
+            </type_NamedElement>
+          </property>
+          <property
+            Id="8f785a13-e46d-49fe-adec-410aeb081961"
+            name="Children"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <undefinedTypeMoniker
+                Id="7daa6724-4544-4091-badf-304ab966709b"
+                LastKnownName="IList&lt;SyntaxTreeNode&gt;"
+                LastKnownLocation="LPD.Compiler.Architecture.uml" />
+            </type_NamedElement>
+          </property>
+          <property
+            Id="e8bd55ad-0f96-4cea-840d-c44fa0724ec7"
+            name="Count"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <undefinedTypeMoniker
+                Id="1bd4138a-e0c4-4e6f-9173-15ce9b5c37fe"
+                LastKnownName="int"
+                LastKnownLocation="LPD.Compiler.Architecture.uml" />
+            </type_NamedElement>
+          </property>
+        </ownedAttributesInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <undefinedType
+        Id="7daa6724-4544-4091-badf-304ab966709b"
+        name="IList&lt;SyntaxTreeNode&gt;" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="9ecc00b7-43ce-49e7-81de-e2b1e645fa3c"
+        name="MainWindow"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <targetEnds>
+          <association
+            Id="fea8bd1f-d2d1-4be1-abc4-ff5c9fc9dc74"
+            isDerived="false"
+            sourceEndRoleName="MainWindow"
+            targetEndRoleName="SyntacticAnalyzer"
+            isLeaf="false"
+            isAbstract="false">
+            <classMoniker
+              Id="abb365b9-306e-4eb2-b833-ccf65cc906a6"
+              LastKnownName="SyntacticAnalyzer"
+              LastKnownLocation="LPD.Compiler.Architecture.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="264d05fc-21b5-4c36-b4db-7f64fac0db8c"
+                  name="MainWindow"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="d3c29b3f-9228-428b-9adb-6790da6457a6"
+                  name="SyntacticAnalyzer"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+        </targetEnds>
+        <ownedOperationsInternal>
+          <operation
+            Id="d907ae8a-9b9a-4124-a0f0-bda6982e1dfe"
+            name="CompileAsync"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false" />
+        </ownedOperationsInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="348434c5-ecdd-440b-ba43-d7dada1e4611"
+        name="CodeGenerator"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <targetEnds>
+          <association
+            Id="f191bd7b-4613-461a-b018-161878688de7"
+            isDerived="false"
+            sourceEndRoleName="CodeGenerator"
+            targetEndRoleName="SyntacticAnalyzer"
+            isLeaf="false"
+            isAbstract="false">
+            <classMoniker
+              Id="abb365b9-306e-4eb2-b833-ccf65cc906a6"
+              LastKnownName="SyntacticAnalyzer"
+              LastKnownLocation="LPD.Compiler.Architecture.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="e0dd859e-6cc4-4b83-8b6a-87519d645aca"
+                  name="CodeGenerator"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="a7940a36-9c54-4fd6-8637-204e9e7505fc"
+                  name="SyntacticAnalyzer"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+        </targetEnds>
+        <ownedOperationsInternal>
+          <operation
+            Id="5c34ae77-b5a8-485b-8dba-b5cf52672dae"
+            name="GenerateLabel"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="099fa1e2-0819-4869-ab76-baaf7a761599"
+                  name="uint label"
+                  direction="In"
+                  isUnique="false" />
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation
+            Id="bf03ffc8-a7ad-4e19-8d7d-a80205a7c99d"
+            name="GenerateInstruction"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="28f7950d-68d9-411f-9db5-accc30b1e8ce"
+                  name="string instructionName"
+                  direction="In"
+                  isUnique="false" />
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="7b854389-4e7a-4b55-be09-acb621543bd1"
+                  name="params object[] arguments"
+                  direction="In"
+                  isUnique="false" />
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation
+            Id="29db60a5-84a4-4243-b413-c2717fccd746"
+            name="GenerateInstruction1"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="2780d1d5-c403-4f9a-aae9-34cb9141ff5c"
+                  name="string instructionName"
+                  direction="In"
+                  isUnique="false" />
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation
+            Id="3c7b676e-fa43-4695-8ec1-84aadf1cb399"
+            name="GetStringLabelFor"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="d1d2f64b-36a4-4ee5-9171-2ba61739771b"
+                  name="uint lable"
+                  direction="In"
+                  isUnique="false" />
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation
+            Id="d620aa9c-e5b0-4631-bd93-d1dd4ea01d78"
+            name="SaveToFileAsync"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="37a505ff-2cbb-4f2d-a421-e95dae05df5c"
+                  name="string path"
+                  direction="In"
+                  isUnique="false" />
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+        </ownedOperationsInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="da141a64-d7ce-4e42-99a6-a554a36f45b5"
+        name="CompilationResult"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <targetEnds>
+          <association
+            Id="84ca7f69-55f9-4a7c-b63a-4ae80626c564"
+            isDerived="false"
+            sourceEndRoleName="CompilationResult"
+            targetEndRoleName="CompileError"
+            isLeaf="false"
+            isAbstract="false">
+            <classMoniker
+              Id="d7ab4254-0d43-4535-8486-9e6d3ecb766f"
+              LastKnownName="CompileError"
+              LastKnownLocation="LPD.Compiler.Architecture.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="f93ead04-f358-4c39-bb70-ef690a49e2bd"
+                  name="CompilationResult"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="86e6646e-c27c-4595-8412-dbc0ee42edb1"
+                  name="CompileError"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+        </targetEnds>
+        <ownedAttributesInternal>
+          <property
+            Id="6f0ab1bd-6fc6-476a-bbfb-8f78e458732e"
+            name="Error"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <classMoniker
+                Id="25422843-a3e8-4886-b4cf-04eba43dc16e"
+                LastKnownName="CompileError"
+                LastKnownLocation="LPD.Compiler.Architecture.uml" />
+            </type_NamedElement>
+          </property>
+          <property
+            Id="34b914a1-35e4-4192-9c21-2c828ffe3942"
+            name="ProgramName"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <undefinedTypeMoniker
+                Id="6d40bfab-aee5-4831-91e2-286b52eddfcf"
+                LastKnownName="string"
+                LastKnownLocation="LPD.Compiler.Architecture.uml" />
+            </type_NamedElement>
+          </property>
+        </ownedAttributesInternal>
+      </class>
     </packageHasNamedElement>
   </packagedElements>
   <primitiveType

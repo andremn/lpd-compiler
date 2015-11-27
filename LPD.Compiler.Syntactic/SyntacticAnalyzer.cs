@@ -147,7 +147,7 @@ namespace LPD.Compiler.Syntactic
 
             if (item.Error != null)
             {
-                RaiseLexicalErrorMessage(item.Error.Message);
+                RaiseGeneralErrorMessage(item.Error.Message);
             }
 
             _token = item.Token;
@@ -240,7 +240,7 @@ namespace LPD.Compiler.Syntactic
 
                             if (_token.Symbol == Symbols.SDoisPontos)
                             {
-                                RaiseLexicalErrorMessage("Esperado identificador");
+                                RaiseGeneralErrorMessage($"Esperado identificador no lugar do símbolo '{_token.Lexeme}'");
                             }
                         }
                     }
@@ -277,7 +277,8 @@ namespace LPD.Compiler.Syntactic
                         }
                         else
                         {
-                            RaiseMissingSemicolonError();
+                            throw new CompilationException(string.Format(ExpectedCommaOrPointsErrorMessage, _lexical.Position.Line, 
+                                _lexical.Position.Column, _token.Lexeme));
                         }
                     }
                 }
@@ -317,7 +318,7 @@ namespace LPD.Compiler.Syntactic
 
                         if (_funcInfo != null)
                         {
-                            _currentNode = _currentNode?.Parent;
+                            _currentNode = _currentNode?.Parent ?? _rootNode;
                         }
 
                         NextToken();
@@ -393,9 +394,13 @@ namespace LPD.Compiler.Syntactic
                     {
                         AnalyzeAttribution();
                     }
-                    else
+                    else if (_token.Symbol == Symbols.SPontoVirgula)
                     {
                         AnalyzeProcCall();
+                    }
+                    else
+                    {
+                        RaiseGeneralErrorMessage($"Símbolo '{_token.Lexeme}' inesperado");
                     }
                 }
             }
@@ -544,6 +549,7 @@ namespace LPD.Compiler.Syntactic
             uint label1 = _lastLabel;
             uint label2;
             var whileToken = _token;
+            var position = _lexical.Position;
 
             _codeGenerator.GenerateLabel(_lastLabel);
             _lastLabel++;
@@ -554,6 +560,7 @@ namespace LPD.Compiler.Syntactic
             if (type != ItemType.Boolean)
             {
                 _token = whileToken;
+                _position = position;
                 RaiseIncompatibleTypeError();
             }
 
@@ -582,7 +589,7 @@ namespace LPD.Compiler.Syntactic
 
             if (_funcInfo != null && _isAnalyzingFunction)
             {
-                parent = _currentNode;
+                parent = _currentNode ?? _rootNode ?? new SyntaxTreeNode();
                 node = GetNode(parent);
                 parent.Children.Add(node);
                 _currentNode = node;
@@ -902,6 +909,11 @@ namespace LPD.Compiler.Syntactic
                 _expressionAnalyzer.Add(_token);
                 NextToken();
             }
+            else
+            {
+                throw new CompilationException(string.Format(UnexpectedOperatorInExpression, _lexical.Position.Line, _lexical.Position.Column, 
+                    _token.Lexeme));
+            }
         }
 
         private void AnalyzeAttribution()
@@ -1091,7 +1103,7 @@ namespace LPD.Compiler.Syntactic
             throw new CompilationException(string.Format(UnexpectedTokenErrorMessage, _lexical.Position.Line, column, message));
         }
 
-        private void RaiseLexicalErrorMessage(string message)
+        private void RaiseGeneralErrorMessage(string message)
         {
             int column = _lexical.Position.Column - _token.Lexeme.Length;
 
@@ -1154,9 +1166,10 @@ namespace LPD.Compiler.Syntactic
 
         private void RaiseIncompatibleTypeError()
         {
-            _position = null;
-            throw new CompilationException(string.Format(IncompatibleCommandExpressionErrorMessage, _lexical.Position.Line, 
-                _lexical.Position.Column, _token.Lexeme));
+            var position = _position ?? _lexical.Position;
+
+            throw new CompilationException(string.Format(IncompatibleCommandExpressionErrorMessage, position.Line,
+                position.Column, _token.Lexeme));
         }
 
         #endregion

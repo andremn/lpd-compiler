@@ -45,13 +45,13 @@ namespace LPD.Compiler.CodeGeneration
 
         public string GetStringLabelFor(uint labelNumber) => "L" + labelNumber;
 
-        public Task SaveToFileAsync(string path)
+        public async Task SaveToFileAsync(string path)
         {
             using (var file = File.Open(path, FileMode.Create, FileAccess.Write))
             {
                 using (var writer = new StreamWriter(file))
                 {
-                    return writer.WriteAsync(_output.ToString());
+                    await writer.WriteAsync(_output.ToString());
                 }
             }
         }

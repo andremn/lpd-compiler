@@ -71,21 +71,6 @@ namespace LPD.Compiler.SymbolsTable
             }
         }
 
-        public void CleanUp()
-        {
-            for (int i = _itemsCollection.Count; i >= 0; i--)
-            {
-                var item = _itemsCollection[i];
-
-                if (item is FunctionItem || item is ProcItem)
-                {
-                    break;
-                }
-
-                _itemsCollection.RemoveAt(i);
-            }
-        }
-
         public void SetFunctionType(string lexeme, ItemType type)
         {
             var func = (from item in _itemsCollection

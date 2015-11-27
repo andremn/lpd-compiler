@@ -88,6 +88,15 @@ namespace LPD.Compiler.Syntactic.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Linha {0}, coluna {1}: Esperado vírgula ou dois pontos, mas o símbolo &apos;{2}&apos; foi encontrado..
+        /// </summary>
+        internal static string ExpectedCommaOrPointsErrorMessage {
+            get {
+                return ResourceManager.GetString("ExpectedCommaOrPointsErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Função.
         /// </summary>
         internal static string Function {
@@ -133,7 +142,7 @@ namespace LPD.Compiler.Syntactic.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Linha {0}, coluna {1}: Simbolo {2} invalido..
+        ///   Looks up a localized string similar to Linha {0}, coluna {1}: Simbolo &apos;{2}&apos; invalido..
         /// </summary>
         internal static string InvalidTokenErrorMessage {
             get {
@@ -205,11 +214,20 @@ namespace LPD.Compiler.Syntactic.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Linha {0}, coluna {1}: Fim inesperado do arquivo..
+        ///   Looks up a localized string similar to Linha {0}, coluna {1}: Fim inesperado do arquivo. Não está faltando um ponto depois do &apos;fim&apos;?.
         /// </summary>
         internal static string UnexpectedEndOfFileErrorMessage {
             get {
                 return ResourceManager.GetString("UnexpectedEndOfFileErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Linha {0}, coluna {1}: Símbolo &apos;{2}&apos; inesperado na expressão..
+        /// </summary>
+        internal static string UnexpectedOperatorInExpression {
+            get {
+                return ResourceManager.GetString("UnexpectedOperatorInExpression", resourceCulture);
             }
         }
         

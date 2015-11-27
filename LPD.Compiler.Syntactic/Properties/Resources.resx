@@ -126,6 +126,9 @@
   <data name="DoubleProcErrorMessage" xml:space="preserve">
     <value>Linha {0}, coluna {1}: Já existe um procedimento chamado '{2}'.</value>
   </data>
+  <data name="ExpectedCommaOrPointsErrorMessage" xml:space="preserve">
+    <value>Linha {0}, coluna {1}: Esperado vírgula ou dois pontos, mas o símbolo '{2}' foi encontrado.</value>
+  </data>
   <data name="Function" xml:space="preserve">
     <value>Função</value>
   </data>
@@ -142,7 +145,7 @@
     <value>Linha {0}, coluna {1}: Termo inválido.</value>
   </data>
   <data name="InvalidTokenErrorMessage" xml:space="preserve">
-    <value>Linha {0}, coluna {1}: Simbolo {2} invalido.</value>
+    <value>Linha {0}, coluna {1}: Simbolo '{2}' invalido.</value>
   </data>
   <data name="MissingFunctionReturnMessage" xml:space="preserve">
     <value>Linha {0}, coluna {1}: Nem todos os caminhos retornam um valor na função '{2}'.</value>
@@ -166,7 +169,10 @@
     <value>Procedimento</value>
   </data>
   <data name="UnexpectedEndOfFileErrorMessage" xml:space="preserve">
-    <value>Linha {0}, coluna {1}: Fim inesperado do arquivo.</value>
+    <value>Linha {0}, coluna {1}: Fim inesperado do arquivo. Não está faltando um ponto depois do 'fim'?</value>
+  </data>
+  <data name="UnexpectedOperatorInExpression" xml:space="preserve">
+    <value>Linha {0}, coluna {1}: Símbolo '{2}' inesperado na expressão.</value>
   </data>
   <data name="UnexpectedTokenErrorMessage" xml:space="preserve">
     <value>Linha {0}, coluna {1}: Esperado {2}.</value>
