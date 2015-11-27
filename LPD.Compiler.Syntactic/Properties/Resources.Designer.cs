@@ -61,11 +61,29 @@ namespace LPD.Compiler.Syntactic.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Linha {0}, coluna {1}: Já existe um identificador chamado &apos;{2}&apos;..
+        ///   Looks up a localized string similar to Linha {0}, coluna {1}: Já existe uma função chamada &apos;{2}&apos;..
+        /// </summary>
+        internal static string DoubleFuncErrorMessage {
+            get {
+                return ResourceManager.GetString("DoubleFuncErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Linha {0}, coluna {1}: Identificador com o nome &apos;{2}&apos; já foi declarado..
         /// </summary>
         internal static string DoubleIdentificatorErrorMessage {
             get {
                 return ResourceManager.GetString("DoubleIdentificatorErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Linha {0}, coluna {1}: Já existe um procedimento chamado &apos;{2}&apos;..
+        /// </summary>
+        internal static string DoubleProcErrorMessage {
+            get {
+                return ResourceManager.GetString("DoubleProcErrorMessage", resourceCulture);
             }
         }
         
@@ -97,11 +115,11 @@ namespace LPD.Compiler.Syntactic.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Linha {0}, coluna {1}: Esperado expressão do tipo &apos;booleano&apos; dentro de um comando &apos;se&apos;..
+        ///   Looks up a localized string similar to Linha {0}, coluna {1}: Esperado expressão do tipo &apos;booleano&apos; dentro de um comando &apos;{2}&apos;..
         /// </summary>
-        internal static string IncompatibleIfExpressionErrorMessage {
+        internal static string IncompatibleCommandExpressionErrorMessage {
             get {
-                return ResourceManager.GetString("IncompatibleIfExpressionErrorMessage", resourceCulture);
+                return ResourceManager.GetString("IncompatibleCommandExpressionErrorMessage", resourceCulture);
             }
         }
         

@@ -117,8 +117,14 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="DoubleFuncErrorMessage" xml:space="preserve">
+    <value>Linha {0}, coluna {1}: Já existe uma função chamada '{2}'.</value>
+  </data>
   <data name="DoubleIdentificatorErrorMessage" xml:space="preserve">
-    <value>Linha {0}, coluna {1}: Já existe um identificador chamado '{2}'.</value>
+    <value>Linha {0}, coluna {1}: Identificador com o nome '{2}' já foi declarado.</value>
+  </data>
+  <data name="DoubleProcErrorMessage" xml:space="preserve">
+    <value>Linha {0}, coluna {1}: Já existe um procedimento chamado '{2}'.</value>
   </data>
   <data name="Function" xml:space="preserve">
     <value>Função</value>
@@ -129,8 +135,8 @@
   <data name="IncompatibleAttributionErrorMessage" xml:space="preserve">
     <value>Linha {0}, coluna {1}: Tipo '{2}' não pode ser atribuido a variável do tipo '{3}'.</value>
   </data>
-  <data name="IncompatibleIfExpressionErrorMessage" xml:space="preserve">
-    <value>Linha {0}, coluna {1}: Esperado expressão do tipo 'booleano' dentro de um comando 'se'.</value>
+  <data name="IncompatibleCommandExpressionErrorMessage" xml:space="preserve">
+    <value>Linha {0}, coluna {1}: Esperado expressão do tipo 'booleano' dentro de um comando '{2}'.</value>
   </data>
   <data name="InvalidTerm" xml:space="preserve">
     <value>Linha {0}, coluna {1}: Termo inválido.</value>

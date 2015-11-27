@@ -25,6 +25,7 @@ namespace LPD.Compiler.Syntactic
         private SyntaxTreeNode _rootNode;
         private SyntaxTreeNode _currentNode;
         private FunctionInfo _funcInfo = null;
+        private bool _isAnalyzingFunction = false;
         private uint _lastLabel = 0;
         private ushort _level = 0;
         private uint _memory = 0;
@@ -215,9 +216,9 @@ namespace LPD.Compiler.Syntactic
             {
                 if (_token.Symbol == Symbols.SIdentificador)
                 {
-                    if (_symbolTable.SearchDouble(_token.Lexeme))
+                    if (_symbolTable.SearchByLevel(_token.Lexeme, _level) != null)
                     {
-                        RaiseDoubleIdentificatorError();
+                        RaiseDoubleError(Symbols.SIdentificador);
                     }
 
                     _symbolTable.Insert(new IdentificatorItem()
@@ -542,6 +543,7 @@ namespace LPD.Compiler.Syntactic
         {
             uint label1 = _lastLabel;
             uint label2;
+            var whileToken = _token;
 
             _codeGenerator.GenerateLabel(_lastLabel);
             _lastLabel++;
@@ -551,6 +553,7 @@ namespace LPD.Compiler.Syntactic
 
             if (type != ItemType.Boolean)
             {
+                _token = whileToken;
                 RaiseIncompatibleTypeError();
             }
 
@@ -577,7 +580,7 @@ namespace LPD.Compiler.Syntactic
             SyntaxTreeNode node = null;
             SyntaxTreeNode parent = null;
 
-            if (_funcInfo != null)
+            if (_funcInfo != null && _isAnalyzingFunction)
             {
                 parent = _currentNode;
                 node = GetNode(parent);
@@ -677,6 +680,7 @@ namespace LPD.Compiler.Syntactic
 
         private void AnalyzeProcDcl()
         {
+            _isAnalyzingFunction = false;
             NextToken();
 
             if (_token.Symbol != Symbols.SIdentificador)
@@ -688,7 +692,7 @@ namespace LPD.Compiler.Syntactic
 
             if (item != null)
             {
-                RaiseDoubleIdentificatorError();
+                RaiseDoubleError(Symbols.SProcedimento);
             }
 
             _codeGenerator.GenerateLabel(_lastLabel);
@@ -717,6 +721,7 @@ namespace LPD.Compiler.Syntactic
 
         private void AnalyzeFuncDcl()
         {
+            _isAnalyzingFunction = true;
             NextToken();
 
             if (_token.Symbol != Symbols.SIdentificador)
@@ -728,7 +733,7 @@ namespace LPD.Compiler.Syntactic
 
             if (item != null)
             {
-                RaiseDoubleIdentificatorError();
+                RaiseDoubleError(Symbols.SFuncao);
             }
 
             var funcItem = new FunctionItem
@@ -1125,16 +1130,33 @@ namespace LPD.Compiler.Syntactic
             throw new CompilationException(string.Format(NotFoundFuncErrorMessage, _lexical.Position.Line, _lexical.Position.Column, _token.Lexeme));
         }
 
-        private void RaiseDoubleIdentificatorError()
+        private void RaiseDoubleError(Symbols symbol)
         {
+            string message = string.Empty;
+
             _position = null;
-            throw new CompilationException(string.Format(DoubleIdentificatorErrorMessage, _lexical.Position.Line, _lexical.Position.Column, _token.Lexeme));
+
+            switch (symbol)
+            {
+                case Symbols.SIdentificador:
+                    message = DoubleIdentificatorErrorMessage;
+                    break;
+                case Symbols.SFuncao:
+                    message = DoubleFuncErrorMessage;
+                    break;
+                case Symbols.SProcedimento:
+                    message = DoubleProcErrorMessage;
+                    break;
+            }
+
+            throw new CompilationException(string.Format(message, _lexical.Position.Line, _lexical.Position.Column, _token.Lexeme));
         }
 
         private void RaiseIncompatibleTypeError()
         {
             _position = null;
-            throw new CompilationException(string.Format(IncompatibleIfExpressionErrorMessage, _lexical.Position.Line, _lexical.Position.Column));
+            throw new CompilationException(string.Format(IncompatibleCommandExpressionErrorMessage, _lexical.Position.Line, 
+                _lexical.Position.Column, _token.Lexeme));
         }
 
         #endregion
