@@ -493,6 +493,8 @@ namespace LPD.Compiler.Syntactic
                 if (_token.Symbol == Symbols.SIdentificador)
                 {
                     var item = _symbolTable.Search(_token.Lexeme);
+                    var identificator = item as IdentificatorItem;
+                    var function = item as FunctionItem;
 
                     if (item == null)
                     {
@@ -501,9 +503,29 @@ namespace LPD.Compiler.Syntactic
 
                     if (item != null)
                     {
-                        if (!(item is FunctionItem) && !(item is IdentificatorItem))
+                        if (function == null && identificator == null)
                         {
                             throw new CompilationException(string.Format(NotAFuncVarErrorMessage, _lexical.Position.Line, _lexical.Position.Column, _token.Lexeme));
+                        }
+                        else
+                        {
+                            if (function != null)
+                            {
+                                if (function.Type != ItemType.Integer)
+                                {
+                                    throw new CompilationException($"Linha {_lexical.Position.Line}, coluna {_lexical.Position.Column}: " +
+                                        "Esperado expressão do tipo 'booleano' dentro de um comando 'escreva'.");
+                                }
+                            }
+
+                            if (identificator != null)
+                            {
+                                if (identificator.Type != ItemType.Integer)
+                                {
+                                    throw new CompilationException($"Linha {_lexical.Position.Line}, coluna {_lexical.Position.Column}: " +
+                                        "Esperado expressão do tipo 'booleano' dentro de um comando 'escreva'.");
+                                }
+                            }
                         }
                     }
 
@@ -517,10 +539,7 @@ namespace LPD.Compiler.Syntactic
                     {
                         RaiseUnexpectedTokenError("\")\"");
                     }
-
-                    var identificator = item as IdentificatorItem;
-                    var function = item as FunctionItem;
-
+                    
                     if (identificator != null)
                     {
                         _codeGenerator.GenerateInstruction(LDV, identificator.Memory);
