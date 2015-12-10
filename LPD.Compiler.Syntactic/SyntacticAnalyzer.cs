@@ -81,7 +81,7 @@ namespace LPD.Compiler.Syntactic
             }
             
             await _codeGenerator.SaveToFileAsync(outputFilePath);
-            await _codeGenerator.SaveToFileAsync(@"C:\Temp\generated.asmd");
+
             return new CompilationResult { Error = null, ProgramName = programName };
         }
 
