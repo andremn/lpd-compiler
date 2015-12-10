@@ -394,13 +394,9 @@ namespace LPD.Compiler.Syntactic
                     {
                         AnalyzeAttribution();
                     }
-                    else if (_token.Symbol == Symbols.SPontoVirgula)
-                    {
-                        AnalyzeProcCall();
-                    }
                     else
                     {
-                        RaiseGeneralErrorMessage($"Símbolo '{_token.Lexeme}' inesperado");
+                        AnalyzeProcCall();
                     }
                 }
             }
