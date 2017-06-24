@@ -1,5 +1,4 @@
 # lpd-compiler
-##EM DESENVOLVIMENTO!
 
 #####Projeto para a disciplina de compiladores da faculdade de Engenharia de Computação da PUC Campinas.
 
